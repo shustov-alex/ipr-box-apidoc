@@ -1,0 +1,599 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "IDP Box",
+        "description": "IDP Box API",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/auth/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "01.01. Получение токенов по логину / паролю",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Auth.Login.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Успешная авторизация",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Auth.Login.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибка авторизации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
+            }
+        },
+        "/auth/logout": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "01.02. Выход из профиля авторизации",
+                "responses": {
+                    "200": {
+                        "description": "Выход из профиля прошёл успешно",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.EmptySuccessResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/auth/reset-password/send-link": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "01.03. Восстановление пароля",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Auth.ResetPassword.SendLink.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Письмо со ссылкой для восстановления пароля отправлено успешно",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Auth.ResetPassword.SendLink.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки при попытке восстановления пароля",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
+            }
+        },
+        "/auth/reset-password/check-code": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "01.04. Проверка временного кода для восстановления пароля",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Auth.ResetPassword.CheckCode.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Проверка выполнена успешно",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Auth.ResetPassword.CheckCode.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки при проверке кода",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
+            }
+        },
+        "/auth/password-requirements": {
+            "get": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "01.05. Получить список требований для паролей",
+                "responses": {
+                    "200": {
+                        "description": "Список требований для паролей",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Auth.PasswordRequirements.Response"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
+            }
+        },
+        "/auth/reset-password/save-new-password": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "01.06. Сохранение нового пароля",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Auth.ResetPassword.SaveNewPassword.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Пароль успешно сохранен",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.EmptySuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки при сохранении пароля",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Auth.ResetPassword.SaveNewPassword.ErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
+            }
+        },
+        "/feedback": {
+            "post": {
+                "tags": [
+                    "Feedback"
+                ],
+                "summary": "02.01. Отправка сообщения в техподдержку",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Feedback.NewTicket.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Обращение создано успешно",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.EmptySuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки при создании обращения",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Base.EmptySuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "boolean",
+                                "enum": [true]
+                            }
+                        },
+                        "required": ["success"]
+                    }
+                }
+            },
+            "Base.Error": {
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "type": "integer",
+                        "description": "Код ошибки",
+                        "example": 1024
+                    },
+                    "message": {
+                        "type": "string",
+                        "description": "Текст ошибки",
+                        "nullable": true
+                    },
+                    "attribute": {
+                        "type": "string",
+                        "description": "Атрибут запроса, с которым связана ошибка",
+                        "nullable": true,
+                        "example": "login"
+                    }
+                },
+                "required": ["code", "message"]
+            },
+            "Base.ErrorCollectionResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "errors": {
+                                "description": "Список ошибок",
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/Base.Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "Auth.Login.Request": {
+                "type": "object",
+                "properties": {
+                    "login": {
+                        "type": "string",
+                        "example": "your_login"
+                    },
+                    "password": {
+                        "type": "string",
+                        "example": "your_password"
+                    },
+                    "remember_me": {
+                        "type": "boolean"
+                    }
+                },
+                "required": ["login", "password"]
+            },
+            "Auth.Login.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "object",
+                                "properties": {
+                                    "access_token": {
+                                        "type": "string",
+                                        "description": "Access token",
+                                        "example": "ZglAnSway3OWcx8nk3IpdN-eGBkS5Hf3jnEnLbyN"
+                                    },
+                                    "refresh_token": {
+                                        "type": "string",
+                                        "description": "Refresh token",
+                                        "example": "G1O8jaQj4KyGOc3-fbrIF30j5eUU_kqs9O2qDXk1"
+                                    },
+                                    "company_id": {
+                                        "type": "integer",
+                                        "description": "ID компании",
+                                        "example": 123
+                                    }
+                                },
+                                "required": ["access_token", "refresh_token", "company_id"]
+                            }
+                        }
+                    }
+                }
+            },
+            "Auth.ResetPassword.SendLink.Request": {
+                "type": "object",
+                "properties": {
+                    "login": {
+                        "type": "string",
+                        "example": "your_login"
+                    }
+                },
+                "required": ["login"]
+            },
+            "Auth.ResetPassword.SendLink.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "object",
+                                "properties": {
+                                    "transport": {
+                                        "type": "string",
+                                        "description": "Способ восстановления пароля",
+                                        "enum": ["email"]
+                                    }
+                                },
+                                "required": ["transport"]
+                            }
+                        }
+                    }
+                }
+            },
+            "Auth.ResetPassword.CheckCode.Request": {
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "type": "string",
+                        "description": "Код, полученный из URL"
+                    }
+                },
+                "required": ["code"]
+            },
+            "Auth.ResetPassword.CheckCode.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "object",
+                                "properties": {
+                                    "expires_in": {
+                                        "type": "integer",
+                                        "description": "Количество секунд, через которое код перестанет быть активным"
+                                    }
+                                },
+                                "required": ["expires_in"]
+                            }
+                        }
+                    }
+                }
+            },
+            "Auth.PasswordRequirement.AttributeMatch": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "description": "Тип правила",
+                        "enum": ["attribute_match"]
+                    },
+                    "use_login": {
+                        "type": "boolean",
+                        "description": "Может ли пароль совпадать с логином",
+                        "example": false
+                    },
+                    "use_email": {
+                        "type": "boolean",
+                        "description": "Может ли пароль совпадать с email",
+                        "example": false
+                    },
+                    "use_phone": {
+                        "type": "boolean",
+                        "description": "Может ли пароль совпадать с номером телефона",
+                        "example": false
+                    }
+                },
+                "required": ["type", "use_login", "use_email", "use_phone"]
+            },
+            "Auth.PasswordRequirement.Regexp": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "description": "Тип правила",
+                        "enum": ["regexp"]
+                    },
+                    "regexp": {
+                        "type": "string",
+                        "description": "Регулярное выражение для проверки пароля",
+                        "example": "\\w{16}"
+                    },
+                    "hint": {
+                        "type": "string",
+                        "description": "Описание регулярного выражения",
+                        "example": "Пароль должен содержать не менее 16 символов"
+                    }
+                },
+                "required": ["type", "regexp", "hint"]
+            },
+            "Auth.PasswordRequirements.Response": {
+                "type": "array",
+                "items": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/components/schemas/Auth.PasswordRequirement.Regexp"
+                        },
+                        {
+                            "$ref": "#/components/schemas/Auth.PasswordRequirement.AttributeMatch"
+                        }
+                    ]
+                }
+            },
+            "Auth.ResetPassword.SaveNewPassword.Request": {
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "type": "string",
+                        "description": "Код, полученный из URL"
+                    },
+                    "password": {
+                        "type": "string",
+                        "description": "Новый пароль"
+                    }
+                },
+                "required": ["code", "password"]
+            },
+            "Auth.ResetPassword.PasswordRequirement.Error": {
+                "type": "object",
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/Base.Error"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "password_requirement": {
+                                "type": "object",
+                                "anyOf": [
+                                    {
+                                        "$ref": "#/components/schemas/Auth.PasswordRequirement.Regexp"
+                                    },
+                                    {
+                                        "$ref": "#/components/schemas/Auth.PasswordRequirement.AttributeMatch"
+                                    }
+                                ]
+                            }
+                        },
+                        "required": ["code", "message", "password_requirement"]
+                    }
+                ]
+            },
+            "Auth.ResetPassword.SaveNewPassword.ErrorCollectionResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "errors": {
+                                "description": "Список ошибок",
+                                "type": "array",
+                                "items": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/components/schemas/Base.Error"
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/Auth.ResetPassword.PasswordRequirement.Error"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "Feedback.NewTicket.Request": {
+                "type": "object",
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "description": "Почта для ответа",
+                        "example": "test@test.com"
+                    },
+                    "text": {
+                        "type": "string",
+                        "description": "Текст запроса",
+                        "example": "Ничего не работает. Ничего не понятно."
+                    }
+                },
+                "required": ["email", "text"]
+            }
+        },
+        "securitySchemes": {
+            "basicAuth": {
+                "description": "Basic authorization",
+                "type": "http",
+                "scheme": "basic"
+            },
+            "bearerAuth": {
+                "description": "Bearer authorization",
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        }
+    }
+}
