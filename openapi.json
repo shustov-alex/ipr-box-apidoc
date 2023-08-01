@@ -163,37 +163,12 @@
                 ]
             }
         },
-        "/auth/password-requirements": {
-            "get": {
-                "tags": [
-                    "Auth"
-                ],
-                "summary": "01.05. Получить список требований для паролей",
-                "responses": {
-                    "200": {
-                        "description": "Список требований для паролей",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Auth.PasswordRequirements.Response"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "basicAuth": []
-                    }
-                ]
-            }
-        },
         "/auth/reset-password/save-new-password": {
             "post": {
                 "tags": [
                     "Auth"
                 ],
-                "summary": "01.06. Сохранение нового пароля",
+                "summary": "01.05. Сохранение нового пароля",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -220,6 +195,31 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/Auth.ResetPassword.SaveNewPassword.ErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
+            }
+        },
+        "/auth/password-requirements": {
+            "get": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "01.06. Получить список требований для паролей",
+                "responses": {
+                    "200": {
+                        "description": "Список требований для паролей",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Auth.PasswordRequirements.Response"
                                 }
                             }
                         }
