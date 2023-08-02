@@ -50,12 +50,56 @@
                 ]
             }
         },
+        "/auth/refresh-token": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "01.02. Обновление токенов",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Auth.RefreshToken.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Обновление токенов прошло успешно",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Auth.Login.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибка обновления токенов",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
+            }
+        },
         "/auth/logout": {
             "post": {
                 "tags": [
                     "Auth"
                 ],
-                "summary": "01.02. Выход из профиля авторизации",
+                "summary": "01.03. Выход из профиля авторизации",
                 "responses": {
                     "200": {
                         "description": "Выход из профиля прошёл успешно",
@@ -80,7 +124,7 @@
                 "tags": [
                     "Auth"
                 ],
-                "summary": "01.03. Восстановление пароля",
+                "summary": "01.04. Восстановление пароля",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -124,7 +168,7 @@
                 "tags": [
                     "Auth"
                 ],
-                "summary": "01.04. Проверка временного кода для восстановления пароля",
+                "summary": "01.05. Проверка временного кода для восстановления пароля",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -168,7 +212,7 @@
                 "tags": [
                     "Auth"
                 ],
-                "summary": "01.05. Сохранение нового пароля",
+                "summary": "01.06. Сохранение нового пароля",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -212,7 +256,7 @@
                 "tags": [
                     "Auth"
                 ],
-                "summary": "01.06. Получить список требований для паролей",
+                "summary": "01.07. Получить список требований для паролей",
                 "responses": {
                     "200": {
                         "description": "Список требований для паролей",
@@ -380,6 +424,16 @@
                         }
                     }
                 }
+            },
+            "Auth.RefreshToken.Request": {
+                "type": "object",
+                "properties": {
+                    "refresh_token": {
+                        "type": "string",
+                        "example": "G1O8jaQj4KyGOc3-fbrIF30j5eUU_kqs9O2qDXk1"
+                    }
+                },
+                "required": ["refresh_token"]
             },
             "Auth.ResetPassword.SendLink.Request": {
                 "type": "object",
