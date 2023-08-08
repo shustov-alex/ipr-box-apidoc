@@ -119,17 +119,17 @@
                 ]
             }
         },
-        "/auth/reset-password/send-link": {
+        "/auth/reset-password/forgot-password": {
             "post": {
                 "tags": [
                     "Auth"
                 ],
-                "summary": "01.04. Восстановление пароля",
+                "summary": "01.04. Запрос на восстановление пароля",
                 "requestBody": {
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Auth.ResetPassword.SendLink.Request"
+                                "$ref": "#/components/schemas/Auth.ResetPassword.ForgotPassword.Request"
                             }
                         }
                     }
@@ -140,7 +140,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Auth.ResetPassword.SendLink.SuccessResponse"
+                                    "$ref": "#/components/schemas/Auth.ResetPassword.ForgotPassword.SuccessResponse"
                                 }
                             }
                         }
@@ -435,7 +435,7 @@
                 },
                 "required": ["refresh_token"]
             },
-            "Auth.ResetPassword.SendLink.Request": {
+            "Auth.ResetPassword.ForgotPassword.Request": {
                 "type": "object",
                 "properties": {
                     "login": {
@@ -445,7 +445,7 @@
                 },
                 "required": ["login"]
             },
-            "Auth.ResetPassword.SendLink.SuccessResponse": {
+            "Auth.ResetPassword.ForgotPassword.SuccessResponse": {
                 "type": "object",
                 "properties": {
                     "data": {
