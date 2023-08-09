@@ -6,12 +6,59 @@
         "version": "1.0.0"
     },
     "paths": {
+        "/configuration": {
+            "get": {
+                "tags": [
+                    "Base"
+                ],
+                "summary": "01.01. Получить конфигурацию компании",
+                "parameters": [
+                    {
+                        "name": "company_id",
+                        "in": "query",
+                        "required": false,
+                        "description": "ID компании. Если передан, то имеет приоритет над company_domain.",
+                        "example": 128,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "company_domain",
+                        "in": "query",
+                        "required": false,
+                        "description": "Домен компании. Передавать в случае, если не известен company_id.",
+                        "example": "my.favorite.company.com",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Объект конфигурации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.Configuration.Response"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "basicAuth": []
+                    }
+                ]
+            }
+        },
         "/auth/login": {
             "post": {
                 "tags": [
                     "Auth"
                 ],
-                "summary": "01.01. Получение токенов по логину / паролю",
+                "summary": "02.01. Получение токенов по логину / паролю",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -55,7 +102,7 @@
                 "tags": [
                     "Auth"
                 ],
-                "summary": "01.02. Обновление токенов",
+                "summary": "02.02. Обновление токенов",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -99,7 +146,7 @@
                 "tags": [
                     "Auth"
                 ],
-                "summary": "01.03. Выход из профиля авторизации",
+                "summary": "02.03. Выход из профиля авторизации",
                 "responses": {
                     "200": {
                         "description": "Выход из профиля прошёл успешно",
@@ -124,7 +171,7 @@
                 "tags": [
                     "Auth"
                 ],
-                "summary": "01.04. Запрос на восстановление пароля",
+                "summary": "02.04. Запрос на восстановление пароля",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -168,7 +215,7 @@
                 "tags": [
                     "Auth"
                 ],
-                "summary": "01.05. Проверка временного кода для восстановления пароля",
+                "summary": "02.05. Проверка временного кода для восстановления пароля",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -212,7 +259,7 @@
                 "tags": [
                     "Auth"
                 ],
-                "summary": "01.06. Сохранение нового пароля",
+                "summary": "02.06. Сохранение нового пароля",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -256,7 +303,7 @@
                 "tags": [
                     "Auth"
                 ],
-                "summary": "01.07. Получить список требований для паролей",
+                "summary": "02.07. Получить список требований для паролей",
                 "responses": {
                     "200": {
                         "description": "Список требований для паролей",
@@ -281,7 +328,7 @@
                 "tags": [
                     "Feedback"
                 ],
-                "summary": "02.01. Отправка сообщения в техподдержку",
+                "summary": "03.01. Отправка сообщения в техподдержку",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -371,6 +418,43 @@
                                 "type": "array",
                                 "items": {
                                     "$ref": "#/components/schemas/Base.Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "Base.Configuration.Response": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "object",
+                                "properties": {
+                                    "feature_flags": {
+                                        "type": "object",
+                                        "properties": {
+                                            "remember_me": {
+                                                "type": "boolean",
+                                                "description": "Страница входа. Функция 'Запомнить меня'."
+                                            },
+                                            "reset_password": {
+                                                "type": "boolean",
+                                                "description": "Страница входа. Функция 'Восстановить пароль'."
+                                            }
+                                        }
+                                    },
+                                    "language_ids": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string",
+                                            "description": "ID языка",
+                                            "enum": ["ru", "en"],
+                                            "example": "en"
+                                        }
+                                    }
                                 }
                             }
                         }
