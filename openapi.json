@@ -471,9 +471,6 @@
                     "password": {
                         "type": "string",
                         "example": "your_password"
-                    },
-                    "remember_me": {
-                        "type": "boolean"
                     }
                 },
                 "required": ["login", "password"]
