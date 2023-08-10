@@ -487,7 +487,17 @@
                                     "access_token": {
                                         "type": "string",
                                         "description": "Access token",
-                                        "example": "ZglAnSway3OWcx8nk3IpdN-eGBkS5Hf3jnEnLbyN"
+                                        "example": "eyJhbGciOiJIUzI1NiIsInR5cGUiOiJKV1QifQ.eyJpc3MiOiJpZHBfYm94X2F1dGhfc2VydmVyIiwic3ViIjoiZmlyc3RfdXNlciIsImV4cCI6MTY5MTc4NTg1NSwiaWF0IjoxNjkxNjk5NDU1fQ.jWFCQJ806fkwxQ555tu3lroCtJ7nxmhTkpj11IGBJpE"
+                                    },
+                                    "token_type": {
+                                        "type": "string",
+                                        "description": "Тип access token'а",
+                                        "enum": ["bearer"]
+                                    },
+                                    "expires_in": {
+                                        "type": "integer",
+                                        "description": "Количество секунд, через которое access token перестанет быть активным",
+                                        "example": 86400
                                     },
                                     "refresh_token": {
                                         "type": "string",
@@ -500,7 +510,7 @@
                                         "example": 123
                                     }
                                 },
-                                "required": ["access_token", "refresh_token", "company_id"]
+                                "required": ["access_token", "token_type", "expires_in", "refresh_token", "company_id"]
                             }
                         }
                     }
