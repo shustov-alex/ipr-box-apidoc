@@ -310,7 +310,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Auth.PasswordRequirements.Response"
+                                    "$ref": "#/components/schemas/Auth.PasswordRequirements.SuccessResponse"
                                 }
                             }
                         }
@@ -634,17 +634,27 @@
                 },
                 "required": ["type", "regexp", "hint"]
             },
-            "Auth.PasswordRequirements.Response": {
-                "type": "array",
-                "items": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/components/schemas/Auth.PasswordRequirement.Regexp"
-                        },
-                        {
-                            "$ref": "#/components/schemas/Auth.PasswordRequirement.AttributeMatch"
+            "Auth.PasswordRequirements.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "array",
+                                "items": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/components/schemas/Auth.PasswordRequirement.Regexp"
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/Auth.PasswordRequirement.AttributeMatch"
+                                        }
+                                    ]
+                                }
+                            }
                         }
-                    ]
+                    }
                 }
             },
             "Auth.ResetPassword.SaveNewPassword.Request": {
