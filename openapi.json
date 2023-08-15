@@ -210,7 +210,7 @@
                 ]
             }
         },
-        "/auth/reset-password/check-code": {
+        "/auth/reset-password/check-token": {
             "post": {
                 "tags": [
                     "Auth"
@@ -220,7 +220,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Auth.ResetPassword.CheckCode.Request"
+                                "$ref": "#/components/schemas/Auth.ResetPassword.CheckToken.Request"
                             }
                         }
                     }
@@ -231,7 +231,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Auth.ResetPassword.CheckCode.SuccessResponse"
+                                    "$ref": "#/components/schemas/Base.EmptySuccessResponse"
                                 }
                             }
                         }
@@ -403,6 +403,11 @@
                         "description": "Атрибут запроса, с которым связана ошибка",
                         "nullable": true,
                         "example": "login"
+                    },
+                    "stack_trace": {
+                        "type": "string",
+                        "description": "Stacktrace. Доступен только на тестовых окружениях",
+                        "nullable": true
                     }
                 },
                 "required": ["code", "message"]
@@ -549,6 +554,12 @@
                                         "type": "string",
                                         "description": "Способ восстановления пароля",
                                         "enum": ["email"]
+                                    },
+                                    "token_lifetime": {
+                                        "type": "string",
+                                        "description": "Текстовое сообщение с временем жизни токена",
+                                        "nullable": true,
+                                        "example": "1 hour"
                                     }
                                 },
                                 "required": ["transport"]
@@ -557,35 +568,15 @@
                     }
                 }
             },
-            "Auth.ResetPassword.CheckCode.Request": {
+            "Auth.ResetPassword.CheckToken.Request": {
                 "type": "object",
                 "properties": {
-                    "code": {
+                    "token": {
                         "type": "string",
-                        "description": "Код, полученный из URL"
+                        "description": "Токен, полученный из URL"
                     }
                 },
-                "required": ["code"]
-            },
-            "Auth.ResetPassword.CheckCode.SuccessResponse": {
-                "type": "object",
-                "properties": {
-                    "data": {
-                        "type": "object",
-                        "properties": {
-                            "success": {
-                                "type": "object",
-                                "properties": {
-                                    "expires_in": {
-                                        "type": "integer",
-                                        "description": "Количество секунд, через которое код перестанет быть активным"
-                                    }
-                                },
-                                "required": ["expires_in"]
-                            }
-                        }
-                    }
-                }
+                "required": ["token"]
             },
             "Auth.PasswordRequirement.AttributeMatch": {
                 "type": "object",
@@ -660,16 +651,16 @@
             "Auth.ResetPassword.SaveNewPassword.Request": {
                 "type": "object",
                 "properties": {
-                    "code": {
+                    "token": {
                         "type": "string",
-                        "description": "Код, полученный из URL"
+                        "description": "Токен, полученный из URL"
                     },
                     "password": {
                         "type": "string",
                         "description": "Новый пароль"
                     }
                 },
-                "required": ["code", "password"]
+                "required": ["token", "password"]
             },
             "Auth.ResetPassword.PasswordRequirement.Error": {
                 "type": "object",
