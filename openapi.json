@@ -45,12 +45,7 @@
                             }
                         }
                     }
-                },
-                "security": [
-                    {
-                        "basicAuth": []
-                    }
-                ]
+                }
             }
         },
         "/auth/login": {
@@ -89,12 +84,7 @@
                             }
                         }
                     }
-                },
-                "security": [
-                    {
-                        "basicAuth": []
-                    }
-                ]
+                }
             }
         },
         "/auth/refresh-token": {
@@ -133,12 +123,7 @@
                             }
                         }
                     }
-                },
-                "security": [
-                    {
-                        "basicAuth": []
-                    }
-                ]
+                }
             }
         },
         "/auth/logout": {
@@ -202,12 +187,7 @@
                             }
                         }
                     }
-                },
-                "security": [
-                    {
-                        "basicAuth": []
-                    }
-                ]
+                }
             }
         },
         "/auth/reset-password/check-token": {
@@ -246,12 +226,7 @@
                             }
                         }
                     }
-                },
-                "security": [
-                    {
-                        "basicAuth": []
-                    }
-                ]
+                }
             }
         },
         "/auth/reset-password/save-new-password": {
@@ -290,12 +265,7 @@
                             }
                         }
                     }
-                },
-                "security": [
-                    {
-                        "basicAuth": []
-                    }
-                ]
+                }
             }
         },
         "/auth/password-requirements": {
@@ -315,12 +285,7 @@
                             }
                         }
                     }
-                },
-                "security": [
-                    {
-                        "basicAuth": []
-                    }
-                ]
+                }
             }
         },
         "/feedback": {
@@ -359,12 +324,7 @@
                             }
                         }
                     }
-                },
-                "security": [
-                    {
-                        "basicAuth": []
-                    }
-                ]
+                }
             }
         }
     },
@@ -729,11 +689,6 @@
             }
         },
         "securitySchemes": {
-            "basicAuth": {
-                "description": "Basic authorization",
-                "type": "http",
-                "scheme": "basic"
-            },
             "bearerAuth": {
                 "description": "Bearer authorization",
                 "type": "http",
