@@ -5,6 +5,12 @@
         "description": "IDP Box API",
         "version": "1.0.0"
     },
+    "servers": [
+        {
+            "url": "http://idp-box.api.130.193.34.51.nip.io",
+            "description": "Test server"
+        }
+    ],
     "paths": {
         "/configuration": {
             "get": {
