@@ -11,13 +11,30 @@
             "description": "Test server"
         }
     ],
+    "tags": [
+        {
+            "name": "Base",
+            "description": "01. Общие настройки"
+        },
+        {
+            "name": "Auth",
+            "description": "02. Аутенфикация"
+        },
+        {
+            "name": "Feedback",
+            "description": "03. Обратная связь"
+        }
+    ],
     "paths": {
         "/configuration": {
             "get": {
+                "security": [],
                 "tags": [
                     "Base"
                 ],
                 "summary": "01.01. Получить конфигурацию компании",
+                "description": "Получить конфигурацию компании",
+                "operationId": "getConfiguration",
                 "parameters": [
                     {
                         "name": "company_id",
@@ -50,16 +67,29 @@
                                 }
                             }
                         }
+                    },
+                    "400": {
+                        "description": "Компания не найдена",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ErrorCollectionResponse"
+                                }
+                            }
+                        }
                     }
                 }
             }
         },
         "/auth/login": {
             "post": {
+                "security": [],
                 "tags": [
                     "Auth"
                 ],
                 "summary": "02.01. Получение токенов по логину / паролю",
+                "description": "Получение токенов по логину / паролю",
+                "operationId": "authByLoginAndPassword",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -98,7 +128,10 @@
                 "tags": [
                     "Auth"
                 ],
+                "security": [],
                 "summary": "02.02. Обновление токенов",
+                "description": "Обновление токенов",
+                "operationId": "refreshPairOfTokens",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -137,7 +170,14 @@
                 "tags": [
                     "Auth"
                 ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
                 "summary": "02.03. Выход из профиля авторизации",
+                "description": "Выход из профиля авторизации",
+                "operationId": "logout",
                 "responses": {
                     "200": {
                         "description": "Выход из профиля прошёл успешно",
@@ -148,21 +188,29 @@
                                 }
                             }
                         }
+                    },
+                    "401": {
+                        "description": "Ошибка выхода из профиля (пользователь не был авторизован)",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ErrorCollectionResponse"
+                                }
+                            }
+                        }
                     }
-                },
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ]
+                }
             }
         },
         "/auth/reset-password/forgot-password": {
             "post": {
+                "security": [],
                 "tags": [
                     "Auth"
                 ],
                 "summary": "02.04. Запрос на восстановление пароля",
+                "description": "Запрос на восстановление пароля",
+                "operationId": "resetPasswordForgotPassword",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -198,10 +246,13 @@
         },
         "/auth/reset-password/check-token": {
             "post": {
+                "security": [],
                 "tags": [
                     "Auth"
                 ],
-                "summary": "02.05. Проверка временного кода для восстановления пароля",
+                "summary": "02.05. Проверка токена для восстановления пароля",
+                "description": "Проверка токена для восстановления пароля",
+                "operationId": "resetPasswordCheckToken",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -237,10 +288,13 @@
         },
         "/auth/reset-password/save-new-password": {
             "post": {
+                "security": [],
                 "tags": [
                     "Auth"
                 ],
                 "summary": "02.06. Сохранение нового пароля",
+                "description": "Сохранение нового пароля",
+                "operationId": "resetPasswordSaveNewPassword",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -276,10 +330,13 @@
         },
         "/auth/password-requirements": {
             "get": {
+                "security": [],
                 "tags": [
                     "Auth"
                 ],
                 "summary": "02.07. Получить список требований для паролей",
+                "description": "Получить список требований для паролей",
+                "operationId": "getPasswordRequirements",
                 "responses": {
                     "200": {
                         "description": "Список требований для паролей",
@@ -296,10 +353,13 @@
         },
         "/feedback": {
             "post": {
+                "security": [],
                 "tags": [
                     "Feedback"
                 ],
                 "summary": "03.01. Отправка сообщения в техподдержку",
+                "description": "Отправка сообщения в техподдержку",
+                "operationId": "sendFeedback",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -362,7 +422,8 @@
                     "message": {
                         "type": "string",
                         "description": "Текст ошибки",
-                        "nullable": true
+                        "nullable": true,
+                        "example": "Unknown error"
                     },
                     "attribute": {
                         "type": "string",
@@ -409,19 +470,21 @@
                                         "properties": {
                                             "remember_me": {
                                                 "type": "boolean",
-                                                "description": "Страница входа. Функция 'Запомнить меня'."
+                                                "description": "Страница входа. Функция 'Запомнить меня'.",
+                                                "example": true
                                             },
                                             "reset_password": {
                                                 "type": "boolean",
-                                                "description": "Страница входа. Функция 'Восстановить пароль'."
+                                                "description": "Страница входа. Функция 'Восстановить пароль'.",
+                                                "example": true
                                             }
                                         }
                                     },
                                     "language_ids": {
                                         "type": "array",
+                                        "description": "ID языка",
                                         "items": {
                                             "type": "string",
-                                            "description": "ID языка",
                                             "enum": ["ru", "en"],
                                             "example": "en"
                                         }
@@ -437,10 +500,12 @@
                 "properties": {
                     "login": {
                         "type": "string",
+                        "description": "Логин",
                         "example": "your_login"
                     },
                     "password": {
                         "type": "string",
+                        "description": "Пароль",
                         "example": "your_password"
                     }
                 },
@@ -457,13 +522,14 @@
                                 "properties": {
                                     "access_token": {
                                         "type": "string",
-                                        "description": "Access token",
+                                        "description": "Access token. Используется для последующих запросов к API.",
                                         "example": "eyJhbGciOiJIUzI1NiIsInR5cGUiOiJKV1QifQ.eyJpc3MiOiJpZHBfYm94X2F1dGhfc2VydmVyIiwic3ViIjoiZmlyc3RfdXNlciIsImV4cCI6MTY5MTc4NTg1NSwiaWF0IjoxNjkxNjk5NDU1fQ.jWFCQJ806fkwxQ555tu3lroCtJ7nxmhTkpj11IGBJpE"
                                     },
                                     "token_type": {
                                         "type": "string",
                                         "description": "Тип access token'а",
-                                        "enum": ["bearer"]
+                                        "enum": ["bearer"],
+                                        "example": "bearer"
                                     },
                                     "expires_in": {
                                         "type": "integer",
@@ -472,7 +538,7 @@
                                     },
                                     "refresh_token": {
                                         "type": "string",
-                                        "description": "Refresh token",
+                                        "description": "Refresh token. Используется для обновления пары access token / refresh token.",
                                         "example": "G1O8jaQj4KyGOc3-fbrIF30j5eUU_kqs9O2qDXk1"
                                     },
                                     "company_id": {
@@ -492,6 +558,7 @@
                 "properties": {
                     "refresh_token": {
                         "type": "string",
+                        "description": "Refresh token",
                         "example": "G1O8jaQj4KyGOc3-fbrIF30j5eUU_kqs9O2qDXk1"
                     }
                 },
@@ -502,6 +569,7 @@
                 "properties": {
                     "login": {
                         "type": "string",
+                        "description": "Логин",
                         "example": "your_login"
                     }
                 },
@@ -519,7 +587,8 @@
                                     "transport": {
                                         "type": "string",
                                         "description": "Способ восстановления пароля",
-                                        "enum": ["email"]
+                                        "enum": ["email"],
+                                        "example": "email"
                                     },
                                     "token_lifetime": {
                                         "type": "string",
@@ -539,7 +608,8 @@
                 "properties": {
                     "token": {
                         "type": "string",
-                        "description": "Токен, полученный из URL"
+                        "description": "Токен, полученный из URL",
+                        "example": "NDQStklU3VNpnlkp1i22kVVPe4QZxk0nkJi7llE0"
                     }
                 },
                 "required": ["token"]
@@ -550,7 +620,8 @@
                     "type": {
                         "type": "string",
                         "description": "Тип правила",
-                        "enum": ["attribute_match"]
+                        "enum": ["attribute_match"],
+                        "example": "attribute_match"
                     },
                     "use_login": {
                         "type": "boolean",
@@ -576,7 +647,8 @@
                     "type": {
                         "type": "string",
                         "description": "Тип правила",
-                        "enum": ["regexp"]
+                        "enum": ["regexp"],
+                        "example": "regexp"
                     },
                     "regexp": {
                         "type": "string",
@@ -619,11 +691,13 @@
                 "properties": {
                     "token": {
                         "type": "string",
-                        "description": "Токен, полученный из URL"
+                        "description": "Токен, полученный из URL",
+                        "example": "NDQStklU3VNpnlkp1i22kVVPe4QZxk0nkJi7llE0"
                     },
                     "password": {
                         "type": "string",
-                        "description": "Новый пароль"
+                        "description": "Новый пароль",
+                        "example": "your_new_password"
                     }
                 },
                 "required": ["token", "password"]
