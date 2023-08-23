@@ -485,7 +485,7 @@
                                         "description": "ID языка",
                                         "items": {
                                             "type": "string",
-                                            "enum": ["ru", "en"],
+                                            "enum": ["ru", "en", "fr"],
                                             "example": "en"
                                         }
                                     }
