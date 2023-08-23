@@ -351,6 +351,48 @@
                 }
             }
         },
+        "/auth/login-by-external-token": {
+            "post": {
+                "security": [],
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "02.08. Авторизация по внешнему JWT",
+                "description": "Авторизация по внешнему JWT, выданному 'Академией Equeo'",
+                "operationId": "authByExternalToken",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Auth.LoginByExternalToken.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Успешная авторизация",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Auth.Login.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибка авторизации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/feedback": {
             "post": {
                 "security": [],
@@ -750,6 +792,17 @@
                         }
                     }
                 }
+            },
+            "Auth.LoginByExternalToken.Request": {
+                "type": "object",
+                "properties": {
+                    "token": {
+                        "type": "string",
+                        "description": "JWT, выданный 'Академией Equeo'",
+                        "example": "eyJhbGciOiJIUzI1NiIsInR5cGUiOiJKV1QifQ.eyJpc3MiOiJlcXVlb19hdXRoX3NlcnZlciIsInN1YiI6IjJuZF91c2VyIiwiY29tcGFueV9pZCI6MSwiZXhwIjoxNjkyODkzMDQ3LCJpYXQiOjE2OTI4MDY2NDd9.3uuI7Hjb_5n1JFz36Uialz8PIc7hEMLTRh-83X3U7wA"
+                    }
+                },
+                "required": ["token"]
             },
             "Feedback.NewTicket.Request": {
                 "type": "object",
