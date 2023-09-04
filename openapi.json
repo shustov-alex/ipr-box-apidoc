@@ -538,6 +538,12 @@
                     },
                     {
                         "$ref": "#/components/parameters/Base.Pagination.PerPage"
+                    },
+                    {
+                        "$ref": "#/components/parameters/Targets.Sort.Attribute"
+                    },
+                    {
+                        "$ref": "#/components/parameters/Base.Sort.Direction"
                     }
                 ],
                 "responses": {
@@ -1194,7 +1200,7 @@
                 "name": "page",
                 "in": "query",
                 "required": false,
-                "description": "Порядковый номер страницы. Если не передан, то будет использовано значение '1'.",
+                "description": "Порядковый номер страницы. Если не указан, то будет использовано значение '1'.",
                 "example": 1,
                 "schema": {
                     "type": "integer"
@@ -1204,10 +1210,40 @@
                 "name": "per_page",
                 "in": "query",
                 "required": false,
-                "description": "Количество элементов на странице. Если не передан, то будет использовано значение по умолчанию",
+                "description": "Количество элементов на странице. Если не указано, то будет использовано значение по умолчанию.",
                 "example": 50,
                 "schema": {
                     "type": "integer"
+                }
+            },
+            "Base.Sort.Attribute": {
+                "name": "sort_attribute",
+                "in": "query",
+                "required": false,
+                "description": "Значение, по которому производится сортировка. Если не указано, то будет использовано значение по умолчанию.",
+                "example": "id",
+                "schema": {
+                    "type": "string"
+                }
+            },
+            "Base.Sort.Direction": {
+                "name": "sort_direction",
+                "in": "query",
+                "required": false,
+                "description": "Направление сортировки. Возможные значения: asc, desc. Если не указано или указано некорректно, то будет использовано значение по умолчанию.",
+                "example": "desc",
+                "schema": {
+                    "type": "string"
+                }
+            },
+            "Targets.Sort.Attribute": {
+                "name": "sort_attribute",
+                "in": "query",
+                "required": false,
+                "description": "Значение, по которому производится сортировка. Возможные значения: name, created_at, priority, deadline. Если не указано, то будет использовано значение по умолчанию.",
+                "example": "created_at",
+                "schema": {
+                    "type": "string"
                 }
             }
         },
