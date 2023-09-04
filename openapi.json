@@ -1202,6 +1202,59 @@
                     },
                     "sort": {
                         "$ref": "#/components/schemas/Targets.Collection.Sort"
+                    },
+                    "filter": {
+                        "type": "object",
+                        "properties": {
+                            "status": {
+                                "type": "array",
+                                "description": "Статус",
+                                "items": {
+                                    "type": "string",
+                                    "enum": [
+                                        "approval",
+                                        "not_approved",
+                                        "not_started",
+                                        "in_progress",
+                                        "done"
+                                    ],
+                                    "example": "in_progress"
+                                }
+                            },
+                            "priority": {
+                                "type": "array",
+                                "description": "Приоритет",
+                                "items": {
+                                    "type": "string",
+                                    "enum": [
+                                        "low",
+                                        "medium",
+                                        "high"
+                                    ],
+                                    "example": "low"
+                                }
+                            },
+                            "deadline": {
+                                "type": "array",
+                                "description": "Крайний срок",
+                                "items": {
+                                    "type": "string",
+                                    "enum": [
+                                        "in_a_week",
+                                        "overdue"
+                                    ],
+                                    "example": "overdue"
+                                }
+                            },
+                            "competency_ids": {
+                                "type": "array",
+                                "description": "ID компетенций",
+                                "items": {
+                                    "type": "integer",
+                                    "example": 256
+                                }
+                            }
+                        }
                     }
                 }
             },
