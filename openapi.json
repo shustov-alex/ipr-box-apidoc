@@ -475,7 +475,7 @@
             }
         },
         "/competencies": {
-            "get": {
+            "post": {
                 "security": [
                     {
                         "bearerAuth": []
@@ -487,24 +487,15 @@
                 "summary": "05.01. Получить список компетенций",
                 "description": "Получить список компетенций",
                 "operationId": "getCompetencies",
-                "parameters": [
-                    {
-                        "$ref": "#/components/parameters/Base.Pagination.Page"
-                    },
-                    {
-                        "$ref": "#/components/parameters/Base.Pagination.PerPage"
-                    },
-                    {
-                        "name": "name",
-                        "in": "query",
-                        "required": false,
-                        "description": "Название компетенции для поиска по подстроке",
-                        "example": "My competency",
-                        "schema": {
-                            "type": "string"
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Competencies.Collection.Request"
+                            }
                         }
                     }
-                ],
+                },
                 "responses": {
                     "200": {
                         "description": "Список компетенций",
@@ -520,7 +511,7 @@
             }
         },
         "/targets": {
-            "get": {
+            "post": {
                 "security": [
                     {
                         "bearerAuth": []
@@ -532,20 +523,15 @@
                 "summary": "06.01. Получить список целей",
                 "description": "Получить список целей",
                 "operationId": "getTargets",
-                "parameters": [
-                    {
-                        "$ref": "#/components/parameters/Base.Pagination.Page"
-                    },
-                    {
-                        "$ref": "#/components/parameters/Base.Pagination.PerPage"
-                    },
-                    {
-                        "$ref": "#/components/parameters/Targets.Sort.Attribute"
-                    },
-                    {
-                        "$ref": "#/components/parameters/Base.Sort.Direction"
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Targets.Collection.Request"
+                            }
+                        }
                     }
-                ],
+                },
                 "responses": {
                     "200": {
                         "description": "Список целей",
@@ -602,7 +588,38 @@
     },
     "components": {
         "schemas": {
+            "Base.Sort": {
+                "type": "object",
+                "properties": {
+                    "attribute": {
+                        "type": "string",
+                        "description": "Значение, по которому производится сортировка. Если не указано, то будет использовано значение по умолчанию.",
+                        "example": "id"
+                    },
+                    "direction": {
+                        "type": "string",
+                        "description": "Направление сортировки. Если не указано или указано некорректно, то будет использовано значение по умолчанию.",
+                        "enum": ["asc", "desc"],
+                        "example": "desc"
+                    }
+                }
+            },
             "Base.Pagination": {
+                "type": "object",
+                "properties": {
+                    "page": {
+                        "type": "integer",
+                        "description": "Номер текущей страницы. Если не указан, то будет использовано значение по умолчанию - '1'.",
+                        "example": 1
+                    },
+                    "per_page": {
+                        "type": "integer",
+                        "description": "Количество элементов на странице. Если не указано, то будет использовано значение по умолчанию.",
+                        "example": 50
+                    }
+                }
+            },
+            "Base.PaginationMeta": {
                 "type": "object",
                 "properties": {
                     "current_page": {
@@ -1054,6 +1071,25 @@
                     }
                 }
             },
+            "Competencies.Collection.Request": {
+                "type": "object",
+                "properties": {
+                    "pagination": {
+                        "$ref": "#/components/schemas/Base.Pagination"
+                    },
+                    "filter": {
+                        "type": "object",
+                        "description": "Параметры для фильтрации коллекции",
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "description": "Название компетенции",
+                                "example": "My competency"
+                            }
+                        }
+                    }
+                }
+            },
             "Competencies.Collection.SuccessResponse": {
                 "type": "object",
                 "properties": {
@@ -1072,7 +1108,7 @@
                         "type": "object",
                         "properties": {
                             "pagination": {
-                                "$ref": "#/components/schemas/Base.Pagination"
+                                "$ref": "#/components/schemas/Base.PaginationMeta"
                             }
                         }
                     }
@@ -1139,6 +1175,36 @@
                     }
                 ]
             },
+            "Targets.Collection.Sort": {
+                "type": "object",
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/Base.Sort"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "attribute": {
+                                "type": "string",
+                                "description": "Значение, по которому производится сортировка. Если не указано, то будет использовано значение по умолчанию.",
+                                "enum": ["name", "created_at", "priority", "deadline"],
+                                "example": "created_at"
+                            }
+                        }
+                    }
+                ]
+            },
+            "Targets.Collection.Request": {
+                "type": "object",
+                "properties": {
+                    "pagination": {
+                        "$ref": "#/components/schemas/Base.Pagination"
+                    },
+                    "sort": {
+                        "$ref": "#/components/schemas/Targets.Collection.Sort"
+                    }
+                }
+            },
             "Targets.Collection.SuccessResponse": {
                 "type": "object",
                 "properties": {
@@ -1157,7 +1223,7 @@
                         "type": "object",
                         "properties": {
                             "pagination": {
-                                "$ref": "#/components/schemas/Base.Pagination"
+                                "$ref": "#/components/schemas/Base.PaginationMeta"
                             }
                         }
                     }
@@ -1196,56 +1262,7 @@
             }
         },
         "parameters": {
-            "Base.Pagination.Page": {
-                "name": "page",
-                "in": "query",
-                "required": false,
-                "description": "Порядковый номер страницы. Если не указан, то будет использовано значение '1'.",
-                "example": 1,
-                "schema": {
-                    "type": "integer"
-                }
-            },
-            "Base.Pagination.PerPage": {
-                "name": "per_page",
-                "in": "query",
-                "required": false,
-                "description": "Количество элементов на странице. Если не указано, то будет использовано значение по умолчанию.",
-                "example": 50,
-                "schema": {
-                    "type": "integer"
-                }
-            },
-            "Base.Sort.Attribute": {
-                "name": "sort_attribute",
-                "in": "query",
-                "required": false,
-                "description": "Значение, по которому производится сортировка. Если не указано, то будет использовано значение по умолчанию.",
-                "example": "id",
-                "schema": {
-                    "type": "string"
-                }
-            },
-            "Base.Sort.Direction": {
-                "name": "sort_direction",
-                "in": "query",
-                "required": false,
-                "description": "Направление сортировки. Возможные значения: asc, desc. Если не указано или указано некорректно, то будет использовано значение по умолчанию.",
-                "example": "desc",
-                "schema": {
-                    "type": "string"
-                }
-            },
-            "Targets.Sort.Attribute": {
-                "name": "sort_attribute",
-                "in": "query",
-                "required": false,
-                "description": "Значение, по которому производится сортировка. Возможные значения: name, created_at, priority, deadline. Если не указано, то будет использовано значение по умолчанию.",
-                "example": "created_at",
-                "schema": {
-                    "type": "string"
-                }
-            }
+
         },
         "securitySchemes": {
             "bearerAuth": {
