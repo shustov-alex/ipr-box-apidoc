@@ -31,6 +31,10 @@
         {
             "name": "Competencies",
             "description": "05. Компетенции"
+        },
+        {
+            "name": "Targets",
+            "description": "06. Цели"
         }
     ],
     "paths": {
@@ -501,7 +505,7 @@
                         "description": "Количество элементов на странице. Если не передан, то будет использовано значение по умолчанию",
                         "example": 50,
                         "schema": {
-                            "type": "string"
+                            "type": "integer"
                         }
                     },
                     {
@@ -522,6 +526,45 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/Competencies.Collection.SuccessResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/targets/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Targets"
+                ],
+                "summary": "06.01. Получить детальную информацию о цели",
+                "description": "Получить детальную информацию о цели",
+                "operationId": "getTargetDetails",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID цели",
+                        "example": 512,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Детальная информация о цели",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Targets.DetailView.SuccessResponse"
                                 }
                             }
                         }
@@ -1003,6 +1046,79 @@
                         "properties": {
                             "pagination": {
                                 "$ref": "#/components/schemas/Base.Pagination"
+                            }
+                        }
+                    }
+                }
+            },
+            "Targets.BaseTarget": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "ID",
+                        "example": 64
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Название",
+                        "example": "My target"
+                    },
+                    "status": {
+                        "type": "string",
+                        "description": "Статус",
+                        "enum": [
+                            "approval",
+                            "not_approved",
+                            "not_started",
+                            "in_progress",
+                            "done"
+                        ],
+                        "example": "in_progress"
+                    },
+                    "priority": {
+                        "type": "string",
+                        "description": "Приоритет",
+                        "enum": [
+                            "low",
+                            "medium",
+                            "high"
+                        ],
+                        "example": "low"
+                    },
+                    "deadline": {
+                        "type": "integer",
+                        "description": "Крайний срок выполнения. Формат - timestamp.",
+                        "example": 1693861388
+                    }
+                }
+            },
+            "Targets.DetailView": {
+                "type": "object",
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/Targets.BaseTarget"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "description": {
+                                "type": "string",
+                                "description": "Описание",
+                                "example": "Some description"
+                            }
+                        }
+                    }
+                ]
+            },
+            "Targets.DetailView.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "$ref": "#/components/schemas/Targets.DetailView"
                             }
                         }
                     }
