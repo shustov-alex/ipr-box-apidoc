@@ -489,24 +489,10 @@
                 "operationId": "getCompetencies",
                 "parameters": [
                     {
-                        "name": "page",
-                        "in": "query",
-                        "required": false,
-                        "description": "Порядковый номер страницы. Если не передан, то будет использовано значение '1'.",
-                        "example": 1,
-                        "schema": {
-                            "type": "integer"
-                        }
+                        "$ref": "#/components/parameters/Base.Pagination.Page"
                     },
                     {
-                        "name": "per_page",
-                        "in": "query",
-                        "required": false,
-                        "description": "Количество элементов на странице. Если не передан, то будет использовано значение по умолчанию",
-                        "example": 50,
-                        "schema": {
-                            "type": "integer"
-                        }
+                        "$ref": "#/components/parameters/Base.Pagination.PerPage"
                     },
                     {
                         "name": "name",
@@ -533,6 +519,41 @@
                 }
             }
         },
+        "/targets": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Targets"
+                ],
+                "summary": "06.01. Получить список целей",
+                "description": "Получить список целей",
+                "operationId": "getTargets",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/Base.Pagination.Page"
+                    },
+                    {
+                        "$ref": "#/components/parameters/Base.Pagination.PerPage"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Список целей",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Targets.Collection.SuccessResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/targets/{id}": {
             "get": {
                 "security": [
@@ -543,7 +564,7 @@
                 "tags": [
                     "Targets"
                 ],
-                "summary": "06.01. Получить детальную информацию о цели",
+                "summary": "06.02. Получить детальную информацию о цели",
                 "description": "Получить детальную информацию о цели",
                 "operationId": "getTargetDetails",
                 "parameters": [
@@ -564,7 +585,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Targets.DetailView.SuccessResponse"
+                                    "$ref": "#/components/schemas/Targets.TargetDetails.SuccessResponse"
                                 }
                             }
                         }
@@ -1012,7 +1033,7 @@
                     }
                 }
             },
-            "Competencies.Collection.Item": {
+            "Competencies.Competency.Base": {
                 "type": "object",
                 "properties": {
                     "id": {
@@ -1036,7 +1057,7 @@
                             "success": {
                                 "type": "array",
                                 "items": {
-                                    "$ref": "#/components/schemas/Competencies.Collection.Item"
+                                    "$ref": "#/components/schemas/Competencies.Competency.Base"
                                 }
                             }
                         }
@@ -1051,7 +1072,7 @@
                     }
                 }
             },
-            "Targets.BaseTarget": {
+            "Targets.Target.Base": {
                 "type": "object",
                 "properties": {
                     "id": {
@@ -1093,11 +1114,54 @@
                     }
                 }
             },
-            "Targets.DetailView": {
+            "Targets.Target.CollectionView": {
                 "type": "object",
                 "allOf": [
                     {
-                        "$ref": "#/components/schemas/Targets.BaseTarget"
+                        "$ref": "#/components/schemas/Targets.Target.Base"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "competencies": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/Competencies.Competency.Base"
+                                }
+                            }
+                        }
+                    }
+                ]
+            },
+            "Targets.Collection.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/Targets.Target.CollectionView"
+                                }
+                            }
+                        }
+                    },
+                    "meta": {
+                        "type": "object",
+                        "properties": {
+                            "pagination": {
+                                "$ref": "#/components/schemas/Base.Pagination"
+                            }
+                        }
+                    }
+                }
+            },
+            "Targets.Target.DetailView": {
+                "type": "object",
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/Targets.Target.Base"
                     },
                     {
                         "type": "object",
@@ -1111,17 +1175,39 @@
                     }
                 ]
             },
-            "Targets.DetailView.SuccessResponse": {
+            "Targets.TargetDetails.SuccessResponse": {
                 "type": "object",
                 "properties": {
                     "data": {
                         "type": "object",
                         "properties": {
                             "success": {
-                                "$ref": "#/components/schemas/Targets.DetailView"
+                                "$ref": "#/components/schemas/Targets.Target.DetailView"
                             }
                         }
                     }
+                }
+            }
+        },
+        "parameters": {
+            "Base.Pagination.Page": {
+                "name": "page",
+                "in": "query",
+                "required": false,
+                "description": "Порядковый номер страницы. Если не передан, то будет использовано значение '1'.",
+                "example": 1,
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            "Base.Pagination.PerPage": {
+                "name": "per_page",
+                "in": "query",
+                "required": false,
+                "description": "Количество элементов на странице. Если не передан, то будет использовано значение по умолчанию",
+                "example": 50,
+                "schema": {
+                    "type": "integer"
                 }
             }
         },
