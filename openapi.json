@@ -23,6 +23,10 @@
         {
             "name": "Feedback",
             "description": "03. Обратная связь"
+        },
+        {
+            "name": "User",
+            "description": "04. Пользователи"
         }
     ],
     "paths": {
@@ -434,6 +438,33 @@
                     }
                 }
             }
+        },
+        "/user/profile": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "User"
+                ],
+                "summary": "04.01. Получить профиль текущего пользователя",
+                "description": "Получить профиль текущего пользователя",
+                "operationId": "getUserProfile",
+                "responses": {
+                    "200": {
+                        "description": "Объект конфигурации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User.Profile.SuccessResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -819,6 +850,41 @@
                     }
                 },
                 "required": ["email", "text"]
+            },
+            "User.Profile.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "object",
+                                "properties": {
+                                    "id": {
+                                        "type": "integer",
+                                        "description": "ID",
+                                        "example": 1024
+                                    },
+                                    "login": {
+                                        "type": "string",
+                                        "description": "Логин",
+                                        "example": "my_login"
+                                    },
+                                    "first_name": {
+                                        "type": "string",
+                                        "description": "Имя",
+                                        "example": "Иван"
+                                    },
+                                    "last_name": {
+                                        "type": "string",
+                                        "description": "Фамилия",
+                                        "example": "Иванов"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         },
         "securitySchemes": {
