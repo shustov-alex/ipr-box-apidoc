@@ -1035,6 +1035,11 @@
                                         "description": "ID",
                                         "example": 1024
                                     },
+                                    "company_id": {
+                                        "type": "integer",
+                                        "description": "ID компании",
+                                        "example": 256
+                                    },
                                     "login": {
                                         "type": "string",
                                         "description": "Логин",
