@@ -1153,6 +1153,11 @@
                         "type": "integer",
                         "description": "Крайний срок выполнения. Формат - timestamp.",
                         "example": 1693861388
+                    },
+                    "completion_percent": {
+                        "type": "integer",
+                        "description": "Процент прохождения",
+                        "example": 75
                     }
                 }
             },
