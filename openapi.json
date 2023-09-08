@@ -1141,13 +1141,12 @@
                         "type": "string",
                         "description": "Статус",
                         "enum": [
-                            "approval",
-                            "not_approved",
                             "not_started",
                             "in_progress",
-                            "done"
+                            "done",
+                            "cancelled"
                         ],
-                        "example": "in_progress"
+                        "example": "not_started"
                     },
                     "priority": {
                         "type": "string",
@@ -1229,13 +1228,12 @@
                                 "items": {
                                     "type": "string",
                                     "enum": [
-                                        "approval",
-                                        "not_approved",
                                         "not_started",
                                         "in_progress",
-                                        "done"
+                                        "done",
+                                        "cancelled"
                                     ],
-                                    "example": "in_progress"
+                                    "example": "not_started"
                                 }
                             },
                             "priority": {
