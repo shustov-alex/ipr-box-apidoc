@@ -521,7 +521,7 @@
                     "Targets"
                 ],
                 "summary": "06.01. Получить список целей",
-                "description": "Получить список целей",
+                "description": "Получить список целей. Максимальное количество элементов - 1000.",
                 "operationId": "getTargets",
                 "requestBody": {
                     "content": {
@@ -1217,9 +1217,6 @@
             "Targets.Collection.Request": {
                 "type": "object",
                 "properties": {
-                    "pagination": {
-                        "$ref": "#/components/schemas/Base.Pagination"
-                    },
                     "sort": {
                         "$ref": "#/components/schemas/Targets.Collection.Sort"
                     },
@@ -1289,14 +1286,6 @@
                                 "items": {
                                     "$ref": "#/components/schemas/Targets.Target.CollectionView"
                                 }
-                            }
-                        }
-                    },
-                    "meta": {
-                        "type": "object",
-                        "properties": {
-                            "pagination": {
-                                "$ref": "#/components/schemas/Base.PaginationMeta"
                             }
                         }
                     }
