@@ -1156,7 +1156,7 @@
                             "medium",
                             "high"
                         ],
-                        "example": "low"
+                        "example": "medium"
                     },
                     "deadline": {
                         "type": "integer",
@@ -1246,7 +1246,7 @@
                                         "medium",
                                         "high"
                                     ],
-                                    "example": "low"
+                                    "example": "medium"
                                 }
                             },
                             "deadline": {
