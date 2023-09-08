@@ -1124,7 +1124,7 @@
                     }
                 }
             },
-            "Targets.Target.Base": {
+            "Targets.Target.DetailView": {
                 "type": "object",
                 "properties": {
                     "id": {
@@ -1168,6 +1168,11 @@
                         "type": "integer",
                         "description": "Процент прохождения",
                         "example": 75
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "Описание",
+                        "example": "Some description"
                     }
                 }
             },
@@ -1175,7 +1180,7 @@
                 "type": "object",
                 "allOf": [
                     {
-                        "$ref": "#/components/schemas/Targets.Target.Base"
+                        "$ref": "#/components/schemas/Targets.Target.DetailView"
                     },
                     {
                         "type": "object",
@@ -1296,24 +1301,6 @@
                         }
                     }
                 }
-            },
-            "Targets.Target.DetailView": {
-                "type": "object",
-                "allOf": [
-                    {
-                        "$ref": "#/components/schemas/Targets.Target.Base"
-                    },
-                    {
-                        "type": "object",
-                        "properties": {
-                            "description": {
-                                "type": "string",
-                                "description": "Описание",
-                                "example": "Some description"
-                            }
-                        }
-                    }
-                ]
             },
             "Targets.TargetDetails.SuccessResponse": {
                 "type": "object",
