@@ -750,6 +750,11 @@
                         "type": "string",
                         "description": "Пароль",
                         "example": "your_password"
+                    },
+                    "company_id": {
+                        "type": "integer",
+                        "description": "ID компании",
+                        "example": 123
                     }
                 },
                 "required": ["login", "password"]
