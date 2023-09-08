@@ -35,6 +35,10 @@
         {
             "name": "Targets",
             "description": "06. Цели"
+        },
+        {
+            "name": "IDP",
+            "description": "07. Индивидуальный план развития"
         }
     ],
     "paths": {
@@ -46,7 +50,7 @@
                 ],
                 "summary": "01.01. Получить конфигурацию компании",
                 "description": "Получить конфигурацию компании",
-                "operationId": "getConfiguration",
+                "operationId": "base.getConfiguration",
                 "parameters": [
                     {
                         "name": "company_id",
@@ -101,7 +105,7 @@
                 ],
                 "summary": "02.01. Получение токенов по логину / паролю",
                 "description": "Получение токенов по логину / паролю",
-                "operationId": "authByLoginAndPassword",
+                "operationId": "auth.authByLoginAndPassword",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -143,7 +147,7 @@
                 "security": [],
                 "summary": "02.02. Обновление токенов",
                 "description": "Обновление токенов",
-                "operationId": "refreshPairOfTokens",
+                "operationId": "auth.refreshPairOfTokens",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -189,7 +193,7 @@
                 ],
                 "summary": "02.03. Выход из профиля авторизации",
                 "description": "Выход из профиля авторизации",
-                "operationId": "logout",
+                "operationId": "auth.logout",
                 "responses": {
                     "200": {
                         "description": "Выход из профиля прошёл успешно",
@@ -222,7 +226,7 @@
                 ],
                 "summary": "02.04. Запрос на восстановление пароля",
                 "description": "Запрос на восстановление пароля",
-                "operationId": "resetPasswordForgotPassword",
+                "operationId": "auth.resetPasswordForgotPassword",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -264,7 +268,7 @@
                 ],
                 "summary": "02.05. Проверка токена для восстановления пароля",
                 "description": "Проверка токена для восстановления пароля",
-                "operationId": "resetPasswordCheckToken",
+                "operationId": "auth.resetPasswordCheckToken",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -306,7 +310,7 @@
                 ],
                 "summary": "02.06. Сохранение нового пароля",
                 "description": "Сохранение нового пароля",
-                "operationId": "resetPasswordSaveNewPassword",
+                "operationId": "auth.resetPasswordSaveNewPassword",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -348,7 +352,7 @@
                 ],
                 "summary": "02.07. Получить список требований для паролей",
                 "description": "Получить список требований для паролей",
-                "operationId": "getPasswordRequirements",
+                "operationId": "auth.getPasswordRequirements",
                 "responses": {
                     "200": {
                         "description": "Список требований для паролей",
@@ -371,7 +375,7 @@
                 ],
                 "summary": "02.08. Авторизация по внешнему JWT",
                 "description": "Авторизация по внешнему JWT, выданному 'Академией Equeo'",
-                "operationId": "authByExternalToken",
+                "operationId": "auth.authByExternalToken",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -413,7 +417,7 @@
                 ],
                 "summary": "03.01. Отправка сообщения в техподдержку",
                 "description": "Отправка сообщения в техподдержку",
-                "operationId": "sendFeedback",
+                "operationId": "feedback.sendFeedback",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -459,7 +463,7 @@
                 ],
                 "summary": "04.01. Получить профиль текущего пользователя",
                 "description": "Получить профиль текущего пользователя",
-                "operationId": "getUserProfile",
+                "operationId": "users.getProfile",
                 "responses": {
                     "200": {
                         "description": "Объект профиля пользователя",
@@ -486,7 +490,7 @@
                 ],
                 "summary": "05.01. Получить список компетенций",
                 "description": "Получить список компетенций",
-                "operationId": "getCompetencies",
+                "operationId": "competencies.getCollection",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -522,7 +526,7 @@
                 ],
                 "summary": "06.01. Получить список целей",
                 "description": "Получить список целей. Максимальное количество элементов - 1000.",
-                "operationId": "getTargets",
+                "operationId": "targets.getCollection",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -558,7 +562,7 @@
                 ],
                 "summary": "06.02. Получить детальную информацию о цели",
                 "description": "Получить детальную информацию о цели",
-                "operationId": "getTargetDetails",
+                "operationId": "targets.getTargetDetails",
                 "parameters": [
                     {
                         "name": "id",
@@ -597,7 +601,7 @@
                 ],
                 "summary": "06.03. Обновить статус цели",
                 "description": "Обновить статус цели",
-                "operationId": "updateTargetStatus",
+                "operationId": "targets.updateStatus",
                 "parameters": [
                     {
                         "name": "id",
@@ -636,6 +640,33 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/Auth.ResetPassword.SaveNewPassword.ErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/idp/available-years": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "IDP"
+                ],
+                "summary": "07.01. Годы, в которых пользователю доступна работа с ИПР",
+                "description": "Годы, в которых пользователю доступна работа с ИПР",
+                "operationId": "idp.getAvailableYears",
+                "responses": {
+                    "200": {
+                        "description": "Объект со списком лет",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/IDP.AvailableYears.SuccessResponse"
                                 }
                             }
                         }
@@ -1375,6 +1406,29 @@
                                 "cancelled"
                             ],
                             "example": "not_started"
+                        }
+                    }
+                }
+            },
+            "IDP.AvailableYears.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "object",
+                                "properties": {
+                                    "years": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "integer",
+                                            "description": "Год",
+                                            "example": 2023
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
