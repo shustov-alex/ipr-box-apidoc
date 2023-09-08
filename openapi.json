@@ -584,6 +584,64 @@
                     }
                 }
             }
+        },
+        "/targets/{id}/update-status": {
+            "put": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Targets"
+                ],
+                "summary": "06.03. Обновить статус цели",
+                "description": "Обновить статус цели",
+                "operationId": "updateTargetStatus",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "description": "ID цели",
+                        "example": 512,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Targets.UpdateStatus.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Статус изменён успешно",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.EmptySuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки при обновлении статуса",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Auth.ResetPassword.SaveNewPassword.ErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -1298,6 +1356,25 @@
                             "success": {
                                 "$ref": "#/components/schemas/Targets.Target.DetailView"
                             }
+                        }
+                    }
+                }
+            },
+            "Targets.UpdateStatus.Request": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "array",
+                        "description": "Статус",
+                        "items": {
+                            "type": "string",
+                            "enum": [
+                                "not_started",
+                                "in_progress",
+                                "done",
+                                "cancelled"
+                            ],
+                            "example": "not_started"
                         }
                     }
                 }
