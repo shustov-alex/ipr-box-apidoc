@@ -612,7 +612,7 @@
             }
         },
         "/targets/status-groups": {
-            "get": {
+            "post": {
                 "security": [
                     {
                         "bearerAuth": []
@@ -624,6 +624,15 @@
                 "summary": "06.04. Получить группы статусов целей",
                 "description": "Получить группы статусов целей",
                 "operationId": "targets.getStatusGroups",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Targets.GetStatusGroups.Request"
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
                         "description": "Группы статусов",
@@ -1262,6 +1271,31 @@
                     }
                 }
             },
+            "Targets.Filters.Year": {
+                "type": "object",
+                "properties": {
+                    "year": {
+                        "type": "integer",
+                        "description": "Год",
+                        "example": 2023
+                    }
+                },
+                "required": ["year"]
+            },
+            "Targets.Filters.StatusGroup": {
+                "type": "object",
+                "properties": {
+                    "status_group": {
+                        "type": "string",
+                        "description": "Группа статусов. 'active' включает в себя статусы 'not_started', 'in_progress'. 'completed' включает в себя статусы 'done', 'cancelled'",
+                        "enum": [
+                            "active",
+                            "completed"
+                        ],
+                        "example": "active"
+                    }
+                }
+            },
             "Targets.Collection.Sort": {
                 "type": "object",
                 "allOf": [
@@ -1289,22 +1323,14 @@
                     },
                     "filter": {
                         "type": "object",
-                        "properties": {
-                            "year": {
-                                "type": "integer",
-                                "description": "Год",
-                                "example": 2023
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Targets.Filters.Year"
                             },
-                            "status_group": {
-                                "type": "string",
-                                "description": "Группа статусов. 'active' включает в себя статусы 'not_started', 'in_progress'. 'completed' включает в себя статусы 'done', 'cancelled'",
-                                "enum": [
-                                    "active",
-                                    "completed"
-                                ],
-                                "example": "active"
+                            {
+                                "$ref": "#/components/schemas/Targets.Filters.StatusGroup"
                             }
-                        },
+                        ],
                         "required": ["year"]
                     }
                 },
@@ -1392,6 +1418,24 @@
                         "example": 4
                     }
                 }
+            },
+            "Targets.GetStatusGroups.Request": {
+                "type": "object",
+                "properties": {
+                    "filter": {
+                        "type": "object",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Targets.Filters.Year"
+                            },
+                            {
+                                "$ref": "#/components/schemas/Targets.Filters.StatusGroup"
+                            }
+                        ],
+                        "required": ["year"]
+                    }
+                },
+                "required": ["filter"]
             },
             "Targets.GetStatusGroups.SuccessResponse": {
                 "type": "object",
