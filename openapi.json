@@ -1225,7 +1225,8 @@
                     "deadline": {
                         "type": "string",
                         "description": "Крайний срок выполнения",
-                        "example": "2023-09-18 15:15:17"
+                        "example": "2023-09-18 15:15:17",
+                        "nullable": true
                     }
                 }
             },
@@ -1262,39 +1263,16 @@
                                 "description": "Год",
                                 "example": 2023
                             },
-                            "status": {
+                            "status_group": {
                                 "type": "array",
-                                "description": "Статус",
+                                "description": "Группа статусов. 'active' включает в себя статусы 'not_started', 'in_progress'. 'completed' включает в себя статусы 'done', 'cancelled'",
                                 "items": {
                                     "type": "string",
                                     "enum": [
-                                        "not_started",
-                                        "in_progress",
-                                        "done",
-                                        "cancelled"
+                                        "active",
+                                        "completed"
                                     ],
-                                    "example": "not_started"
-                                }
-                            },
-                            "priority": {
-                                "type": "array",
-                                "description": "Приоритет",
-                                "items": {
-                                    "type": "string",
-                                    "enum": [
-                                        "low",
-                                        "medium",
-                                        "high"
-                                    ],
-                                    "example": "medium"
-                                }
-                            },
-                            "skill_ids": {
-                                "type": "array",
-                                "description": "ID навыков",
-                                "items": {
-                                    "type": "integer",
-                                    "example": 256
+                                    "example": "active"
                                 }
                             }
                         },
@@ -1331,6 +1309,7 @@
                             "description": {
                                 "type": "string",
                                 "description": "Описание",
+                                "nullable": true,
                                 "example": "Some description"
                             }
                         }
