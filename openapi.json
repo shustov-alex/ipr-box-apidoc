@@ -1242,7 +1242,7 @@
                             "attribute": {
                                 "type": "string",
                                 "description": "Значение, по которому производится сортировка. Если не указано, то будет использовано значение по умолчанию.",
-                                "enum": ["name", "priority", "created_at", "deadline"],
+                                "enum": ["priority", "created_at", "deadline"],
                                 "example": "priority"
                             }
                         }
