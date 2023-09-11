@@ -1291,16 +1291,13 @@
                                 "example": 2023
                             },
                             "status_group": {
-                                "type": "array",
+                                "type": "string",
                                 "description": "Группа статусов. 'active' включает в себя статусы 'not_started', 'in_progress'. 'completed' включает в себя статусы 'done', 'cancelled'",
-                                "items": {
-                                    "type": "string",
-                                    "enum": [
-                                        "active",
-                                        "completed"
-                                    ],
-                                    "example": "active"
-                                }
+                                "enum": [
+                                    "active",
+                                    "completed"
+                                ],
+                                "example": "active"
                             }
                         },
                         "required": ["year"]
