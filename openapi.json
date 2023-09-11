@@ -1332,13 +1332,6 @@
                                 "type": "string",
                                 "description": "Описание",
                                 "example": "Some description"
-                            },
-                            "materials": {
-                                "type": "array",
-                                "description": "Материалы",
-                                "items": {
-                                    "$ref": "#/components/schemas/Materials.Material.Base"
-                                }
                             }
                         }
                     }
