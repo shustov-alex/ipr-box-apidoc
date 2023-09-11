@@ -1169,6 +1169,11 @@
                                         "description": "Логин",
                                         "example": "my_login"
                                     },
+                                    "email": {
+                                        "type": "string",
+                                        "description": "Email",
+                                        "example": "test@test.com"
+                                    },
                                     "first_name": {
                                         "type": "string",
                                         "description": "Имя",
