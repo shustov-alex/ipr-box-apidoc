@@ -1388,18 +1388,14 @@
                 "type": "object",
                 "properties": {
                     "status": {
-                        "type": "array",
-                        "description": "Статус",
-                        "items": {
-                            "type": "string",
-                            "enum": [
-                                "not_started",
-                                "in_progress",
-                                "done",
-                                "cancelled"
-                            ],
-                            "example": "not_started"
-                        }
+                        "type": "string",
+                        "enum": [
+                            "not_started",
+                            "in_progress",
+                            "done",
+                            "cancelled"
+                        ],
+                        "example": "not_started"
                     }
                 }
             },
