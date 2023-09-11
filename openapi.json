@@ -29,8 +29,8 @@
             "description": "04. Пользователи"
         },
         {
-            "name": "Competencies",
-            "description": "05. Компетенции"
+            "name": "Skills",
+            "description": "05. Навыки"
         },
         {
             "name": "Targets",
@@ -478,7 +478,7 @@
                 }
             }
         },
-        "/competencies": {
+        "/skills": {
             "post": {
                 "security": [
                     {
@@ -486,27 +486,27 @@
                     }
                 ],
                 "tags": [
-                    "Competencies"
+                    "Skills"
                 ],
-                "summary": "05.01. Получить список компетенций",
-                "description": "Получить список компетенций",
-                "operationId": "competencies.getCollection",
+                "summary": "05.01. Получить список навыков",
+                "description": "Получить список навыков",
+                "operationId": "skills.getCollection",
                 "requestBody": {
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Competencies.Collection.Request"
+                                "$ref": "#/components/schemas/Skills.Collection.Request"
                             }
                         }
                     }
                 },
                 "responses": {
                     "200": {
-                        "description": "Список компетенций",
+                        "description": "Список навыков",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Competencies.Collection.SuccessResponse"
+                                    "$ref": "#/components/schemas/Skills.Collection.SuccessResponse"
                                 }
                             }
                         }
@@ -1155,7 +1155,7 @@
                     }
                 }
             },
-            "Competencies.Competency.Base": {
+            "Skills.Skill.Base": {
                 "type": "object",
                 "properties": {
                     "id": {
@@ -1166,11 +1166,11 @@
                     "name": {
                         "type": "string",
                         "description": "Название",
-                        "example": "My competency"
+                        "example": "My skill"
                     }
                 }
             },
-            "Competencies.Collection.Request": {
+            "Skills.Collection.Request": {
                 "type": "object",
                 "properties": {
                     "pagination": {
@@ -1182,14 +1182,14 @@
                         "properties": {
                             "name": {
                                 "type": "string",
-                                "description": "Название компетенции",
-                                "example": "My competency"
+                                "description": "Название навыка",
+                                "example": "My skill"
                             }
                         }
                     }
                 }
             },
-            "Competencies.Collection.SuccessResponse": {
+            "Skills.Collection.SuccessResponse": {
                 "type": "object",
                 "properties": {
                     "data": {
@@ -1198,7 +1198,7 @@
                             "success": {
                                 "type": "array",
                                 "items": {
-                                    "$ref": "#/components/schemas/Competencies.Competency.Base"
+                                    "$ref": "#/components/schemas/Skills.Skill.Base"
                                 }
                             }
                         }
@@ -1273,10 +1273,10 @@
                     {
                         "type": "object",
                         "properties": {
-                            "competencies": {
+                            "skills": {
                                 "type": "array",
                                 "items": {
-                                    "$ref": "#/components/schemas/Competencies.Competency.Base"
+                                    "$ref": "#/components/schemas/Skills.Skill.Base"
                                 }
                             }
                         }
@@ -1350,9 +1350,9 @@
                                     "example": "overdue"
                                 }
                             },
-                            "competency_ids": {
+                            "skill_ids": {
                                 "type": "array",
-                                "description": "ID компетенций",
+                                "description": "ID навыков",
                                 "items": {
                                     "type": "integer",
                                     "example": 256
