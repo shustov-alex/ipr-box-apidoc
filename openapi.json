@@ -1194,6 +1194,21 @@
                     }
                 }
             },
+            "Materials.Material.Base": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "ID",
+                        "example": 32
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Название",
+                        "example": "My material"
+                    }
+                }
+            },
             "Skills.Skill.Base": {
                 "type": "object",
                 "properties": {
@@ -1252,7 +1267,7 @@
                     }
                 }
             },
-            "Targets.Target.DetailView": {
+            "Targets.Target.Base": {
                 "type": "object",
                 "properties": {
                     "id": {
@@ -1291,31 +1306,14 @@
                         "description": "Крайний срок выполнения. Формат - timestamp.",
                         "example": 1693861388
                     },
-                    "description": {
-                        "type": "string",
-                        "description": "Описание",
-                        "example": "Some description"
-                    }
-                }
-            },
-            "Targets.Target.CollectionView": {
-                "type": "object",
-                "allOf": [
-                    {
-                        "$ref": "#/components/schemas/Targets.Target.DetailView"
-                    },
-                    {
-                        "type": "object",
-                        "properties": {
-                            "skills": {
-                                "type": "array",
-                                "items": {
-                                    "$ref": "#/components/schemas/Skills.Skill.Base"
-                                }
-                            }
+                    "skills": {
+                        "type": "array",
+                        "description": "Навыки",
+                        "items": {
+                            "$ref": "#/components/schemas/Skills.Skill.Base"
                         }
                     }
-                ]
+                }
             },
             "Targets.Collection.Sort": {
                 "type": "object",
@@ -1405,12 +1403,37 @@
                             "success": {
                                 "type": "array",
                                 "items": {
-                                    "$ref": "#/components/schemas/Targets.Target.CollectionView"
+                                    "$ref": "#/components/schemas/Targets.Target.Base"
                                 }
                             }
                         }
                     }
                 }
+            },
+            "Targets.Target.DetailView": {
+                "type": "object",
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/Targets.Target.Base"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "description": {
+                                "type": "string",
+                                "description": "Описание",
+                                "example": "Some description"
+                            },
+                            "materials": {
+                                "type": "array",
+                                "description": "Материалы",
+                                "items": {
+                                    "$ref": "#/components/schemas/Materials.Material.Base"
+                                }
+                            }
+                        }
+                    }
+                ]
             },
             "Targets.TargetDetails.SuccessResponse": {
                 "type": "object",
