@@ -1327,8 +1327,8 @@
                             "attribute": {
                                 "type": "string",
                                 "description": "Значение, по которому производится сортировка. Если не указано, то будет использовано значение по умолчанию.",
-                                "enum": ["name", "created_at", "priority", "deadline"],
-                                "example": "created_at"
+                                "enum": ["name", "priority", "created_at", "deadline"],
+                                "example": "priority"
                             }
                         }
                     }
@@ -1343,6 +1343,11 @@
                     "filter": {
                         "type": "object",
                         "properties": {
+                            "year": {
+                                "type": "integer",
+                                "description": "Год",
+                                "example": 2023
+                            },
                             "status": {
                                 "type": "array",
                                 "description": "Статус",
@@ -1370,18 +1375,6 @@
                                     "example": "medium"
                                 }
                             },
-                            "deadline": {
-                                "type": "array",
-                                "description": "Крайний срок",
-                                "items": {
-                                    "type": "string",
-                                    "enum": [
-                                        "in_a_week",
-                                        "overdue"
-                                    ],
-                                    "example": "overdue"
-                                }
-                            },
                             "skill_ids": {
                                 "type": "array",
                                 "description": "ID навыков",
@@ -1390,9 +1383,11 @@
                                     "example": 256
                                 }
                             }
-                        }
+                        },
+                        "required": ["year"]
                     }
-                }
+                },
+                "required": ["filter"]
             },
             "Targets.Collection.SuccessResponse": {
                 "type": "object",
