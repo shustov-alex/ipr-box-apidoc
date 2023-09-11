@@ -478,42 +478,6 @@
                 }
             }
         },
-        "/skills": {
-            "post": {
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ],
-                "tags": [
-                    "Skills"
-                ],
-                "summary": "05.01. Получить список навыков",
-                "description": "Получить список навыков",
-                "operationId": "skills.getCollection",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Skills.Collection.Request"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Список навыков",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Skills.Collection.SuccessResponse"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
         "/targets": {
             "post": {
                 "security": [
@@ -1224,49 +1188,6 @@
                     }
                 }
             },
-            "Skills.Collection.Request": {
-                "type": "object",
-                "properties": {
-                    "pagination": {
-                        "$ref": "#/components/schemas/Base.Pagination"
-                    },
-                    "filter": {
-                        "type": "object",
-                        "description": "Параметры для фильтрации коллекции",
-                        "properties": {
-                            "name": {
-                                "type": "string",
-                                "description": "Название навыка",
-                                "example": "My skill"
-                            }
-                        }
-                    }
-                }
-            },
-            "Skills.Collection.SuccessResponse": {
-                "type": "object",
-                "properties": {
-                    "data": {
-                        "type": "object",
-                        "properties": {
-                            "success": {
-                                "type": "array",
-                                "items": {
-                                    "$ref": "#/components/schemas/Skills.Skill.Base"
-                                }
-                            }
-                        }
-                    },
-                    "meta": {
-                        "type": "object",
-                        "properties": {
-                            "pagination": {
-                                "$ref": "#/components/schemas/Base.PaginationMeta"
-                            }
-                        }
-                    }
-                }
-            },
             "Targets.Target.Base": {
                 "type": "object",
                 "properties": {
@@ -1305,13 +1226,6 @@
                         "type": "integer",
                         "description": "Крайний срок выполнения. Формат - timestamp.",
                         "example": 1693861388
-                    },
-                    "skills": {
-                        "type": "array",
-                        "description": "Навыки",
-                        "items": {
-                            "$ref": "#/components/schemas/Skills.Skill.Base"
-                        }
                     }
                 }
             },
