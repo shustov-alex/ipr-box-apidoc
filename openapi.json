@@ -1223,9 +1223,9 @@
                         "example": "medium"
                     },
                     "deadline": {
-                        "type": "integer",
-                        "description": "Крайний срок выполнения. Формат - timestamp.",
-                        "example": 1693861388
+                        "type": "string",
+                        "description": "Крайний срок выполнения",
+                        "example": "2023-09-18 15:15:17"
                     }
                 }
             },
