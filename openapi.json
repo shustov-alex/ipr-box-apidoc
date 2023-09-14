@@ -1263,6 +1263,11 @@
                         ],
                         "example": "medium"
                     },
+                    "created_at": {
+                        "type": "string",
+                        "description": "Дата создания цели",
+                        "example": "2023-09-01 12:10:20"
+                    },
                     "deadline": {
                         "type": "string",
                         "description": "Крайний срок выполнения",
