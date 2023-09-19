@@ -528,16 +528,7 @@
                 "description": "Получить детальную информацию о цели",
                 "operationId": "targets.getTargetDetails",
                 "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "description": "ID цели",
-                        "example": 512,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
+                    {"$ref": "#/components/parameters/Targets.Target.ID"}
                 ],
                 "responses": {
                     "200": {
@@ -567,16 +558,7 @@
                 "description": "Обновить статус цели",
                 "operationId": "targets.updateStatus",
                 "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "required": true,
-                        "description": "ID цели",
-                        "example": 512,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
+                    {"$ref": "#/components/parameters/Targets.Target.ID"}
                 ],
                 "requestBody": {
                     "content": {
@@ -640,6 +622,131 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/Targets.GetStatusGroups.SuccessResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/targets/create": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Targets"
+                ],
+                "summary": "06.05. Создать цель",
+                "description": "Создать цель",
+                "operationId": "targets.createTarget",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Targets.Target.ToUpsert"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Цель создана успешно",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.EmptySuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки при создании цели",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Auth.ResetPassword.SaveNewPassword.ErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/targets/{id}/update": {
+            "put": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Targets"
+                ],
+                "summary": "06.06. Обновить цель",
+                "description": "Обновить цель",
+                "operationId": "targets.updateTarget",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Targets.Target.ID"}
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Targets.Target.ToUpsert"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Цель обновлена успешно",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.EmptySuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки при обновлении цели",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Auth.ResetPassword.SaveNewPassword.ErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/targets/{id}/delete": {
+            "delete": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Targets"
+                ],
+                "summary": "06.07. Удалить цель",
+                "description": "Удалить цель",
+                "operationId": "targets.deleteTarget",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Targets.Target.ID"}
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Цель удалена успешно",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.EmptySuccessResponse"
                                 }
                             }
                         }
@@ -1229,19 +1336,55 @@
                     }
                 }
             },
-            "Targets.Target.Base": {
+            "Targets.MaterialToAdd": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "ID",
+                        "example": 256
+                    },
+                    "reason": {
+                        "type": "string",
+                        "description": "Обоснование для платного материала",
+                        "example": "Очень надо"
+                    }
+                }
+            },
+            "Targets.TargetAttribute.ID": {
                 "type": "object",
                 "properties": {
                     "id": {
                         "type": "integer",
                         "description": "ID",
                         "example": 64
-                    },
+                    }
+                }
+            },
+            "Targets.TargetAttribute.Name": {
+                "type": "object",
+                "properties": {
                     "name": {
                         "type": "string",
                         "description": "Название",
                         "example": "My target"
-                    },
+                    }
+                }
+            },
+            "Targets.TargetAttribute.Description": {
+                "type": "object",
+                "properties": {
+                    "description": {
+                        "type": "string",
+                        "description": "Описание",
+                        "nullable": true,
+                        "example": "Some description"
+                    }
+                }
+            },
+            "Targets.TargetAttribute.Status": {
+                "type": "object",
+                "properties": {
                     "status": {
                         "type": "string",
                         "description": "Статус",
@@ -1252,7 +1395,12 @@
                             "cancelled"
                         ],
                         "example": "not_started"
-                    },
+                    }
+                }
+            },
+            "Targets.TargetAttribute.Priority": {
+                "type": "object",
+                "properties": {
                     "priority": {
                         "type": "string",
                         "description": "Приоритет",
@@ -1262,19 +1410,69 @@
                             "high"
                         ],
                         "example": "medium"
-                    },
+                    }
+                }
+            },
+            "Targets.TargetAttribute.Deadline": {
+                "type": "object",
+                "properties": {
+                    "deadline": {
+                        "type": "string",
+                        "description": "Крайний срок выполнения",
+                        "example": "2023-09-18 15:15:17"
+                    }
+                }
+            },
+            "Targets.TargetAttribute.CreatedAt": {
+                "type": "object",
+                "properties": {
                     "created_at": {
                         "type": "string",
                         "description": "Дата создания цели",
                         "example": "2023-09-01 12:10:20"
-                    },
-                    "deadline": {
-                        "type": "string",
-                        "description": "Крайний срок выполнения",
-                        "example": "2023-09-18 15:15:17",
-                        "nullable": true
                     }
                 }
+            },
+            "Targets.Target.ToUpsert": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Targets.TargetAttribute.Name"},
+                    {"$ref": "#/components/schemas/Targets.TargetAttribute.Description"},
+                    {"$ref": "#/components/schemas/Targets.TargetAttribute.Priority"},
+                    {"$ref": "#/components/schemas/Targets.TargetAttribute.Deadline"},
+                    {
+                        "type": "object",
+                        "properties": {
+                            "skill_ids": {
+                                "type": "array",
+                                "description": "ID навыков",
+                                "items": {
+                                    "type": "integer",
+                                    "description": "ID",
+                                    "example": 128
+                                }
+                            },
+                            "materials": {
+                                "type": "array",
+                                "description": "Материалы",
+                                "items": {
+                                    "$ref": "#/components/schemas/Targets.MaterialToAdd"
+                                }
+                            }
+                        }
+                    }
+                ]
+            },
+            "Targets.Target.Base": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Targets.TargetAttribute.ID"},
+                    {"$ref": "#/components/schemas/Targets.TargetAttribute.Name"},
+                    {"$ref": "#/components/schemas/Targets.TargetAttribute.Status"},
+                    {"$ref": "#/components/schemas/Targets.TargetAttribute.Priority"},
+                    {"$ref": "#/components/schemas/Targets.TargetAttribute.CreatedAt"},
+                    {"$ref": "#/components/schemas/Targets.TargetAttribute.Deadline"}
+                ]
             },
             "Targets.Filters.Year": {
                 "type": "object",
@@ -1360,20 +1558,8 @@
             "Targets.Target.DetailView": {
                 "type": "object",
                 "allOf": [
-                    {
-                        "$ref": "#/components/schemas/Targets.Target.Base"
-                    },
-                    {
-                        "type": "object",
-                        "properties": {
-                            "description": {
-                                "type": "string",
-                                "description": "Описание",
-                                "nullable": true,
-                                "example": "Some description"
-                            }
-                        }
-                    }
+                    {"$ref": "#/components/schemas/Targets.Target.Base"},
+                    {"$ref": "#/components/schemas/Targets.TargetAttribute.Description"}
                 ]
             },
             "Targets.TargetDetails.SuccessResponse": {
@@ -1499,7 +1685,16 @@
             }
         },
         "parameters": {
-
+            "Targets.Target.ID": {
+                "name": "id",
+                "in": "path",
+                "required": true,
+                "description": "ID цели",
+                "example": 512,
+                "schema": {
+                    "type": "integer"
+                }
+            }
         },
         "securitySchemes": {
             "bearerAuth": {
