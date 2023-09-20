@@ -47,6 +47,10 @@
         {
             "name": "Competencies",
             "description": "09. Компетенции"
+        },
+        {
+            "name": "Materials",
+            "description": "10. Материалы"
         }
     ],
     "paths": {
@@ -1193,6 +1197,387 @@
                     }
                 }
             }
+        },
+        "/materials/tree": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Materials"
+                ],
+                "summary": "10.01. Получить дерево материалов",
+                "description": "Возвращает все корневые элементы и первые 500 вложенных элементов",
+                "operationId": "materials.getTree",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Materials.Tree.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Дерево материалов",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "data": {
+                                        "success": [
+                                            {
+                                                "type": "category",
+                                                "id": 1,
+                                                "parent_id": null,
+                                                "name": "Курсы",
+                                                "count_of_next_level_children": 2,
+                                                "children": [
+                                                    {
+                                                        "type": "category",
+                                                        "id": 10,
+                                                        "parent_id": 1,
+                                                        "name": "Эквио",
+                                                        "count_of_next_level_children": 3,
+                                                        "children": [
+                                                            {
+                                                                "type": "material",
+                                                                "id": 100,
+                                                                "parent_id": 10,
+                                                                "name": "Курс 'Профессия дизайнер'",
+                                                                "is_paid": false,
+                                                                "skills": [
+                                                                    {
+                                                                        "id": 123,
+                                                                        "name": "Навык 123"
+                                                                    },
+                                                                    {
+                                                                        "id": 456,
+                                                                        "name": "Навык 456"
+                                                                    }
+                                                                ],
+                                                                "count_of_next_level_children": 0,
+                                                                "children": []
+                                                            },
+                                                            {
+                                                                "type": "material",
+                                                                "id": 101,
+                                                                "parent_id": 10,
+                                                                "name": "Курс 'Основы дизайн мышления'",
+                                                                "is_paid": false,
+                                                                "skills": [
+                                                                    {
+                                                                        "id": 123,
+                                                                        "name": "Навык 123"
+                                                                    },
+                                                                    {
+                                                                        "id": 456,
+                                                                        "name": "Навык 456"
+                                                                    }
+                                                                ],
+                                                                "count_of_next_level_children": 0,
+                                                                "children": []
+                                                            },
+                                                            {
+                                                                "type": "material",
+                                                                "id": 102,
+                                                                "parent_id": 10,
+                                                                "name": "Курс 'Дизайн исследования'",
+                                                                "is_paid": true,
+                                                                "skills": [
+                                                                    {
+                                                                        "id": 123,
+                                                                        "name": "Навык 123"
+                                                                    },
+                                                                    {
+                                                                        "id": 456,
+                                                                        "name": "Навык 456"
+                                                                    }
+                                                                ],
+                                                                "count_of_next_level_children": 0,
+                                                                "children": []
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "type": "category",
+                                                        "id": 11,
+                                                        "parent_id": 1,
+                                                        "name": "SkillBox",
+                                                        "count_of_next_level_children": 2,
+                                                        "children": [
+                                                            {
+                                                                "type": "material",
+                                                                "id": 110,
+                                                                "parent_id": 11,
+                                                                "name": "Какой-то материал, ID 110",
+                                                                "is_paid": true,
+                                                                "skills": [
+                                                                    {
+                                                                        "id": 123,
+                                                                        "name": "Навык 123"
+                                                                    },
+                                                                    {
+                                                                        "id": 456,
+                                                                        "name": "Навык 456"
+                                                                    }
+                                                                ],
+                                                                "count_of_next_level_children": 0,
+                                                                "children": []
+                                                            },
+                                                            {
+                                                                "type": "material",
+                                                                "id": 111,
+                                                                "parent_id": 11,
+                                                                "name": "Какой-то материал, ID 111",
+                                                                "is_paid": true,
+                                                                "skills": [
+                                                                    {
+                                                                        "id": 123,
+                                                                        "name": "Навык 123"
+                                                                    },
+                                                                    {
+                                                                        "id": 456,
+                                                                        "name": "Навык 456"
+                                                                    }
+                                                                ],
+                                                                "count_of_next_level_children": 0,
+                                                                "children": []
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "category",
+                                                "id": 2,
+                                                "parent_id": null,
+                                                "name": "Книги",
+                                                "count_of_next_level_children": 2,
+                                                "children": [
+                                                    {
+                                                        "type": "category",
+                                                        "id": 20,
+                                                        "parent_id": 2,
+                                                        "name": "Какая-то категория, ID 20",
+                                                        "count_of_next_level_children": 2,
+                                                        "children": [
+                                                            {
+                                                                "type": "material",
+                                                                "id": 200,
+                                                                "parent_id": 20,
+                                                                "name": "Какой-то материал, ID 200",
+                                                                "is_paid": false,
+                                                                "skills": [
+                                                                    {
+                                                                        "id": 123,
+                                                                        "name": "Навык 123"
+                                                                    },
+                                                                    {
+                                                                        "id": 456,
+                                                                        "name": "Навык 456"
+                                                                    }
+                                                                ],
+                                                                "count_of_next_level_children": 0,
+                                                                "children": []
+                                                            },
+                                                            {
+                                                                "type": "material",
+                                                                "id": 201,
+                                                                "parent_id": 20,
+                                                                "name": "Какой-то материал, ID 201",
+                                                                "is_paid": false,
+                                                                "skills": [
+                                                                    {
+                                                                        "id": 123,
+                                                                        "name": "Навык 123"
+                                                                    },
+                                                                    {
+                                                                        "id": 456,
+                                                                        "name": "Навык 456"
+                                                                    }
+                                                                ],
+                                                                "count_of_next_level_children": 0,
+                                                                "children": []
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "type": "category",
+                                                        "id": 21,
+                                                        "parent_id": 2,
+                                                        "name": "Какая-то категория, ID 21",
+                                                        "count_of_next_level_children": 2,
+                                                        "children": [
+                                                            {
+                                                                "type": "material",
+                                                                "id": 210,
+                                                                "parent_id": 21,
+                                                                "name": "Какой-то материал, ID 210",
+                                                                "is_paid": false,
+                                                                "skills": [
+                                                                    {
+                                                                        "id": 123,
+                                                                        "name": "Навык 123"
+                                                                    },
+                                                                    {
+                                                                        "id": 456,
+                                                                        "name": "Навык 456"
+                                                                    }
+                                                                ],
+                                                                "count_of_next_level_children": 0,
+                                                                "children": []
+                                                            },
+                                                            {
+                                                                "type": "material",
+                                                                "id": 211,
+                                                                "parent_id": 21,
+                                                                "name": "Какой-то материал, ID 211",
+                                                                "is_paid": false,
+                                                                "skills": [
+                                                                    {
+                                                                        "id": 123,
+                                                                        "name": "Навык 123"
+                                                                    },
+                                                                    {
+                                                                        "id": 456,
+                                                                        "name": "Навык 456"
+                                                                    }
+                                                                ],
+                                                                "count_of_next_level_children": 0,
+                                                                "children": []
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/Materials.Tree.SuccessResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/materials/tree/level": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Materials"
+                ],
+                "summary": "10.02. Дерево материалов. Получить список элементов одного уровня по parent_id.",
+                "description": "Дерево материалов. Получить список элементов одного уровня по parent_id.",
+                "operationId": "materials.getTreeLevel",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Materials.TreeLevel.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Дерево материалов. Список элементов одного уровня.",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "data": {
+                                        "success": [
+                                            {
+                                                "type": "material",
+                                                "id": 100,
+                                                "parent_id": 10,
+                                                "name": "Какой-то материал, ID 100",
+                                                "is_paid": true,
+                                                "skills": [
+                                                    {
+                                                        "id": 123,
+                                                        "name": "Навык 123"
+                                                    },
+                                                    {
+                                                        "id": 456,
+                                                        "name": "Навык 456"
+                                                    }
+                                                ],
+                                                "count_of_next_level_children": 0
+                                            },
+                                            {
+                                                "type": "material",
+                                                "id": 101,
+                                                "parent_id": 10,
+                                                "name": "Какой-то материал, ID 101",
+                                                "is_paid": false,
+                                                "skills": [
+                                                    {
+                                                        "id": 123,
+                                                        "name": "Навык 123"
+                                                    },
+                                                    {
+                                                        "id": 456,
+                                                        "name": "Навык 456"
+                                                    }
+                                                ],
+                                                "count_of_next_level_children": 0
+                                            },
+                                            {
+                                                "type": "material",
+                                                "id": 102,
+                                                "parent_id": 10,
+                                                "name": "Какой-то материал, ID 102",
+                                                "is_paid": true,
+                                                "skills": [
+                                                    {
+                                                        "id": 123,
+                                                        "name": "Навык 123"
+                                                    },
+                                                    {
+                                                        "id": 456,
+                                                        "name": "Навык 456"
+                                                    }
+                                                ],
+                                                "count_of_next_level_children": 0
+                                            },
+                                            {
+                                                "type": "material",
+                                                "id": 103,
+                                                "parent_id": 10,
+                                                "name": "Какой-то материал, ID 103",
+                                                "is_paid": false,
+                                                "skills": [
+                                                    {
+                                                        "id": 123,
+                                                        "name": "Навык 123"
+                                                    },
+                                                    {
+                                                        "id": 456,
+                                                        "name": "Навык 456"
+                                                    }
+                                                ],
+                                                "count_of_next_level_children": 0
+                                            }
+                                        ]
+                                    }
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/Materials.TreeLevel.SuccessResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -1680,18 +2065,224 @@
                     }
                 }
             },
-            "Materials.Material.Base": {
+            "Materials.ItemAttribute.CategoryType": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "description": "Тип объекта",
+                        "enum": ["category"],
+                        "example": "category"
+                    }
+                }
+            },
+            "Materials.ItemAttribute.MaterialType": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "description": "Тип объекта",
+                        "enum": ["material"],
+                        "example": "material"
+                    }
+                }
+            },
+            "Materials.ItemAttribute.ID": {
                 "type": "object",
                 "properties": {
                     "id": {
                         "type": "integer",
                         "description": "ID",
-                        "example": 32
-                    },
+                        "example": 16
+                    }
+                }
+            },
+            "Materials.ItemAttribute.ParentID": {
+                "type": "object",
+                "properties": {
+                    "parent_id": {
+                        "type": "integer",
+                        "description": "ID родителя",
+                        "example": 512,
+                        "nullable": true
+                    }
+                }
+            },
+            "Materials.ItemAttribute.Name": {
+                "type": "object",
+                "properties": {
                     "name": {
                         "type": "string",
                         "description": "Название",
-                        "example": "My material"
+                        "example": "My name"
+                    }
+                }
+            },
+            "Materials.ItemAttribute.Description": {
+                "type": "object",
+                "properties": {
+                    "description": {
+                        "type": "string",
+                        "description": "Описание",
+                        "example": "My description"
+                    }
+                }
+            },
+            "Materials.ItemAttribute.IsPaid": {
+                "type": "object",
+                "properties": {
+                    "is_paid": {
+                        "type": "boolean",
+                        "description": "Является ли материал платным",
+                        "example": false
+                    }
+                }
+            },
+            "Materials.ItemAttribute.Skills": {
+                "type": "object",
+                "properties": {
+                    "skills": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "allOf": [
+                                {"$ref": "#/components/schemas/Skills.ItemAttribute.ID"},
+                                {"$ref": "#/components/schemas/Skills.ItemAttribute.Name"}
+                            ]
+                        }
+                    }
+                }
+            },
+            "Materials.TreeItemAttribute.CountOfNextLevelChildren": {
+                "type": "object",
+                "properties": {
+                    "count_of_next_level_children": {
+                        "type": "integer",
+                        "description": "Количество дочерних элементов следующего уровня",
+                        "example": 7
+                    }
+                }
+            },
+            "Materials.TreeItemAttribute.Children": {
+                "type": "object",
+                "properties": {
+                    "children": {
+                        "type": "array",
+                        "description": "Список дочерних элементов"
+                    }
+                }
+            },
+            "Materials.TreeLevelItem.Base": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Materials.ItemAttribute.ID"},
+                    {"$ref": "#/components/schemas/Materials.ItemAttribute.ParentID"},
+                    {"$ref": "#/components/schemas/Materials.ItemAttribute.Name"},
+                    {"$ref": "#/components/schemas/Materials.TreeItemAttribute.CountOfNextLevelChildren"}
+                ]
+            },
+            "Materials.TreeLevelItem.Category": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Materials.ItemAttribute.CategoryType"},
+                    {"$ref": "#/components/schemas/Materials.TreeLevelItem.Base"}
+                ]
+            },
+            "Materials.TreeLevelItem.Material": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Materials.ItemAttribute.MaterialType"},
+                    {"$ref": "#/components/schemas/Materials.TreeLevelItem.Base"},
+                    {"$ref": "#/components/schemas/Materials.ItemAttribute.IsPaid"},
+                    {"$ref": "#/components/schemas/Materials.ItemAttribute.Skills"}
+                ]
+            },
+            "Materials.TreeItem.Base": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Materials.ItemAttribute.ID"},
+                    {"$ref": "#/components/schemas/Materials.ItemAttribute.ParentID"},
+                    {"$ref": "#/components/schemas/Materials.ItemAttribute.Name"},
+                    {"$ref": "#/components/schemas/Materials.TreeItemAttribute.CountOfNextLevelChildren"},
+                    {"$ref": "#/components/schemas/Materials.TreeItemAttribute.Children"}
+                ]
+            },
+            "Materials.TreeItem.Category": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Materials.ItemAttribute.CategoryType"},
+                    {"$ref": "#/components/schemas/Materials.TreeItem.Base"}
+                ]
+            },
+            "Materials.TreeItem.Material": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Materials.ItemAttribute.MaterialType"},
+                    {"$ref": "#/components/schemas/Materials.TreeItem.Base"},
+                    {"$ref": "#/components/schemas/Materials.ItemAttribute.IsPaid"},
+                    {"$ref": "#/components/schemas/Materials.ItemAttribute.Skills"}
+                ]
+            },
+            "Materials.TreeLevel.Request": {
+                "type": "object",
+                "properties": {
+                    "filter": {
+                        "type": "object",
+                        "allOf": [
+                            { "$ref": "#/components/schemas/Materials.ItemAttribute.ParentID" },
+                            { "$ref": "#/components/schemas/Materials.ItemAttribute.Name" }
+                        ],
+                        "required": ["parent_id"]
+                    }
+                },
+                "required": ["filter"]
+            },
+            "Materials.TreeLevel.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "array",
+                                "items": {
+                                    "anyOf": [
+                                        { "$ref": "#/components/schemas/Materials.TreeLevelItem.Category" },
+                                        { "$ref": "#/components/schemas/Materials.TreeLevelItem.Material" }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "Materials.Tree.Request": {
+                "type": "object",
+                "properties": {
+                    "filter": {
+                        "type": "object",
+                        "allOf": [
+                            { "$ref": "#/components/schemas/Materials.ItemAttribute.Name" }
+                        ]
+                    }
+                }
+            },
+            "Materials.Tree.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "array",
+                                "items": {
+                                    "anyOf": [
+                                        { "$ref": "#/components/schemas/Materials.TreeItem.Category" },
+                                        { "$ref": "#/components/schemas/Materials.TreeItem.Material" }
+                                    ]
+                                }
+                            }
+                        }
                     }
                 }
             },
