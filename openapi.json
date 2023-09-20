@@ -738,7 +738,13 @@
                                                 "current_level_indicator_id": 1,
                                                 "count_of_next_level_children": 0
                                             }
-                                        ]
+                                        ],
+                                        "meta": {
+                                            "pagination": {
+                                                "type": "cursor",
+                                                "count": 4
+                                            }
+                                        }
                                     }
                                 },
                                 "schema": {
@@ -1668,7 +1674,13 @@
                                                 ],
                                                 "count_of_next_level_children": 0
                                             }
-                                        ]
+                                        ],
+                                        "meta": {
+                                            "pagination": {
+                                                "type": "cursor",
+                                                "count": 4
+                                            }
+                                        }
                                     }
                                 },
                                 "schema": {
@@ -1765,38 +1777,136 @@
                     }
                 }
             },
-            "Base.Pagination": {
+            "Base.OffsetPaginationAttribute.Type": {
                 "type": "object",
                 "properties": {
-                    "page": {
-                        "type": "integer",
-                        "description": "Номер текущей страницы. Если не указан, то будет использовано значение по умолчанию - '1'.",
-                        "example": 1
-                    },
-                    "per_page": {
-                        "type": "integer",
-                        "description": "Количество элементов на странице. Если не указано, то будет использовано значение по умолчанию.",
-                        "example": 50
+                    "type": {
+                        "type": "string",
+                        "description": "Тип пагинации",
+                        "enum": ["offset"],
+                        "example": "offset"
                     }
                 }
             },
-            "Base.PaginationMeta": {
+            "Base.OffsetPagination": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Base.OffsetPaginationAttribute.Type"},
+                    {
+                        "type": "object",
+                        "properties": {
+                            "page": {
+                                "type": "integer",
+                                "description": "Номер текущей страницы. Если не указан, то будет использовано значение по умолчанию - '1'.",
+                                "example": 1
+                            },
+                            "per_page": {
+                                "type": "integer",
+                                "description": "Количество элементов на странице. Если не указано, то будет использовано значение по умолчанию.",
+                                "example": 50
+                            }
+                        }
+                    }
+                ]
+            },
+            "Base.OffsetPaginationMeta": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Base.OffsetPaginationAttribute.Type"},
+                    {
+                        "type": "object",
+                        "properties": {
+                            "current_page": {
+                                "type": "integer",
+                                "description": "Номер текущей страницы",
+                                "example": 1
+                            },
+                            "per_page": {
+                                "type": "integer",
+                                "description": "Количество элементов на странице",
+                                "example": 50
+                            },
+                            "total": {
+                                "type": "integer",
+                                "description": "Общее количество элементов",
+                                "example": 123
+                            }
+                        }
+                    }
+                ]
+            },
+            "Base.CursorPaginationAttribute.Type": {
                 "type": "object",
                 "properties": {
-                    "current_page": {
+                    "type": {
+                        "type": "string",
+                        "description": "Тип пагинации",
+                        "enum": ["cursor"],
+                        "example": "cursor"
+                    }
+                }
+            },
+            "Base.CursorPaginationAttribute.Limit": {
+                "type": "object",
+                "properties": {
+                    "limit": {
                         "type": "integer",
-                        "description": "Номер текущей страницы",
-                        "example": 1
+                        "description": "Количество элементов в выборке",
+                        "example": 500
+                    }
+                }
+            },
+            "Base.CursorPaginationAttribute.After": {
+                "type": "object",
+                "properties": {
+                    "after": {
+                        "type": "string",
+                        "description": "Курсор, от которого должен осуществляться отсчёт вперёд. По умолчанию - ID сущности.",
+                        "example": "123"
+                    }
+                }
+            },
+            "Base.CursorPaginationAttribute.Before": {
+                "type": "object",
+                "properties": {
+                    "before": {
+                        "type": "string",
+                        "description": "Курсор, от которого должен осуществляться отсчёт назад. По умолчанию - ID сущности.",
+                        "example": "123"
+                    }
+                }
+            },
+            "Base.CursorPaginationForward": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Base.CursorPaginationAttribute.Type"},
+                    {"$ref": "#/components/schemas/Base.CursorPaginationAttribute.Limit"},
+                    {"$ref": "#/components/schemas/Base.CursorPaginationAttribute.After"}
+                ],
+                "required": ["type", "after"]
+            },
+            "Base.CursorPaginationBackward": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Base.CursorPaginationAttribute.Type"},
+                    {"$ref": "#/components/schemas/Base.CursorPaginationAttribute.Limit"},
+                    {"$ref": "#/components/schemas/Base.CursorPaginationAttribute.Before"}
+                ],
+                "required": ["type", "before"]
+            },
+            "Base.CursorPaginationMeta": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "description": "Тип пагинации",
+                        "enum": ["cursor"],
+                        "example": "cursor"
                     },
-                    "per_page": {
+                    "count": {
                         "type": "integer",
-                        "description": "Количество элементов на странице",
+                        "description": "Количество элементов",
                         "example": 50
-                    },
-                    "total": {
-                        "type": "integer",
-                        "description": "Общее количество элементов",
-                        "example": 123
                     }
                 }
             },
@@ -2505,6 +2615,9 @@
                             { "$ref": "#/components/schemas/Skills.ItemAttribute.Name" }
                         ],
                         "required": ["parent_id"]
+                    },
+                    "pagination": {
+                        "$ref": "#/components/schemas/Base.CursorPaginationForward"
                     }
                 },
                 "required": ["filter"]
@@ -2523,6 +2636,14 @@
                                         { "$ref": "#/components/schemas/Skills.TreeLevelItem.Competency" },
                                         { "$ref": "#/components/schemas/Skills.TreeLevelItem.Skill" }
                                     ]
+                                }
+                            },
+                            "meta": {
+                                "type": "object",
+                                "properties": {
+                                    "pagination": {
+                                        "$ref": "#/components/schemas/Base.CursorPaginationMeta"
+                                    }
                                 }
                             }
                         }
@@ -3214,6 +3335,9 @@
                             { "$ref": "#/components/schemas/Materials.ItemAttribute.Name" }
                         ],
                         "required": ["parent_id"]
+                    },
+                    "pagination": {
+                        "$ref": "#/components/schemas/Base.CursorPaginationForward"
                     }
                 },
                 "required": ["filter"]
@@ -3231,6 +3355,14 @@
                                         { "$ref": "#/components/schemas/Materials.TreeLevelItem.Category" },
                                         { "$ref": "#/components/schemas/Materials.TreeLevelItem.Material" }
                                     ]
+                                }
+                            },
+                            "meta": {
+                                "type": "object",
+                                "properties": {
+                                    "pagination": {
+                                        "$ref": "#/components/schemas/Base.CursorPaginationMeta"
+                                    }
                                 }
                             }
                         }
