@@ -1089,6 +1089,36 @@
                 }
             }
         },
+        "/targets/{id}/count-of-relations": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Targets"
+                ],
+                "summary": "06.08. Получить количество связанных объектов",
+                "description": "Получить количество связанных объектов",
+                "operationId": "targets.getCountOfRelations",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Targets.Target.ID"}
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Количество связанных объектов",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Targets.CountOfRelations.SuccessResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/targets/{id}/skills": {
             "get": {
                 "security": [
@@ -1099,7 +1129,7 @@
                 "tags": [
                     "Targets"
                 ],
-                "summary": "06.08. Получить выбранные навыки по ID цели",
+                "summary": "06.09. Получить выбранные навыки по ID цели",
                 "description": "Получить выбранные навыки по ID цели",
                 "operationId": "targets.getTargetSkills",
                 "parameters": [
@@ -1129,7 +1159,7 @@
                 "tags": [
                     "Targets"
                 ],
-                "summary": "06.09. Получить выбранные материалы по ID цели",
+                "summary": "06.10. Получить выбранные материалы по ID цели",
                 "description": "Получить выбранные материалы по ID цели",
                 "operationId": "targets.getTargetMaterials",
                 "parameters": [
@@ -1149,8 +1179,8 @@
                 }
             }
         },
-        "/targets/{id}/count-of-relations": {
-            "get": {
+        "/targets/{id}/comments": {
+            "post": {
                 "security": [
                     {
                         "bearerAuth": []
@@ -1159,19 +1189,28 @@
                 "tags": [
                     "Targets"
                 ],
-                "summary": "06.10. Получить количество связанных объектов",
-                "description": "Получить количество связанных объектов",
-                "operationId": "targets.getCountOfRelations",
+                "summary": "06.11. Получить комментарии по ID цели",
+                "description": "Получить комментарии по ID цели",
+                "operationId": "targets.getTargetComments",
                 "parameters": [
                     {"$ref": "#/components/parameters/Targets.Target.ID"}
                 ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Targets.TargetComments.Request"
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
-                        "description": "Количество связанных объектов",
+                        "description": "Список комментариев",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Targets.CountOfRelations.SuccessResponse"
+                                    "$ref": "#/components/schemas/Targets.TargetComments.SuccessResponse"
                                 }
                             }
                         }
@@ -1906,7 +1945,7 @@
                     "count": {
                         "type": "integer",
                         "description": "Количество элементов",
-                        "example": 50
+                        "example": 500
                     }
                 }
             },
@@ -2297,6 +2336,46 @@
                 },
                 "required": ["email", "text"]
             },
+            "Users.UserAttribute.ID": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "ID",
+                        "example": 1024
+                    }
+                }
+            },
+            "Users.UserAttribute.FirstName": {
+                "type": "object",
+                "properties": {
+                    "first_name": {
+                        "type": "string",
+                        "description": "Имя",
+                        "example": "Иван"
+                    }
+                }
+            },
+            "Users.UserAttribute.LastName": {
+                "type": "object",
+                "properties": {
+                    "last_name": {
+                        "type": "string",
+                        "description": "Фамилия",
+                        "example": "Иванов"
+                    }
+                }
+            },
+            "Users.UserAttribute.Role": {
+                "type": "object",
+                "properties": {
+                    "role": {
+                        "type": "string",
+                        "description": "Роль",
+                        "example": "employee"
+                    }
+                }
+            },
             "Users.Profile.SuccessResponse": {
                 "type": "object",
                 "properties": {
@@ -2305,38 +2384,31 @@
                         "properties": {
                             "success": {
                                 "type": "object",
-                                "properties": {
-                                    "id": {
-                                        "type": "integer",
-                                        "description": "ID",
-                                        "example": 1024
-                                    },
-                                    "company_id": {
-                                        "type": "integer",
-                                        "description": "ID компании",
-                                        "example": 256
-                                    },
-                                    "login": {
-                                        "type": "string",
-                                        "description": "Логин",
-                                        "example": "my_login"
-                                    },
-                                    "email": {
-                                        "type": "string",
-                                        "description": "Email",
-                                        "example": "test@test.com"
-                                    },
-                                    "first_name": {
-                                        "type": "string",
-                                        "description": "Имя",
-                                        "example": "Иван"
-                                    },
-                                    "last_name": {
-                                        "type": "string",
-                                        "description": "Фамилия",
-                                        "example": "Иванов"
+                                "allOf": [
+                                    { "$ref": "#/components/schemas/Users.UserAttribute.ID" },
+                                    { "$ref": "#/components/schemas/Users.UserAttribute.FirstName" },
+                                    { "$ref": "#/components/schemas/Users.UserAttribute.LastName" },
+                                    {
+                                        "type": "object",
+                                        "properties": {
+                                            "company_id": {
+                                                "type": "integer",
+                                                "description": "ID компании",
+                                                "example": 256
+                                            },
+                                            "login": {
+                                                "type": "string",
+                                                "description": "Логин",
+                                                "example": "my_login"
+                                            },
+                                            "email": {
+                                                "type": "string",
+                                                "description": "Email",
+                                                "example": "test@test.com"
+                                            }
+                                        }
                                     }
-                                }
+                                ]
                             }
                         }
                     }
@@ -3039,6 +3111,38 @@
                     }
                 }
             },
+            "Targets.TargetComments.Request": {
+                "type": "object",
+                "properties": {
+                    "pagination": {
+                        "$ref": "#/components/schemas/Base.CursorPaginationForward"
+                    }
+                }
+            },
+            "Targets.TargetComments.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/Comments.Comment"
+                                }
+                            },
+                            "meta": {
+                                "type": "object",
+                                "properties": {
+                                    "pagination": {
+                                        "$ref": "#/components/schemas/Base.CursorPaginationMeta"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
             "Targets.CountOfRelations.SuccessResponse": {
                 "type": "object",
                 "properties": {
@@ -3502,6 +3606,59 @@
                         }
                     }
                 }
+            },
+            "Comments.CommentAttribute.ID": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "ID",
+                        "example": 2048
+                    }
+                }
+            },
+            "Comments.CommentAttribute.CreatedAt": {
+                "type": "object",
+                "properties": {
+                    "created_at": {
+                        "type": "string",
+                        "description": "Дата оставления комментария",
+                        "example": "2023-09-01 12:10:20"
+                    }
+                }
+            },
+            "Comments.CommentAttribute.Author": {
+                "type": "object",
+                "properties": {
+                    "author": {
+                        "type": "object",
+                        "allOf": [
+                            { "$ref": "#/components/schemas/Users.UserAttribute.ID" },
+                            { "$ref": "#/components/schemas/Users.UserAttribute.Role" },
+                            { "$ref": "#/components/schemas/Users.UserAttribute.FirstName" },
+                            { "$ref": "#/components/schemas/Users.UserAttribute.LastName" }
+                        ]
+                    }
+                }
+            },
+            "Comments.CommentAttribute.Text": {
+                "type": "object",
+                "properties": {
+                    "text": {
+                        "type": "string",
+                        "description": "Текст комментария",
+                        "example": "Your comment text"
+                    }
+                }
+            },
+            "Comments.Comment": {
+                "type": "object",
+                "allOf": [
+                    { "$ref": "#/components/schemas/Comments.CommentAttribute.ID" },
+                    { "$ref": "#/components/schemas/Comments.CommentAttribute.CreatedAt" },
+                    { "$ref": "#/components/schemas/Comments.CommentAttribute.Author" },
+                    { "$ref": "#/components/schemas/Comments.CommentAttribute.Text" }
+                ]
             }
         },
         "parameters": {
