@@ -39,6 +39,14 @@
         {
             "name": "IDP",
             "description": "07. Индивидуальный план развития"
+        },
+        {
+            "name": "Competency clusters",
+            "description": "08. Кластеры компетенций"
+        },
+        {
+            "name": "Competencies",
+            "description": "09. Компетенции"
         }
     ],
     "paths": {
@@ -478,6 +486,282 @@
                 }
             }
         },
+        "/skills/tree": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Skills"
+                ],
+                "summary": "05.01. Получить дерево навыков",
+                "description": "Возвращает все корневые элементы и первые 500 вложенных элементов",
+                "operationId": "skills.getTree",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Skills.Tree.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Дерево навыков",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "data": {
+                                        "success": [
+                                            {
+                                                "type": "competency_cluster",
+                                                "id": 1,
+                                                "parent_id": null,
+                                                "name": "Специализированные компетенции",
+                                                "count_of_next_level_children": 2,
+                                                "children": [
+                                                    {
+                                                        "type": "competency",
+                                                        "id": 10,
+                                                        "parent_id": 1,
+                                                        "name": "Исследование",
+                                                        "count_of_next_level_children": 4,
+                                                        "children": [
+                                                            {
+                                                                "type": "skill",
+                                                                "id": 100,
+                                                                "parent_id": 10,
+                                                                "name": "Формулирую цель исследования, понимая, как это мне поможет в дальнейшем дизайн-решении",
+                                                                "count_of_next_level_children": 0,
+                                                                "children": []
+                                                            },
+                                                            {
+                                                                "type": "skill",
+                                                                "id": 101,
+                                                                "parent_id": 10,
+                                                                "name": "Формулирую продуктовые гипотезы, которые будут проверены на исследовании",
+                                                                "count_of_next_level_children": 0,
+                                                                "children": []
+                                                            },
+                                                            {
+                                                                "type": "skill",
+                                                                "id": 102,
+                                                                "parent_id": 10,
+                                                                "name": "Подгатавливаю гайд для проведения исследования",
+                                                                "count_of_next_level_children": 0,
+                                                                "children": []
+                                                            },
+                                                            {
+                                                                "type": "skill",
+                                                                "id": 103,
+                                                                "parent_id": 10,
+                                                                "name": "Могу провести глубинное интервью целевой аудитории",
+                                                                "count_of_next_level_children": 0,
+                                                                "children": []
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "type": "competency",
+                                                        "id": 11,
+                                                        "parent_id": 1,
+                                                        "name": "Проектирование",
+                                                        "count_of_next_level_children": 2,
+                                                        "children": [
+                                                            {
+                                                                "type": "skill",
+                                                                "id": 110,
+                                                                "parent_id": 11,
+                                                                "name": "Какой-то навык, ID 110",
+                                                                "count_of_next_level_children": 0,
+                                                                "children": []
+                                                            },
+                                                            {
+                                                                "type": "skill",
+                                                                "id": 111,
+                                                                "parent_id": 11,
+                                                                "name": "Какой-то навык, ID 111",
+                                                                "count_of_next_level_children": 0,
+                                                                "children": []
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "type": "competency_cluster",
+                                                "id": 2,
+                                                "parent_id": null,
+                                                "name": "Общие компетенции",
+                                                "count_of_next_level_children": 2,
+                                                "children": [
+                                                    {
+                                                        "type": "competency",
+                                                        "id": 20,
+                                                        "parent_id": 2,
+                                                        "name": "Какая-то компетенция, ID 20",
+                                                        "count_of_next_level_children": 2,
+                                                        "children": [
+                                                            {
+                                                                "type": "skill",
+                                                                "id": 200,
+                                                                "parent_id": 20,
+                                                                "name": "Какой-то навык, ID 200",
+                                                                "count_of_next_level_children": 0,
+                                                                "children": []
+                                                            },
+                                                            {
+                                                                "type": "skill",
+                                                                "id": 201,
+                                                                "parent_id": 20,
+                                                                "name": "Какой-то навык, ID 201",
+                                                                "count_of_next_level_children": 0,
+                                                                "children": []
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "type": "competency",
+                                                        "id": 21,
+                                                        "parent_id": 2,
+                                                        "name": "Какая-то компетенция, ID 21",
+                                                        "count_of_next_level_children": 2,
+                                                        "children": [
+                                                            {
+                                                                "type": "skill",
+                                                                "id": 210,
+                                                                "parent_id": 21,
+                                                                "name": "Какой-то навык, ID 210",
+                                                                "count_of_next_level_children": 0,
+                                                                "children": []
+                                                            },
+                                                            {
+                                                                "type": "skill",
+                                                                "id": 211,
+                                                                "parent_id": 21,
+                                                                "name": "Какой-то навык, ID 211",
+                                                                "count_of_next_level_children": 0,
+                                                                "children": []
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/Skills.Tree.SuccessResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/skills/tree/level": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Skills"
+                ],
+                "summary": "05.02. Дерево навыков. Получить список элементов одного уровня по parent_id.",
+                "description": "Дерево навыков. Получить список элементов одного уровня по parent_id.",
+                "operationId": "skills.getTreeLevel",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Skills.TreeLevel.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Дерево навыков. Список элементов одного уровня.",
+                        "content": {
+                            "application/json": {
+                                "example": {
+                                    "data": {
+                                        "success": [
+                                            {
+                                                "type": "skill",
+                                                "id": 100,
+                                                "parent_id": 10,
+                                                "name": "Формулирую цель исследования, понимая, как это мне поможет в дальнейшем дизайн-решении",
+                                                "count_of_next_level_children": 0
+                                            },
+                                            {
+                                                "type": "skill",
+                                                "id": 101,
+                                                "parent_id": 10,
+                                                "name": "Формулирую продуктовые гипотезы, которые будут проверены на исследовании",
+                                                "count_of_next_level_children": 0
+                                            },
+                                            {
+                                                "type": "skill",
+                                                "id": 102,
+                                                "parent_id": 10,
+                                                "name": "Подгатавливаю гайд для проведения исследования",
+                                                "count_of_next_level_children": 0
+                                            },
+                                            {
+                                                "type": "skill",
+                                                "id": 103,
+                                                "parent_id": 10,
+                                                "name": "Могу провести глубинное интервью целевой аудитории",
+                                                "count_of_next_level_children": 0
+                                            }
+                                        ]
+                                    }
+                                },
+                                "schema": {
+                                    "$ref": "#/components/schemas/Skills.TreeLevel.SuccessResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/skills/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Skills"
+                ],
+                "summary": "05.03. Получить детальную информацию о навыке",
+                "description": "Получить детальную информацию о навыке",
+                "operationId": "skills.getSkillDetails",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Skills.Skill.ID"}
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Детальная информация о навыке",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Skills.SkillDetails.SuccessResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/targets": {
             "post": {
                 "security": [
@@ -813,6 +1097,66 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/IDP.IDPDetails.SuccessResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/competency-clusters/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Competency clusters"
+                ],
+                "summary": "08.01. Получить детальную информацию о кластере компетенций",
+                "description": "Получить детальную информацию о кластере компетенций",
+                "operationId": "competencyClusters.getClusterDetails",
+                "parameters": [
+                    {"$ref": "#/components/parameters/CompetencyClusters.Cluster.ID"}
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Детальная информация о кластере",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CompetencyClusters.ClusterDetails.SuccessResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/competencies/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Competencies"
+                ],
+                "summary": "09.01. Получить детальную информацию о компетенции",
+                "description": "Получить детальную информацию о компетенции",
+                "operationId": "competencies.getCompetencyDetails",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Competencies.Competency.ID"}
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Детальная информация о компетенции",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Competencies.CompetencyDetails.SuccessResponse"
                                 }
                             }
                         }
@@ -1321,18 +1665,277 @@
                     }
                 }
             },
-            "Skills.Skill.Base": {
+            "Skills.ItemAttribute.ID": {
                 "type": "object",
                 "properties": {
                     "id": {
                         "type": "integer",
                         "description": "ID",
-                        "example": 64
-                    },
+                        "example": 16
+                    }
+                }
+            },
+            "Skills.ItemAttribute.ParentID": {
+                "type": "object",
+                "properties": {
+                    "parent_id": {
+                        "type": "integer",
+                        "description": "ID родителя",
+                        "example": 512,
+                        "nullable": true
+                    }
+                }
+            },
+            "Skills.ItemAttribute.Name": {
+                "type": "object",
+                "properties": {
                     "name": {
                         "type": "string",
                         "description": "Название",
-                        "example": "My skill"
+                        "example": "My name"
+                    }
+                }
+            },
+            "Skills.ItemAttribute.Description": {
+                "type": "object",
+                "properties": {
+                    "description": {
+                        "type": "string",
+                        "description": "Описание",
+                        "example": "My description"
+                    }
+                }
+            },
+            "Skills.ItemAttribute.CompetencyClusterType": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "description": "Тип объекта",
+                        "enum": ["competency_cluster"],
+                        "example": "competency_cluster"
+                    }
+                }
+            },
+            "Skills.ItemAttribute.CompetencyType": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "description": "Тип объекта",
+                        "enum": ["competency"],
+                        "example": "competency"
+                    }
+                }
+            },
+            "Skills.ItemAttribute.SkillType": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "description": "Тип объекта",
+                        "enum": ["skill"],
+                        "example": "skill"
+                    }
+                }
+            },
+            "Skills.SkillParent.CompetencyCluster": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Skills.ItemAttribute.CompetencyClusterType"},
+                    {"$ref": "#/components/schemas/Skills.ItemAttribute.ID"},
+                    {"$ref": "#/components/schemas/Skills.ItemAttribute.ParentID"},
+                    {"$ref": "#/components/schemas/Skills.ItemAttribute.Name"}
+                ]
+            },
+            "Skills.SkillParent.Competency": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Skills.ItemAttribute.CompetencyType"},
+                    {"$ref": "#/components/schemas/Skills.ItemAttribute.ID"},
+                    {"$ref": "#/components/schemas/Skills.ItemAttribute.ParentID"},
+                    {"$ref": "#/components/schemas/Skills.ItemAttribute.Name"}
+                ]
+            },
+            "Skills.Skill": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Skills.ItemAttribute.ID"},
+                    {"$ref": "#/components/schemas/Skills.ItemAttribute.ID"},
+                    {"$ref": "#/components/schemas/Skills.ItemAttribute.ParentID"},
+                    {"$ref": "#/components/schemas/Skills.ItemAttribute.Name"},
+                    {"$ref": "#/components/schemas/Skills.ItemAttribute.Description"},
+                    {
+                        "type": "object",
+                        "properties": {
+                            "parents": {
+                                "type": "array",
+                                "items": {
+                                    "anyOf": [
+                                        { "$ref": "#/components/schemas/Skills.SkillParent.CompetencyCluster" },
+                                        { "$ref": "#/components/schemas/Skills.SkillParent.Competency" }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                ]
+            },
+            "Skills.SkillDetails.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "$ref": "#/components/schemas/Skills.Skill"
+                            }
+                        }
+                    }
+                }
+            },
+            "Skills.TreeItemAttribute.CountOfNextLevelChildren": {
+                "type": "object",
+                "properties": {
+                    "count_of_next_level_children": {
+                        "type": "integer",
+                        "description": "Количество дочерних элементов следующего уровня",
+                        "example": 7
+                    }
+                }
+            },
+            "Skills.TreeItemAttribute.Children": {
+                "type": "object",
+                "properties": {
+                    "children": {
+                        "type": "array",
+                        "description": "Список дочерних элементов"
+                    }
+                }
+            },
+            "Skills.TreeLevelItem.Base": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Skills.ItemAttribute.ID"},
+                    {"$ref": "#/components/schemas/Skills.ItemAttribute.ParentID"},
+                    {"$ref": "#/components/schemas/Skills.ItemAttribute.Name"},
+                    {"$ref": "#/components/schemas/Skills.TreeItemAttribute.CountOfNextLevelChildren"}
+                ]
+            },
+            "Skills.TreeLevelItem.CompetencyCluster": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Skills.TreeLevelItem.Base"},
+                    {"$ref": "#/components/schemas/Skills.ItemAttribute.CompetencyClusterType"}
+                ]
+            },
+            "Skills.TreeLevelItem.Competency": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Skills.TreeLevelItem.Base"},
+                    {"$ref": "#/components/schemas/Skills.ItemAttribute.CompetencyType"}
+                ]
+            },
+            "Skills.TreeLevelItem.Skill": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Skills.TreeLevelItem.Base"},
+                    {"$ref": "#/components/schemas/Skills.ItemAttribute.SkillType"}
+                ]
+            },
+            "Skills.TreeItem.Base": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Skills.ItemAttribute.ID"},
+                    {"$ref": "#/components/schemas/Skills.ItemAttribute.ParentID"},
+                    {"$ref": "#/components/schemas/Skills.ItemAttribute.Name"},
+                    {"$ref": "#/components/schemas/Skills.TreeItemAttribute.CountOfNextLevelChildren"},
+                    {"$ref": "#/components/schemas/Skills.TreeItemAttribute.Children"}
+                ]
+            },
+            "Skills.TreeItem.CompetencyCluster": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Skills.TreeItem.Base"},
+                    {"$ref": "#/components/schemas/Skills.ItemAttribute.CompetencyClusterType"}
+                ]
+            },
+            "Skills.TreeItem.Competency": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Skills.TreeItem.Base"},
+                    {"$ref": "#/components/schemas/Skills.ItemAttribute.CompetencyType"}
+                ]
+            },
+            "Skills.TreeItem.Skill": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Skills.TreeItem.Base"},
+                    {"$ref": "#/components/schemas/Skills.ItemAttribute.SkillType"}
+                ]
+            },
+            "Skills.TreeLevel.Request": {
+                "type": "object",
+                "properties": {
+                    "filter": {
+                        "type": "object",
+                        "allOf": [
+                            { "$ref": "#/components/schemas/Skills.ItemAttribute.ParentID" },
+                            { "$ref": "#/components/schemas/Skills.ItemAttribute.Name" }
+                        ],
+                        "required": ["parent_id"]
+                    }
+                },
+                "required": ["filter"]
+            },
+            "Skills.TreeLevel.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "array",
+                                "items": {
+                                    "anyOf": [
+                                        { "$ref": "#/components/schemas/Skills.TreeLevelItem.CompetencyCluster" },
+                                        { "$ref": "#/components/schemas/Skills.TreeLevelItem.Competency" },
+                                        { "$ref": "#/components/schemas/Skills.TreeLevelItem.Skill" }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "Skills.Tree.Request": {
+                "type": "object",
+                "properties": {
+                    "filter": {
+                        "type": "object",
+                        "allOf": [
+                            { "$ref": "#/components/schemas/Skills.ItemAttribute.Name" }
+                        ]
+                    }
+                }
+            },
+            "Skills.Tree.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "array",
+                                "items": {
+                                    "anyOf": [
+                                        { "$ref": "#/components/schemas/Skills.TreeItem.CompetencyCluster" },
+                                        { "$ref": "#/components/schemas/Skills.TreeItem.Competency" },
+                                        { "$ref": "#/components/schemas/Skills.TreeItem.Skill" }
+                                    ]
+                                }
+                            }
+                        }
                     }
                 }
             },
@@ -1682,14 +2285,110 @@
                         }
                     }
                 }
+            },
+            "CompetencyClusters.Cluster": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "ID",
+                        "example": 234
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Название",
+                        "example": "Competency cluster name"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "Описание",
+                        "example": "Competency cluster description"
+                    }
+                }
+            },
+            "CompetencyClusters.ClusterDetails.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "$ref": "#/components/schemas/CompetencyClusters.Cluster"
+                            }
+                        }
+                    }
+                }
+            },
+            "Competencies.Competency": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "ID",
+                        "example": 345
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Название",
+                        "example": "Competency name"
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "Описание",
+                        "example": "Competency description"
+                    }
+                }
+            },
+            "Competencies.CompetencyDetails.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "$ref": "#/components/schemas/Competencies.Competency"
+                            }
+                        }
+                    }
+                }
             }
         },
         "parameters": {
+            "Skills.Skill.ID": {
+                "name": "id",
+                "in": "path",
+                "required": true,
+                "description": "ID навыка",
+                "example": 512,
+                "schema": {
+                    "type": "integer"
+                }
+            },
             "Targets.Target.ID": {
                 "name": "id",
                 "in": "path",
                 "required": true,
                 "description": "ID цели",
+                "example": 512,
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            "CompetencyClusters.Cluster.ID": {
+                "name": "id",
+                "in": "path",
+                "required": true,
+                "description": "ID кластера компетенций",
+                "example": 512,
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            "Competencies.Competency.ID": {
+                "name": "id",
+                "in": "path",
+                "required": true,
+                "description": "ID компетенции",
                 "example": 512,
                 "schema": {
                     "type": "integer"
