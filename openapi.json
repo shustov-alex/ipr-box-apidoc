@@ -2922,6 +2922,17 @@
                     }
                 }
             },
+            "Materials.ItemAttribute.Reason": {
+                "type": "object",
+                "properties": {
+                    "reason": {
+                        "type": "string",
+                        "description": "Обоснование",
+                        "example": "My reason",
+                        "nullable": true
+                    }
+                }
+            },
             "Materials.ItemAttribute.Skills": {
                 "type": "object",
                 "properties": {
@@ -3070,12 +3081,34 @@
                     }
                 }
             },
+            "Materials.MaterialParent.Category": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Materials.ItemAttribute.CategoryType"},
+                    {"$ref": "#/components/schemas/Materials.ItemAttribute.ID"},
+                    {"$ref": "#/components/schemas/Materials.ItemAttribute.ParentID"},
+                    {"$ref": "#/components/schemas/Materials.ItemAttribute.Name"}
+                ]
+            },
             "Materials.Material.CollectionView": {
                 "type": "object",
                 "allOf": [
                     {"$ref": "#/components/schemas/Materials.ItemAttribute.ID"},
                     {"$ref": "#/components/schemas/Materials.ItemAttribute.Name"},
-                    {"$ref": "#/components/schemas/Materials.ItemAttribute.IsPaid"}
+                    {"$ref": "#/components/schemas/Materials.ItemAttribute.IsPaid"},
+                    {
+                        "type": "object",
+                        "properties": {
+                            "parents": {
+                                "type": "array",
+                                "items": {
+                                    "anyOf": [
+                                        { "$ref": "#/components/schemas/Materials.MaterialParent.Category" }
+                                    ]
+                                }
+                            }
+                        }
+                    }
                 ]
             },
             "Materials.Material.DetailView": {
@@ -3083,6 +3116,7 @@
                 "allOf": [
                     {"$ref": "#/components/schemas/Materials.Material.CollectionView"},
                     {"$ref": "#/components/schemas/Materials.ItemAttribute.Description"},
+                    {"$ref": "#/components/schemas/Materials.ItemAttribute.Reason"},
                     {"$ref": "#/components/schemas/Materials.ItemAttribute.Skills"}
                 ]
             },
