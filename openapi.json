@@ -1102,6 +1102,36 @@
                 }
             }
         },
+        "/targets/{id}/count-of-relations": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Targets"
+                ],
+                "summary": "06.10. Получить количество связанных объектов",
+                "description": "Получить количество связанных объектов",
+                "operationId": "targets.getCountOfRelations",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Targets.Target.ID"}
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Количество связанных объектов",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Targets.CountOfRelations.SuccessResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/idp/available-years": {
             "get": {
                 "security": [
@@ -2770,6 +2800,36 @@
                                 "type": "array",
                                 "items": {
                                     "$ref": "#/components/schemas/Materials.Material.CollectionView"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "Targets.CountOfRelations.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "object",
+                                "properties": {
+                                    "skills": {
+                                        "type": "integer",
+                                        "description": "Количество навыков",
+                                        "example": 2
+                                    },
+                                    "materials": {
+                                        "type": "integer",
+                                        "description": "Количество материалов",
+                                        "example": 3
+                                    },
+                                    "comments": {
+                                        "type": "integer",
+                                        "description": "Количество комментариев",
+                                        "example": 2
+                                    }
                                 }
                             }
                         }
