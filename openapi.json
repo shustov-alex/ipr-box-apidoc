@@ -2778,6 +2778,21 @@
                     }
                 }
             },
+            "Targets.TargetAttribute.Skills": {
+                "type": "object",
+                "properties": {
+                    "skills": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "allOf": [
+                                {"$ref": "#/components/schemas/Skills.ItemAttribute.ID"},
+                                {"$ref": "#/components/schemas/Skills.ItemAttribute.Name"}
+                            ]
+                        }
+                    }
+                }
+            },
             "Targets.Target.ToUpsert": {
                 "type": "object",
                 "allOf": [
@@ -2884,6 +2899,13 @@
                 },
                 "required": ["filter"]
             },
+            "Targets.Target.CollectionView": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Targets.Target.Base"},
+                    {"$ref": "#/components/schemas/Targets.TargetAttribute.Skills"}
+                ]
+            },
             "Targets.Collection.SuccessResponse": {
                 "type": "object",
                 "properties": {
@@ -2893,7 +2915,7 @@
                             "success": {
                                 "type": "array",
                                 "items": {
-                                    "$ref": "#/components/schemas/Targets.Target.Base"
+                                    "$ref": "#/components/schemas/Targets.Target.CollectionView"
                                 }
                             }
                         }
