@@ -1072,6 +1072,36 @@
                 }
             }
         },
+        "/targets/{id}/materials": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Targets"
+                ],
+                "summary": "06.09. Получить выбранные материалы по ID цели",
+                "description": "Получить выбранные материалы по ID цели",
+                "operationId": "targets.getTargetMaterials",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Targets.Target.ID"}
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Список материалов",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Targets.TargetMaterials.SuccessResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/idp/available-years": {
             "get": {
                 "security": [
@@ -2688,6 +2718,22 @@
                                 "type": "array",
                                 "items": {
                                     "$ref": "#/components/schemas/Skills.Skill.CollectionView"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "Targets.TargetMaterials.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/Materials.Material.CollectionView"
                                 }
                             }
                         }
