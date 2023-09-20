@@ -1038,6 +1038,36 @@
                 }
             }
         },
+        "/targets/{id}/skills": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Targets"
+                ],
+                "summary": "06.08. Получить выбранные навыки по ID цели",
+                "description": "Получить выбранные навыки по ID цели",
+                "operationId": "targets.getTargetSkills",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Targets.Target.ID"}
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Список навыков",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Targets.TargetSkills.SuccessResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/idp/available-years": {
             "get": {
                 "security": [
@@ -1757,14 +1787,12 @@
                     {"$ref": "#/components/schemas/Skills.ItemAttribute.Name"}
                 ]
             },
-            "Skills.Skill": {
+            "Skills.Skill.CollectionView": {
                 "type": "object",
                 "allOf": [
                     {"$ref": "#/components/schemas/Skills.ItemAttribute.ID"},
-                    {"$ref": "#/components/schemas/Skills.ItemAttribute.ID"},
                     {"$ref": "#/components/schemas/Skills.ItemAttribute.ParentID"},
                     {"$ref": "#/components/schemas/Skills.ItemAttribute.Name"},
-                    {"$ref": "#/components/schemas/Skills.ItemAttribute.Description"},
                     {
                         "type": "object",
                         "properties": {
@@ -1781,6 +1809,13 @@
                     }
                 ]
             },
+            "Skills.Skill.DetailView": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Skills.Skill.CollectionView"},
+                    {"$ref": "#/components/schemas/Skills.ItemAttribute.Description"}
+                ]
+            },
             "Skills.SkillDetails.SuccessResponse": {
                 "type": "object",
                 "properties": {
@@ -1788,7 +1823,7 @@
                         "type": "object",
                         "properties": {
                             "success": {
-                                "$ref": "#/components/schemas/Skills.Skill"
+                                "$ref": "#/components/schemas/Skills.Skill.DetailView"
                             }
                         }
                     }
@@ -2237,6 +2272,22 @@
                                 "type": "array",
                                 "items": {
                                     "$ref": "#/components/schemas/Targets.StatusGroup"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "Targets.TargetSkills.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/Skills.Skill.CollectionView"
                                 }
                             }
                         }
