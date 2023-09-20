@@ -539,6 +539,7 @@
                                                                 "id": 100,
                                                                 "parent_id": 10,
                                                                 "name": "Формулирую цель исследования, понимая, как это мне поможет в дальнейшем дизайн-решении",
+                                                                "current_level_indicator_id": 1,
                                                                 "count_of_next_level_children": 0,
                                                                 "children": []
                                                             },
@@ -547,6 +548,7 @@
                                                                 "id": 101,
                                                                 "parent_id": 10,
                                                                 "name": "Формулирую продуктовые гипотезы, которые будут проверены на исследовании",
+                                                                "current_level_indicator_id": 1,
                                                                 "count_of_next_level_children": 0,
                                                                 "children": []
                                                             },
@@ -555,6 +557,7 @@
                                                                 "id": 102,
                                                                 "parent_id": 10,
                                                                 "name": "Подгатавливаю гайд для проведения исследования",
+                                                                "current_level_indicator_id": 1,
                                                                 "count_of_next_level_children": 0,
                                                                 "children": []
                                                             },
@@ -563,6 +566,7 @@
                                                                 "id": 103,
                                                                 "parent_id": 10,
                                                                 "name": "Могу провести глубинное интервью целевой аудитории",
+                                                                "current_level_indicator_id": 1,
                                                                 "count_of_next_level_children": 0,
                                                                 "children": []
                                                             }
@@ -580,6 +584,7 @@
                                                                 "id": 110,
                                                                 "parent_id": 11,
                                                                 "name": "Какой-то навык, ID 110",
+                                                                "current_level_indicator_id": 1,
                                                                 "count_of_next_level_children": 0,
                                                                 "children": []
                                                             },
@@ -588,6 +593,7 @@
                                                                 "id": 111,
                                                                 "parent_id": 11,
                                                                 "name": "Какой-то навык, ID 111",
+                                                                "current_level_indicator_id": 1,
                                                                 "count_of_next_level_children": 0,
                                                                 "children": []
                                                             }
@@ -614,6 +620,7 @@
                                                                 "id": 200,
                                                                 "parent_id": 20,
                                                                 "name": "Какой-то навык, ID 200",
+                                                                "current_level_indicator_id": 1,
                                                                 "count_of_next_level_children": 0,
                                                                 "children": []
                                                             },
@@ -622,6 +629,7 @@
                                                                 "id": 201,
                                                                 "parent_id": 20,
                                                                 "name": "Какой-то навык, ID 201",
+                                                                "current_level_indicator_id": 1,
                                                                 "count_of_next_level_children": 0,
                                                                 "children": []
                                                             }
@@ -639,6 +647,7 @@
                                                                 "id": 210,
                                                                 "parent_id": 21,
                                                                 "name": "Какой-то навык, ID 210",
+                                                                "current_level_indicator_id": 1,
                                                                 "count_of_next_level_children": 0,
                                                                 "children": []
                                                             },
@@ -647,6 +656,7 @@
                                                                 "id": 211,
                                                                 "parent_id": 21,
                                                                 "name": "Какой-то навык, ID 211",
+                                                                "current_level_indicator_id": 1,
                                                                 "count_of_next_level_children": 0,
                                                                 "children": []
                                                             }
@@ -701,6 +711,7 @@
                                                 "id": 100,
                                                 "parent_id": 10,
                                                 "name": "Формулирую цель исследования, понимая, как это мне поможет в дальнейшем дизайн-решении",
+                                                "current_level_indicator_id": 1,
                                                 "count_of_next_level_children": 0
                                             },
                                             {
@@ -708,6 +719,7 @@
                                                 "id": 101,
                                                 "parent_id": 10,
                                                 "name": "Формулирую продуктовые гипотезы, которые будут проверены на исследовании",
+                                                "current_level_indicator_id": 1,
                                                 "count_of_next_level_children": 0
                                             },
                                             {
@@ -715,6 +727,7 @@
                                                 "id": 102,
                                                 "parent_id": 10,
                                                 "name": "Подгатавливаю гайд для проведения исследования",
+                                                "current_level_indicator_id": 1,
                                                 "count_of_next_level_children": 0
                                             },
                                             {
@@ -722,6 +735,7 @@
                                                 "id": 103,
                                                 "parent_id": 10,
                                                 "name": "Могу провести глубинное интервью целевой аудитории",
+                                                "current_level_indicator_id": 1,
                                                 "count_of_next_level_children": 0
                                             }
                                         ]
@@ -759,6 +773,33 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/Skills.SkillDetails.SuccessResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/skills/level-indicators": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Skills"
+                ],
+                "summary": "05.04. Получить все возможные индикаторы навыков",
+                "description": "Получить все возможные индикаторы навыков",
+                "operationId": "skills.getLevelIndicators",
+                "responses": {
+                    "200": {
+                        "description": "Список индикаторов",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Skills.LevelIndicators.SuccessResponse"
                                 }
                             }
                         }
@@ -2191,6 +2232,42 @@
                     }
                 }
             },
+            "Skills.LevelIndicator": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "Порядковый номер. Чем выше значение, тем лучше уровень владения навыком.",
+                        "example": 5
+                    },
+                    "description": {
+                        "type": "string",
+                        "description": "Описание",
+                        "example": "Уверенно владею навыком, могу помочь и научить другого."
+                    },
+                    "label": {
+                        "type": "string",
+                        "description": "Метка",
+                        "example": "A"
+                    }
+                }
+            },
+            "Skills.LevelIndicators.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/Skills.LevelIndicator"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
             "Skills.ItemAttribute.ID": {
                 "type": "object",
                 "properties": {
@@ -2265,6 +2342,16 @@
                     }
                 }
             },
+            "Skills.ItemAttribute.CurrentLevelIndicatorID": {
+                "type": "object",
+                "properties": {
+                    "current_level_indicator_id": {
+                        "type": "integer",
+                        "description": "Уровень владения навыком, ID",
+                        "example": 5
+                    }
+                }
+            },
             "Skills.SkillParent.CompetencyCluster": {
                 "type": "object",
                 "allOf": [
@@ -2289,6 +2376,7 @@
                     {"$ref": "#/components/schemas/Skills.ItemAttribute.ID"},
                     {"$ref": "#/components/schemas/Skills.ItemAttribute.ParentID"},
                     {"$ref": "#/components/schemas/Skills.ItemAttribute.Name"},
+                    {"$ref": "#/components/schemas/Skills.ItemAttribute.CurrentLevelIndicatorID"},
                     {
                         "type": "object",
                         "properties": {
@@ -2356,22 +2444,23 @@
             "Skills.TreeLevelItem.CompetencyCluster": {
                 "type": "object",
                 "allOf": [
-                    {"$ref": "#/components/schemas/Skills.TreeLevelItem.Base"},
-                    {"$ref": "#/components/schemas/Skills.ItemAttribute.CompetencyClusterType"}
+                    {"$ref": "#/components/schemas/Skills.ItemAttribute.CompetencyClusterType"},
+                    {"$ref": "#/components/schemas/Skills.TreeLevelItem.Base"}
                 ]
             },
             "Skills.TreeLevelItem.Competency": {
                 "type": "object",
                 "allOf": [
-                    {"$ref": "#/components/schemas/Skills.TreeLevelItem.Base"},
-                    {"$ref": "#/components/schemas/Skills.ItemAttribute.CompetencyType"}
+                    {"$ref": "#/components/schemas/Skills.ItemAttribute.CompetencyType"},
+                    {"$ref": "#/components/schemas/Skills.TreeLevelItem.Base"}
                 ]
             },
             "Skills.TreeLevelItem.Skill": {
                 "type": "object",
                 "allOf": [
+                    {"$ref": "#/components/schemas/Skills.ItemAttribute.SkillType"},
                     {"$ref": "#/components/schemas/Skills.TreeLevelItem.Base"},
-                    {"$ref": "#/components/schemas/Skills.ItemAttribute.SkillType"}
+                    {"$ref": "#/components/schemas/Skills.ItemAttribute.CurrentLevelIndicatorID"}
                 ]
             },
             "Skills.TreeItem.Base": {
@@ -2387,22 +2476,23 @@
             "Skills.TreeItem.CompetencyCluster": {
                 "type": "object",
                 "allOf": [
-                    {"$ref": "#/components/schemas/Skills.TreeItem.Base"},
-                    {"$ref": "#/components/schemas/Skills.ItemAttribute.CompetencyClusterType"}
+                    {"$ref": "#/components/schemas/Skills.ItemAttribute.CompetencyClusterType"},
+                    {"$ref": "#/components/schemas/Skills.TreeItem.Base"}
                 ]
             },
             "Skills.TreeItem.Competency": {
                 "type": "object",
                 "allOf": [
-                    {"$ref": "#/components/schemas/Skills.TreeItem.Base"},
-                    {"$ref": "#/components/schemas/Skills.ItemAttribute.CompetencyType"}
+                    {"$ref": "#/components/schemas/Skills.ItemAttribute.CompetencyType"},
+                    {"$ref": "#/components/schemas/Skills.TreeItem.Base"}
                 ]
             },
             "Skills.TreeItem.Skill": {
                 "type": "object",
                 "allOf": [
+                    {"$ref": "#/components/schemas/Skills.ItemAttribute.SkillType"},
                     {"$ref": "#/components/schemas/Skills.TreeItem.Base"},
-                    {"$ref": "#/components/schemas/Skills.ItemAttribute.SkillType"}
+                    {"$ref": "#/components/schemas/Skills.ItemAttribute.CurrentLevelIndicatorID"}
                 ]
             },
             "Skills.TreeLevel.Request": {
