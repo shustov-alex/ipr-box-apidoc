@@ -1110,7 +1110,7 @@
             }
         },
         "/targets/{id}/comments": {
-            "post": {
+            "get": {
                 "security": [
                     {
                         "bearerAuth": []
@@ -1125,15 +1125,6 @@
                 "parameters": [
                     {"$ref": "#/components/parameters/Targets.Target.ID"}
                 ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Targets.TargetComments.Request"
-                            }
-                        }
-                    }
-                },
                 "responses": {
                     "200": {
                         "description": "Список комментариев",
@@ -2900,14 +2891,6 @@
                     }
                 }
             },
-            "Targets.TargetComments.Request": {
-                "type": "object",
-                "properties": {
-                    "pagination": {
-                        "$ref": "#/components/schemas/Base.CursorPaginationForward"
-                    }
-                }
-            },
             "Targets.TargetComments.SuccessResponse": {
                 "type": "object",
                 "properties": {
@@ -2918,14 +2901,6 @@
                                 "type": "array",
                                 "items": {
                                     "$ref": "#/components/schemas/Comments.Comment"
-                                }
-                            },
-                            "meta": {
-                                "type": "object",
-                                "properties": {
-                                    "pagination": {
-                                        "$ref": "#/components/schemas/Base.CursorPaginationMeta"
-                                    }
                                 }
                             }
                         }
