@@ -501,7 +501,7 @@
                     "Skills"
                 ],
                 "summary": "05.01. Получить дерево навыков",
-                "description": "Возвращает все корневые элементы и первые 500 вложенных элементов",
+                "description": "Получить дерево навыков",
                 "operationId": "skills.getTree",
                 "requestBody": {
                     "content": {
@@ -1275,7 +1275,7 @@
                     "Materials"
                 ],
                 "summary": "10.01. Получить дерево материалов",
-                "description": "Возвращает все корневые элементы и первые 500 вложенных элементов",
+                "description": "Получить дерево материалов",
                 "operationId": "materials.getTree",
                 "requestBody": {
                     "content": {
