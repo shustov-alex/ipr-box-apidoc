@@ -63,28 +63,6 @@
                 "summary": "01.01. Получить конфигурацию компании",
                 "description": "Получить конфигурацию компании",
                 "operationId": "base.getConfiguration",
-                "parameters": [
-                    {
-                        "name": "company_id",
-                        "in": "query",
-                        "required": false,
-                        "description": "ID компании. Если передан, то имеет приоритет над company_domain.",
-                        "example": 128,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    },
-                    {
-                        "name": "company_domain",
-                        "in": "query",
-                        "required": false,
-                        "description": "Домен компании. Передавать в случае, если не известен company_id.",
-                        "example": "my.favorite.company.com",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ],
                 "responses": {
                     "200": {
                         "description": "Объект конфигурации",
@@ -1869,11 +1847,6 @@
                         "type": "string",
                         "description": "Пароль",
                         "example": "your_password"
-                    },
-                    "company_id": {
-                        "type": "integer",
-                        "description": "ID компании",
-                        "example": 123
                     }
                 },
                 "required": ["login", "password"]
@@ -1907,14 +1880,9 @@
                                         "type": "string",
                                         "description": "Refresh token. Используется для обновления пары access token / refresh token.",
                                         "example": "G1O8jaQj4KyGOc3-fbrIF30j5eUU_kqs9O2qDXk1"
-                                    },
-                                    "company_id": {
-                                        "type": "integer",
-                                        "description": "ID компании",
-                                        "example": 123
                                     }
                                 },
-                                "required": ["access_token", "token_type", "expires_in", "refresh_token", "company_id"]
+                                "required": ["access_token", "token_type", "expires_in", "refresh_token"]
                             }
                         }
                     }
@@ -2199,16 +2167,6 @@
                     }
                 }
             },
-            "Users.UserAttribute.CompanyID": {
-                "type": "object",
-                "properties": {
-                    "company_id": {
-                        "type": "integer",
-                        "description": "ID компании",
-                        "example": 256
-                    }
-                }
-            },
             "Users.UserAttribute.Login": {
                 "type": "object",
                 "properties": {
@@ -2283,7 +2241,6 @@
                                 "type": "object",
                                 "allOf": [
                                     { "$ref": "#/components/schemas/Users.UserAttribute.ID" },
-                                    { "$ref": "#/components/schemas/Users.UserAttribute.CompanyID" },
                                     { "$ref": "#/components/schemas/Users.UserAttribute.Login" },
                                     { "$ref": "#/components/schemas/Users.UserAttribute.Email" },
                                     { "$ref": "#/components/schemas/Users.UserAttribute.FirstName" },
