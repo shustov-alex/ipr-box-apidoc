@@ -525,14 +525,12 @@
                                                 "id": 1,
                                                 "parent_id": null,
                                                 "name": "Специализированные компетенции",
-                                                "count_of_next_level_children": 2,
                                                 "children": [
                                                     {
                                                         "type": "competency",
                                                         "id": 10,
                                                         "parent_id": 1,
                                                         "name": "Исследование",
-                                                        "count_of_next_level_children": 4,
                                                         "children": [
                                                             {
                                                                 "type": "skill",
@@ -541,7 +539,6 @@
                                                                 "name": "Формулирую цель исследования, понимая, как это мне поможет в дальнейшем дизайн-решении",
                                                                 "current_level_indicator_id": 1,
                                                                 "required_level_indicator_id": 5,
-                                                                "count_of_next_level_children": 0,
                                                                 "children": []
                                                             },
                                                             {
@@ -551,7 +548,6 @@
                                                                 "name": "Формулирую продуктовые гипотезы, которые будут проверены на исследовании",
                                                                 "current_level_indicator_id": 1,
                                                                 "required_level_indicator_id": 5,
-                                                                "count_of_next_level_children": 0,
                                                                 "children": []
                                                             },
                                                             {
@@ -561,7 +557,6 @@
                                                                 "name": "Подгатавливаю гайд для проведения исследования",
                                                                 "current_level_indicator_id": 1,
                                                                 "required_level_indicator_id": 5,
-                                                                "count_of_next_level_children": 0,
                                                                 "children": []
                                                             },
                                                             {
@@ -571,7 +566,6 @@
                                                                 "name": "Могу провести глубинное интервью целевой аудитории",
                                                                 "current_level_indicator_id": 1,
                                                                 "required_level_indicator_id": 5,
-                                                                "count_of_next_level_children": 0,
                                                                 "children": []
                                                             }
                                                         ]
@@ -581,7 +575,6 @@
                                                         "id": 11,
                                                         "parent_id": 1,
                                                         "name": "Проектирование",
-                                                        "count_of_next_level_children": 2,
                                                         "children": [
                                                             {
                                                                 "type": "skill",
@@ -590,7 +583,6 @@
                                                                 "name": "Какой-то навык, ID 110",
                                                                 "current_level_indicator_id": 1,
                                                                 "required_level_indicator_id": 5,
-                                                                "count_of_next_level_children": 0,
                                                                 "children": []
                                                             },
                                                             {
@@ -600,7 +592,6 @@
                                                                 "name": "Какой-то навык, ID 111",
                                                                 "current_level_indicator_id": 1,
                                                                 "required_level_indicator_id": 5,
-                                                                "count_of_next_level_children": 0,
                                                                 "children": []
                                                             }
                                                         ]
@@ -612,14 +603,12 @@
                                                 "id": 2,
                                                 "parent_id": null,
                                                 "name": "Общие компетенции",
-                                                "count_of_next_level_children": 2,
                                                 "children": [
                                                     {
                                                         "type": "competency",
                                                         "id": 20,
                                                         "parent_id": 2,
                                                         "name": "Какая-то компетенция, ID 20",
-                                                        "count_of_next_level_children": 2,
                                                         "children": [
                                                             {
                                                                 "type": "skill",
@@ -628,7 +617,6 @@
                                                                 "name": "Какой-то навык, ID 200",
                                                                 "current_level_indicator_id": 1,
                                                                 "required_level_indicator_id": 5,
-                                                                "count_of_next_level_children": 0,
                                                                 "children": []
                                                             },
                                                             {
@@ -638,7 +626,6 @@
                                                                 "name": "Какой-то навык, ID 201",
                                                                 "current_level_indicator_id": 1,
                                                                 "required_level_indicator_id": 5,
-                                                                "count_of_next_level_children": 0,
                                                                 "children": []
                                                             }
                                                         ]
@@ -648,7 +635,6 @@
                                                         "id": 21,
                                                         "parent_id": 2,
                                                         "name": "Какая-то компетенция, ID 21",
-                                                        "count_of_next_level_children": 2,
                                                         "children": [
                                                             {
                                                                 "type": "skill",
@@ -657,7 +643,6 @@
                                                                 "name": "Какой-то навык, ID 210",
                                                                 "current_level_indicator_id": 1,
                                                                 "required_level_indicator_id": 5,
-                                                                "count_of_next_level_children": 0,
                                                                 "children": []
                                                             },
                                                             {
@@ -667,7 +652,6 @@
                                                                 "name": "Какой-то навык, ID 211",
                                                                 "current_level_indicator_id": 1,
                                                                 "required_level_indicator_id": 5,
-                                                                "count_of_next_level_children": 0,
                                                                 "children": []
                                                             }
                                                         ]
@@ -1300,14 +1284,12 @@
                                                 "id": 1,
                                                 "parent_id": null,
                                                 "name": "Курсы",
-                                                "count_of_next_level_children": 2,
                                                 "children": [
                                                     {
                                                         "type": "category",
                                                         "id": 10,
                                                         "parent_id": 1,
                                                         "name": "Эквио",
-                                                        "count_of_next_level_children": 3,
                                                         "children": [
                                                             {
                                                                 "type": "material",
@@ -1325,7 +1307,6 @@
                                                                         "name": "Навык 456"
                                                                     }
                                                                 ],
-                                                                "count_of_next_level_children": 0,
                                                                 "children": []
                                                             },
                                                             {
@@ -1344,7 +1325,6 @@
                                                                         "name": "Навык 456"
                                                                     }
                                                                 ],
-                                                                "count_of_next_level_children": 0,
                                                                 "children": []
                                                             },
                                                             {
@@ -1363,7 +1343,6 @@
                                                                         "name": "Навык 456"
                                                                     }
                                                                 ],
-                                                                "count_of_next_level_children": 0,
                                                                 "children": []
                                                             }
                                                         ]
@@ -1373,7 +1352,6 @@
                                                         "id": 11,
                                                         "parent_id": 1,
                                                         "name": "SkillBox",
-                                                        "count_of_next_level_children": 2,
                                                         "children": [
                                                             {
                                                                 "type": "material",
@@ -1391,7 +1369,6 @@
                                                                         "name": "Навык 456"
                                                                     }
                                                                 ],
-                                                                "count_of_next_level_children": 0,
                                                                 "children": []
                                                             },
                                                             {
@@ -1410,7 +1387,6 @@
                                                                         "name": "Навык 456"
                                                                     }
                                                                 ],
-                                                                "count_of_next_level_children": 0,
                                                                 "children": []
                                                             }
                                                         ]
@@ -1422,14 +1398,12 @@
                                                 "id": 2,
                                                 "parent_id": null,
                                                 "name": "Книги",
-                                                "count_of_next_level_children": 2,
                                                 "children": [
                                                     {
                                                         "type": "category",
                                                         "id": 20,
                                                         "parent_id": 2,
                                                         "name": "Какая-то категория, ID 20",
-                                                        "count_of_next_level_children": 2,
                                                         "children": [
                                                             {
                                                                 "type": "material",
@@ -1447,7 +1421,6 @@
                                                                         "name": "Навык 456"
                                                                     }
                                                                 ],
-                                                                "count_of_next_level_children": 0,
                                                                 "children": []
                                                             },
                                                             {
@@ -1466,7 +1439,6 @@
                                                                         "name": "Навык 456"
                                                                     }
                                                                 ],
-                                                                "count_of_next_level_children": 0,
                                                                 "children": []
                                                             }
                                                         ]
@@ -1476,7 +1448,6 @@
                                                         "id": 21,
                                                         "parent_id": 2,
                                                         "name": "Какая-то категория, ID 21",
-                                                        "count_of_next_level_children": 2,
                                                         "children": [
                                                             {
                                                                 "type": "material",
@@ -1494,7 +1465,6 @@
                                                                         "name": "Навык 456"
                                                                     }
                                                                 ],
-                                                                "count_of_next_level_children": 0,
                                                                 "children": []
                                                             },
                                                             {
@@ -1513,7 +1483,6 @@
                                                                         "name": "Навык 456"
                                                                     }
                                                                 ],
-                                                                "count_of_next_level_children": 0,
                                                                 "children": []
                                                             }
                                                         ]
@@ -2467,16 +2436,6 @@
                     }
                 }
             },
-            "Skills.TreeItemAttribute.CountOfNextLevelChildren": {
-                "type": "object",
-                "properties": {
-                    "count_of_next_level_children": {
-                        "type": "integer",
-                        "description": "Количество дочерних элементов следующего уровня",
-                        "example": 7
-                    }
-                }
-            },
             "Skills.TreeItemAttribute.Children": {
                 "type": "object",
                 "properties": {
@@ -2491,8 +2450,7 @@
                 "allOf": [
                     {"$ref": "#/components/schemas/Skills.ItemAttribute.ID"},
                     {"$ref": "#/components/schemas/Skills.ItemAttribute.ParentID"},
-                    {"$ref": "#/components/schemas/Skills.ItemAttribute.Name"},
-                    {"$ref": "#/components/schemas/Skills.TreeItemAttribute.CountOfNextLevelChildren"}
+                    {"$ref": "#/components/schemas/Skills.ItemAttribute.Name"}
                 ]
             },
             "Skills.TreeLevelItem.CompetencyCluster": {
@@ -2524,7 +2482,6 @@
                     {"$ref": "#/components/schemas/Skills.ItemAttribute.ID"},
                     {"$ref": "#/components/schemas/Skills.ItemAttribute.ParentID"},
                     {"$ref": "#/components/schemas/Skills.ItemAttribute.Name"},
-                    {"$ref": "#/components/schemas/Skills.TreeItemAttribute.CountOfNextLevelChildren"},
                     {"$ref": "#/components/schemas/Skills.TreeItemAttribute.Children"}
                 ]
             },
@@ -3205,16 +3162,6 @@
                     }
                 }
             },
-            "Materials.TreeItemAttribute.CountOfNextLevelChildren": {
-                "type": "object",
-                "properties": {
-                    "count_of_next_level_children": {
-                        "type": "integer",
-                        "description": "Количество дочерних элементов следующего уровня",
-                        "example": 7
-                    }
-                }
-            },
             "Materials.TreeItemAttribute.Children": {
                 "type": "object",
                 "properties": {
@@ -3229,8 +3176,7 @@
                 "allOf": [
                     {"$ref": "#/components/schemas/Materials.ItemAttribute.ID"},
                     {"$ref": "#/components/schemas/Materials.ItemAttribute.ParentID"},
-                    {"$ref": "#/components/schemas/Materials.ItemAttribute.Name"},
-                    {"$ref": "#/components/schemas/Materials.TreeItemAttribute.CountOfNextLevelChildren"}
+                    {"$ref": "#/components/schemas/Materials.ItemAttribute.Name"}
                 ]
             },
             "Materials.TreeLevelItem.Category": {
@@ -3255,7 +3201,6 @@
                     {"$ref": "#/components/schemas/Materials.ItemAttribute.ID"},
                     {"$ref": "#/components/schemas/Materials.ItemAttribute.ParentID"},
                     {"$ref": "#/components/schemas/Materials.ItemAttribute.Name"},
-                    {"$ref": "#/components/schemas/Materials.TreeItemAttribute.CountOfNextLevelChildren"},
                     {"$ref": "#/components/schemas/Materials.TreeItemAttribute.Children"}
                 ]
             },
