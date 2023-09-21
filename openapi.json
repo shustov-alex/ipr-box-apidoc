@@ -2137,6 +2137,39 @@
                 },
                 "required": ["email", "text"]
             },
+            "Users.AccessRights.CreateOwnTarget": {
+                "type": "object",
+                "properties": {
+                    "create_own_target": {
+                        "type": "string",
+                        "description": "Право на создание собственной цели",
+                        "enum": ["granted", "denied"],
+                        "example": "granted"
+                    }
+                }
+            },
+            "Users.AccessRights.UpdateOwnTarget": {
+                "type": "object",
+                "properties": {
+                    "update_own_target": {
+                        "type": "string",
+                        "description": "Право на редактирование собственной цели",
+                        "enum": ["granted", "denied"],
+                        "example": "granted"
+                    }
+                }
+            },
+            "Users.AccessRights.DeleteOwnTarget": {
+                "type": "object",
+                "properties": {
+                    "delete_own_target": {
+                        "type": "string",
+                        "description": "Право на удаление собственной цели",
+                        "enum": ["granted", "denied"],
+                        "example": "granted"
+                    }
+                }
+            },
             "Users.UserAttribute.ID": {
                 "type": "object",
                 "properties": {
@@ -2144,6 +2177,36 @@
                         "type": "integer",
                         "description": "ID",
                         "example": 1024
+                    }
+                }
+            },
+            "Users.UserAttribute.CompanyID": {
+                "type": "object",
+                "properties": {
+                    "company_id": {
+                        "type": "integer",
+                        "description": "ID компании",
+                        "example": 256
+                    }
+                }
+            },
+            "Users.UserAttribute.Login": {
+                "type": "object",
+                "properties": {
+                    "login": {
+                        "type": "string",
+                        "description": "Логин",
+                        "example": "my_login"
+                    }
+                }
+            },
+            "Users.UserAttribute.Email": {
+                "type": "object",
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "description": "Email",
+                        "example": "test@test.com"
                     }
                 }
             },
@@ -2167,6 +2230,19 @@
                     }
                 }
             },
+            "Users.UserAttribute.AccessRights": {
+                "type": "object",
+                "properties": {
+                    "access_rights": {
+                        "type": "object",
+                        "allOf": [
+                            { "$ref": "#/components/schemas/Users.AccessRights.CreateOwnTarget" },
+                            { "$ref": "#/components/schemas/Users.AccessRights.UpdateOwnTarget" },
+                            { "$ref": "#/components/schemas/Users.AccessRights.DeleteOwnTarget" }
+                        ]
+                    }
+                }
+            },
             "Users.UserAttribute.Role": {
                 "type": "object",
                 "properties": {
@@ -2187,28 +2263,12 @@
                                 "type": "object",
                                 "allOf": [
                                     { "$ref": "#/components/schemas/Users.UserAttribute.ID" },
+                                    { "$ref": "#/components/schemas/Users.UserAttribute.CompanyID" },
+                                    { "$ref": "#/components/schemas/Users.UserAttribute.Login" },
+                                    { "$ref": "#/components/schemas/Users.UserAttribute.Email" },
                                     { "$ref": "#/components/schemas/Users.UserAttribute.FirstName" },
                                     { "$ref": "#/components/schemas/Users.UserAttribute.LastName" },
-                                    {
-                                        "type": "object",
-                                        "properties": {
-                                            "company_id": {
-                                                "type": "integer",
-                                                "description": "ID компании",
-                                                "example": 256
-                                            },
-                                            "login": {
-                                                "type": "string",
-                                                "description": "Логин",
-                                                "example": "my_login"
-                                            },
-                                            "email": {
-                                                "type": "string",
-                                                "description": "Email",
-                                                "example": "test@test.com"
-                                            }
-                                        }
-                                    }
+                                    { "$ref": "#/components/schemas/Users.UserAttribute.AccessRights" }
                                 ]
                             }
                         }
