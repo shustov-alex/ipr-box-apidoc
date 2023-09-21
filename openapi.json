@@ -2697,6 +2697,16 @@
                     }
                 }
             },
+            "Targets.TargetAttribute.CountOfComments": {
+                "type": "object",
+                "properties": {
+                    "count_of_comments": {
+                        "type": "integer",
+                        "description": "Количество комментариев",
+                        "example": 0
+                    }
+                }
+            },
             "Targets.TargetAttribute.Skills": {
                 "type": "object",
                 "properties": {
@@ -2823,6 +2833,7 @@
                 "allOf": [
                     {"$ref": "#/components/schemas/Targets.Target.Base"},
                     {"$ref": "#/components/schemas/Targets.TargetAttribute.CountOfMaterials"},
+                    {"$ref": "#/components/schemas/Targets.TargetAttribute.CountOfComments"},
                     {"$ref": "#/components/schemas/Targets.TargetAttribute.Skills"}
                 ]
             },
