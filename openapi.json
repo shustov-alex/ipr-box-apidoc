@@ -2605,6 +2605,16 @@
                     }
                 }
             },
+            "Targets.TargetAttribute.CountOfMaterials": {
+                "type": "object",
+                "properties": {
+                    "count_of_materials": {
+                        "type": "integer",
+                        "description": "Количество выбранных материалов",
+                        "example": 2
+                    }
+                }
+            },
             "Targets.TargetAttribute.Skills": {
                 "type": "object",
                 "properties": {
@@ -2730,6 +2740,7 @@
                 "type": "object",
                 "allOf": [
                     {"$ref": "#/components/schemas/Targets.Target.Base"},
+                    {"$ref": "#/components/schemas/Targets.TargetAttribute.CountOfMaterials"},
                     {"$ref": "#/components/schemas/Targets.TargetAttribute.Skills"}
                 ]
             },
