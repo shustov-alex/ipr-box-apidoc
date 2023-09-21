@@ -696,7 +696,7 @@
                 "tags": [
                     "Skills"
                 ],
-                "summary": "05.03. Получить детальную информацию о навыке",
+                "summary": "05.02. Получить детальную информацию о навыке",
                 "description": "Получить детальную информацию о навыке",
                 "operationId": "skills.getSkillDetails",
                 "parameters": [
@@ -726,7 +726,7 @@
                 "tags": [
                     "Skills"
                 ],
-                "summary": "05.04. Получить все возможные индикаторы навыков",
+                "summary": "05.03. Получить все возможные индикаторы навыков",
                 "description": "Получить все возможные индикаторы навыков",
                 "operationId": "skills.getLevelIndicators",
                 "responses": {
@@ -1542,7 +1542,7 @@
                 "tags": [
                     "Materials"
                 ],
-                "summary": "10.03. Получить детальную информацию о материале",
+                "summary": "10.02. Получить детальную информацию о материале",
                 "description": "Получить детальную информацию о материале",
                 "operationId": "materials.getMaterialDetails",
                 "parameters": [
@@ -1572,7 +1572,7 @@
                 "tags": [
                     "Materials"
                 ],
-                "summary": "10.04. Получить список материалов по ID навыков.",
+                "summary": "10.03. Получить список материалов по ID навыков.",
                 "description": "Получить список материалов по ID навыков.",
                 "operationId": "materials.getBySkills",
                 "requestBody": {
