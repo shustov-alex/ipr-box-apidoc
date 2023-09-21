@@ -1123,6 +1123,45 @@
                 }
             }
         },
+        "/targets/{id}/comments/leave": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Targets"
+                ],
+                "summary": "06.12. Оставить комментарий к цели",
+                "description": "Оставить комментарий к цели",
+                "operationId": "targets.leaveCommentOnTarget",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Targets.Target.ID"}
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Targets.LeaveCommentOnTarget.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Список комментариев",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.EmptySuccessResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/idp/available-years": {
             "get": {
                 "security": [
@@ -2139,6 +2178,17 @@
                     }
                 }
             },
+            "Users.AccessRights.LeaveCommentsOnOwnTarget": {
+                "type": "object",
+                "properties": {
+                    "leave_comments_on_own_target": {
+                        "type": "string",
+                        "description": "Право на оставление комментариев к собственной цели",
+                        "enum": ["granted", "denied"],
+                        "example": "granted"
+                    }
+                }
+            },
             "Users.UserAttribute.ID": {
                 "type": "object",
                 "properties": {
@@ -2207,7 +2257,8 @@
                         "allOf": [
                             { "$ref": "#/components/schemas/Users.AccessRights.CreateOwnTarget" },
                             { "$ref": "#/components/schemas/Users.AccessRights.UpdateOwnTarget" },
-                            { "$ref": "#/components/schemas/Users.AccessRights.DeleteOwnTarget" }
+                            { "$ref": "#/components/schemas/Users.AccessRights.DeleteOwnTarget" },
+                            { "$ref": "#/components/schemas/Users.AccessRights.LeaveCommentsOnOwnTarget" }
                         ]
                     }
                 }
@@ -2923,6 +2974,12 @@
                         }
                     }
                 }
+            },
+            "Targets.LeaveCommentOnTarget.Request": {
+                "type": "object",
+                "allOf": [
+                    { "$ref": "#/components/schemas/Comments.CommentAttribute.Text" }
+                ]
             },
             "Targets.CountOfRelations.SuccessResponse": {
                 "type": "object",
