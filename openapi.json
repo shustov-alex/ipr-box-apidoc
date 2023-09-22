@@ -2161,19 +2161,9 @@
                 "type": "object",
                 "properties": {
                     "id": {
-                        "type": "integer",
-                        "description": "ID",
-                        "example": 1024
-                    }
-                }
-            },
-            "Users.UserAttribute.Login": {
-                "type": "object",
-                "properties": {
-                    "login": {
                         "type": "string",
-                        "description": "Логин",
-                        "example": "my_login"
+                        "description": "ID",
+                        "example": "my_id"
                     }
                 }
             },
@@ -2241,7 +2231,6 @@
                                 "type": "object",
                                 "allOf": [
                                     { "$ref": "#/components/schemas/Users.UserAttribute.ID" },
-                                    { "$ref": "#/components/schemas/Users.UserAttribute.Login" },
                                     { "$ref": "#/components/schemas/Users.UserAttribute.Email" },
                                     { "$ref": "#/components/schemas/Users.UserAttribute.FirstName" },
                                     { "$ref": "#/components/schemas/Users.UserAttribute.LastName" },
