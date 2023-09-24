@@ -2392,6 +2392,7 @@
             "Skills.Skill.CollectionView": {
                 "type": "object",
                 "allOf": [
+                    {"$ref": "#/components/schemas/Skills.ItemAttribute.SkillType"},
                     {"$ref": "#/components/schemas/Skills.ItemAttribute.ID"},
                     {"$ref": "#/components/schemas/Skills.ItemAttribute.ParentID"},
                     {"$ref": "#/components/schemas/Skills.ItemAttribute.Name"},
