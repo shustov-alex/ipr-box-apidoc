@@ -648,7 +648,7 @@
                 }
             }
         },
-        "/skills/{id}": {
+        "/skills/{skill_id}": {
             "get": {
                 "security": [
                     {
@@ -741,7 +741,7 @@
                 }
             }
         },
-        "/targets/{id}": {
+        "/targets/{target_id}": {
             "get": {
                 "security": [
                     {
@@ -771,7 +771,7 @@
                 }
             }
         },
-        "/targets/{id}/update-status": {
+        "/targets/{target_id}/update-status": {
             "put": {
                 "security": [
                     {
@@ -902,7 +902,7 @@
                 }
             }
         },
-        "/targets/{id}/update": {
+        "/targets/{target_id}/update": {
             "put": {
                 "security": [
                     {
@@ -951,7 +951,7 @@
                 }
             }
         },
-        "/targets/{id}/delete": {
+        "/targets/{target_id}/delete": {
             "delete": {
                 "security": [
                     {
@@ -981,7 +981,7 @@
                 }
             }
         },
-        "/targets/{id}/count-of-relations": {
+        "/targets/{target_id}/count-of-relations": {
             "get": {
                 "security": [
                     {
@@ -1011,7 +1011,7 @@
                 }
             }
         },
-        "/targets/{id}/skills": {
+        "/targets/{target_id}/skills": {
             "get": {
                 "security": [
                     {
@@ -1041,7 +1041,7 @@
                 }
             }
         },
-        "/targets/{id}/materials": {
+        "/targets/{target_id}/materials": {
             "get": {
                 "security": [
                     {
@@ -1071,7 +1071,7 @@
                 }
             }
         },
-        "/targets/{id}/comments": {
+        "/targets/{target_id}/materials/{material_id}": {
             "get": {
                 "security": [
                     {
@@ -1081,7 +1081,38 @@
                 "tags": [
                     "Targets"
                 ],
-                "summary": "06.11. Получить комментарии по ID цели",
+                "summary": "06.11. Получить выбранный материал по ID цели и ID материала",
+                "description": "Получить выбранные материалы по ID цели",
+                "operationId": "targets.getTargetMaterial",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Targets.Target.ID"},
+                    {"$ref": "#/components/parameters/Materials.Material.ID"}
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Список материалов",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Targets.TargetMaterial.SuccessResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/targets/{target_id}/comments": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Targets"
+                ],
+                "summary": "06.12. Получить комментарии по ID цели",
                 "description": "Получить комментарии по ID цели",
                 "operationId": "targets.getTargetComments",
                 "parameters": [
@@ -1101,7 +1132,7 @@
                 }
             }
         },
-        "/targets/{id}/comments/leave": {
+        "/targets/{target_id}/comments/leave": {
             "post": {
                 "security": [
                     {
@@ -1111,7 +1142,7 @@
                 "tags": [
                     "Targets"
                 ],
-                "summary": "06.12. Оставить комментарий к цели",
+                "summary": "06.13. Оставить комментарий к цели",
                 "description": "Оставить комментарий к цели",
                 "operationId": "targets.leaveCommentOnTarget",
                 "parameters": [
@@ -1206,7 +1237,7 @@
                 }
             }
         },
-        "/competency-clusters/{id}": {
+        "/competency-clusters/{cluster_id}": {
             "get": {
                 "security": [
                     {
@@ -1236,7 +1267,7 @@
                 }
             }
         },
-        "/competencies/{id}": {
+        "/competencies/{competency_id}": {
             "get": {
                 "security": [
                     {
@@ -1518,7 +1549,7 @@
                 }
             }
         },
-        "/materials/{id}": {
+        "/materials/{material_id}": {
             "get": {
                 "security": [
                     {
@@ -2901,6 +2932,13 @@
                     }
                 }
             },
+            "Targets.TargetMaterial.CollectionView": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Materials.Material.CollectionView"},
+                    {"$ref": "#/components/schemas/Materials.ItemAttribute.Reason"}
+                ]
+            },
             "Targets.TargetMaterials.SuccessResponse": {
                 "type": "object",
                 "properties": {
@@ -2910,8 +2948,28 @@
                             "success": {
                                 "type": "array",
                                 "items": {
-                                    "$ref": "#/components/schemas/Materials.Material.CollectionView"
+                                    "$ref": "#/components/schemas/Targets.TargetMaterial.CollectionView"
                                 }
+                            }
+                        }
+                    }
+                }
+            },
+            "Targets.TargetMaterial.DetailView": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Materials.Material.DetailView"},
+                    {"$ref": "#/components/schemas/Materials.ItemAttribute.Reason"}
+                ]
+            },
+            "Targets.TargetMaterial.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "$ref": "#/components/schemas/Targets.TargetMaterial.DetailView"
                             }
                         }
                     }
@@ -3270,8 +3328,7 @@
                 "allOf": [
                     {"$ref": "#/components/schemas/Materials.ItemAttribute.ID"},
                     {"$ref": "#/components/schemas/Materials.ItemAttribute.Name"},
-                    {"$ref": "#/components/schemas/Materials.ItemAttribute.IsPaid"},
-                    {"$ref": "#/components/schemas/Materials.ItemAttribute.Reason"}
+                    {"$ref": "#/components/schemas/Materials.ItemAttribute.IsPaid"}
                 ]
             },
             "Materials.Material.DetailView": {
@@ -3381,7 +3438,7 @@
         },
         "parameters": {
             "Skills.Skill.ID": {
-                "name": "id",
+                "name": "skill_id",
                 "in": "path",
                 "required": true,
                 "description": "ID навыка",
@@ -3390,18 +3447,8 @@
                     "type": "integer"
                 }
             },
-            "Targets.Target.ID": {
-                "name": "id",
-                "in": "path",
-                "required": true,
-                "description": "ID цели",
-                "example": 512,
-                "schema": {
-                    "type": "integer"
-                }
-            },
             "CompetencyClusters.Cluster.ID": {
-                "name": "id",
+                "name": "cluster_id",
                 "in": "path",
                 "required": true,
                 "description": "ID кластера компетенций",
@@ -3411,7 +3458,7 @@
                 }
             },
             "Competencies.Competency.ID": {
-                "name": "id",
+                "name": "competency_id",
                 "in": "path",
                 "required": true,
                 "description": "ID компетенции",
@@ -3421,10 +3468,20 @@
                 }
             },
             "Materials.Material.ID": {
-                "name": "id",
+                "name": "material_id",
                 "in": "path",
                 "required": true,
                 "description": "ID материала",
+                "example": 512,
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            "Targets.Target.ID": {
+                "name": "target_id",
+                "in": "path",
+                "required": true,
+                "description": "ID цели",
                 "example": 512,
                 "schema": {
                     "type": "integer"
