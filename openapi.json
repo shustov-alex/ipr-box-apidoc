@@ -41,16 +41,8 @@
             "description": "07. Индивидуальный план развития"
         },
         {
-            "name": "Competency clusters",
-            "description": "08. Кластеры компетенций"
-        },
-        {
-            "name": "Competencies",
-            "description": "09. Компетенции"
-        },
-        {
             "name": "Materials",
-            "description": "10. Материалы"
+            "description": "08. Материалы"
         }
     ],
     "paths": {
@@ -678,6 +670,36 @@
                 }
             }
         },
+        "/skills/{skill_id}/short": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Skills"
+                ],
+                "summary": "05.03. Получить краткую информацию о навыке",
+                "description": "Получить краткую информацию о навыке",
+                "operationId": "skills.getSkillDetailsShort",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Skills.Skill.ID"}
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Краткая информация о навыке",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Skills.SkillDetailsShort.SuccessResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/skills/level-indicators": {
             "get": {
                 "security": [
@@ -688,7 +710,7 @@
                 "tags": [
                     "Skills"
                 ],
-                "summary": "05.03. Получить все возможные индикаторы навыков",
+                "summary": "05.04. Получить все возможные индикаторы навыков",
                 "description": "Получить все возможные индикаторы навыков",
                 "operationId": "skills.getLevelIndicators",
                 "responses": {
@@ -1237,66 +1259,6 @@
                 }
             }
         },
-        "/competency-clusters/{cluster_id}": {
-            "get": {
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ],
-                "tags": [
-                    "Competency clusters"
-                ],
-                "summary": "08.01. Получить детальную информацию о кластере компетенций",
-                "description": "Получить детальную информацию о кластере компетенций",
-                "operationId": "competencyClusters.getClusterDetails",
-                "parameters": [
-                    {"$ref": "#/components/parameters/CompetencyClusters.Cluster.ID"}
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Детальная информация о кластере",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/CompetencyClusters.ClusterDetails.SuccessResponse"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/competencies/{competency_id}": {
-            "get": {
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ],
-                "tags": [
-                    "Competencies"
-                ],
-                "summary": "09.01. Получить детальную информацию о компетенции",
-                "description": "Получить детальную информацию о компетенции",
-                "operationId": "competencies.getCompetencyDetails",
-                "parameters": [
-                    {"$ref": "#/components/parameters/Competencies.Competency.ID"}
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Детальная информация о компетенции",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Competencies.CompetencyDetails.SuccessResponse"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
         "/materials/tree": {
             "post": {
                 "security": [
@@ -1307,7 +1269,7 @@
                 "tags": [
                     "Materials"
                 ],
-                "summary": "10.01. Получить дерево материалов",
+                "summary": "08.01. Получить дерево материалов",
                 "description": "Получить дерево материалов",
                 "operationId": "materials.getTree",
                 "requestBody": {
@@ -1559,7 +1521,7 @@
                 "tags": [
                     "Materials"
                 ],
-                "summary": "10.02. Получить детальную информацию о материале",
+                "summary": "08.02. Получить детальную информацию о материале",
                 "description": "Получить детальную информацию о материале",
                 "operationId": "materials.getMaterialDetails",
                 "parameters": [
@@ -1589,7 +1551,7 @@
                 "tags": [
                     "Materials"
                 ],
-                "summary": "10.03. Получить список материалов по ID навыков.",
+                "summary": "08.03. Получить список материалов по ID навыков.",
                 "description": "Получить список материалов по ID навыков.",
                 "operationId": "materials.getBySkills",
                 "requestBody": {
@@ -2349,6 +2311,17 @@
                     }
                 }
             },
+            "Skills.ItemAttribute.Type": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "description": "Тип объекта",
+                        "enum": ["skill", "competency", "competency_cluster"],
+                        "example": "skill"
+                    }
+                }
+            },
             "Skills.ItemAttribute.CompetencyClusterType": {
                 "type": "object",
                 "properties": {
@@ -2423,7 +2396,7 @@
             "Skills.Skill.CollectionView": {
                 "type": "object",
                 "allOf": [
-                    {"$ref": "#/components/schemas/Skills.ItemAttribute.SkillType"},
+                    {"$ref": "#/components/schemas/Skills.ItemAttribute.Type"},
                     {"$ref": "#/components/schemas/Skills.ItemAttribute.ID"},
                     {"$ref": "#/components/schemas/Skills.ItemAttribute.ParentID"},
                     {"$ref": "#/components/schemas/Skills.ItemAttribute.Name"},
@@ -2460,6 +2433,28 @@
                         "properties": {
                             "success": {
                                 "$ref": "#/components/schemas/Skills.Skill.DetailView"
+                            }
+                        }
+                    }
+                }
+            },
+            "Skills.Skill.DetailShortView": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Skills.ItemAttribute.Type"},
+                    {"$ref": "#/components/schemas/Skills.ItemAttribute.ID"},
+                    {"$ref": "#/components/schemas/Skills.ItemAttribute.Name"},
+                    {"$ref": "#/components/schemas/Skills.ItemAttribute.Description"}
+                ]
+            },
+            "Skills.SkillDetailsShort.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "$ref": "#/components/schemas/Skills.Skill.DetailShortView"
                             }
                         }
                     }
@@ -3070,72 +3065,6 @@
                     }
                 }
             },
-            "CompetencyClusters.Cluster": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "description": "ID",
-                        "example": 234
-                    },
-                    "name": {
-                        "type": "string",
-                        "description": "Название",
-                        "example": "Competency cluster name"
-                    },
-                    "description": {
-                        "type": "string",
-                        "description": "Описание",
-                        "example": "Competency cluster description"
-                    }
-                }
-            },
-            "CompetencyClusters.ClusterDetails.SuccessResponse": {
-                "type": "object",
-                "properties": {
-                    "data": {
-                        "type": "object",
-                        "properties": {
-                            "success": {
-                                "$ref": "#/components/schemas/CompetencyClusters.Cluster"
-                            }
-                        }
-                    }
-                }
-            },
-            "Competencies.Competency": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "description": "ID",
-                        "example": 345
-                    },
-                    "name": {
-                        "type": "string",
-                        "description": "Название",
-                        "example": "Competency name"
-                    },
-                    "description": {
-                        "type": "string",
-                        "description": "Описание",
-                        "example": "Competency description"
-                    }
-                }
-            },
-            "Competencies.CompetencyDetails.SuccessResponse": {
-                "type": "object",
-                "properties": {
-                    "data": {
-                        "type": "object",
-                        "properties": {
-                            "success": {
-                                "$ref": "#/components/schemas/Competencies.Competency"
-                            }
-                        }
-                    }
-                }
-            },
             "Materials.ItemAttribute.CategoryType": {
                 "type": "object",
                 "properties": {
@@ -3442,26 +3371,6 @@
                 "in": "path",
                 "required": true,
                 "description": "ID навыка",
-                "example": 512,
-                "schema": {
-                    "type": "integer"
-                }
-            },
-            "CompetencyClusters.Cluster.ID": {
-                "name": "cluster_id",
-                "in": "path",
-                "required": true,
-                "description": "ID кластера компетенций",
-                "example": 512,
-                "schema": {
-                    "type": "integer"
-                }
-            },
-            "Competencies.Competency.ID": {
-                "name": "competency_id",
-                "in": "path",
-                "required": true,
-                "description": "ID компетенции",
                 "example": 512,
                 "schema": {
                     "type": "integer"
