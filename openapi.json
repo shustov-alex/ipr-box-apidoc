@@ -2109,7 +2109,7 @@
             "Users.AccessRights.CreateOwnTarget": {
                 "type": "object",
                 "properties": {
-                    "create_own_target": {
+                    "app.targets.create_own_target": {
                         "type": "string",
                         "description": "Право на создание собственной цели",
                         "enum": ["granted", "denied"],
@@ -2120,7 +2120,7 @@
             "Users.AccessRights.UpdateOwnTarget": {
                 "type": "object",
                 "properties": {
-                    "update_own_target": {
+                    "app.targets.update_own_target": {
                         "type": "string",
                         "description": "Право на редактирование собственной цели",
                         "enum": ["granted", "denied"],
@@ -2131,7 +2131,7 @@
             "Users.AccessRights.DeleteOwnTarget": {
                 "type": "object",
                 "properties": {
-                    "delete_own_target": {
+                    "app.targets.delete_own_target": {
                         "type": "string",
                         "description": "Право на удаление собственной цели",
                         "enum": ["granted", "denied"],
@@ -2142,7 +2142,7 @@
             "Users.AccessRights.LeaveCommentsOnOwnTarget": {
                 "type": "object",
                 "properties": {
-                    "leave_comments_on_own_target": {
+                    "app.targets.leave_comments_on_own_target": {
                         "type": "string",
                         "description": "Право на оставление комментариев к собственной цели",
                         "enum": ["granted", "denied"],
