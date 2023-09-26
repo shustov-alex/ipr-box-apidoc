@@ -670,7 +670,7 @@
                 }
             }
         },
-        "/skills/{skill_id}/short": {
+        "/skills/{skill_id}/brief": {
             "get": {
                 "security": [
                     {
@@ -682,7 +682,7 @@
                 ],
                 "summary": "05.03. Получить краткую информацию о навыке",
                 "description": "Получить краткую информацию о навыке",
-                "operationId": "skills.getSkillDetailsShort",
+                "operationId": "skills.getSkillDetailsBrief",
                 "parameters": [
                     {"$ref": "#/components/parameters/Skills.Skill.ID"}
                 ],
@@ -692,7 +692,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Skills.SkillDetailsShort.SuccessResponse"
+                                    "$ref": "#/components/schemas/Skills.SkillDetailsBrief.SuccessResponse"
                                 }
                             }
                         }
@@ -2438,7 +2438,7 @@
                     }
                 }
             },
-            "Skills.Skill.DetailShortView": {
+            "Skills.Skill.DetailBriefView": {
                 "type": "object",
                 "allOf": [
                     {"$ref": "#/components/schemas/Skills.ItemAttribute.Type"},
@@ -2447,14 +2447,14 @@
                     {"$ref": "#/components/schemas/Skills.ItemAttribute.Description"}
                 ]
             },
-            "Skills.SkillDetailsShort.SuccessResponse": {
+            "Skills.SkillDetailsBrief.SuccessResponse": {
                 "type": "object",
                 "properties": {
                     "data": {
                         "type": "object",
                         "properties": {
                             "success": {
-                                "$ref": "#/components/schemas/Skills.Skill.DetailShortView"
+                                "$ref": "#/components/schemas/Skills.Skill.DetailBriefView"
                             }
                         }
                     }
