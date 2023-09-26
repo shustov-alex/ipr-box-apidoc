@@ -895,7 +895,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Targets.Target.ToUpsert"
+                                "$ref": "#/components/schemas/Targets.Target.ToCreate"
                             }
                         }
                     }
@@ -944,7 +944,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Targets.Target.ToUpsert"
+                                "$ref": "#/components/schemas/Targets.Target.ToUpdate"
                             }
                         }
                     }
@@ -2695,7 +2695,7 @@
                     }
                 }
             },
-            "Targets.Target.ToUpsert": {
+            "Targets.Target.ToUpdate": {
                 "type": "object",
                 "allOf": [
                     {"$ref": "#/components/schemas/Targets.TargetAttribute.Name"},
@@ -2723,6 +2723,22 @@
                             }
                         }
                     }
+                ]
+            },
+            "Targets.Target.ToCreate": {
+                "type": "object",
+                "allOf": [
+                    {
+                        "type": "object",
+                        "properties": {
+                            "year": {
+                                "type": "integer",
+                                "description": "Год",
+                                "example": 2023
+                            }
+                        }
+                    },
+                    {"$ref": "#/components/schemas/Targets.Target.ToUpdate"}
                 ]
             },
             "Targets.Target.Base": {
