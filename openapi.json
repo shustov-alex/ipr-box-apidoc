@@ -834,7 +834,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Auth.ResetPassword.SaveNewPassword.ErrorCollectionResponse"
+                                    "$ref": "#/components/schemas/Base.ErrorCollectionResponse"
                                 }
                             }
                         }
@@ -916,7 +916,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Auth.ResetPassword.SaveNewPassword.ErrorCollectionResponse"
+                                    "$ref": "#/components/schemas/Base.ErrorCollectionResponse"
                                 }
                             }
                         }
@@ -965,7 +965,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Auth.ResetPassword.SaveNewPassword.ErrorCollectionResponse"
+                                    "$ref": "#/components/schemas/Base.ErrorCollectionResponse"
                                 }
                             }
                         }
