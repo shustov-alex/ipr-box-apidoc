@@ -1251,7 +1251,7 @@
                 "operationId": "idp.getDefaultRoute",
                 "responses": {
                     "200": {
-                        "description": "Детальная информация об ИПР",
+                        "description": "Согласование, маршрут по умолчанию",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1311,7 +1311,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Детальная информация об ИПР",
+                        "description": "Список прав по работе с ИПР",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1350,7 +1350,7 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Детальная информация об ИПР",
+                        "description": "Список попыток согласования",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1389,7 +1389,118 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Детальная информация об ИПР",
+                        "description": "Согласование успешно запущено",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.EmptySuccessResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/idp/{idp_id}/approval/attempts/{attempt_id}/cancel": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "IDP"
+                ],
+                "summary": "07.07. Отмена согласования",
+                "description": "Отмена согласования. Выполняется инициатором.",
+                "operationId": "idp.cancelApprovalAttempt",
+                "parameters": [
+                    {"$ref": "#/components/parameters/IDP.IDP.ID"},
+                    {"$ref": "#/components/parameters/IDP.ApprovalAttempt.ID"}
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Согласование успешно отменено",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.EmptySuccessResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/idp/{idp_id}/approval/attempts/{attempt_id}/approve": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "IDP"
+                ],
+                "summary": "07.08. Согласовать этап маршрута",
+                "description": "Согласовать этап маршрута. Если согласующий (авторизованный пользователь) присутствует в нескольких этапах, то будет обработан первый из несогласованных.",
+                "operationId": "idp.approveStage",
+                "parameters": [
+                    {"$ref": "#/components/parameters/IDP.IDP.ID"},
+                    {"$ref": "#/components/parameters/IDP.ApprovalAttempt.ID"}
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/IDP.ApproveStageOrNot.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Согласование этапа прошло успешно",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.EmptySuccessResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/idp/{idp_id}/approval/attempts/{attempt_id}/reject": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "IDP"
+                ],
+                "summary": "07.09. Отказать в согласовании этапа",
+                "description": "Отказать в согласовании этапа. Если согласующий (авторизованный пользователь) присутствует в нескольких этапах, то будет обработан первый из несогласованных.",
+                "operationId": "idp.rejectStage",
+                "parameters": [
+                    {"$ref": "#/components/parameters/IDP.IDP.ID"},
+                    {"$ref": "#/components/parameters/IDP.ApprovalAttempt.ID"}
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/IDP.ApproveStageOrNot.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Отказ в согласовании прошёл успешно",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -3298,7 +3409,7 @@
                     "comment": {
                         "type": "string",
                         "description": "Комментарий",
-                        "example": "Согласовано"
+                        "example": "Комментарий к согласованию"
                     }
                 }
             },
@@ -3635,6 +3746,12 @@
                     }
                 },
                 "required": ["stages"]
+            },
+            "IDP.ApproveStageOrNot.Request": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/IDP.ApproverAttribute.Comment"}
+                ]
             },
             "Materials.ItemAttribute.CategoryType": {
                 "type": "object",
@@ -3983,6 +4100,16 @@
                 "required": true,
                 "description": "ИПР ID",
                 "example": 345,
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            "IDP.ApprovalAttempt.ID": {
+                "name": "attempt_id",
+                "in": "path",
+                "required": true,
+                "description": "ID попытки согласования",
+                "example": 512,
                 "schema": {
                     "type": "integer"
                 }
