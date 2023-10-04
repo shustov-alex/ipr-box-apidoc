@@ -1323,6 +1323,45 @@
                 }
             }
         },
+        "/idp/{idp_id}/approval/attempts": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "IDP"
+                ],
+                "summary": "07.05. Получить список попыток согласования ИПР",
+                "description": "Получить список попыток согласования ИПР",
+                "operationId": "idp.getApprovalAttempts",
+                "parameters": [
+                    {"$ref": "#/components/parameters/IDP.IDP.ID"}
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/IDP.GetApprovalAttempts.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Детальная информация об ИПР",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/IDP.GetApprovalAttempts.SuccessResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/materials/tree": {
             "post": {
                 "security": [
@@ -3140,33 +3179,109 @@
                     }
                 }
             },
-            "IDP.RouteStage": {
+            "IDP.RouteStageAttribute.ID": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "ID",
+                        "example": 4096
+                    }
+                }
+            },
+            "IDP.RouteStageAttribute.SerialNumber": {
                 "type": "object",
                 "properties": {
                     "serial_number": {
                         "type": "integer",
                         "description": "Порядковый номер (1, 2, ..., N)",
                         "example": 1
-                    },
+                    }
+                }
+            },
+            "IDP.RouteStageAttribute.Name": {
+                "type": "object",
+                "properties": {
                     "name": {
                         "type": "string",
                         "description": "Название",
                         "example": "Очень важный этап"
-                    },
+                    }
+                }
+            },
+            "IDP.RouteStageAttribute.SuccessStrategy": {
+                "type": "object",
+                "properties": {
                     "success_strategy": {
                         "type": "string",
                         "description": "Условие, при котором этап будет считаться согласованным. Affirmative - согласовать должен хотя бы один участник. Unanimous - согласовать должны все.",
                         "enum": ["affirmative", "unanimous"],
                         "example": "affirmative"
-                    },
-                    "approvers": {
-                        "type": "array",
-                        "description": "Согласующие",
-                        "items": {
-                            "$ref": "#/components/schemas/IDP.RouteUser"
-                        }
                     }
                 }
+            },
+            "IDP.RouteStageAttribute.Status": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "description": "Статус",
+                        "enum": ["none", "approval", "approved", "not_approved"],
+                        "example": "approval"
+                    }
+                }
+            },
+            "IDP.ApproverAttribute.Status": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "description": "Статус",
+                        "enum": ["none", "approved", "not_approved"],
+                        "example": "none"
+                    }
+                }
+            },
+            "IDP.ApproverAttribute.StatusChangedAt": {
+                "type": "object",
+                "properties": {
+                    "status_changed_at": {
+                        "type": "string",
+                        "description": "Дата изменения статуса",
+                        "example": "2023-09-01 12:10:20 +03:00",
+                        "nullable": true
+                    }
+                }
+            },
+            "IDP.ApproverAttribute.Comment": {
+                "type": "object",
+                "properties": {
+                    "comment": {
+                        "type": "string",
+                        "description": "Комментарий",
+                        "example": "Согласовано"
+                    }
+                }
+            },
+            "IDP.RouteStage": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/IDP.RouteStageAttribute.SerialNumber"},
+                    {"$ref": "#/components/schemas/IDP.RouteStageAttribute.Name"},
+                    {"$ref": "#/components/schemas/IDP.RouteStageAttribute.SuccessStrategy"},
+                    {
+                        "type": "object",
+                        "properties": {
+                            "approvers": {
+                                "type": "array",
+                                "description": "Согласующие",
+                                "items": {
+                                    "$ref": "#/components/schemas/IDP.RouteUser"
+                                }
+                            }
+                        }
+                    }
+                ]
             },
             "IDP.RouteUser": {
                 "type": "object",
@@ -3205,6 +3320,83 @@
                         "example": "approval"
                     }
                 }
+            },
+            "IDP.ApprovalAttemptAttribute.Initiator": {
+                "type": "object",
+                "properties": {
+                    "initiator": {
+                        "$ref": "#/components/schemas/IDP.RouteUser"
+                    }
+                }
+            },
+            "IDP.ApprovalAttemptAttribute.InitiatedAt": {
+                "type": "object",
+                "properties": {
+                    "initiated_at": {
+                        "type": "string",
+                        "description": "Дата начала согласования",
+                        "example": "2023-09-01 12:10:20 +03:00"
+                    }
+                }
+            },
+            "IDP.ApprovalAttemptAttribute.InitiatorComment": {
+                "type": "object",
+                "properties": {
+                    "initiator_comment": {
+                        "type": "string",
+                        "description": "Комментарий пользователя, инициировавшего согласование",
+                        "example": "Согласуйте, пожалуйста"
+                    }
+                }
+            },
+            "IDP.Approver": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/IDP.RouteUser"},
+                    {"$ref": "#/components/schemas/IDP.ApproverAttribute.Status"},
+                    {"$ref": "#/components/schemas/IDP.ApproverAttribute.StatusChangedAt"},
+                    {"$ref": "#/components/schemas/IDP.ApproverAttribute.Comment"}
+                ]
+            },
+            "IDP.ApprovalStage": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/IDP.RouteStageAttribute.ID"},
+                    {"$ref": "#/components/schemas/IDP.RouteStageAttribute.SerialNumber"},
+                    {"$ref": "#/components/schemas/IDP.RouteStageAttribute.Name"},
+                    {"$ref": "#/components/schemas/IDP.RouteStageAttribute.SuccessStrategy"},
+                    {"$ref": "#/components/schemas/IDP.RouteStageAttribute.Status"},
+                    {
+                        "type": "object",
+                        "properties": {
+                            "approvers": {
+                                "$ref": "#/components/schemas/IDP.Approver"
+                            }
+                        }
+                    }
+                ]
+            },
+            "IDP.ApprovalAttempt": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/IDP.ApprovalAttemptAttribute.ID"},
+                    {"$ref": "#/components/schemas/IDP.ApprovalAttemptAttribute.SerialNumber"},
+                    {"$ref": "#/components/schemas/IDP.ApprovalAttemptAttribute.Status"},
+                    {"$ref": "#/components/schemas/IDP.ApprovalAttemptAttribute.Initiator"},
+                    {"$ref": "#/components/schemas/IDP.ApprovalAttemptAttribute.InitiatedAt"},
+                    {"$ref": "#/components/schemas/IDP.ApprovalAttemptAttribute.InitiatorComment"},
+                    {
+                        "type": "object",
+                        "properties": {
+                            "stages": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/IDP.ApprovalStage"
+                                }
+                            }
+                        }
+                    }
+                ]
             },
             "IDP.IDP.DetailsBriefView": {
                 "type": "object",
@@ -3270,6 +3462,19 @@
                     }
                 }
             },
+            "IDP.GetDefaultRoute.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "$ref": "#/components/schemas/IDP.Route"
+                            }
+                        }
+                    }
+                }
+            },
             "IDP.GetIDPDetails.SuccessResponse": {
                 "type": "object",
                 "properties": {
@@ -3328,14 +3533,35 @@
                     }
                 }
             },
-            "IDP.GetDefaultRoute.SuccessResponse": {
+            "IDP.GetApprovalAttempts.Request": {
+                "type": "object",
+                "properties": {
+                    "filter": {
+                        "type": "object",
+                        "properties": {
+                            "attempt_ids": {
+                                "type": "array",
+                                "items": {
+                                    "type": "integer",
+                                    "description": "ID попытки",
+                                    "example": 890
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "IDP.GetApprovalAttempts.SuccessResponse": {
                 "type": "object",
                 "properties": {
                     "data": {
                         "type": "object",
                         "properties": {
                             "success": {
-                                "$ref": "#/components/schemas/IDP.Route"
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/IDP.ApprovalAttempt"
+                                }
                             }
                         }
                     }
