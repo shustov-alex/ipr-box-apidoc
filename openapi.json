@@ -2595,6 +2595,16 @@
                     }
                 }
             },
+            "Targets.TargetAttribute.IDP_ID": {
+                "type": "object",
+                "properties": {
+                    "idp_id": {
+                        "type": "integer",
+                        "description": "ИПР ID",
+                        "example": 678
+                    }
+                }
+            },
             "Targets.TargetAttribute.Name": {
                 "type": "object",
                 "properties": {
@@ -2735,16 +2745,7 @@
             "Targets.Target.ToCreate": {
                 "type": "object",
                 "allOf": [
-                    {
-                        "type": "object",
-                        "properties": {
-                            "year": {
-                                "type": "integer",
-                                "description": "Год",
-                                "example": 2023
-                            }
-                        }
-                    },
+                    {"$ref": "#/components/schemas/Targets.TargetAttribute.IDP_ID"},
                     {"$ref": "#/components/schemas/Targets.Target.ToUpdate"}
                 ]
             },
@@ -2759,16 +2760,12 @@
                     {"$ref": "#/components/schemas/Targets.TargetAttribute.Deadline"}
                 ]
             },
-            "Targets.Filters.Year": {
+            "Targets.Filters.IDP_ID": {
                 "type": "object",
-                "properties": {
-                    "year": {
-                        "type": "integer",
-                        "description": "Год",
-                        "example": 2023
-                    }
-                },
-                "required": ["year"]
+                "allOf": [
+                    {"$ref": "#/components/schemas/Targets.TargetAttribute.IDP_ID"}
+                ],
+                "required": ["idp_id"]
             },
             "Targets.Filters.StatusGroup": {
                 "type": "object",
@@ -2813,13 +2810,13 @@
                         "type": "object",
                         "allOf": [
                             {
-                                "$ref": "#/components/schemas/Targets.Filters.Year"
+                                "$ref": "#/components/schemas/Targets.Filters.IDP_ID"
                             },
                             {
                                 "$ref": "#/components/schemas/Targets.Filters.StatusGroup"
                             }
                         ],
-                        "required": ["year"]
+                        "required": ["idp_id"]
                     }
                 },
                 "required": ["filter"]
@@ -2907,13 +2904,13 @@
                         "type": "object",
                         "allOf": [
                             {
-                                "$ref": "#/components/schemas/Targets.Filters.Year"
+                                "$ref": "#/components/schemas/Targets.Filters.IDP_ID"
                             },
                             {
                                 "$ref": "#/components/schemas/Targets.Filters.StatusGroup"
                             }
                         ],
-                        "required": ["year"]
+                        "required": ["idp_id"]
                     }
                 },
                 "required": ["filter"]
@@ -3045,12 +3042,32 @@
                     }
                 }
             },
+            "IDP.IDPAttribute.ID": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "ID",
+                        "example": 321
+                    }
+                }
+            },
+            "IDP.IDPAttribute.Year": {
+                "type": "object",
+                "properties": {
+                    "year": {
+                        "type": "integer",
+                        "description": "Год",
+                        "example": 2023
+                    }
+                }
+            },
             "IDP.ApprovalAttemptAttribute.ID": {
                 "type": "object",
                 "properties": {
                     "id": {
                         "type": "integer",
-                        "description": "ID попытки",
+                        "description": "ID",
                         "example": 4096
                     }
                 }
@@ -3060,7 +3077,7 @@
                 "properties": {
                     "serial_number": {
                         "type": "integer",
-                        "description": "Порядковый номер попытки",
+                        "description": "Порядковый номер",
                         "example": 1
                     }
                 }
@@ -3070,7 +3087,7 @@
                 "properties": {
                     "status": {
                         "type": "string",
-                        "description": "Актуальная попытка, статус",
+                        "description": "Статус",
                         "enum": ["approval", "approved", "not_approved"],
                         "example": "approval"
                     }
@@ -3078,23 +3095,15 @@
             },
             "IDP.IDP.DetailsBriefView": {
                 "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "description": "ID",
-                        "example": 321
-                    },
-                    "year": {
-                        "type": "integer",
-                        "description": "Год",
-                        "example": 2023
-                    }
-                }
+                "allOf": [
+                    {"$ref": "#/components/schemas/IDP.IDPAttribute.ID"},
+                    {"$ref": "#/components/schemas/IDP.IDPAttribute.Year"}
+                ]
             },
             "IDP.IDP.DetailsView": {
                 "type": "object",
                 "allOf": [
-                    { "$ref": "#/components/schemas/IDP.IDP.DetailsBriefView" },
+                    {"$ref": "#/components/schemas/IDP.IDP.DetailsBriefView"},
                     {
                         "type": "object",
                         "properties": {
@@ -3104,8 +3113,8 @@
                                 "items": {
                                     "type": "object",
                                     "allOf": [
-                                        { "$ref": "#/components/schemas/IDP.ApprovalAttemptAttribute.ID" },
-                                        { "$ref": "#/components/schemas/IDP.ApprovalAttemptAttribute.SerialNumber" }
+                                        {"$ref": "#/components/schemas/IDP.ApprovalAttemptAttribute.ID"},
+                                        {"$ref": "#/components/schemas/IDP.ApprovalAttemptAttribute.SerialNumber"}
                                     ]
                                 }
                             },
