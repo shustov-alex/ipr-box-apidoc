@@ -1236,6 +1236,33 @@
                 }
             }
         },
+        "/idp/default-route": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "IDP"
+                ],
+                "summary": "07.02. Получить маршрут по умолчанию",
+                "description": "Получить маршрут по умолчанию",
+                "operationId": "idp.getDefaultRoute",
+                "responses": {
+                    "200": {
+                        "description": "Детальная информация об ИПР",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/IDP.GetDefaultRoute.SuccessResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/idp/{idp_id}": {
             "get": {
                 "security": [
@@ -1246,7 +1273,7 @@
                 "tags": [
                     "IDP"
                 ],
-                "summary": "07.02. Получить детальную информацию об ИПР",
+                "summary": "07.03. Получить детальную информацию об ИПР",
                 "description": "Получить детальную информацию об ИПР",
                 "operationId": "idp.getIDPDetails",
                 "parameters": [
@@ -1266,7 +1293,7 @@
                 }
             }
         },
-        "/idp/{idp_id}/approval/access-rights": {
+        "/idp/{idp_id}/access-rights": {
             "get": {
                 "security": [
                     {
@@ -1276,8 +1303,8 @@
                 "tags": [
                     "IDP"
                 ],
-                "summary": "07.03. Права на ИПР",
-                "description": "Права на ИПР",
+                "summary": "07.04. Получить список прав по работе с ИПР",
+                "description": "Получить список прав по работе с ИПР",
                 "operationId": "idp.getAccessRights",
                 "parameters": [
                     {"$ref": "#/components/parameters/IDP.IDP.ID"}
@@ -2227,6 +2254,16 @@
                     }
                 }
             },
+            "Users.UserAttribute.FullName": {
+                "type": "object",
+                "properties": {
+                    "full_name": {
+                        "type": "string",
+                        "description": "Полное имя",
+                        "example": "Иванов Иван (Иванович)"
+                    }
+                }
+            },
             "Users.UserAttribute.AccessRights": {
                 "type": "object",
                 "properties": {
@@ -3092,6 +3129,52 @@
                     }
                 }
             },
+            "IDP.Route": {
+                "type": "object",
+                "properties": {
+                    "stages": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/IDP.RouteStage"
+                        }
+                    }
+                }
+            },
+            "IDP.RouteStage": {
+                "type": "object",
+                "properties": {
+                    "serial_number": {
+                        "type": "integer",
+                        "description": "Порядковый номер (1, 2, ..., N)",
+                        "example": 1
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Название",
+                        "example": "Очень важный этап"
+                    },
+                    "success_strategy": {
+                        "type": "string",
+                        "description": "Условие, при котором этап будет считаться согласованным. Affirmative - согласовать должен хотя бы один участник. Unanimous - согласовать должны все.",
+                        "enum": ["affirmative", "unanimous"],
+                        "example": "affirmative"
+                    },
+                    "approvers": {
+                        "type": "array",
+                        "description": "Согласующие",
+                        "items": {
+                            "$ref": "#/components/schemas/IDP.RouteUser"
+                        }
+                    }
+                }
+            },
+            "IDP.RouteUser": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Users.UserAttribute.ID"},
+                    {"$ref": "#/components/schemas/Users.UserAttribute.FullName"}
+                ]
+            },
             "IDP.ApprovalAttemptAttribute.ID": {
                 "type": "object",
                 "properties": {
@@ -3107,7 +3190,7 @@
                 "properties": {
                     "serial_number": {
                         "type": "integer",
-                        "description": "Порядковый номер",
+                        "description": "Порядковый номер (1, 2, ..., N)",
                         "example": 1
                     }
                 }
@@ -3203,41 +3286,58 @@
             "IDP.GetAccessRights.SuccessResponse": {
                 "type": "object",
                 "properties": {
-                    "app.idp.start_approval": {
-                        "type": "string",
-                        "description": "Запуск процесса согласования (доступно только при отсутствии попыток или в статусе not_approved)",
-                        "enum": ["granted", "denied"],
-                        "example": "granted"
-                    },
-                    "app.idp.cancel_approval": {
-                        "type": "string",
-                        "description": "Отменить процесс согласования (доступно только в статусе approval)",
-                        "enum": ["granted", "denied"],
-                        "example": "granted"
-                    },
-                    "app.idp.approve": {
-                        "type": "string",
-                        "description": "Согласовать (доступно только в статусе approval)",
-                        "enum": ["granted", "denied"],
-                        "example": "granted"
-                    },
-                    "app.idp.not_approve": {
-                        "type": "string",
-                        "description": "Отправить на доработку (доступно только в статусе approval)",
-                        "enum": ["granted", "denied"],
-                        "example": "granted"
-                    },
-                    "app.idp.edit_approvers": {
-                        "type": "string",
-                        "description": "Редактиовать согласующих",
-                        "enum": ["granted", "denied"],
-                        "example": "granted"
-                    },
-                    "app.idp.edit_stages": {
-                        "type": "string",
-                        "description": "Редактиовать этапы",
-                        "enum": ["granted", "denied"],
-                        "example": "granted"
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "object",
+                                "properties": {
+                                    "app.idp.start_approval": {
+                                        "type": "string",
+                                        "description": "Запуск процесса согласования (доступно только при отсутствии попыток или в статусе not_approved)",
+                                        "enum": ["granted", "denied"],
+                                        "example": "granted"
+                                    },
+                                    "app.idp.cancel_approval": {
+                                        "type": "string",
+                                        "description": "Отменить процесс согласования (доступно только в статусе approval)",
+                                        "enum": ["granted", "denied"],
+                                        "example": "granted"
+                                    },
+                                    "app.idp.approve": {
+                                        "type": "string",
+                                        "description": "Согласовать (доступно только в статусе approval)",
+                                        "enum": ["granted", "denied"],
+                                        "example": "granted"
+                                    },
+                                    "app.idp.not_approve": {
+                                        "type": "string",
+                                        "description": "Отправить на доработку (доступно только в статусе approval)",
+                                        "enum": ["granted", "denied"],
+                                        "example": "granted"
+                                    },
+                                    "app.idp.edit_route": {
+                                        "type": "string",
+                                        "description": "Редактиовать маршурт",
+                                        "enum": ["granted", "denied"],
+                                        "example": "granted"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "IDP.GetDefaultRoute.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "$ref": "#/components/schemas/IDP.Route"
+                            }
+                        }
                     }
                 }
             },
