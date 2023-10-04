@@ -473,6 +473,9 @@
                 "summary": "05.01. Получить дерево навыков",
                 "description": "Получить дерево навыков",
                 "operationId": "skills.getTree",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Users.User.ID"}
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -654,7 +657,8 @@
                 "description": "Получить детальную информацию о навыке",
                 "operationId": "skills.getSkillDetails",
                 "parameters": [
-                    {"$ref": "#/components/parameters/Skills.Skill.ID"}
+                    {"$ref": "#/components/parameters/Skills.Skill.ID"},
+                    {"$ref": "#/components/parameters/Users.User.ID"}
                 ],
                 "responses": {
                     "200": {
@@ -740,6 +744,9 @@
                 "summary": "06.01. Получить список целей",
                 "description": "Получить список целей. Максимальное количество элементов - 1000.",
                 "operationId": "targets.getCollection",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Users.User.ID"}
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -855,6 +862,9 @@
                 "summary": "06.04. Получить группы статусов целей",
                 "description": "Получить группы статусов целей",
                 "operationId": "targets.getStatusGroups",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Users.User.ID"}
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -891,6 +901,9 @@
                 "summary": "06.05. Создать цель",
                 "description": "Создать цель",
                 "operationId": "targets.createTarget",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Users.User.ID"}
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
