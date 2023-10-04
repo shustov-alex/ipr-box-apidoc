@@ -1193,7 +1193,7 @@
                 }
             }
         },
-        "/idp/available-years": {
+        "/idp": {
             "get": {
                 "security": [
                     {
@@ -1203,16 +1203,19 @@
                 "tags": [
                     "IDP"
                 ],
-                "summary": "07.01. Годы, в которых пользователю доступна работа с ИПР",
-                "description": "Годы, в которых пользователю доступна работа с ИПР",
-                "operationId": "idp.getAvailableYears",
+                "summary": "07.01. Коллекция доступных пользователю ИПР",
+                "description": "Коллекция доступных пользователю ИПР",
+                "operationId": "idp.getCollection",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Users.User.ID"}
+                ],
                 "responses": {
                     "200": {
-                        "description": "Объект со списком лет",
+                        "description": "Список ИПР",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/IDP.AvailableYears.SuccessResponse"
+                                    "$ref": "#/components/schemas/IDP.GetIDPCollection.SuccessResponse"
                                 }
                             }
                         }
@@ -1220,7 +1223,7 @@
                 }
             }
         },
-        "/idp/{year}": {
+        "/idp/{idp_id}": {
             "get": {
                 "security": [
                     {
@@ -1234,16 +1237,7 @@
                 "description": "Получить детальную информацию об ИПР",
                 "operationId": "idp.getIDPDetails",
                 "parameters": [
-                    {
-                        "name": "year",
-                        "in": "path",
-                        "required": true,
-                        "description": "Год ИПР",
-                        "example": 2023,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
+                    {"$ref": "#/components/parameters/IDP.IDP.ID"}
                 ],
                 "responses": {
                     "200": {
@@ -1251,7 +1245,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/IDP.IDPDetails.SuccessResponse"
+                                    "$ref": "#/components/schemas/IDP.GetIDPDetails.SuccessResponse"
                                 }
                             }
                         }
@@ -3038,44 +3032,117 @@
                     }
                 }
             },
-            "IDP.AvailableYears.SuccessResponse": {
+            "IDP.ApprovalAttemptAttribute.ID": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "ID попытки",
+                        "example": 4096
+                    }
+                }
+            },
+            "IDP.ApprovalAttemptAttribute.SerialNumber": {
+                "type": "object",
+                "properties": {
+                    "serial_number": {
+                        "type": "integer",
+                        "description": "Порядковый номер попытки",
+                        "example": 1
+                    }
+                }
+            },
+            "IDP.ApprovalAttemptAttribute.Status": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "description": "Актуальная попытка, статус",
+                        "enum": ["approval", "approved", "not_approved"],
+                        "example": "approval"
+                    }
+                }
+            },
+            "IDP.IDP.DetailsBriefView": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "ID",
+                        "example": 321
+                    },
+                    "year": {
+                        "type": "integer",
+                        "description": "Год",
+                        "example": 2023
+                    }
+                }
+            },
+            "IDP.IDP.DetailsView": {
+                "type": "object",
+                "allOf": [
+                    { "$ref": "#/components/schemas/IDP.IDP.DetailsBriefView" },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "attempts": {
+                                "type": "array",
+                                "description": "Краткая информация о попытках",
+                                "items": {
+                                    "type": "object",
+                                    "allOf": [
+                                        { "$ref": "#/components/schemas/IDP.ApprovalAttemptAttribute.ID" },
+                                        { "$ref": "#/components/schemas/IDP.ApprovalAttemptAttribute.SerialNumber" }
+                                    ]
+                                }
+                            },
+                            "last_attempt_status": {
+                                "type": "string",
+                                "description": "Актуальная попытка, статус",
+                                "enum": ["approval", "approved", "not_approved"],
+                                "example": "approval",
+                                "nullable": true
+                            },
+                            "last_attempt_count_of_stages": {
+                                "type": "integer",
+                                "description": "Актуальная попытка, количество этапов",
+                                "example": 3,
+                                "nullable": true
+                            },
+                            "last_attempt_count_of_approved_stages": {
+                                "type": "integer",
+                                "description": "Актуальная попытка, количество согласованных этапов",
+                                "example": 0,
+                                "nullable": true
+                            }
+                        }
+                    }
+                ]
+            },
+            "IDP.GetIDPCollection.SuccessResponse": {
                 "type": "object",
                 "properties": {
                     "data": {
                         "type": "object",
                         "properties": {
                             "success": {
-                                "type": "object",
-                                "properties": {
-                                    "years": {
-                                        "type": "array",
-                                        "items": {
-                                            "type": "integer",
-                                            "description": "Год",
-                                            "example": 2023
-                                        }
-                                    }
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/IDP.IDP.DetailsBriefView"
                                 }
                             }
                         }
                     }
                 }
             },
-            "IDP.IDPDetails.SuccessResponse": {
+            "IDP.GetIDPDetails.SuccessResponse": {
                 "type": "object",
                 "properties": {
                     "data": {
                         "type": "object",
                         "properties": {
                             "success": {
-                                "type": "object",
-                                "properties": {
-                                    "completion_percent": {
-                                        "type": "integer",
-                                        "description": "Процент прохождения",
-                                        "example": 75
-                                    }
-                                }
+                                "$ref": "#/components/schemas/IDP.IDP.DetailsView"
                             }
                         }
                     }
@@ -3408,6 +3475,26 @@
                 "required": true,
                 "description": "ID цели",
                 "example": 512,
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            "Users.User.ID": {
+                "name": "user_id",
+                "in": "query",
+                "required": false,
+                "description": "ID пользователя. Если не указан, то будет использован ID пользователя, который авторизован на данный момент.",
+                "example": "some_user_id",
+                "schema": {
+                    "type": "string"
+                }
+            },
+            "IDP.IDP.ID": {
+                "name": "idp_id",
+                "in": "path",
+                "required": true,
+                "description": "ИПР ID",
+                "example": 345,
                 "schema": {
                     "type": "integer"
                 }
