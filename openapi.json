@@ -1540,7 +1540,7 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Маршрут успешно обновлён",
+                        "description": "Маршрут успешно обновлён. Возвращается объект попытки.",
                         "content": {
                             "application/json": {
                                 "schema": {
