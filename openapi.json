@@ -1228,7 +1228,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/IDP.GetIDPCollection.SuccessResponse"
+                                    "$ref": "#/components/schemas/Idp.GetIdpCollection.SuccessResponse"
                                 }
                             }
                         }
@@ -1255,7 +1255,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/IDP.GetDefaultRoute.SuccessResponse"
+                                    "$ref": "#/components/schemas/Idp.GetDefaultRoute.SuccessResponse"
                                 }
                             }
                         }
@@ -1275,9 +1275,9 @@
                 ],
                 "summary": "07.03. Получить детальную информацию об ИПР",
                 "description": "Получить детальную информацию об ИПР",
-                "operationId": "idp.getIDPDetails",
+                "operationId": "idp.getIdpDetails",
                 "parameters": [
-                    {"$ref": "#/components/parameters/IDP.IDP.ID"}
+                    {"$ref": "#/components/parameters/Idp.Idp.ID"}
                 ],
                 "responses": {
                     "200": {
@@ -1285,7 +1285,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/IDP.GetIDPDetails.SuccessResponse"
+                                    "$ref": "#/components/schemas/Idp.GetIdpDetails.SuccessResponse"
                                 }
                             }
                         }
@@ -1307,7 +1307,7 @@
                 "description": "Получить список прав по работе с ИПР",
                 "operationId": "idp.getAccessRights",
                 "parameters": [
-                    {"$ref": "#/components/parameters/IDP.IDP.ID"}
+                    {"$ref": "#/components/parameters/Idp.Idp.ID"}
                 ],
                 "responses": {
                     "200": {
@@ -1315,7 +1315,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/IDP.GetAccessRights.SuccessResponse"
+                                    "$ref": "#/components/schemas/Idp.GetAccessRights.SuccessResponse"
                                 }
                             }
                         }
@@ -1337,13 +1337,13 @@
                 "description": "Получить список попыток согласования ИПР",
                 "operationId": "idp.getApprovalAttempts",
                 "parameters": [
-                    {"$ref": "#/components/parameters/IDP.IDP.ID"}
+                    {"$ref": "#/components/parameters/Idp.Idp.ID"}
                 ],
                 "requestBody": {
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/IDP.GetApprovalAttempts.Request"
+                                "$ref": "#/components/schemas/Idp.GetApprovalAttempts.Request"
                             }
                         }
                     }
@@ -1354,7 +1354,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/IDP.GetApprovalAttempts.SuccessResponse"
+                                    "$ref": "#/components/schemas/Idp.GetApprovalAttempts.SuccessResponse"
                                 }
                             }
                         }
@@ -1376,13 +1376,13 @@
                 "description": "Запуск согласования",
                 "operationId": "idp.startApprovalAttempt",
                 "parameters": [
-                    {"$ref": "#/components/parameters/IDP.IDP.ID"}
+                    {"$ref": "#/components/parameters/Idp.Idp.ID"}
                 ],
                 "requestBody": {
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/IDP.StartApprovalAttempt.Request"
+                                "$ref": "#/components/schemas/Idp.StartApprovalAttempt.Request"
                             }
                         }
                     }
@@ -1415,8 +1415,8 @@
                 "description": "Отмена согласования. Выполняется инициатором.",
                 "operationId": "idp.cancelApprovalAttempt",
                 "parameters": [
-                    {"$ref": "#/components/parameters/IDP.IDP.ID"},
-                    {"$ref": "#/components/parameters/IDP.ApprovalAttempt.ID"}
+                    {"$ref": "#/components/parameters/Idp.Idp.ID"},
+                    {"$ref": "#/components/parameters/Idp.ApprovalAttempt.ID"}
                 ],
                 "responses": {
                     "200": {
@@ -1446,14 +1446,14 @@
                 "description": "Согласовать этап маршрута. Если согласующий (авторизованный пользователь) присутствует в нескольких этапах, то будет обработан первый из несогласованных.",
                 "operationId": "idp.approveStage",
                 "parameters": [
-                    {"$ref": "#/components/parameters/IDP.IDP.ID"},
-                    {"$ref": "#/components/parameters/IDP.ApprovalAttempt.ID"}
+                    {"$ref": "#/components/parameters/Idp.Idp.ID"},
+                    {"$ref": "#/components/parameters/Idp.ApprovalAttempt.ID"}
                 ],
                 "requestBody": {
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/IDP.ApproveStageOrNot.Request"
+                                "$ref": "#/components/schemas/Idp.ApproveStageOrNot.Request"
                             }
                         }
                     }
@@ -1486,14 +1486,14 @@
                 "description": "Отказать в согласовании этапа. Если согласующий (авторизованный пользователь) присутствует в нескольких этапах, то будет обработан первый из несогласованных.",
                 "operationId": "idp.rejectStage",
                 "parameters": [
-                    {"$ref": "#/components/parameters/IDP.IDP.ID"},
-                    {"$ref": "#/components/parameters/IDP.ApprovalAttempt.ID"}
+                    {"$ref": "#/components/parameters/Idp.Idp.ID"},
+                    {"$ref": "#/components/parameters/Idp.ApprovalAttempt.ID"}
                 ],
                 "requestBody": {
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/IDP.ApproveStageOrNot.Request"
+                                "$ref": "#/components/schemas/Idp.ApproveStageOrNot.Request"
                             }
                         }
                     }
@@ -1526,14 +1526,14 @@
                 "description": "Обновить маршрут согласования.",
                 "operationId": "idp.updateApprovalAttemptRoute",
                 "parameters": [
-                    {"$ref": "#/components/parameters/IDP.IDP.ID"},
-                    {"$ref": "#/components/parameters/IDP.ApprovalAttempt.ID"}
+                    {"$ref": "#/components/parameters/Idp.Idp.ID"},
+                    {"$ref": "#/components/parameters/Idp.ApprovalAttempt.ID"}
                 ],
                 "requestBody": {
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/IDP.UpdateAttemptRoute.Request"
+                                "$ref": "#/components/schemas/Idp.UpdateAttemptRoute.Request"
                             }
                         }
                     }
@@ -1544,7 +1544,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/IDP.UpdateAttemptRoute.SuccessResponse"
+                                    "$ref": "#/components/schemas/Idp.UpdateAttemptRoute.SuccessResponse"
                                 }
                             }
                         }
@@ -1566,13 +1566,13 @@
                 "description": "Поиск согласующих.",
                 "operationId": "idp.searchForApprovers",
                 "parameters": [
-                    {"$ref": "#/components/parameters/IDP.IDP.ID"}
+                    {"$ref": "#/components/parameters/Idp.Idp.ID"}
                 ],
                 "requestBody": {
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/IDP.SearchForApprovers.Request"
+                                "$ref": "#/components/schemas/Idp.SearchForApprovers.Request"
                             }
                         }
                     }
@@ -1583,7 +1583,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/IDP.SearchForApprovers.SuccessResponse"
+                                    "$ref": "#/components/schemas/Idp.SearchForApprovers.SuccessResponse"
                                 }
                             }
                         }
@@ -2930,7 +2930,7 @@
                     }
                 }
             },
-            "Targets.TargetAttribute.IDP_ID": {
+            "Targets.TargetAttribute.IdpId": {
                 "type": "object",
                 "properties": {
                     "idp_id": {
@@ -3080,7 +3080,7 @@
             "Targets.Target.ToCreate": {
                 "type": "object",
                 "allOf": [
-                    {"$ref": "#/components/schemas/Targets.TargetAttribute.IDP_ID"},
+                    {"$ref": "#/components/schemas/Targets.TargetAttribute.IdpId"},
                     {"$ref": "#/components/schemas/Targets.Target.ToUpdate"}
                 ]
             },
@@ -3095,10 +3095,10 @@
                     {"$ref": "#/components/schemas/Targets.TargetAttribute.Deadline"}
                 ]
             },
-            "Targets.Filters.IDP_ID": {
+            "Targets.Filters.IdpId": {
                 "type": "object",
                 "allOf": [
-                    {"$ref": "#/components/schemas/Targets.TargetAttribute.IDP_ID"}
+                    {"$ref": "#/components/schemas/Targets.TargetAttribute.IdpId"}
                 ],
                 "required": ["idp_id"]
             },
@@ -3145,7 +3145,7 @@
                         "type": "object",
                         "allOf": [
                             {
-                                "$ref": "#/components/schemas/Targets.Filters.IDP_ID"
+                                "$ref": "#/components/schemas/Targets.Filters.IdpId"
                             },
                             {
                                 "$ref": "#/components/schemas/Targets.Filters.StatusGroup"
@@ -3239,7 +3239,7 @@
                         "type": "object",
                         "allOf": [
                             {
-                                "$ref": "#/components/schemas/Targets.Filters.IDP_ID"
+                                "$ref": "#/components/schemas/Targets.Filters.IdpId"
                             },
                             {
                                 "$ref": "#/components/schemas/Targets.Filters.StatusGroup"
@@ -3377,7 +3377,7 @@
                     }
                 }
             },
-            "IDP.IDPAttribute.ID": {
+            "Idp.IdpAttribute.ID": {
                 "type": "object",
                 "properties": {
                     "id": {
@@ -3387,7 +3387,7 @@
                     }
                 }
             },
-            "IDP.IDPAttribute.Year": {
+            "Idp.IdpAttribute.Year": {
                 "type": "object",
                 "properties": {
                     "year": {
@@ -3397,18 +3397,18 @@
                     }
                 }
             },
-            "IDP.Route": {
+            "Idp.Route": {
                 "type": "object",
                 "properties": {
                     "stages": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/IDP.RouteStage"
+                            "$ref": "#/components/schemas/Idp.RouteStage"
                         }
                     }
                 }
             },
-            "IDP.RouteStageAttribute.ID": {
+            "Idp.RouteStageAttribute.ID": {
                 "type": "object",
                 "properties": {
                     "id": {
@@ -3418,7 +3418,7 @@
                     }
                 }
             },
-            "IDP.RouteStageAttribute.SerialNumber": {
+            "Idp.RouteStageAttribute.SerialNumber": {
                 "type": "object",
                 "properties": {
                     "serial_number": {
@@ -3428,7 +3428,7 @@
                     }
                 }
             },
-            "IDP.RouteStageAttribute.Name": {
+            "Idp.RouteStageAttribute.Name": {
                 "type": "object",
                 "properties": {
                     "name": {
@@ -3438,7 +3438,7 @@
                     }
                 }
             },
-            "IDP.RouteStageAttribute.VoteStrategy": {
+            "Idp.RouteStageAttribute.VoteStrategy": {
                 "type": "object",
                 "properties": {
                     "vote_strategy": {
@@ -3449,7 +3449,7 @@
                     }
                 }
             },
-            "IDP.RouteStageAttribute.Status": {
+            "Idp.RouteStageAttribute.Status": {
                 "type": "object",
                 "properties": {
                     "status": {
@@ -3460,7 +3460,7 @@
                     }
                 }
             },
-            "IDP.RouteStageAttribute.IsEditable": {
+            "Idp.RouteStageAttribute.IsEditable": {
                 "type": "object",
                 "properties": {
                     "is_editable": {
@@ -3470,7 +3470,7 @@
                     }
                 }
             },
-            "IDP.RouteStageAttribute.ApproverIDs": {
+            "Idp.RouteStageAttribute.ApproverIDs": {
                 "type": "object",
                 "properties": {
                     "approver_ids": {
@@ -3483,7 +3483,7 @@
                     }
                 }
             },
-            "IDP.ApproverAttribute.Status": {
+            "Idp.ApproverAttribute.Status": {
                 "type": "object",
                 "properties": {
                     "status": {
@@ -3494,7 +3494,7 @@
                     }
                 }
             },
-            "IDP.ApproverAttribute.StatusChangedAt": {
+            "Idp.ApproverAttribute.StatusChangedAt": {
                 "type": "object",
                 "properties": {
                     "status_changed_at": {
@@ -3505,7 +3505,7 @@
                     }
                 }
             },
-            "IDP.ApproverAttribute.Comment": {
+            "Idp.ApproverAttribute.Comment": {
                 "type": "object",
                 "properties": {
                     "comment": {
@@ -3515,7 +3515,7 @@
                     }
                 }
             },
-            "IDP.ApproverAttribute.IsEditable": {
+            "Idp.ApproverAttribute.IsEditable": {
                 "type": "object",
                 "properties": {
                     "is_editable": {
@@ -3525,12 +3525,12 @@
                     }
                 }
             },
-            "IDP.RouteStage": {
+            "Idp.RouteStage": {
                 "type": "object",
                 "allOf": [
-                    {"$ref": "#/components/schemas/IDP.RouteStageAttribute.SerialNumber"},
-                    {"$ref": "#/components/schemas/IDP.RouteStageAttribute.Name"},
-                    {"$ref": "#/components/schemas/IDP.RouteStageAttribute.VoteStrategy"},
+                    {"$ref": "#/components/schemas/Idp.RouteStageAttribute.SerialNumber"},
+                    {"$ref": "#/components/schemas/Idp.RouteStageAttribute.Name"},
+                    {"$ref": "#/components/schemas/Idp.RouteStageAttribute.VoteStrategy"},
                     {
                         "type": "object",
                         "properties": {
@@ -3538,21 +3538,21 @@
                                 "type": "array",
                                 "description": "Согласующие",
                                 "items": {
-                                    "$ref": "#/components/schemas/IDP.RouteUser"
+                                    "$ref": "#/components/schemas/Idp.RouteUser"
                                 }
                             }
                         }
                     }
                 ]
             },
-            "IDP.RouteUser": {
+            "Idp.RouteUser": {
                 "type": "object",
                 "allOf": [
                     {"$ref": "#/components/schemas/Users.UserAttribute.ID"},
                     {"$ref": "#/components/schemas/Users.UserAttribute.FullName"}
                 ]
             },
-            "IDP.ApprovalAttemptAttribute.ID": {
+            "Idp.ApprovalAttemptAttribute.ID": {
                 "type": "object",
                 "properties": {
                     "id": {
@@ -3562,7 +3562,7 @@
                     }
                 }
             },
-            "IDP.ApprovalAttemptAttribute.SerialNumber": {
+            "Idp.ApprovalAttemptAttribute.SerialNumber": {
                 "type": "object",
                 "properties": {
                     "serial_number": {
@@ -3572,7 +3572,7 @@
                     }
                 }
             },
-            "IDP.ApprovalAttemptAttribute.Status": {
+            "Idp.ApprovalAttemptAttribute.Status": {
                 "type": "object",
                 "properties": {
                     "status": {
@@ -3583,15 +3583,15 @@
                     }
                 }
             },
-            "IDP.ApprovalAttemptAttribute.Initiator": {
+            "Idp.ApprovalAttemptAttribute.Initiator": {
                 "type": "object",
                 "properties": {
                     "initiator": {
-                        "$ref": "#/components/schemas/IDP.RouteUser"
+                        "$ref": "#/components/schemas/Idp.RouteUser"
                     }
                 }
             },
-            "IDP.ApprovalAttemptAttribute.InitiatedAt": {
+            "Idp.ApprovalAttemptAttribute.InitiatedAt": {
                 "type": "object",
                 "properties": {
                     "initiated_at": {
@@ -3601,7 +3601,7 @@
                     }
                 }
             },
-            "IDP.ApprovalAttemptAttribute.InitiatorComment": {
+            "Idp.ApprovalAttemptAttribute.InitiatorComment": {
                 "type": "object",
                 "properties": {
                     "initiator_comment": {
@@ -3611,68 +3611,68 @@
                     }
                 }
             },
-            "IDP.Approver": {
+            "Idp.Approver": {
                 "type": "object",
                 "allOf": [
-                    {"$ref": "#/components/schemas/IDP.RouteUser"},
-                    {"$ref": "#/components/schemas/IDP.ApproverAttribute.Status"},
-                    {"$ref": "#/components/schemas/IDP.ApproverAttribute.StatusChangedAt"},
-                    {"$ref": "#/components/schemas/IDP.ApproverAttribute.Comment"},
-                    {"$ref": "#/components/schemas/IDP.ApproverAttribute.IsEditable"}
+                    {"$ref": "#/components/schemas/Idp.RouteUser"},
+                    {"$ref": "#/components/schemas/Idp.ApproverAttribute.Status"},
+                    {"$ref": "#/components/schemas/Idp.ApproverAttribute.StatusChangedAt"},
+                    {"$ref": "#/components/schemas/Idp.ApproverAttribute.Comment"},
+                    {"$ref": "#/components/schemas/Idp.ApproverAttribute.IsEditable"}
                 ]
             },
-            "IDP.ApprovalStage": {
+            "Idp.ApprovalStage": {
                 "type": "object",
                 "allOf": [
-                    {"$ref": "#/components/schemas/IDP.RouteStageAttribute.ID"},
-                    {"$ref": "#/components/schemas/IDP.RouteStageAttribute.SerialNumber"},
-                    {"$ref": "#/components/schemas/IDP.RouteStageAttribute.Name"},
-                    {"$ref": "#/components/schemas/IDP.RouteStageAttribute.VoteStrategy"},
-                    {"$ref": "#/components/schemas/IDP.RouteStageAttribute.Status"},
-                    {"$ref": "#/components/schemas/IDP.RouteStageAttribute.IsEditable"},
+                    {"$ref": "#/components/schemas/Idp.RouteStageAttribute.ID"},
+                    {"$ref": "#/components/schemas/Idp.RouteStageAttribute.SerialNumber"},
+                    {"$ref": "#/components/schemas/Idp.RouteStageAttribute.Name"},
+                    {"$ref": "#/components/schemas/Idp.RouteStageAttribute.VoteStrategy"},
+                    {"$ref": "#/components/schemas/Idp.RouteStageAttribute.Status"},
+                    {"$ref": "#/components/schemas/Idp.RouteStageAttribute.IsEditable"},
                     {
                         "type": "object",
                         "properties": {
                             "approvers": {
-                                "$ref": "#/components/schemas/IDP.Approver"
+                                "$ref": "#/components/schemas/Idp.Approver"
                             }
                         }
                     }
                 ]
             },
-            "IDP.ApprovalAttempt": {
+            "Idp.ApprovalAttempt": {
                 "type": "object",
                 "allOf": [
-                    {"$ref": "#/components/schemas/IDP.ApprovalAttemptAttribute.ID"},
-                    {"$ref": "#/components/schemas/IDP.ApprovalAttemptAttribute.SerialNumber"},
-                    {"$ref": "#/components/schemas/IDP.ApprovalAttemptAttribute.Status"},
-                    {"$ref": "#/components/schemas/IDP.ApprovalAttemptAttribute.Initiator"},
-                    {"$ref": "#/components/schemas/IDP.ApprovalAttemptAttribute.InitiatedAt"},
-                    {"$ref": "#/components/schemas/IDP.ApprovalAttemptAttribute.InitiatorComment"},
+                    {"$ref": "#/components/schemas/Idp.ApprovalAttemptAttribute.ID"},
+                    {"$ref": "#/components/schemas/Idp.ApprovalAttemptAttribute.SerialNumber"},
+                    {"$ref": "#/components/schemas/Idp.ApprovalAttemptAttribute.Status"},
+                    {"$ref": "#/components/schemas/Idp.ApprovalAttemptAttribute.Initiator"},
+                    {"$ref": "#/components/schemas/Idp.ApprovalAttemptAttribute.InitiatedAt"},
+                    {"$ref": "#/components/schemas/Idp.ApprovalAttemptAttribute.InitiatorComment"},
                     {
                         "type": "object",
                         "properties": {
                             "stages": {
                                 "type": "array",
                                 "items": {
-                                    "$ref": "#/components/schemas/IDP.ApprovalStage"
+                                    "$ref": "#/components/schemas/Idp.ApprovalStage"
                                 }
                             }
                         }
                     }
                 ]
             },
-            "IDP.IDP.DetailsBriefView": {
+            "Idp.Idp.DetailsBriefView": {
                 "type": "object",
                 "allOf": [
-                    {"$ref": "#/components/schemas/IDP.IDPAttribute.ID"},
-                    {"$ref": "#/components/schemas/IDP.IDPAttribute.Year"}
+                    {"$ref": "#/components/schemas/Idp.IdpAttribute.ID"},
+                    {"$ref": "#/components/schemas/Idp.IdpAttribute.Year"}
                 ]
             },
-            "IDP.IDP.DetailsView": {
+            "Idp.Idp.DetailsView": {
                 "type": "object",
                 "allOf": [
-                    {"$ref": "#/components/schemas/IDP.IDP.DetailsBriefView"},
+                    {"$ref": "#/components/schemas/Idp.Idp.DetailsBriefView"},
                     {
                         "type": "object",
                         "properties": {
@@ -3682,8 +3682,8 @@
                                 "items": {
                                     "type": "object",
                                     "allOf": [
-                                        {"$ref": "#/components/schemas/IDP.ApprovalAttemptAttribute.ID"},
-                                        {"$ref": "#/components/schemas/IDP.ApprovalAttemptAttribute.SerialNumber"}
+                                        {"$ref": "#/components/schemas/Idp.ApprovalAttemptAttribute.ID"},
+                                        {"$ref": "#/components/schemas/Idp.ApprovalAttemptAttribute.SerialNumber"}
                                     ]
                                 }
                             },
@@ -3710,7 +3710,7 @@
                     }
                 ]
             },
-            "IDP.GetIDPCollection.SuccessResponse": {
+            "Idp.GetIdpCollection.SuccessResponse": {
                 "type": "object",
                 "properties": {
                     "data": {
@@ -3719,40 +3719,40 @@
                             "success": {
                                 "type": "array",
                                 "items": {
-                                    "$ref": "#/components/schemas/IDP.IDP.DetailsBriefView"
+                                    "$ref": "#/components/schemas/Idp.Idp.DetailsBriefView"
                                 }
                             }
                         }
                     }
                 }
             },
-            "IDP.GetDefaultRoute.SuccessResponse": {
+            "Idp.GetDefaultRoute.SuccessResponse": {
                 "type": "object",
                 "properties": {
                     "data": {
                         "type": "object",
                         "properties": {
                             "success": {
-                                "$ref": "#/components/schemas/IDP.Route"
+                                "$ref": "#/components/schemas/Idp.Route"
                             }
                         }
                     }
                 }
             },
-            "IDP.GetIDPDetails.SuccessResponse": {
+            "Idp.GetIdpDetails.SuccessResponse": {
                 "type": "object",
                 "properties": {
                     "data": {
                         "type": "object",
                         "properties": {
                             "success": {
-                                "$ref": "#/components/schemas/IDP.IDP.DetailsView"
+                                "$ref": "#/components/schemas/Idp.Idp.DetailsView"
                             }
                         }
                     }
                 }
             },
-            "IDP.GetAccessRights.SuccessResponse": {
+            "Idp.GetAccessRights.SuccessResponse": {
                 "type": "object",
                 "properties": {
                     "data": {
@@ -3797,7 +3797,7 @@
                     }
                 }
             },
-            "IDP.GetApprovalAttempts.Request": {
+            "Idp.GetApprovalAttempts.Request": {
                 "type": "object",
                 "properties": {
                     "filter": {
@@ -3815,7 +3815,7 @@
                     }
                 }
             },
-            "IDP.GetApprovalAttempts.SuccessResponse": {
+            "Idp.GetApprovalAttempts.SuccessResponse": {
                 "type": "object",
                 "properties": {
                     "data": {
@@ -3824,14 +3824,14 @@
                             "success": {
                                 "type": "array",
                                 "items": {
-                                    "$ref": "#/components/schemas/IDP.ApprovalAttempt"
+                                    "$ref": "#/components/schemas/Idp.ApprovalAttempt"
                                 }
                             }
                         }
                     }
                 }
             },
-            "IDP.StartApprovalAttempt.Request": {
+            "Idp.StartApprovalAttempt.Request": {
                 "type": "object",
                 "properties": {
                     "stages": {
@@ -3839,9 +3839,9 @@
                         "items": {
                             "type": "object",
                             "allOf": [
-                                {"$ref": "#/components/schemas/IDP.RouteStageAttribute.Name"},
-                                {"$ref": "#/components/schemas/IDP.RouteStageAttribute.VoteStrategy"},
-                                {"$ref": "#/components/schemas/IDP.RouteStageAttribute.ApproverIDs"}
+                                {"$ref": "#/components/schemas/Idp.RouteStageAttribute.Name"},
+                                {"$ref": "#/components/schemas/Idp.RouteStageAttribute.VoteStrategy"},
+                                {"$ref": "#/components/schemas/Idp.RouteStageAttribute.ApproverIDs"}
                             ],
                             "required": ["vote_strategy", "approver_ids"]
                         }
@@ -3849,13 +3849,13 @@
                 },
                 "required": ["stages"]
             },
-            "IDP.ApproveStageOrNot.Request": {
+            "Idp.ApproveStageOrNot.Request": {
                 "type": "object",
                 "allOf": [
-                    {"$ref": "#/components/schemas/IDP.ApproverAttribute.Comment"}
+                    {"$ref": "#/components/schemas/Idp.ApproverAttribute.Comment"}
                 ]
             },
-            "IDP.UpdateAttemptRoute.Request": {
+            "Idp.UpdateAttemptRoute.Request": {
                 "type": "object",
                 "properties": {
                     "stages": {
@@ -3864,29 +3864,29 @@
                         "items": {
                             "type": "object",
                             "allOf": [
-                                {"$ref": "#/components/schemas/IDP.RouteStageAttribute.ID"},
-                                {"$ref": "#/components/schemas/IDP.RouteStageAttribute.Name"},
-                                {"$ref": "#/components/schemas/IDP.RouteStageAttribute.VoteStrategy"},
-                                {"$ref": "#/components/schemas/IDP.RouteStageAttribute.ApproverIDs"}
+                                {"$ref": "#/components/schemas/Idp.RouteStageAttribute.ID"},
+                                {"$ref": "#/components/schemas/Idp.RouteStageAttribute.Name"},
+                                {"$ref": "#/components/schemas/Idp.RouteStageAttribute.VoteStrategy"},
+                                {"$ref": "#/components/schemas/Idp.RouteStageAttribute.ApproverIDs"}
                             ]
                         }
                     }
                 }
             },
-            "IDP.UpdateAttemptRoute.SuccessResponse": {
+            "Idp.UpdateAttemptRoute.SuccessResponse": {
                 "type": "object",
                 "properties": {
                     "data": {
                         "type": "object",
                         "properties": {
                             "success": {
-                                "$ref": "#/components/schemas/IDP.ApprovalAttempt"
+                                "$ref": "#/components/schemas/Idp.ApprovalAttempt"
                             }
                         }
                     }
                 }
             },
-            "IDP.SearchForApprovers.Request": {
+            "Idp.SearchForApprovers.Request": {
                 "type": "object",
                 "properties": {
                     "filter": {
@@ -3907,7 +3907,7 @@
                     }
                 }
             },
-            "IDP.SearchForApprovers.SuccessResponse": {
+            "Idp.SearchForApprovers.SuccessResponse": {
                 "type": "object",
                 "properties": {
                     "data": {
@@ -3916,7 +3916,7 @@
                             "success": {
                                 "type": "array",
                                 "items": {
-                                    "$ref": "#/components/schemas/IDP.RouteUser"
+                                    "$ref": "#/components/schemas/Idp.RouteUser"
                                 }
                             }
                         }
@@ -4264,7 +4264,7 @@
                     "type": "string"
                 }
             },
-            "IDP.IDP.ID": {
+            "Idp.Idp.ID": {
                 "name": "idp_id",
                 "in": "path",
                 "required": true,
@@ -4274,7 +4274,7 @@
                     "type": "integer"
                 }
             },
-            "IDP.ApprovalAttempt.ID": {
+            "Idp.ApprovalAttempt.ID": {
                 "name": "attempt_id",
                 "in": "path",
                 "required": true,
