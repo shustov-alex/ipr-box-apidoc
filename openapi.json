@@ -3381,6 +3381,16 @@
                     }
                 }
             },
+            "IDP.RouteStageAttribute.IsEditable": {
+                "type": "object",
+                "properties": {
+                    "is_editable": {
+                        "type": "boolean",
+                        "description": "Можно ли редактировать этап. Не распространяется на вложенных согласующих.",
+                        "example": true
+                    }
+                }
+            },
             "IDP.ApproverAttribute.Status": {
                 "type": "object",
                 "properties": {
@@ -3410,6 +3420,16 @@
                         "type": "string",
                         "description": "Комментарий",
                         "example": "Комментарий к согласованию"
+                    }
+                }
+            },
+            "IDP.ApproverAttribute.IsEditable": {
+                "type": "object",
+                "properties": {
+                    "is_editable": {
+                        "type": "boolean",
+                        "description": "Можно ли редактировать согласующего",
+                        "example": true
                     }
                 }
             },
@@ -3505,7 +3525,8 @@
                     {"$ref": "#/components/schemas/IDP.RouteUser"},
                     {"$ref": "#/components/schemas/IDP.ApproverAttribute.Status"},
                     {"$ref": "#/components/schemas/IDP.ApproverAttribute.StatusChangedAt"},
-                    {"$ref": "#/components/schemas/IDP.ApproverAttribute.Comment"}
+                    {"$ref": "#/components/schemas/IDP.ApproverAttribute.Comment"},
+                    {"$ref": "#/components/schemas/IDP.ApproverAttribute.IsEditable"}
                 ]
             },
             "IDP.ApprovalStage": {
@@ -3516,6 +3537,7 @@
                     {"$ref": "#/components/schemas/IDP.RouteStageAttribute.Name"},
                     {"$ref": "#/components/schemas/IDP.RouteStageAttribute.SuccessStrategy"},
                     {"$ref": "#/components/schemas/IDP.RouteStageAttribute.Status"},
+                    {"$ref": "#/components/schemas/IDP.RouteStageAttribute.IsEditable"},
                     {
                         "type": "object",
                         "properties": {
