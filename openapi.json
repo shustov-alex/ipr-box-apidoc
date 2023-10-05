@@ -1540,11 +1540,50 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Отказ в согласовании прошёл успешно",
+                        "description": "Маршрут успешно обновлён",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Base.EmptySuccessResponse"
+                                    "$ref": "#/components/schemas/IDP.UpdateAttemptRoute.SuccessResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/idp/{idp_id}/approval/approvers/search": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "IDP"
+                ],
+                "summary": "07.11. Поиск согласующих.",
+                "description": "Поиск согласующих.",
+                "operationId": "idp.searchForApprovers",
+                "parameters": [
+                    {"$ref": "#/components/parameters/IDP.IDP.ID"}
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/IDP.SearchForApprovers.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Список найденных пользователей",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/IDP.SearchForApprovers.SuccessResponse"
                                 }
                             }
                         }
@@ -3830,6 +3869,56 @@
                                 {"$ref": "#/components/schemas/IDP.RouteStageAttribute.SuccessStrategy"},
                                 {"$ref": "#/components/schemas/IDP.RouteStageAttribute.ApproverIDs"}
                             ]
+                        }
+                    }
+                }
+            },
+            "IDP.UpdateAttemptRoute.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "$ref": "#/components/schemas/IDP.ApprovalAttempt"
+                            }
+                        }
+                    }
+                }
+            },
+            "IDP.SearchForApprovers.Request": {
+                "type": "object",
+                "properties": {
+                    "filter": {
+                        "type": "object",
+                        "properties": {
+                            "stage_id": {
+                                "type": "integer",
+                                "description": "ID этапа",
+                                "example": 8192
+                            },
+                            "query": {
+                                "type": "string",
+                                "description": "Текст для поиска по подстроке среди ФИО и прочих параметров",
+                                "example": "some_user_login"
+                            }
+                        },
+                        "required": ["stage_id", "query"]
+                    }
+                }
+            },
+            "IDP.SearchForApprovers.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/IDP.RouteUser"
+                                }
+                            }
                         }
                     }
                 }
