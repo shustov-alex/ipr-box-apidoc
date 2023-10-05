@@ -1512,6 +1512,46 @@
                 }
             }
         },
+        "/idp/{idp_id}/approval/attempts/{attempt_id}/update-route": {
+            "put": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "IDP"
+                ],
+                "summary": "07.10. Обновить маршрут согласования.",
+                "description": "Обновить маршрут согласования.",
+                "operationId": "idp.updateApprovalAttemptRoute",
+                "parameters": [
+                    {"$ref": "#/components/parameters/IDP.IDP.ID"},
+                    {"$ref": "#/components/parameters/IDP.ApprovalAttempt.ID"}
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/IDP.UpdateAttemptRoute.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Отказ в согласовании прошёл успешно",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.EmptySuccessResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/materials/tree": {
             "post": {
                 "security": [
@@ -3391,6 +3431,19 @@
                     }
                 }
             },
+            "IDP.RouteStageAttribute.ApproverIDs": {
+                "type": "object",
+                "properties": {
+                    "approver_ids": {
+                        "type": "array",
+                        "description": "ID согласующих",
+                        "items": {
+                            "type": "integer",
+                            "example": 765
+                        }
+                    }
+                }
+            },
             "IDP.ApproverAttribute.Status": {
                 "type": "object",
                 "properties": {
@@ -3749,19 +3802,7 @@
                             "allOf": [
                                 {"$ref": "#/components/schemas/IDP.RouteStageAttribute.Name"},
                                 {"$ref": "#/components/schemas/IDP.RouteStageAttribute.SuccessStrategy"},
-                                {
-                                    "type": "object",
-                                    "properties": {
-                                        "approver_ids": {
-                                            "type": "array",
-                                            "description": "ID согласующих",
-                                            "items": {
-                                                "type": "integer",
-                                                "example": 765
-                                            }
-                                        }
-                                    }
-                                }
+                                {"$ref": "#/components/schemas/IDP.RouteStageAttribute.ApproverIDs"}
                             ],
                             "required": ["success_strategy", "approver_ids"]
                         }
@@ -3774,6 +3815,24 @@
                 "allOf": [
                     {"$ref": "#/components/schemas/IDP.ApproverAttribute.Comment"}
                 ]
+            },
+            "IDP.UpdateAttemptRoute.Request": {
+                "type": "object",
+                "properties": {
+                    "stages": {
+                        "type": "array",
+                        "description": "Этапы, которые пользователь хочет сохранить",
+                        "items": {
+                            "type": "object",
+                            "allOf": [
+                                {"$ref": "#/components/schemas/IDP.RouteStageAttribute.ID"},
+                                {"$ref": "#/components/schemas/IDP.RouteStageAttribute.Name"},
+                                {"$ref": "#/components/schemas/IDP.RouteStageAttribute.SuccessStrategy"},
+                                {"$ref": "#/components/schemas/IDP.RouteStageAttribute.ApproverIDs"}
+                            ]
+                        }
+                    }
+                }
             },
             "Materials.ItemAttribute.CategoryType": {
                 "type": "object",
