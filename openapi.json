@@ -3438,14 +3438,14 @@
                     }
                 }
             },
-            "IDP.RouteStageAttribute.SuccessStrategy": {
+            "IDP.RouteStageAttribute.VoteStrategy": {
                 "type": "object",
                 "properties": {
-                    "success_strategy": {
+                    "vote_strategy": {
                         "type": "string",
-                        "description": "Условие, при котором этап будет считаться согласованным. Affirmative - согласовать должен хотя бы один участник. Unanimous - согласовать должны все.",
-                        "enum": ["affirmative", "unanimous"],
-                        "example": "affirmative"
+                        "description": "Условие, при котором этап будет считаться согласованным. First - решение первого согласующего проэцируется на весь этап. Unanimous - этап будет считаться согласованным только если согласовали все.",
+                        "enum": ["first", "unanimous"],
+                        "example": "first"
                     }
                 }
             },
@@ -3530,7 +3530,7 @@
                 "allOf": [
                     {"$ref": "#/components/schemas/IDP.RouteStageAttribute.SerialNumber"},
                     {"$ref": "#/components/schemas/IDP.RouteStageAttribute.Name"},
-                    {"$ref": "#/components/schemas/IDP.RouteStageAttribute.SuccessStrategy"},
+                    {"$ref": "#/components/schemas/IDP.RouteStageAttribute.VoteStrategy"},
                     {
                         "type": "object",
                         "properties": {
@@ -3627,7 +3627,7 @@
                     {"$ref": "#/components/schemas/IDP.RouteStageAttribute.ID"},
                     {"$ref": "#/components/schemas/IDP.RouteStageAttribute.SerialNumber"},
                     {"$ref": "#/components/schemas/IDP.RouteStageAttribute.Name"},
-                    {"$ref": "#/components/schemas/IDP.RouteStageAttribute.SuccessStrategy"},
+                    {"$ref": "#/components/schemas/IDP.RouteStageAttribute.VoteStrategy"},
                     {"$ref": "#/components/schemas/IDP.RouteStageAttribute.Status"},
                     {"$ref": "#/components/schemas/IDP.RouteStageAttribute.IsEditable"},
                     {
@@ -3840,10 +3840,10 @@
                             "type": "object",
                             "allOf": [
                                 {"$ref": "#/components/schemas/IDP.RouteStageAttribute.Name"},
-                                {"$ref": "#/components/schemas/IDP.RouteStageAttribute.SuccessStrategy"},
+                                {"$ref": "#/components/schemas/IDP.RouteStageAttribute.VoteStrategy"},
                                 {"$ref": "#/components/schemas/IDP.RouteStageAttribute.ApproverIDs"}
                             ],
-                            "required": ["success_strategy", "approver_ids"]
+                            "required": ["vote_strategy", "approver_ids"]
                         }
                     }
                 },
@@ -3866,7 +3866,7 @@
                             "allOf": [
                                 {"$ref": "#/components/schemas/IDP.RouteStageAttribute.ID"},
                                 {"$ref": "#/components/schemas/IDP.RouteStageAttribute.Name"},
-                                {"$ref": "#/components/schemas/IDP.RouteStageAttribute.SuccessStrategy"},
+                                {"$ref": "#/components/schemas/IDP.RouteStageAttribute.VoteStrategy"},
                                 {"$ref": "#/components/schemas/IDP.RouteStageAttribute.ApproverIDs"}
                             ]
                         }
