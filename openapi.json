@@ -3634,7 +3634,10 @@
                         "type": "object",
                         "properties": {
                             "approvers": {
-                                "$ref": "#/components/schemas/Idp.Approver"
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/Idp.Approver"
+                                }
                             }
                         }
                     }
