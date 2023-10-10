@@ -3907,7 +3907,7 @@
                                 "example": "some_user_login"
                             }
                         },
-                        "required": ["stage_id", "query"]
+                        "required": ["stage_id"]
                     },
                     "pagination": {
                         "$ref": "#/components/schemas/Base.CursorPaginationForward"
