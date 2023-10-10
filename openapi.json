@@ -3908,6 +3908,9 @@
                             }
                         },
                         "required": ["stage_id", "query"]
+                    },
+                    "pagination": {
+                        "$ref": "#/components/schemas/Base.CursorPaginationForward"
                     }
                 }
             },
@@ -3921,6 +3924,14 @@
                                 "type": "array",
                                 "items": {
                                     "$ref": "#/components/schemas/Idp.RouteUser"
+                                }
+                            },
+                            "meta": {
+                                "type": "object",
+                                "properties": {
+                                    "pagination": {
+                                        "$ref": "#/components/schemas/Base.CursorPaginationMeta"
+                                    }
                                 }
                             }
                         }
