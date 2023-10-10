@@ -2034,7 +2034,7 @@
                     {"$ref": "#/components/schemas/Base.CursorPaginationAttribute.Limit"},
                     {"$ref": "#/components/schemas/Base.CursorPaginationAttribute.After"}
                 ],
-                "required": ["type", "after"]
+                "required": ["after"]
             },
             "Base.CursorPaginationBackward": {
                 "type": "object",
@@ -2043,7 +2043,7 @@
                     {"$ref": "#/components/schemas/Base.CursorPaginationAttribute.Limit"},
                     {"$ref": "#/components/schemas/Base.CursorPaginationAttribute.Before"}
                 ],
-                "required": ["type", "before"]
+                "required": ["before"]
             },
             "Base.CursorPaginationMeta": {
                 "type": "object",
