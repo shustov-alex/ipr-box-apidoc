@@ -3455,8 +3455,8 @@
                     "status": {
                         "type": "string",
                         "description": "Статус",
-                        "enum": ["none", "approval", "approved", "not_approved"],
-                        "example": "approval"
+                        "enum": ["none", "approved", "not_approved"],
+                        "example": "none"
                     }
                 }
             },
