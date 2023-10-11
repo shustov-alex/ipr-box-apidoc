@@ -3477,8 +3477,8 @@
                         "type": "array",
                         "description": "ID согласующих",
                         "items": {
-                            "type": "integer",
-                            "example": 765
+                            "type": "string",
+                            "example": "some_user_id"
                         }
                     }
                 }
