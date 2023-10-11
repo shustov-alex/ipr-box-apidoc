@@ -3837,20 +3837,26 @@
             },
             "Idp.StartApprovalAttempt.Request": {
                 "type": "object",
-                "properties": {
-                    "stages": {
-                        "type": "array",
-                        "items": {
-                            "type": "object",
-                            "allOf": [
-                                {"$ref": "#/components/schemas/Idp.RouteStageAttribute.Name"},
-                                {"$ref": "#/components/schemas/Idp.RouteStageAttribute.VoteStrategy"},
-                                {"$ref": "#/components/schemas/Idp.RouteStageAttribute.ApproverIDs"}
-                            ],
-                            "required": ["vote_strategy", "approver_ids"]
+                "allOf": [
+                    {
+                        "type": "object",
+                        "properties": {
+                            "stages": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "allOf": [
+                                        {"$ref": "#/components/schemas/Idp.RouteStageAttribute.Name"},
+                                        {"$ref": "#/components/schemas/Idp.RouteStageAttribute.VoteStrategy"},
+                                        {"$ref": "#/components/schemas/Idp.RouteStageAttribute.ApproverIDs"}
+                                    ],
+                                    "required": ["vote_strategy", "approver_ids"]
+                                }
+                            }
                         }
-                    }
-                },
+                    },
+                    {"$ref": "#/components/schemas/Idp.ApproverAttribute.Comment"}
+                ],
                 "required": ["stages"]
             },
             "Idp.ApproveStageOrNot.Request": {
