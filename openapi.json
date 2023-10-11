@@ -3579,7 +3579,7 @@
                     "status": {
                         "type": "string",
                         "description": "Статус",
-                        "enum": ["approval", "approved", "not_approved"],
+                        "enum": ["approval", "approved", "not_approved", "cancelled"],
                         "example": "approval"
                     }
                 }
@@ -3694,7 +3694,7 @@
                             "last_attempt_status": {
                                 "type": "string",
                                 "description": "Актуальная попытка, статус",
-                                "enum": ["approval", "approved", "not_approved"],
+                                "enum": ["approval", "approved", "not_approved", "cancelled"],
                                 "example": "approval",
                                 "nullable": true
                             },
@@ -3767,7 +3767,7 @@
                                 "properties": {
                                     "app.idp.start_approval": {
                                         "type": "string",
-                                        "description": "Запуск процесса согласования (доступно только при отсутствии попыток или в статусе not_approved)",
+                                        "description": "Запуск процесса согласования (доступно только если последняя попытка находится в статусе, отличном от approval)",
                                         "enum": ["granted", "denied"],
                                         "example": "granted"
                                     },
