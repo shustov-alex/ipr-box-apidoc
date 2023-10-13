@@ -1304,7 +1304,7 @@
                     "IDP"
                 ],
                 "summary": "07.04. Получить список прав по работе с ИПР",
-                "description": "Получить список прав по работе с ИПР",
+                "description": "Получить список прав по работе с ИПР. В ответ также будут включены права по работе с последней попыткой (если такая есть).",
                 "operationId": "idp.getIdpAccessRights",
                 "parameters": [
                     {"$ref": "#/components/parameters/Idp.Idp.ID"}
@@ -3786,6 +3786,61 @@
                     }
                 }
             },
+            "Idp.AccessRights.StartApproval": {
+                "type": "object",
+                "properties": {
+                    "app.idp.start_approval": {
+                        "type": "string",
+                        "description": "Запуск процесса согласования (доступно только если последняя попытка находится в статусе, отличном от approval)",
+                        "enum": ["granted", "denied"],
+                        "example": "granted"
+                    }
+                }
+            },
+            "Idp.AccessRights.CancelApproval": {
+                "type": "object",
+                "properties": {
+                    "app.idp.cancel_approval": {
+                        "type": "string",
+                        "description": "Отменить процесс согласования (доступно только в статусе approval)",
+                        "enum": ["granted", "denied"],
+                        "example": "granted"
+                    }
+                }
+            },
+            "Idp.AccessRights.ApproveStage": {
+                "type": "object",
+                "properties": {
+                    "app.idp.approve_stage": {
+                        "type": "string",
+                        "description": "Согласовать (доступно только в статусе approval)",
+                        "enum": ["granted", "denied"],
+                        "example": "granted"
+                    }
+                }
+            },
+            "Idp.AccessRights.RejectStage": {
+                "type": "object",
+                "properties": {
+                    "app.idp.reject_stage": {
+                        "type": "string",
+                        "description": "Отправить на доработку (доступно только в статусе approval)",
+                        "enum": ["granted", "denied"],
+                        "example": "granted"
+                    }
+                }
+            },
+            "Idp.AccessRights.UpdateRoute": {
+                "type": "object",
+                "properties": {
+                    "app.idp.update_route": {
+                        "type": "string",
+                        "description": "Редактиовать маршурт",
+                        "enum": ["granted", "denied"],
+                        "example": "granted"
+                    }
+                }
+            },
             "Idp.GetIdpAccessRights.SuccessResponse": {
                 "type": "object",
                 "properties": {
@@ -3794,14 +3849,14 @@
                         "properties": {
                             "success": {
                                 "type": "object",
-                                "properties": {
-                                    "app.idp.start_approval": {
-                                        "type": "string",
-                                        "description": "Запуск процесса согласования (доступно только если последняя попытка находится в статусе, отличном от approval)",
-                                        "enum": ["granted", "denied"],
-                                        "example": "granted"
-                                    }
-                                }
+                                "allOf": [
+                                    {"$ref": "#/components/schemas/Idp.AccessRights.StartApproval"},
+                                    {"$ref": "#/components/schemas/Idp.AccessRights.CancelApproval"},
+                                    {"$ref": "#/components/schemas/Idp.AccessRights.ApproveStage"},
+                                    {"$ref": "#/components/schemas/Idp.AccessRights.RejectStage"},
+                                    {"$ref": "#/components/schemas/Idp.AccessRights.UpdateRoute"}
+                                ],
+                                "required": ["app.idp.start_approval"]
                             }
                         }
                     }
@@ -3815,32 +3870,18 @@
                         "properties": {
                             "success": {
                                 "type": "object",
-                                "properties": {
-                                    "app.idp.cancel_approval": {
-                                        "type": "string",
-                                        "description": "Отменить процесс согласования (доступно только в статусе approval)",
-                                        "enum": ["granted", "denied"],
-                                        "example": "granted"
-                                    },
-                                    "app.idp.approve_stage": {
-                                        "type": "string",
-                                        "description": "Согласовать (доступно только в статусе approval)",
-                                        "enum": ["granted", "denied"],
-                                        "example": "granted"
-                                    },
-                                    "app.idp.reject_stage": {
-                                        "type": "string",
-                                        "description": "Отправить на доработку (доступно только в статусе approval)",
-                                        "enum": ["granted", "denied"],
-                                        "example": "granted"
-                                    },
-                                    "app.idp.update_route": {
-                                        "type": "string",
-                                        "description": "Редактиовать маршурт",
-                                        "enum": ["granted", "denied"],
-                                        "example": "granted"
-                                    }
-                                }
+                                "allOf": [
+                                    {"$ref": "#/components/schemas/Idp.AccessRights.CancelApproval"},
+                                    {"$ref": "#/components/schemas/Idp.AccessRights.ApproveStage"},
+                                    {"$ref": "#/components/schemas/Idp.AccessRights.RejectStage"},
+                                    {"$ref": "#/components/schemas/Idp.AccessRights.UpdateRoute"}
+                                ],
+                                "required": [
+                                    "app.idp.cancel_approval",
+                                    "app.idp.approve_stage",
+                                    "app.idp.reject_stage",
+                                    "app.idp.update_route"
+                                ]
                             }
                         }
                     }
