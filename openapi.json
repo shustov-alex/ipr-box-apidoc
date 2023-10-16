@@ -1566,7 +1566,8 @@
                 "description": "Получить список прав по работе с попыткой",
                 "operationId": "idp.getAttemptAccessRights",
                 "parameters": [
-                    {"$ref": "#/components/parameters/Idp.Idp.ID"}
+                    {"$ref": "#/components/parameters/Idp.Idp.ID"},
+                    {"$ref": "#/components/parameters/Idp.ApprovalAttempt.ID"}
                 ],
                 "responses": {
                     "200": {
@@ -3791,7 +3792,7 @@
                 "properties": {
                     "app.idp.start_approval": {
                         "type": "string",
-                        "description": "Запуск процесса согласования (доступно только если последняя попытка находится в статусе, отличном от approval)",
+                        "description": "Запуск процесса согласования",
                         "enum": ["granted", "denied"],
                         "example": "granted"
                     }
@@ -3802,7 +3803,7 @@
                 "properties": {
                     "app.idp.cancel_approval": {
                         "type": "string",
-                        "description": "Отменить процесс согласования (доступно только в статусе approval)",
+                        "description": "Отменить процесс согласования",
                         "enum": ["granted", "denied"],
                         "example": "granted"
                     }
@@ -3813,7 +3814,7 @@
                 "properties": {
                     "app.idp.approve_stage": {
                         "type": "string",
-                        "description": "Согласовать (доступно только в статусе approval)",
+                        "description": "Согласовать",
                         "enum": ["granted", "denied"],
                         "example": "granted"
                     }
@@ -3824,7 +3825,7 @@
                 "properties": {
                     "app.idp.reject_stage": {
                         "type": "string",
-                        "description": "Отправить на доработку (доступно только в статусе approval)",
+                        "description": "Отправить на доработку",
                         "enum": ["granted", "denied"],
                         "example": "granted"
                     }
