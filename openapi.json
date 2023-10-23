@@ -4018,14 +4018,14 @@
                                 "items": {
                                     "$ref": "#/components/schemas/Idp.RouteUser"
                                 }
-                            },
-                            "meta": {
-                                "type": "object",
-                                "properties": {
-                                    "pagination": {
-                                        "$ref": "#/components/schemas/Base.CursorPaginationMeta"
-                                    }
-                                }
+                            }
+                        }
+                    },
+                    "meta": {
+                        "type": "object",
+                        "properties": {
+                            "pagination": {
+                                "$ref": "#/components/schemas/Base.CursorPaginationMeta"
                             }
                         }
                     }
