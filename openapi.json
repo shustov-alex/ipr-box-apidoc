@@ -43,10 +43,6 @@
         {
             "name": "Materials",
             "description": "08. Материалы"
-        },
-        {
-            "name": "Positions",
-            "description": "09. Должности"
         }
     ],
     "paths": {
@@ -2009,42 +2005,6 @@
                     }
                 }
             }
-        },
-        "/positions": {
-            "post": {
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ],
-                "tags": [
-                    "Positions"
-                ],
-                "summary": "09.01. Получить список должностей",
-                "description": "Получить список должностей",
-                "operationId": "positions.getCollectionOfPositions",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Positions.CollectionOfPositions.Request"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Список должностей",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Positions.CollectionOfPositions.SuccessResponse"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
         }
     },
     "components": {
@@ -2761,15 +2721,6 @@
                             "example": "approval"
                         }
                     },
-                    "position_ids": {
-                        "type": "array",
-                        "nullable": true,
-                        "items": {
-                            "type": "integer",
-                            "description": "ID должности",
-                            "example": 256
-                        }
-                    },
                     "active_only": {
                         "type": "boolean",
                         "description": "Если выбрано (true), то будут возвращены только активные сотрудники (т.е. без архивных, уволенных, ...)",
@@ -2824,15 +2775,6 @@
                                         {
                                             "type": "object",
                                             "properties": {
-                                                "position": {
-                                                    "type": "object",
-                                                    "description": "Должность",
-                                                    "allOf": [
-                                                        { "$ref": "#/components/schemas/Positions.PositionAttribute.ID" },
-                                                        { "$ref": "#/components/schemas/Positions.PositionAttribute.Name" }
-                                                    ],
-                                                    "nullable": true
-                                                },
                                                 "idp": {
                                                     "type": "object",
                                                     "description": "ИПР",
@@ -4581,69 +4523,6 @@
                                 "items": {
                                     "$ref": "#/components/schemas/Materials.Material.CollectionView"
                                 }
-                            }
-                        }
-                    }
-                }
-            },
-            "Positions.PositionAttribute.ID": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "description": "ID должности",
-                        "example": 256
-                    }
-                }
-            },
-            "Positions.PositionAttribute.Name": {
-                "type": "object",
-                "properties": {
-                    "name": {
-                        "type": "string",
-                        "description": "Название должности",
-                        "example": "Маркетолог"
-                    }
-                }
-            },
-            "Positions.CollectionOfPositions.Request": {
-                "type": "object",
-                "properties": {
-                    "filter": {
-                        "type": "object",
-                        "allOf": [
-                            {"$ref": "#/components/schemas/Positions.PositionAttribute.Name"}
-                        ]
-                    },
-                    "pagination": {
-                        "$ref": "#/components/schemas/Base.CursorPaginationForward"
-                    }
-                }
-            },
-            "Positions.CollectionOfPositions.SuccessResponse": {
-                "type": "object",
-                "properties": {
-                    "data": {
-                        "type": "object",
-                        "properties": {
-                            "success": {
-                                "type": "array",
-                                "items": {
-                                    "type": "object",
-                                    "description": "Должность",
-                                    "allOf": [
-                                        { "$ref": "#/components/schemas/Positions.PositionAttribute.ID" },
-                                        { "$ref": "#/components/schemas/Positions.PositionAttribute.Name" }
-                                    ]
-                                }
-                            }
-                        }
-                    },
-                    "meta": {
-                        "type": "object",
-                        "properties": {
-                            "pagination": {
-                                "$ref": "#/components/schemas/Base.CursorPaginationMeta"
                             }
                         }
                     }
