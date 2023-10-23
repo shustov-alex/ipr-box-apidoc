@@ -2651,8 +2651,8 @@
                 "properties": {
                     "full_name": {
                         "type": "string",
-                        "description": "Полное имя",
-                        "example": "Иванов Иван (Иванович)"
+                        "description": "Имя, фамилия",
+                        "example": "Иван Иванов"
                     }
                 }
             },
@@ -2797,8 +2797,7 @@
                                     "allOf": [
                                         { "$ref": "#/components/schemas/Users.UserAttribute.ID" },
                                         { "$ref": "#/components/schemas/Users.UserAttribute.CreatedAt" },
-                                        { "$ref": "#/components/schemas/Users.UserAttribute.FirstName" },
-                                        { "$ref": "#/components/schemas/Users.UserAttribute.LastName" },
+                                        { "$ref": "#/components/schemas/Users.UserAttribute.FullName" },
                                         {
                                             "type": "object",
                                             "properties": {
