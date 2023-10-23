@@ -43,6 +43,10 @@
         {
             "name": "Materials",
             "description": "08. Материалы"
+        },
+        {
+            "name": "Positions",
+            "description": "09. Должности"
         }
     ],
     "paths": {
@@ -1658,6 +1662,36 @@
                 }
             }
         },
+        "/idp/{idp_id}/approval/attempts/last": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "IDP"
+                ],
+                "summary": "07.13. Получить актуальную попытку согласования ИПР",
+                "description": "Получить актуальную попытку согласования ИПР",
+                "operationId": "idp.getLastApprovalAttempt",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Idp.Idp.ID"}
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Актуальная попытка согласования",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Idp.GetLastAttempt.SuccessResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/materials/tree": {
             "post": {
                 "security": [
@@ -1969,6 +2003,42 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/Materials.CollectionBySkills.SuccessResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/positions": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Positions"
+                ],
+                "summary": "09.01. Получить список должностей",
+                "description": "Получить список должностей",
+                "operationId": "positions.getCollectionOfPositions",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Positions.CollectionOfPositions.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Список должностей",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Positions.CollectionOfPositions.SuccessResponse"
                                 }
                             }
                         }
@@ -2767,8 +2837,10 @@
                                                     "type": "object",
                                                     "description": "ИПР",
                                                     "allOf": [
+                                                        { "$ref": "#/components/schemas/Idp.IdpAttribute.ID" },
                                                         { "$ref": "#/components/schemas/Idp.IdpAttribute.Status" },
-                                                        { "$ref": "#/components/schemas/Idp.IdpAttribute.Progress" },
+                                                        { "$ref": "#/components/schemas/Idp.IdpAttribute.CountOfTargets" },
+                                                        { "$ref": "#/components/schemas/Idp.IdpAttribute.CountOfTargetsDone" },
                                                         { "$ref": "#/components/schemas/Idp.IdpAttribute.Price" }
                                                     ],
                                                     "nullable": true
@@ -2787,26 +2859,6 @@
                                 "$ref": "#/components/schemas/Base.OffsetPaginationMeta"
                             }
                         }
-                    }
-                }
-            },
-            "Positions.PositionAttribute.ID": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "description": "ID должности",
-                        "example": 256
-                    }
-                }
-            },
-            "Positions.PositionAttribute.Name": {
-                "type": "object",
-                "properties": {
-                    "name": {
-                        "type": "string",
-                        "description": "Название должности",
-                        "example": "Маркетолог"
                     }
                 }
             },
@@ -3642,13 +3694,23 @@
                     }
                 }
             },
-            "Idp.IdpAttribute.Progress": {
+            "Idp.IdpAttribute.CountOfTargets": {
                 "type": "object",
                 "properties": {
-                    "progress": {
+                    "count_of_targets": {
                         "type": "integer",
-                        "description": "Прогресс выполнения задач в ИПР, в процентах",
-                        "example": 50
+                        "description": "Количество целей",
+                        "example": 5
+                    }
+                }
+            },
+            "Idp.IdpAttribute.CountOfTargetsDone": {
+                "type": "object",
+                "properties": {
+                    "count_of_targets_done": {
+                        "type": "integer",
+                        "description": "Количество выполненных целей",
+                        "example": 2
                     }
                 }
             },
@@ -4265,6 +4327,19 @@
                     }
                 }
             },
+            "Idp.GetLastAttempt.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "$ref": "#/components/schemas/Idp.ApprovalAttempt"
+                            }
+                        }
+                    }
+                }
+            },
             "Materials.ItemAttribute.CategoryType": {
                 "type": "object",
                 "properties": {
@@ -4506,6 +4581,69 @@
                                 "items": {
                                     "$ref": "#/components/schemas/Materials.Material.CollectionView"
                                 }
+                            }
+                        }
+                    }
+                }
+            },
+            "Positions.PositionAttribute.ID": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "ID должности",
+                        "example": 256
+                    }
+                }
+            },
+            "Positions.PositionAttribute.Name": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Название должности",
+                        "example": "Маркетолог"
+                    }
+                }
+            },
+            "Positions.CollectionOfPositions.Request": {
+                "type": "object",
+                "properties": {
+                    "filter": {
+                        "type": "object",
+                        "allOf": [
+                            {"$ref": "#/components/schemas/Positions.PositionAttribute.Name"}
+                        ]
+                    },
+                    "pagination": {
+                        "$ref": "#/components/schemas/Base.CursorPaginationForward"
+                    }
+                }
+            },
+            "Positions.CollectionOfPositions.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "description": "Должность",
+                                    "allOf": [
+                                        { "$ref": "#/components/schemas/Positions.PositionAttribute.ID" },
+                                        { "$ref": "#/components/schemas/Positions.PositionAttribute.Name" }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "meta": {
+                        "type": "object",
+                        "properties": {
+                            "pagination": {
+                                "$ref": "#/components/schemas/Base.CursorPaginationMeta"
                             }
                         }
                     }
