@@ -460,6 +460,42 @@
                 }
             }
         },
+        "/users/employees": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "summary": "04.02. Получить список сотрудников",
+                "description": "Получить список сотрудников",
+                "operationId": "users.getCollectionOfEmployees",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Users.CollectionOfEmployees.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Список сотрудников",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Users.CollectionOfEmployees.SuccessResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/skills/tree": {
             "post": {
                 "security": [
@@ -2587,6 +2623,16 @@
                     }
                 }
             },
+            "Users.UserAttribute.CreatedAt": {
+                "type": "object",
+                "properties": {
+                    "created_at": {
+                        "type": "string",
+                        "description": "Дата создания",
+                        "example": "2023-09-01 12:10:20 +03:00"
+                    }
+                }
+            },
             "Users.Profile.SuccessResponse": {
                 "type": "object",
                 "properties": {
@@ -2604,6 +2650,163 @@
                                 ]
                             }
                         }
+                    }
+                }
+            },
+            "Users.CollectionOfEmployees.Sort": {
+                "type": "object",
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/Base.Sort"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "attribute": {
+                                "type": "string",
+                                "description": "Значение, по которому производится сортировка. Если не указано, то будет использовано значение по умолчанию.",
+                                "enum": ["created_at", "id", "name", "idp_status", "idp_progress", "idp_price"],
+                                "example": "created_at"
+                            }
+                        }
+                    }
+                ]
+            },
+            "Users.CollectionOfEmployees.Filter": {
+                "type": "object",
+                "properties": {
+                    "idp_year": {
+                        "type": "integer",
+                        "description": "Год ИПР",
+                        "nullable": false,
+                        "example": 2023
+                    },
+                    "idp_statuses": {
+                        "type": "array",
+                        "nullable": true,
+                        "items": {
+                            "type": "string",
+                            "description": "Статус ИПР",
+                            "enum": ["approval", "approved", "not_approved", "cancelled", "draft", "no_idp"],
+                            "example": "approval"
+                        }
+                    },
+                    "position_ids": {
+                        "type": "array",
+                        "nullable": true,
+                        "items": {
+                            "type": "integer",
+                            "description": "ID должности",
+                            "example": 256
+                        }
+                    },
+                    "active_only": {
+                        "type": "boolean",
+                        "description": "Если выбрано (true), то будут возвращены только активные сотрудники (т.е. без архивных, уволенных, ...)",
+                        "nullable": true,
+                        "example": true
+                    },
+                    "action_required_only": {
+                        "type": "boolean",
+                        "description": "Если выбрано (true), то будут возвращены только те сотрудники, для которых текущий пользователь назначен согласующим по ИПР и в данный момент наступил его этап согласования.",
+                        "nullable": true,
+                        "example": true
+                    },
+                    "text_query": {
+                        "type": "string",
+                        "description": "Значение из текстовой строки поиска. Используется для фильтрации по имени или ID",
+                        "nullable": true,
+                        "example": "some_employee_login"
+                    }
+                }
+            },
+            "Users.CollectionOfEmployees.Request": {
+                "type": "object",
+                "properties": {
+                    "sort": {
+                        "$ref": "#/components/schemas/Users.CollectionOfEmployees.Sort"
+                    },
+                    "filter": {
+                        "$ref": "#/components/schemas/Users.CollectionOfEmployees.Filter"
+                    },
+                    "pagination": {
+                        "$ref": "#/components/schemas/Base.OffsetPagination"
+                    }
+                },
+                "required": ["filter"]
+            },
+            "Users.CollectionOfEmployees.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "description": "Сотрудник",
+                                    "allOf": [
+                                        { "$ref": "#/components/schemas/Users.UserAttribute.ID" },
+                                        { "$ref": "#/components/schemas/Users.UserAttribute.CreatedAt" },
+                                        { "$ref": "#/components/schemas/Users.UserAttribute.FirstName" },
+                                        { "$ref": "#/components/schemas/Users.UserAttribute.LastName" },
+                                        {
+                                            "type": "object",
+                                            "properties": {
+                                                "position": {
+                                                    "type": "object",
+                                                    "description": "Должность",
+                                                    "allOf": [
+                                                        { "$ref": "#/components/schemas/Positions.PositionAttribute.ID" },
+                                                        { "$ref": "#/components/schemas/Positions.PositionAttribute.Name" }
+                                                    ],
+                                                    "nullable": true
+                                                },
+                                                "idp": {
+                                                    "type": "object",
+                                                    "description": "ИПР",
+                                                    "allOf": [
+                                                        { "$ref": "#/components/schemas/Idp.IdpAttribute.Status" },
+                                                        { "$ref": "#/components/schemas/Idp.IdpAttribute.Progress" },
+                                                        { "$ref": "#/components/schemas/Idp.IdpAttribute.Price" }
+                                                    ],
+                                                    "nullable": true
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "meta": {
+                        "type": "object",
+                        "properties": {
+                            "pagination": {
+                                "$ref": "#/components/schemas/Base.OffsetPaginationMeta"
+                            }
+                        }
+                    }
+                }
+            },
+            "Positions.PositionAttribute.ID": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "ID должности",
+                        "example": 256
+                    }
+                }
+            },
+            "Positions.PositionAttribute.Name": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Название должности",
+                        "example": "Маркетолог"
                     }
                 }
             },
@@ -3425,6 +3628,37 @@
                         "type": "integer",
                         "description": "Год",
                         "example": 2023
+                    }
+                }
+            },
+            "Idp.IdpAttribute.Status": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "description": "Статус",
+                        "enum": ["approval", "approved", "not_approved", "cancelled", "draft"],
+                        "example": "approval"
+                    }
+                }
+            },
+            "Idp.IdpAttribute.Progress": {
+                "type": "object",
+                "properties": {
+                    "progress": {
+                        "type": "integer",
+                        "description": "Прогресс выполнения задач в ИПР, в процентах",
+                        "example": 50
+                    }
+                }
+            },
+            "Idp.IdpAttribute.Price": {
+                "type": "object",
+                "properties": {
+                    "price": {
+                        "type": "integer",
+                        "description": "Сумма затрат на все платные материалы, в рублях",
+                        "example": 25000
                     }
                 }
             },
