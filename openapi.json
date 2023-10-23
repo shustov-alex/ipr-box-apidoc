@@ -1688,6 +1688,33 @@
                 }
             }
         },
+        "/idp/years-of-all-employees": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "IDP"
+                ],
+                "summary": "07.14. Получить все возможные года, которые есть в ИПР сотрудников",
+                "description": "Получить все возможные года, которые есть в ИПР сотрудников",
+                "operationId": "idp.getYearsOfAllEmployees",
+                "responses": {
+                    "200": {
+                        "description": "Года ИПР",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Idp.GetYearsOfAllEmployees.SuccessResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/materials/tree": {
             "post": {
                 "security": [
@@ -4277,6 +4304,24 @@
                         "properties": {
                             "success": {
                                 "$ref": "#/components/schemas/Idp.ApprovalAttempt"
+                            }
+                        }
+                    }
+                }
+            },
+            "Idp.GetYearsOfAllEmployees.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "array",
+                                "items": {
+                                    "type": "integer",
+                                    "description": "Год ИПР",
+                                    "example": 2023
+                                }
                             }
                         }
                     }
