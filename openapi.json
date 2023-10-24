@@ -2722,7 +2722,7 @@
                             "attribute": {
                                 "type": "string",
                                 "description": "Значение, по которому производится сортировка. Если не указано, то будет использовано значение по умолчанию.",
-                                "enum": ["created_at", "id", "name", "idp_status", "idp_progress", "idp_price"],
+                                "enum": ["created_at", "id", "full_name", "idp_status", "idp_progress", "idp_price"],
                                 "example": "created_at"
                             }
                         }
@@ -3686,9 +3686,10 @@
                 "type": "object",
                 "properties": {
                     "price": {
-                        "type": "integer",
+                        "type": "number",
+                        "format": "float",
                         "description": "Сумма затрат на все платные материалы, в рублях",
-                        "example": 25000
+                        "example": 25000.0
                     }
                 }
             },
