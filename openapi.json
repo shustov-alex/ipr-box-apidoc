@@ -496,6 +496,42 @@
                 }
             }
         },
+        "/users/employees/count": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "summary": "04.03. Получить количество сотрудников",
+                "description": "Получить количество сотрудников",
+                "operationId": "users.getCountOfEmployees",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Users.CountOfEmployees.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Количество",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Users.CountOfEmployees.SuccessResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/skills/tree": {
             "post": {
                 "security": [
@@ -2825,6 +2861,35 @@
                         "properties": {
                             "pagination": {
                                 "$ref": "#/components/schemas/Base.OffsetPaginationMeta"
+                            }
+                        }
+                    }
+                }
+            },
+            "Users.CountOfEmployees.Request": {
+                "type": "object",
+                "properties": {
+                    "filter": {
+                        "$ref": "#/components/schemas/Users.CollectionOfEmployees.Filter"
+                    }
+                },
+                "required": ["filter"]
+            },
+            "Users.CountOfEmployees.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "object",
+                                "properties": {
+                                    "count": {
+                                        "type": "integer",
+                                        "description": "Количество сотрудников",
+                                        "example": 780
+                                    }
+                                }
                             }
                         }
                     }
