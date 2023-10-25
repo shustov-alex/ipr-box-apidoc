@@ -2833,7 +2833,8 @@
                                     "allOf": [
                                         { "$ref": "#/components/schemas/Users.UserAttribute.ID" },
                                         { "$ref": "#/components/schemas/Users.UserAttribute.CreatedAt" },
-                                        { "$ref": "#/components/schemas/Users.UserAttribute.FullName" },
+                                        { "$ref": "#/components/schemas/Users.UserAttribute.FirstName" },
+                                        { "$ref": "#/components/schemas/Users.UserAttribute.LastName" },
                                         {
                                             "type": "object",
                                             "properties": {
