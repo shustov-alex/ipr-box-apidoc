@@ -888,6 +888,16 @@
                                 }
                             }
                         }
+                    },
+                    "400": {
+                        "description": "Запрашиваемый объект не найден",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundErrorCollectionResponse"
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -929,11 +939,11 @@
                         }
                     },
                     "400": {
-                        "description": "Ошибки при обновлении статуса",
+                        "description": "Ошибки обновления статуса",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Base.ErrorCollectionResponse"
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundOrValidationErrorResponse"
                                 }
                             }
                         }
@@ -1017,11 +1027,11 @@
                         }
                     },
                     "400": {
-                        "description": "Ошибки при создании цели",
+                        "description": "Ошибки валидации",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Base.ErrorCollectionResponse"
+                                    "$ref": "#/components/schemas/Base.ValidationErrorCollectionResponse"
                                 }
                             }
                         }
@@ -1070,7 +1080,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Base.ErrorCollectionResponse"
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundOrValidationErrorResponse"
                                 }
                             }
                         }
@@ -1104,6 +1114,16 @@
                                 }
                             }
                         }
+                    },
+                    "400": {
+                        "description": "Запрашиваемый объект не найден",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundErrorCollectionResponse"
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -1131,6 +1151,16 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/Targets.CountOfRelations.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Запрашиваемый объект не найден",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundErrorCollectionResponse"
                                 }
                             }
                         }
@@ -1164,6 +1194,16 @@
                                 }
                             }
                         }
+                    },
+                    "400": {
+                        "description": "Запрашиваемый объект не найден",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundErrorCollectionResponse"
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -1191,6 +1231,16 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/Targets.TargetMaterials.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Запрашиваемый объект не найден",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundErrorCollectionResponse"
                                 }
                             }
                         }
@@ -1225,6 +1275,16 @@
                                 }
                             }
                         }
+                    },
+                    "400": {
+                        "description": "Запрашиваемый объект не найден",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundErrorCollectionResponse"
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -1252,6 +1312,16 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/Targets.TargetComments.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Запрашиваемый объект не найден",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundErrorCollectionResponse"
                                 }
                             }
                         }
@@ -1291,6 +1361,16 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/Base.EmptySuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки при оставлении комментария",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundOrValidationErrorResponse"
                                 }
                             }
                         }
@@ -2256,48 +2336,6 @@
                     }
                 }
             },
-            "Base.ErrorAttribute.Code": {
-                "type": "object",
-                "properties": {
-                    "code": {
-                        "type": "string",
-                        "description": "Код ошибки",
-                        "example": "base.unknown_error"
-                    }
-                }
-            },
-            "Base.ErrorAttribute.Message": {
-                "type": "object",
-                "properties": {
-                    "message": {
-                        "type": "string",
-                        "description": "Текст ошибки",
-                        "example": "Unknown error"
-                    }
-                }
-            },
-            "Base.ErrorAttribute.NullableMessage": {
-                "type": "object",
-                "properties": {
-                    "message": {
-                        "type": "string",
-                        "description": "Текст ошибки",
-                        "nullable": true,
-                        "example": "Unknown error"
-                    }
-                }
-            },
-            "Base.ErrorAttribute.Attribute": {
-                "type": "object",
-                "properties": {
-                    "attribute": {
-                        "type": "string",
-                        "description": "Атрибут запроса, с которым связана ошибка",
-                        "nullable": true,
-                        "example": "login"
-                    }
-                }
-            },
             "Base.Error": {
                 "type": "object",
                 "properties": {
@@ -2349,6 +2387,23 @@
                 },
                 "required": ["code", "message"]
             },
+            "Base.ObjectNotFoundError": {
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "type": "string",
+                        "description": "Код ошибки",
+                        "enum": ["base.object_not_found"],
+                        "example": "base.object_not_found"
+                    },
+                    "message": {
+                        "type": "string",
+                        "description": "Текст ошибки",
+                        "example": "Object not found"
+                    }
+                },
+                "required": ["code", "message"]
+            },
             "Base.ErrorCollectionResponse": {
                 "type": "object",
                 "properties": {
@@ -2377,6 +2432,43 @@
                                 "type": "array",
                                 "items": {
                                     "$ref": "#/components/schemas/Base.ValidationError"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "Base.ObjectNotFoundErrorCollectionResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "errors": {
+                                "description": "Список ошибок",
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundError"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "Base.ObjectNotFoundOrValidationErrorResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "errors": {
+                                "description": "Список ошибок",
+                                "type": "array",
+                                "items": {
+                                    "oneOf": [
+                                        {"$ref": "#/components/schemas/Base.ValidationError"},
+                                        {"$ref": "#/components/schemas/Base.ObjectNotFoundError"}
+                                    ]
                                 }
                             }
                         }
