@@ -492,6 +492,16 @@
                                 }
                             }
                         }
+                    },
+                    "400": {
+                        "description": "Ошибки валидации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ValidationErrorCollectionResponse"
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -525,6 +535,16 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/Users.CountOfEmployees.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки валидации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ValidationErrorCollectionResponse"
                                 }
                             }
                         }
@@ -2264,6 +2284,29 @@
                 },
                 "required": ["code", "message"]
             },
+            "Base.ValidationError": {
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "type": "string",
+                        "description": "Код ошибки",
+                        "enum": ["base.validation_error"],
+                        "example": "base.validation_error"
+                    },
+                    "message": {
+                        "type": "string",
+                        "description": "Текст ошибки",
+                        "example": "Login is a required attribute"
+                    },
+                    "attribute": {
+                        "type": "string",
+                        "description": "Атрибут запроса, с которым связана ошибка",
+                        "nullable": true,
+                        "example": "login"
+                    }
+                },
+                "required": ["code", "message"]
+            },
             "Base.ErrorCollectionResponse": {
                 "type": "object",
                 "properties": {
@@ -2275,6 +2318,23 @@
                                 "type": "array",
                                 "items": {
                                     "$ref": "#/components/schemas/Base.Error"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "Base.ValidationErrorCollectionResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "errors": {
+                                "description": "Список ошибок",
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/Base.ValidationError"
                                 }
                             }
                         }
