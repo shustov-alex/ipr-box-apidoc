@@ -2936,6 +2936,17 @@
                     }
                 }
             },
+            "Users.UserAttribute.Status": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "description": "Статус",
+                        "enum": ["active", "archived"],
+                        "example": "active"
+                    }
+                }
+            },
             "Users.UserAttribute.Email": {
                 "type": "object",
                 "properties": {
@@ -3068,11 +3079,15 @@
                             "example": "approval"
                         }
                     },
-                    "active_only": {
-                        "type": "boolean",
-                        "description": "Если выбрано (true), то будут возвращены только активные сотрудники (т.е. без архивных, уволенных, ...)",
+                    "user_statuses": {
+                        "type": "array",
                         "nullable": true,
-                        "example": true
+                        "items": {
+                            "type": "string",
+                            "description": "Статус пользователя",
+                            "enum": ["active", "archived"],
+                            "example": "active"
+                        }
                     },
                     "action_required_only": {
                         "type": "boolean",
@@ -3116,6 +3131,7 @@
                                     "description": "Сотрудник",
                                     "allOf": [
                                         { "$ref": "#/components/schemas/Users.UserAttribute.ID" },
+                                        { "$ref": "#/components/schemas/Users.UserAttribute.Status" },
                                         { "$ref": "#/components/schemas/Users.UserAttribute.CreatedAt" },
                                         { "$ref": "#/components/schemas/Users.UserAttribute.FirstName" },
                                         { "$ref": "#/components/schemas/Users.UserAttribute.LastName" },
