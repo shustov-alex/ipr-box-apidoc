@@ -4274,6 +4274,17 @@
                     }
                 }
             },
+            "Idp.ApprovalAttemptAttribute.FinishedAt": {
+                "type": "object",
+                "properties": {
+                    "finished_at": {
+                        "type": "string",
+                        "description": "Дата завершения попытки. Завершение - это приведение к одному из статусов: cancelled, approved, not_approved.",
+                        "nullable": true,
+                        "example": null
+                    }
+                }
+            },
             "Idp.Approver": {
                 "type": "object",
                 "allOf": [
@@ -4315,6 +4326,7 @@
                     {"$ref": "#/components/schemas/Idp.ApprovalAttemptAttribute.Initiator"},
                     {"$ref": "#/components/schemas/Idp.ApprovalAttemptAttribute.InitiatedAt"},
                     {"$ref": "#/components/schemas/Idp.ApprovalAttemptAttribute.InitiatorComment"},
+                    {"$ref": "#/components/schemas/Idp.ApprovalAttemptAttribute.FinishedAt"},
                     {
                         "type": "object",
                         "properties": {
