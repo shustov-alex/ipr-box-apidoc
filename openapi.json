@@ -3074,7 +3074,7 @@
                             "attribute": {
                                 "type": "string",
                                 "description": "Значение, по которому производится сортировка. Если не указано, то будет использовано значение по умолчанию.",
-                                "enum": ["created_at", "id", "full_name", "idp_status", "idp_progress", "idp_price"],
+                                "enum": ["created_at", "id", "external_id", "full_name", "idp_status", "idp_progress", "idp_price"],
                                 "example": "created_at"
                             }
                         }
@@ -3152,6 +3152,7 @@
                                     "description": "Сотрудник",
                                     "allOf": [
                                         { "$ref": "#/components/schemas/Employees.EmployeeAttribute.ID" },
+                                        { "$ref": "#/components/schemas/Employees.EmployeeAttribute.ExternalID" },
                                         { "$ref": "#/components/schemas/Employees.EmployeeAttribute.Status" },
                                         { "$ref": "#/components/schemas/Employees.EmployeeAttribute.CreatedAt" },
                                         { "$ref": "#/components/schemas/Employees.EmployeeAttribute.FirstName" },
@@ -5029,8 +5030,18 @@
                 "type": "object",
                 "properties": {
                     "id": {
-                        "type": "string",
+                        "type": "integer",
                         "description": "ID",
+                        "example": 123
+                    }
+                }
+            },
+            "Employees.EmployeeAttribute.ExternalID": {
+                "type": "object",
+                "properties": {
+                    "external_id": {
+                        "type": "string",
+                        "description": "Внешний ID",
                         "example": "my_id"
                     }
                 }
