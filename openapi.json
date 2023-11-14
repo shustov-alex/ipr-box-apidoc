@@ -43,6 +43,10 @@
         {
             "name": "Materials",
             "description": "08. Материалы"
+        },
+        {
+            "name": "Employees",
+            "description": "09. Сотрудники"
         }
     ],
     "paths": {
@@ -460,98 +464,6 @@
                 }
             }
         },
-        "/users/employees": {
-            "post": {
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ],
-                "tags": [
-                    "Users"
-                ],
-                "summary": "04.02. Получить список сотрудников",
-                "description": "Получить список сотрудников",
-                "operationId": "users.getCollectionOfEmployees",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Users.CollectionOfEmployees.Request"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Список сотрудников",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Users.CollectionOfEmployees.SuccessResponse"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Ошибки валидации",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Base.ValidationErrorCollectionResponse"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/users/employees/count": {
-            "post": {
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ],
-                "tags": [
-                    "Users"
-                ],
-                "summary": "04.03. Получить количество сотрудников",
-                "description": "Получить количество сотрудников",
-                "operationId": "users.getCountOfEmployees",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Users.CountOfEmployees.Request"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Количество",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Users.CountOfEmployees.SuccessResponse"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Ошибки валидации",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Base.ValidationErrorCollectionResponse"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
         "/skills/tree": {
             "post": {
                 "security": [
@@ -566,7 +478,7 @@
                 "description": "Получить дерево навыков",
                 "operationId": "skills.getTree",
                 "parameters": [
-                    {"$ref": "#/components/parameters/Users.User.ID"}
+                    {"$ref": "#/components/parameters/Employees.Employee.ID"}
                 ],
                 "requestBody": {
                     "content": {
@@ -750,7 +662,7 @@
                 "operationId": "skills.getSkillDetails",
                 "parameters": [
                     {"$ref": "#/components/parameters/Skills.Skill.ID"},
-                    {"$ref": "#/components/parameters/Users.User.ID"}
+                    {"$ref": "#/components/parameters/Employees.Employee.ID"}
                 ],
                 "responses": {
                     "200": {
@@ -837,7 +749,7 @@
                 "description": "Получить список целей. Максимальное количество элементов - 1000.",
                 "operationId": "targets.getCollection",
                 "parameters": [
-                    {"$ref": "#/components/parameters/Users.User.ID"}
+                    {"$ref": "#/components/parameters/Employees.Employee.ID"}
                 ],
                 "requestBody": {
                     "content": {
@@ -876,7 +788,8 @@
                 "description": "Получить детальную информацию о цели",
                 "operationId": "targets.getTargetDetails",
                 "parameters": [
-                    {"$ref": "#/components/parameters/Targets.Target.ID"}
+                    {"$ref": "#/components/parameters/Targets.Target.ID"},
+                    {"$ref": "#/components/parameters/Employees.Employee.ID"}
                 ],
                 "responses": {
                     "200": {
@@ -965,7 +878,7 @@
                 "description": "Получить группы статусов целей",
                 "operationId": "targets.getStatusGroups",
                 "parameters": [
-                    {"$ref": "#/components/parameters/Users.User.ID"}
+                    {"$ref": "#/components/parameters/Employees.Employee.ID"}
                 ],
                 "requestBody": {
                     "content": {
@@ -1004,7 +917,7 @@
                 "description": "Создать цель",
                 "operationId": "targets.createTarget",
                 "parameters": [
-                    {"$ref": "#/components/parameters/Users.User.ID"}
+                    {"$ref": "#/components/parameters/Employees.Employee.ID"}
                 ],
                 "requestBody": {
                     "content": {
@@ -1142,7 +1055,8 @@
                 "description": "Получить количество связанных объектов",
                 "operationId": "targets.getCountOfRelations",
                 "parameters": [
-                    {"$ref": "#/components/parameters/Targets.Target.ID"}
+                    {"$ref": "#/components/parameters/Targets.Target.ID"},
+                    {"$ref": "#/components/parameters/Employees.Employee.ID"}
                 ],
                 "responses": {
                     "200": {
@@ -1182,7 +1096,8 @@
                 "description": "Получить выбранные навыки по ID цели",
                 "operationId": "targets.getTargetSkills",
                 "parameters": [
-                    {"$ref": "#/components/parameters/Targets.Target.ID"}
+                    {"$ref": "#/components/parameters/Targets.Target.ID"},
+                    {"$ref": "#/components/parameters/Employees.Employee.ID"}
                 ],
                 "responses": {
                     "200": {
@@ -1222,7 +1137,8 @@
                 "description": "Получить выбранные материалы по ID цели",
                 "operationId": "targets.getTargetMaterials",
                 "parameters": [
-                    {"$ref": "#/components/parameters/Targets.Target.ID"}
+                    {"$ref": "#/components/parameters/Targets.Target.ID"},
+                    {"$ref": "#/components/parameters/Employees.Employee.ID"}
                 ],
                 "responses": {
                     "200": {
@@ -1263,7 +1179,8 @@
                 "operationId": "targets.getTargetMaterial",
                 "parameters": [
                     {"$ref": "#/components/parameters/Targets.Target.ID"},
-                    {"$ref": "#/components/parameters/Materials.Material.ID"}
+                    {"$ref": "#/components/parameters/Materials.Material.ID"},
+                    {"$ref": "#/components/parameters/Employees.Employee.ID"}
                 ],
                 "responses": {
                     "200": {
@@ -1303,7 +1220,8 @@
                 "description": "Получить комментарии по ID цели",
                 "operationId": "targets.getTargetComments",
                 "parameters": [
-                    {"$ref": "#/components/parameters/Targets.Target.ID"}
+                    {"$ref": "#/components/parameters/Targets.Target.ID"},
+                    {"$ref": "#/components/parameters/Employees.Employee.ID"}
                 ],
                 "responses": {
                     "200": {
@@ -1392,7 +1310,7 @@
                 "description": "Коллекция доступных пользователю ИПР",
                 "operationId": "idp.getCollection",
                 "parameters": [
-                    {"$ref": "#/components/parameters/Users.User.ID"}
+                    {"$ref": "#/components/parameters/Employees.Employee.ID"}
                 ],
                 "responses": {
                     "200": {
@@ -2258,6 +2176,98 @@
                     }
                 }
             }
+        },
+        "/employees": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Employees"
+                ],
+                "summary": "09.01. Получить список сотрудников",
+                "description": "Получить список сотрудников",
+                "operationId": "employees.getCollection",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Employees.Collection.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Список сотрудников",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Employees.Collection.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки валидации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ValidationErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/employees/count": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Employees"
+                ],
+                "summary": "09.02. Получить количество сотрудников",
+                "description": "Получить количество сотрудников",
+                "operationId": "employees.getCount",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Employees.Count.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Количество",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Employees.Count.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки валидации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ValidationErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -2936,6 +2946,16 @@
                     }
                 }
             },
+            "Users.UserAttribute.EmployeeID": {
+                "type": "object",
+                "properties": {
+                    "employee_id": {
+                        "type": "integer",
+                        "description": "ID сотрудника",
+                        "example": 567
+                    }
+                }
+            },
             "Users.UserAttribute.Status": {
                 "type": "object",
                 "properties": {
@@ -3034,6 +3054,7 @@
                                     { "$ref": "#/components/schemas/Users.UserAttribute.Email" },
                                     { "$ref": "#/components/schemas/Users.UserAttribute.FirstName" },
                                     { "$ref": "#/components/schemas/Users.UserAttribute.LastName" },
+                                    { "$ref": "#/components/schemas/Users.UserAttribute.EmployeeID" },
                                     { "$ref": "#/components/schemas/Users.UserAttribute.AccessRights" }
                                 ]
                             }
@@ -3041,7 +3062,7 @@
                     }
                 }
             },
-            "Users.CollectionOfEmployees.Sort": {
+            "Employees.Collection.Sort": {
                 "type": "object",
                 "allOf": [
                     {
@@ -3060,7 +3081,7 @@
                     }
                 ]
             },
-            "Users.CollectionOfEmployees.Filter": {
+            "Employees.Collection.Filter": {
                 "type": "object",
                 "properties": {
                     "idp_year": {
@@ -3079,12 +3100,12 @@
                             "example": "approval"
                         }
                     },
-                    "user_statuses": {
+                    "employee_statuses": {
                         "type": "array",
                         "nullable": true,
                         "items": {
                             "type": "string",
-                            "description": "Статус пользователя",
+                            "description": "Статус сотрудника",
                             "enum": ["active", "archived"],
                             "example": "active"
                         }
@@ -3103,14 +3124,14 @@
                     }
                 }
             },
-            "Users.CollectionOfEmployees.Request": {
+            "Employees.Collection.Request": {
                 "type": "object",
                 "properties": {
                     "sort": {
-                        "$ref": "#/components/schemas/Users.CollectionOfEmployees.Sort"
+                        "$ref": "#/components/schemas/Employees.Collection.Sort"
                     },
                     "filter": {
-                        "$ref": "#/components/schemas/Users.CollectionOfEmployees.Filter"
+                        "$ref": "#/components/schemas/Employees.Collection.Filter"
                     },
                     "pagination": {
                         "$ref": "#/components/schemas/Base.OffsetPagination"
@@ -3118,7 +3139,7 @@
                 },
                 "required": ["filter"]
             },
-            "Users.CollectionOfEmployees.SuccessResponse": {
+            "Employees.Collection.SuccessResponse": {
                 "type": "object",
                 "properties": {
                     "data": {
@@ -3130,11 +3151,11 @@
                                     "type": "object",
                                     "description": "Сотрудник",
                                     "allOf": [
-                                        { "$ref": "#/components/schemas/Users.UserAttribute.ID" },
-                                        { "$ref": "#/components/schemas/Users.UserAttribute.Status" },
-                                        { "$ref": "#/components/schemas/Users.UserAttribute.CreatedAt" },
-                                        { "$ref": "#/components/schemas/Users.UserAttribute.FirstName" },
-                                        { "$ref": "#/components/schemas/Users.UserAttribute.LastName" },
+                                        { "$ref": "#/components/schemas/Employees.EmployeeAttribute.ID" },
+                                        { "$ref": "#/components/schemas/Employees.EmployeeAttribute.Status" },
+                                        { "$ref": "#/components/schemas/Employees.EmployeeAttribute.CreatedAt" },
+                                        { "$ref": "#/components/schemas/Employees.EmployeeAttribute.FirstName" },
+                                        { "$ref": "#/components/schemas/Employees.EmployeeAttribute.LastName" },
                                         {
                                             "type": "object",
                                             "properties": {
@@ -3167,16 +3188,16 @@
                     }
                 }
             },
-            "Users.CountOfEmployees.Request": {
+            "Employees.Count.Request": {
                 "type": "object",
                 "properties": {
                     "filter": {
-                        "$ref": "#/components/schemas/Users.CollectionOfEmployees.Filter"
+                        "$ref": "#/components/schemas/Employees.Collection.Filter"
                     }
                 },
                 "required": ["filter"]
             },
-            "Users.CountOfEmployees.SuccessResponse": {
+            "Employees.Count.SuccessResponse": {
                 "type": "object",
                 "properties": {
                     "data": {
@@ -5003,6 +5024,67 @@
                     { "$ref": "#/components/schemas/Comments.CommentAttribute.Author" },
                     { "$ref": "#/components/schemas/Comments.CommentAttribute.Text" }
                 ]
+            },
+            "Employees.EmployeeAttribute.ID": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "ID",
+                        "example": "my_id"
+                    }
+                }
+            },
+            "Employees.EmployeeAttribute.Status": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "description": "Статус",
+                        "enum": ["active", "archived"],
+                        "example": "active"
+                    }
+                }
+            },
+            "Employees.EmployeeAttribute.FirstName": {
+                "type": "object",
+                "properties": {
+                    "first_name": {
+                        "type": "string",
+                        "description": "Имя",
+                        "example": "Иван"
+                    }
+                }
+            },
+            "Employees.EmployeeAttribute.LastName": {
+                "type": "object",
+                "properties": {
+                    "last_name": {
+                        "type": "string",
+                        "description": "Фамилия",
+                        "example": "Иванов"
+                    }
+                }
+            },
+            "Employees.EmployeeAttribute.FullName": {
+                "type": "object",
+                "properties": {
+                    "full_name": {
+                        "type": "string",
+                        "description": "Имя, фамилия",
+                        "example": "Иван Иванов"
+                    }
+                }
+            },
+            "Employees.EmployeeAttribute.CreatedAt": {
+                "type": "object",
+                "properties": {
+                    "created_at": {
+                        "type": "string",
+                        "description": "Дата создания",
+                        "example": "2023-09-01 12:10:20 +03:00"
+                    }
+                }
             }
         },
         "parameters": {
@@ -5036,14 +5118,14 @@
                     "type": "integer"
                 }
             },
-            "Users.User.ID": {
-                "name": "user_id",
+            "Employees.Employee.ID": {
+                "name": "employee_id",
                 "in": "query",
                 "required": false,
-                "description": "ID пользователя. Если не указан, то будет использован ID пользователя, который авторизован на данный момент.",
-                "example": "some_user_id",
+                "description": "ID сотрудника. Если не указан, то пытаемся получить из текущего пользователя.",
+                "example": 123,
                 "schema": {
-                    "type": "string"
+                    "type": "integer"
                 }
             },
             "Idp.Idp.ID": {
