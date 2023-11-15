@@ -1306,8 +1306,8 @@
                 "tags": [
                     "IDP"
                 ],
-                "summary": "07.01. Коллекция доступных пользователю ИПР",
-                "description": "Коллекция доступных пользователю ИПР",
+                "summary": "07.01. Коллекция доступных сотруднику ИПР",
+                "description": "Коллекция доступных сотруднику ИПР",
                 "operationId": "idp.getCollection",
                 "parameters": [
                     {"$ref": "#/components/parameters/Employees.Employee.ID"}
@@ -3917,7 +3917,7 @@
                     },
                     "count_of_targets": {
                         "type": "integer",
-                        "description": "Количество целей пользователя в таком статусе",
+                        "description": "Количество целей сотрудника в таком статусе",
                         "example": 4
                     }
                 }
