@@ -3163,14 +3163,62 @@
                                                 "idp": {
                                                     "type": "object",
                                                     "description": "ИПР",
+                                                    "nullable": true,
                                                     "allOf": [
                                                         { "$ref": "#/components/schemas/Idp.IdpAttribute.ID" },
                                                         { "$ref": "#/components/schemas/Idp.IdpAttribute.Status" },
                                                         { "$ref": "#/components/schemas/Idp.IdpAttribute.CountOfTargets" },
                                                         { "$ref": "#/components/schemas/Idp.IdpAttribute.CountOfTargetsDone" },
-                                                        { "$ref": "#/components/schemas/Idp.IdpAttribute.Price" }
-                                                    ],
-                                                    "nullable": true
+                                                        { "$ref": "#/components/schemas/Idp.IdpAttribute.Price" },
+                                                        {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "last_attempt": {
+                                                                    "type": "object",
+                                                                    "description": "Краткая информация о последней попытке согласования",
+                                                                    "nullable": true,
+                                                                    "allOf": [
+                                                                        { "$ref": "#/components/schemas/Idp.ApprovalAttemptAttribute.Status" },
+                                                                        { "$ref": "#/components/schemas/Idp.ApprovalAttemptAttribute.InitiatedAt" },
+                                                                        { "$ref": "#/components/schemas/Idp.ApprovalAttemptAttribute.FinishedAt" },
+                                                                        {
+                                                                            "type": "object",
+                                                                            "properties": {
+                                                                                "count_of_stages": {
+                                                                                    "type": "integer",
+                                                                                    "description": "Количество этапов",
+                                                                                    "example": 3
+                                                                                },
+                                                                                "count_of_stages_approved": {
+                                                                                    "type": "integer",
+                                                                                    "description": "Количество согласованных этапов",
+                                                                                    "example": 1
+                                                                                },
+                                                                                "approvers": {
+                                                                                    "type": "array",
+                                                                                    "description": "Краткая информация о согласующих",
+                                                                                    "items": {
+                                                                                        "type": "object",
+                                                                                        "allOf": [
+                                                                                            { "$ref": "#/components/schemas/Idp.RouteUser" },
+                                                                                            { "$ref": "#/components/schemas/Idp.ApproverAttribute.Status" },
+                                                                                            { "$ref": "#/components/schemas/Idp.ApproverAttribute.StatusChangedAt" }
+                                                                                        ]
+                                                                                    }
+                                                                                }
+                                                                            }
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            }
+                                                        }
+                                                    ]
+                                                },
+                                                "divisions": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "#/components/schemas/Divisions.DivisionBriefView"
+                                                    }
                                                 }
                                             }
                                         }
@@ -5094,6 +5142,21 @@
                         "type": "string",
                         "description": "Дата создания",
                         "example": "2023-09-01 12:10:20 +03:00"
+                    }
+                }
+            },
+            "Divisions.DivisionBriefView": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "ID",
+                        "example": 512
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Название",
+                        "example": "Московский филиал"
                     }
                 }
             }
