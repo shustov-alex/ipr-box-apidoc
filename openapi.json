@@ -3189,7 +3189,7 @@
                                                                                     "description": "Количество этапов",
                                                                                     "example": 3
                                                                                 },
-                                                                                "count_of_stages_approved": {
+                                                                                "count_of_approved_stages": {
                                                                                     "type": "integer",
                                                                                     "description": "Количество согласованных этапов",
                                                                                     "example": 1
