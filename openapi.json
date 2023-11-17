@@ -1908,6 +1908,46 @@
                 }
             }
         },
+        "/idp/{idp_id}/delete": {
+            "delete": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "IDP"
+                ],
+                "summary": "07.15. Удалить ИПР",
+                "description": "Удалить ИПР",
+                "operationId": "idp.deleteIdp",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Idp.Path.Idp.Id"}
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ИПР успешно удалён",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.EmptySuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Запрашиваемый объект не найден",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/materials/tree": {
             "post": {
                 "security": [
