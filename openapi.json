@@ -1859,6 +1859,55 @@
                 }
             }
         },
+        "/idp/create": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "IDP"
+                ],
+                "summary": "07.14. Создать ИПР",
+                "description": "Создать ИПР",
+                "operationId": "idp.createIdp",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Employees.Query.Employee.Id"}
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Idp.Idp.ToCreate"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "ИПР успешно создан",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Idp.CreateIdp.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки валидации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ValidationErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/materials/tree": {
             "post": {
                 "security": [
@@ -4831,6 +4880,30 @@
                                     "description": "Год ИПР",
                                     "example": 2023
                                 }
+                            }
+                        }
+                    }
+                }
+            },
+            "Idp.Idp.ToCreate": {
+                "type": "object",
+                "allOf": [
+                    { "$ref": "#/components/schemas/Idp.IdpAttribute.Year" }
+                ]
+            },
+            "Idp.CreateIdp.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "object",
+                                "allOf": [
+                                    { "$ref": "#/components/schemas/Idp.IdpAttribute.ID" },
+                                    { "$ref": "#/components/schemas/Idp.IdpAttribute.Year" },
+                                    { "$ref": "#/components/schemas/Idp.IdpAttribute.Status" }
+                                ]
                             }
                         }
                     }
