@@ -4621,17 +4621,6 @@
                     {
                         "type": "object",
                         "properties": {
-                            "attempts": {
-                                "type": "array",
-                                "description": "Краткая информация о попытках",
-                                "items": {
-                                    "type": "object",
-                                    "allOf": [
-                                        {"$ref": "#/components/schemas/Idp.ApprovalAttemptAttribute.ID"},
-                                        {"$ref": "#/components/schemas/Idp.ApprovalAttemptAttribute.SerialNumber"}
-                                    ]
-                                }
-                            },
                             "last_attempt_status": {
                                 "type": "string",
                                 "description": "Актуальная попытка, статус",
