@@ -478,7 +478,7 @@
                 "description": "Получить дерево навыков",
                 "operationId": "skills.getTree",
                 "parameters": [
-                    {"$ref": "#/components/parameters/Employees.Employee.ID"}
+                    {"$ref": "#/components/parameters/Employees.Query.Employee.Id"}
                 ],
                 "requestBody": {
                     "content": {
@@ -661,8 +661,8 @@
                 "description": "Получить детальную информацию о навыке",
                 "operationId": "skills.getSkillDetails",
                 "parameters": [
-                    {"$ref": "#/components/parameters/Skills.Skill.ID"},
-                    {"$ref": "#/components/parameters/Employees.Employee.ID"}
+                    {"$ref": "#/components/parameters/Skills.Path.Skill.Id"},
+                    {"$ref": "#/components/parameters/Employees.Query.Employee.Id"}
                 ],
                 "responses": {
                     "200": {
@@ -692,7 +692,7 @@
                 "description": "Получить краткую информацию о навыке",
                 "operationId": "skills.getSkillDetailsBrief",
                 "parameters": [
-                    {"$ref": "#/components/parameters/Skills.Skill.ID"}
+                    {"$ref": "#/components/parameters/Skills.Path.Skill.Id"}
                 ],
                 "responses": {
                     "200": {
@@ -749,7 +749,7 @@
                 "description": "Получить список целей. Максимальное количество элементов - 1000.",
                 "operationId": "targets.getCollection",
                 "parameters": [
-                    {"$ref": "#/components/parameters/Employees.Employee.ID"}
+                    {"$ref": "#/components/parameters/Employees.Query.Employee.Id"}
                 ],
                 "requestBody": {
                     "content": {
@@ -788,8 +788,8 @@
                 "description": "Получить детальную информацию о цели",
                 "operationId": "targets.getTargetDetails",
                 "parameters": [
-                    {"$ref": "#/components/parameters/Targets.Target.ID"},
-                    {"$ref": "#/components/parameters/Employees.Employee.ID"}
+                    {"$ref": "#/components/parameters/Targets.Path.Target.Id"},
+                    {"$ref": "#/components/parameters/Employees.Query.Employee.Id"}
                 ],
                 "responses": {
                     "200": {
@@ -829,7 +829,7 @@
                 "description": "Обновить статус цели",
                 "operationId": "targets.updateStatus",
                 "parameters": [
-                    {"$ref": "#/components/parameters/Targets.Target.ID"}
+                    {"$ref": "#/components/parameters/Targets.Path.Target.Id"}
                 ],
                 "requestBody": {
                     "content": {
@@ -878,7 +878,7 @@
                 "description": "Получить группы статусов целей",
                 "operationId": "targets.getStatusGroups",
                 "parameters": [
-                    {"$ref": "#/components/parameters/Employees.Employee.ID"}
+                    {"$ref": "#/components/parameters/Employees.Query.Employee.Id"}
                 ],
                 "requestBody": {
                     "content": {
@@ -917,7 +917,7 @@
                 "description": "Создать цель",
                 "operationId": "targets.createTarget",
                 "parameters": [
-                    {"$ref": "#/components/parameters/Employees.Employee.ID"}
+                    {"$ref": "#/components/parameters/Employees.Query.Employee.Id"}
                 ],
                 "requestBody": {
                     "content": {
@@ -966,7 +966,7 @@
                 "description": "Обновить цель",
                 "operationId": "targets.updateTarget",
                 "parameters": [
-                    {"$ref": "#/components/parameters/Targets.Target.ID"}
+                    {"$ref": "#/components/parameters/Targets.Path.Target.Id"}
                 ],
                 "requestBody": {
                     "content": {
@@ -1015,7 +1015,7 @@
                 "description": "Удалить цель",
                 "operationId": "targets.deleteTarget",
                 "parameters": [
-                    {"$ref": "#/components/parameters/Targets.Target.ID"}
+                    {"$ref": "#/components/parameters/Targets.Path.Target.Id"}
                 ],
                 "responses": {
                     "200": {
@@ -1055,8 +1055,8 @@
                 "description": "Получить количество связанных объектов",
                 "operationId": "targets.getCountOfRelations",
                 "parameters": [
-                    {"$ref": "#/components/parameters/Targets.Target.ID"},
-                    {"$ref": "#/components/parameters/Employees.Employee.ID"}
+                    {"$ref": "#/components/parameters/Targets.Path.Target.Id"},
+                    {"$ref": "#/components/parameters/Employees.Query.Employee.Id"}
                 ],
                 "responses": {
                     "200": {
@@ -1096,8 +1096,8 @@
                 "description": "Получить выбранные навыки по ID цели",
                 "operationId": "targets.getTargetSkills",
                 "parameters": [
-                    {"$ref": "#/components/parameters/Targets.Target.ID"},
-                    {"$ref": "#/components/parameters/Employees.Employee.ID"}
+                    {"$ref": "#/components/parameters/Targets.Path.Target.Id"},
+                    {"$ref": "#/components/parameters/Employees.Query.Employee.Id"}
                 ],
                 "responses": {
                     "200": {
@@ -1137,8 +1137,8 @@
                 "description": "Получить выбранные материалы по ID цели",
                 "operationId": "targets.getTargetMaterials",
                 "parameters": [
-                    {"$ref": "#/components/parameters/Targets.Target.ID"},
-                    {"$ref": "#/components/parameters/Employees.Employee.ID"}
+                    {"$ref": "#/components/parameters/Targets.Path.Target.Id"},
+                    {"$ref": "#/components/parameters/Employees.Query.Employee.Id"}
                 ],
                 "responses": {
                     "200": {
@@ -1178,9 +1178,9 @@
                 "description": "Получить выбранные материалы по ID цели",
                 "operationId": "targets.getTargetMaterial",
                 "parameters": [
-                    {"$ref": "#/components/parameters/Targets.Target.ID"},
-                    {"$ref": "#/components/parameters/Materials.Material.ID"},
-                    {"$ref": "#/components/parameters/Employees.Employee.ID"}
+                    {"$ref": "#/components/parameters/Targets.Path.Target.Id"},
+                    {"$ref": "#/components/parameters/Materials.Path.Material.Id"},
+                    {"$ref": "#/components/parameters/Employees.Query.Employee.Id"}
                 ],
                 "responses": {
                     "200": {
@@ -1220,8 +1220,8 @@
                 "description": "Получить комментарии по ID цели",
                 "operationId": "targets.getTargetComments",
                 "parameters": [
-                    {"$ref": "#/components/parameters/Targets.Target.ID"},
-                    {"$ref": "#/components/parameters/Employees.Employee.ID"}
+                    {"$ref": "#/components/parameters/Targets.Path.Target.Id"},
+                    {"$ref": "#/components/parameters/Employees.Query.Employee.Id"}
                 ],
                 "responses": {
                     "200": {
@@ -1261,7 +1261,7 @@
                 "description": "Оставить комментарий к цели",
                 "operationId": "targets.leaveCommentOnTarget",
                 "parameters": [
-                    {"$ref": "#/components/parameters/Targets.Target.ID"}
+                    {"$ref": "#/components/parameters/Targets.Path.Target.Id"}
                 ],
                 "requestBody": {
                     "content": {
@@ -1310,7 +1310,7 @@
                 "description": "Коллекция доступных сотруднику ИПР",
                 "operationId": "idp.getCollection",
                 "parameters": [
-                    {"$ref": "#/components/parameters/Employees.Employee.ID"}
+                    {"$ref": "#/components/parameters/Employees.Query.Employee.Id"}
                 ],
                 "responses": {
                     "200": {
@@ -1367,7 +1367,7 @@
                 "description": "Получить детальную информацию об ИПР",
                 "operationId": "idp.getIdpDetails",
                 "parameters": [
-                    {"$ref": "#/components/parameters/Idp.Idp.ID"}
+                    {"$ref": "#/components/parameters/Idp.Path.Idp.Id"}
                 ],
                 "responses": {
                     "200": {
@@ -1407,7 +1407,7 @@
                 "description": "Получить список прав по работе с ИПР. В ответ также будут включены права по работе с последней попыткой (если такая есть).",
                 "operationId": "idp.getIdpAccessRights",
                 "parameters": [
-                    {"$ref": "#/components/parameters/Idp.Idp.ID"}
+                    {"$ref": "#/components/parameters/Idp.Path.Idp.Id"}
                 ],
                 "responses": {
                     "200": {
@@ -1447,7 +1447,7 @@
                 "description": "Получить список попыток согласования ИПР",
                 "operationId": "idp.getApprovalAttempts",
                 "parameters": [
-                    {"$ref": "#/components/parameters/Idp.Idp.ID"}
+                    {"$ref": "#/components/parameters/Idp.Path.Idp.Id"}
                 ],
                 "requestBody": {
                     "content": {
@@ -1486,7 +1486,7 @@
                 "description": "Запуск согласования",
                 "operationId": "idp.startApprovalAttempt",
                 "parameters": [
-                    {"$ref": "#/components/parameters/Idp.Idp.ID"}
+                    {"$ref": "#/components/parameters/Idp.Path.Idp.Id"}
                 ],
                 "requestBody": {
                     "content": {
@@ -1535,8 +1535,8 @@
                 "description": "Отмена согласования. Выполняется инициатором.",
                 "operationId": "idp.cancelApprovalAttempt",
                 "parameters": [
-                    {"$ref": "#/components/parameters/Idp.Idp.ID"},
-                    {"$ref": "#/components/parameters/Idp.ApprovalAttempt.ID"}
+                    {"$ref": "#/components/parameters/Idp.Path.Idp.Id"},
+                    {"$ref": "#/components/parameters/Idp.Path.ApprovalAttempt.Id"}
                 ],
                 "responses": {
                     "200": {
@@ -1576,8 +1576,8 @@
                 "description": "Согласовать этап маршрута. Если согласующий (авторизованный пользователь) присутствует в нескольких этапах, то будет обработан первый из несогласованных.",
                 "operationId": "idp.approveStage",
                 "parameters": [
-                    {"$ref": "#/components/parameters/Idp.Idp.ID"},
-                    {"$ref": "#/components/parameters/Idp.ApprovalAttempt.ID"}
+                    {"$ref": "#/components/parameters/Idp.Path.Idp.Id"},
+                    {"$ref": "#/components/parameters/Idp.Path.ApprovalAttempt.Id"}
                 ],
                 "requestBody": {
                     "content": {
@@ -1626,8 +1626,8 @@
                 "description": "Отказать в согласовании этапа. Если согласующий (авторизованный пользователь) присутствует в нескольких этапах, то будет обработан первый из несогласованных.",
                 "operationId": "idp.rejectStage",
                 "parameters": [
-                    {"$ref": "#/components/parameters/Idp.Idp.ID"},
-                    {"$ref": "#/components/parameters/Idp.ApprovalAttempt.ID"}
+                    {"$ref": "#/components/parameters/Idp.Path.Idp.Id"},
+                    {"$ref": "#/components/parameters/Idp.Path.ApprovalAttempt.Id"}
                 ],
                 "requestBody": {
                     "content": {
@@ -1676,8 +1676,8 @@
                 "description": "Обновить маршрут согласования.",
                 "operationId": "idp.updateApprovalAttemptRoute",
                 "parameters": [
-                    {"$ref": "#/components/parameters/Idp.Idp.ID"},
-                    {"$ref": "#/components/parameters/Idp.ApprovalAttempt.ID"}
+                    {"$ref": "#/components/parameters/Idp.Path.Idp.Id"},
+                    {"$ref": "#/components/parameters/Idp.Path.ApprovalAttempt.Id"}
                 ],
                 "requestBody": {
                     "content": {
@@ -1726,8 +1726,8 @@
                 "description": "Получить список прав по работе с попыткой",
                 "operationId": "idp.getAttemptAccessRights",
                 "parameters": [
-                    {"$ref": "#/components/parameters/Idp.Idp.ID"},
-                    {"$ref": "#/components/parameters/Idp.ApprovalAttempt.ID"}
+                    {"$ref": "#/components/parameters/Idp.Path.Idp.Id"},
+                    {"$ref": "#/components/parameters/Idp.Path.ApprovalAttempt.Id"}
                 ],
                 "responses": {
                     "200": {
@@ -1767,7 +1767,7 @@
                 "description": "Поиск согласующих.",
                 "operationId": "idp.searchForApprovers",
                 "parameters": [
-                    {"$ref": "#/components/parameters/Idp.Idp.ID"}
+                    {"$ref": "#/components/parameters/Idp.Path.Idp.Id"}
                 ],
                 "requestBody": {
                     "content": {
@@ -1806,7 +1806,7 @@
                 "description": "Получить актуальную попытку согласования ИПР",
                 "operationId": "idp.getLastApprovalAttempt",
                 "parameters": [
-                    {"$ref": "#/components/parameters/Idp.Idp.ID"}
+                    {"$ref": "#/components/parameters/Idp.Path.Idp.Id"}
                 ],
                 "responses": {
                     "200": {
@@ -2125,7 +2125,7 @@
                 "description": "Получить детальную информацию о материале",
                 "operationId": "materials.getMaterialDetails",
                 "parameters": [
-                    {"$ref": "#/components/parameters/Materials.Material.ID"}
+                    {"$ref": "#/components/parameters/Materials.Path.Material.Id"}
                 ],
                 "responses": {
                     "200": {
@@ -2262,6 +2262,37 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/Base.ValidationErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/employees/{employee_id}": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Employees"
+                ],
+                "summary": "09.03. Получить краткую информацию о сотруднике",
+                "description": "Получить краткую информацию о сотруднике. Атрибут idps будет включен в ответ только если был указан в query-параметре extra_attributes.",
+                "operationId": "employees.getEmployeeBriefDetails",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Employees.Path.Employee.Id"},
+                    {"$ref": "#/components/parameters/Base.Query.ExtraAttributes"}
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Краткая информация о сотруднике",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Employees.EmployeeBriefDetails.SuccessResponse"
                                 }
                             }
                         }
@@ -3261,6 +3292,36 @@
                                         "example": 780
                                     }
                                 }
+                            }
+                        }
+                    }
+                }
+            },
+            "Employees.EmployeeBriefDetails.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "object",
+                                "allOf": [
+                                    { "$ref": "#/components/schemas/Employees.EmployeeAttribute.ID" },
+                                    { "$ref": "#/components/schemas/Employees.EmployeeAttribute.ExternalID" },
+                                    { "$ref": "#/components/schemas/Employees.EmployeeAttribute.FirstName" },
+                                    { "$ref": "#/components/schemas/Employees.EmployeeAttribute.LastName" },
+                                    {
+                                        "type": "object",
+                                        "properties": {
+                                            "idps": {
+                                                "type": "array",
+                                                "items": {
+                                                    "$ref": "#/components/schemas/Idp.Idp.DetailsBriefView"
+                                                }
+                                            }
+                                        }
+                                    }
+                                ]
                             }
                         }
                     }
@@ -5162,7 +5223,17 @@
             }
         },
         "parameters": {
-            "Skills.Skill.ID": {
+            "Base.Query.ExtraAttributes": {
+                "name": "extra_attributes",
+                "in": "query",
+                "required": false,
+                "description": "Массив атрибутов, которые нужно включить в ответ дополнительно.",
+                "example": ["first_attribute_name", "second_attribute_name"],
+                "schema": {
+                    "type": "array"
+                }
+            },
+            "Skills.Path.Skill.Id": {
                 "name": "skill_id",
                 "in": "path",
                 "required": true,
@@ -5172,7 +5243,7 @@
                     "type": "integer"
                 }
             },
-            "Materials.Material.ID": {
+            "Materials.Path.Material.Id": {
                 "name": "material_id",
                 "in": "path",
                 "required": true,
@@ -5182,7 +5253,7 @@
                     "type": "integer"
                 }
             },
-            "Targets.Target.ID": {
+            "Targets.Path.Target.Id": {
                 "name": "target_id",
                 "in": "path",
                 "required": true,
@@ -5192,7 +5263,17 @@
                     "type": "integer"
                 }
             },
-            "Employees.Employee.ID": {
+            "Employees.Path.Employee.Id": {
+                "name": "employee_id",
+                "in": "path",
+                "required": true,
+                "description": "ID сотрудника.",
+                "example": 32,
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            "Employees.Query.Employee.Id": {
                 "name": "employee_id",
                 "in": "query",
                 "required": false,
@@ -5202,7 +5283,7 @@
                     "type": "integer"
                 }
             },
-            "Idp.Idp.ID": {
+            "Idp.Path.Idp.Id": {
                 "name": "idp_id",
                 "in": "path",
                 "required": true,
@@ -5212,7 +5293,7 @@
                     "type": "integer"
                 }
             },
-            "Idp.ApprovalAttempt.ID": {
+            "Idp.Path.ApprovalAttempt.Id": {
                 "name": "attempt_id",
                 "in": "path",
                 "required": true,
