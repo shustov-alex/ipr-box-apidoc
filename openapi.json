@@ -2346,6 +2346,16 @@
                                 }
                             }
                         }
+                    },
+                    "400": {
+                        "description": "Запрашиваемый объект не найден",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundErrorCollectionResponse"
+                                }
+                            }
+                        }
                     }
                 }
             }
