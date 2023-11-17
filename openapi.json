@@ -1793,46 +1793,6 @@
                 }
             }
         },
-        "/idp/{idp_id}/approval/attempts/last": {
-            "get": {
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ],
-                "tags": [
-                    "IDP"
-                ],
-                "summary": "07.13. Получить актуальную попытку согласования ИПР",
-                "description": "Получить актуальную попытку согласования ИПР",
-                "operationId": "idp.getLastApprovalAttempt",
-                "parameters": [
-                    {"$ref": "#/components/parameters/Idp.Path.Idp.Id"}
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Актуальная попытка согласования",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Idp.GetLastAttempt.SuccessResponse"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Запрашиваемый объект не найден",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Base.ObjectNotFoundErrorCollectionResponse"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
         "/idp/years-of-all-employees": {
             "get": {
                 "security": [
@@ -4893,19 +4853,6 @@
                         "properties": {
                             "pagination": {
                                 "$ref": "#/components/schemas/Base.CursorPaginationMeta"
-                            }
-                        }
-                    }
-                }
-            },
-            "Idp.GetLastAttempt.SuccessResponse": {
-                "type": "object",
-                "properties": {
-                    "data": {
-                        "type": "object",
-                        "properties": {
-                            "success": {
-                                "$ref": "#/components/schemas/Idp.ApprovalAttempt"
                             }
                         }
                     }
