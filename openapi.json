@@ -1364,10 +1364,11 @@
                     "IDP"
                 ],
                 "summary": "07.03. Получить детальную информацию об ИПР",
-                "description": "Получить детальную информацию об ИПР",
+                "description": "Получить детальную информацию об ИПР. Атрибуы count_of_targets, count_of_targets_done, price будут включены в ответ только если были указаны в query-параметре extra_attributes.",
                 "operationId": "idp.getIdpDetails",
                 "parameters": [
-                    {"$ref": "#/components/parameters/Idp.Path.Idp.Id"}
+                    {"$ref": "#/components/parameters/Idp.Path.Idp.Id"},
+                    {"$ref": "#/components/parameters/Base.Query.ExtraAttributes"}
                 ],
                 "responses": {
                     "200": {
@@ -4571,6 +4572,9 @@
                 "type": "object",
                 "allOf": [
                     {"$ref": "#/components/schemas/Idp.Idp.DetailsBriefView"},
+                    {"$ref": "#/components/schemas/Idp.IdpAttribute.CountOfTargets"},
+                    {"$ref": "#/components/schemas/Idp.IdpAttribute.CountOfTargetsDone"},
+                    {"$ref": "#/components/schemas/Idp.IdpAttribute.Price"},
                     {
                         "type": "object",
                         "properties": {
