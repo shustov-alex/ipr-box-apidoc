@@ -1296,6 +1296,52 @@
                 }
             }
         },
+        "/targets/create-collection": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Targets"
+                ],
+                "summary": "06.14. Создать несколько целей",
+                "description": "Создать несколько целей",
+                "operationId": "targets.createTargetCollection",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Targets.Target.ToCreateCollection"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Цели созданы успешно",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.EmptySuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки валидации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ValidationErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/idp": {
             "get": {
                 "security": [
@@ -1909,7 +1955,7 @@
                 }
             }
         },
-        "/idp/mass-create": {
+        "/idp/create-collection": {
             "post": {
                 "security": [
                     {
@@ -4009,6 +4055,31 @@
                     {"$ref": "#/components/schemas/Targets.TargetAttribute.IdpId"},
                     {"$ref": "#/components/schemas/Targets.Target.ToUpdate"}
                 ]
+            },
+            "Targets.Target.ToCreateCollection": {
+                "type": "object",
+                "properties": {
+                    "year" : {
+                        "type": "integer",
+                        "description": "Год",
+                        "example": 2023
+                    },
+                    "employee_ids": {
+                        "type": "array",
+                        "description": "ID сотрудников",
+                        "items": {
+                            "type": "integer",
+                            "description": "ID сотрудника",
+                            "example": 64
+                        }
+                    },
+                    "targets": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Targets.Target.ToUpdate"
+                        }
+                    }
+                }
             },
             "Targets.Target.Base": {
                 "type": "object",
