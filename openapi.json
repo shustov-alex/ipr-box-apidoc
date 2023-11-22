@@ -1803,7 +1803,7 @@
                 "tags": [
                     "IDP"
                 ],
-                "summary": "07.14. Получить все возможные года, которые есть в ИПР сотрудников",
+                "summary": "07.13. Получить все возможные года, которые есть в ИПР сотрудников",
                 "description": "Получить все возможные года, которые есть в ИПР сотрудников",
                 "operationId": "idp.getYearsOfAllEmployees",
                 "responses": {
@@ -4608,7 +4608,8 @@
                 "type": "object",
                 "allOf": [
                     {"$ref": "#/components/schemas/Idp.IdpAttribute.ID"},
-                    {"$ref": "#/components/schemas/Idp.IdpAttribute.Year"}
+                    {"$ref": "#/components/schemas/Idp.IdpAttribute.Year"},
+                    {"$ref": "#/components/schemas/Idp.IdpAttribute.Status"}
                 ]
             },
             "Idp.Idp.DetailsView": {
@@ -4961,12 +4962,7 @@
                         "type": "object",
                         "properties": {
                             "success": {
-                                "type": "object",
-                                "allOf": [
-                                    { "$ref": "#/components/schemas/Idp.IdpAttribute.ID" },
-                                    { "$ref": "#/components/schemas/Idp.IdpAttribute.Year" },
-                                    { "$ref": "#/components/schemas/Idp.IdpAttribute.Status" }
-                                ]
+                                "$ref": "#/components/schemas/Idp.Idp.DetailsBriefView"
                             }
                         }
                     }
