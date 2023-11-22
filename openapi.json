@@ -3435,26 +3435,11 @@
                         "properties": {
                             "success": {
                                 "type": "object",
-                                "properties": {
-                                    "app.idp.create_idp": {
-                                        "type": "string",
-                                        "description": "Создание ИПР",
-                                        "enum": ["granted", "denied"],
-                                        "example": "granted"
-                                    },
-                                    "app.idp.delete_idp": {
-                                        "type": "string",
-                                        "description": "Удаление ИПР",
-                                        "enum": ["granted", "denied"],
-                                        "example": "granted"
-                                    },
-                                    "app.targets.create_target": {
-                                        "type": "string",
-                                        "description": "Создание цели",
-                                        "enum": ["granted", "denied"],
-                                        "example": "granted"
-                                    }
-                                }
+                                "allOf": [
+                                    {"$ref": "#/components/schemas/Idp.AccessRights.CreateIdp"},
+                                    {"$ref": "#/components/schemas/Idp.AccessRights.DeleteIdp"},
+                                    {"$ref": "#/components/schemas/Targets.AccessRights.CreateTarget"}
+                                ]
                             }
                         }
                     }
@@ -3786,6 +3771,17 @@
                                 }
                             }
                         }
+                    }
+                }
+            },
+            "Targets.AccessRights.CreateTarget": {
+                "type": "object",
+                "properties": {
+                    "app.targets.create_target": {
+                        "type": "string",
+                        "description": "Создание цели",
+                        "enum": ["granted", "denied"],
+                        "example": "granted"
                     }
                 }
             },
@@ -4687,6 +4683,28 @@
                     }
                 }
             },
+            "Idp.AccessRights.CreateIdp": {
+                "type": "object",
+                "properties": {
+                    "app.idp.create_idp": {
+                        "type": "string",
+                        "description": "Создание ИПР",
+                        "enum": ["granted", "denied"],
+                        "example": "granted"
+                    }
+                }
+            },
+            "Idp.AccessRights.DeleteIdp": {
+                "type": "object",
+                "properties": {
+                    "app.idp.delete_idp": {
+                        "type": "string",
+                        "description": "Удаление ИПР",
+                        "enum": ["granted", "denied"],
+                        "example": "granted"
+                    }
+                }
+            },
             "Idp.AccessRights.StartApproval": {
                 "type": "object",
                 "properties": {
@@ -4751,13 +4769,14 @@
                             "success": {
                                 "type": "object",
                                 "allOf": [
+                                    {"$ref": "#/components/schemas/Idp.AccessRights.DeleteIdp"},
                                     {"$ref": "#/components/schemas/Idp.AccessRights.StartApproval"},
                                     {"$ref": "#/components/schemas/Idp.AccessRights.CancelApproval"},
                                     {"$ref": "#/components/schemas/Idp.AccessRights.ApproveStage"},
                                     {"$ref": "#/components/schemas/Idp.AccessRights.RejectStage"},
                                     {"$ref": "#/components/schemas/Idp.AccessRights.UpdateRoute"}
                                 ],
-                                "required": ["app.idp.start_approval"]
+                                "required": ["app.idp.start_approval", "app.idp.delete_idp"]
                             }
                         }
                     }
