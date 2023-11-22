@@ -1909,6 +1909,52 @@
                 }
             }
         },
+        "/idp/mass-create": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "IDP"
+                ],
+                "summary": "07.16. Создать несколько ИПР",
+                "description": "Создать несколько ИПР",
+                "operationId": "idp.massCreateIdp",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Idp.Idp.ToCreateCollection"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Коллекция ИПР успешно создана",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.EmptySuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки валидации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ValidationErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/materials/tree": {
             "post": {
                 "security": [
@@ -4986,6 +5032,26 @@
                         }
                     }
                 }
+            },
+            "Idp.Idp.ToCreateCollection": {
+                "type": "object",
+                "allOf": [
+                    { "$ref": "#/components/schemas/Idp.IdpAttribute.Year" },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "employee_ids": {
+                                "type": "array",
+                                "description": "ID сотрудников",
+                                "items": {
+                                    "type": "integer",
+                                    "description": "ID сотрудника",
+                                    "example": 64
+                                }
+                            }
+                        }
+                    }
+                ]
             },
             "Materials.ItemAttribute.CategoryType": {
                 "type": "object",
