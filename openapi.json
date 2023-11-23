@@ -1972,7 +1972,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Idp.Idp.ToCreateCollection"
+                                "$ref": "#/components/schemas/Idp.IdpCollection.Request"
                             }
                         }
                     }
@@ -1980,6 +1980,190 @@
                 "responses": {
                     "200": {
                         "description": "Коллекция ИПР успешно создана",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.EmptySuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки валидации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ValidationErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/idp/check-if-approval-is-available": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "IDP"
+                ],
+                "summary": "07.17. Можно ли согласовать ИПР для нескольких сотрудников",
+                "description": "Можно ли согласовать ИПР для нескольких сотрудников",
+                "operationId": "idp.checkIfApprovalIsAvailable",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Idp.IdpCollection.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Список ID сотрудников",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Idp.Idp.CheckIfAttemptActionIsAvailable.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки валидации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ValidationErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/idp/approve-collection": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "IDP"
+                ],
+                "summary": "07.18. Согласовать ИПР для нескольких сотрудников",
+                "description": "Согласовать ИПР для нескольких сотрудников",
+                "operationId": "idp.approveCollection",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Idp.IdpCollection.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "ИПР будут согласованы в ближайшее время",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.EmptySuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки валидации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ValidationErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/idp/check-if-rejection-is-available": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "IDP"
+                ],
+                "summary": "07.19. Можно ли отправить на доработку ИПР для нескольких сотрудников",
+                "description": "Можно ли отправить на доработку ИПР для нескольких сотрудников",
+                "operationId": "idp.checkIfRejectionIsAvailable",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Idp.IdpCollection.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Список ID сотрудников",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Idp.Idp.CheckIfAttemptActionIsAvailable.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки валидации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ValidationErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/idp/reject-collection": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "IDP"
+                ],
+                "summary": "07.20. Отправить на доработку ИПР для нескольких сотрудников",
+                "description": "Отправить на доработку ИПР для нескольких сотрудников",
+                "operationId": "idp.rejectCollection",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Idp.IdpCollection.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "ИПР будут отправлены на доработку в ближайшее время",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -5104,7 +5288,58 @@
                     }
                 }
             },
-            "Idp.Idp.ToCreateCollection": {
+            "Idp.IdpCollection.Request": {
+                "type": "object",
+                "allOf": [
+                    { "$ref": "#/components/schemas/Idp.IdpAttribute.Year" },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "employee_ids": {
+                                "type": "array",
+                                "description": "ID сотрудников",
+                                "items": {
+                                    "type": "integer",
+                                    "description": "ID сотрудника",
+                                    "example": 64
+                                }
+                            }
+                        }
+                    }
+                ]
+            },
+            "Idp.Idp.CheckIfAttemptActionIsAvailable.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "object",
+                                "properties": {
+                                    "available_employee_ids": {
+                                        "type": "array",
+                                        "description": "Сотрудники, для которых действие доступно",
+                                        "items": {
+                                            "type": "integer",
+                                            "example": 64
+                                        }
+                                    },
+                                    "not_available_employee_ids": {
+                                        "type": "array",
+                                        "description": "Сотрудники, для которых действие недоступно",
+                                        "items": {
+                                            "type": "integer",
+                                            "example": 128
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "Idp.Idp.ApproveCollection.Request": {
                 "type": "object",
                 "allOf": [
                     { "$ref": "#/components/schemas/Idp.IdpAttribute.Year" },
