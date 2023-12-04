@@ -51,6 +51,10 @@
         {
             "name": "Divisions",
             "description": "10. Организационная структура"
+        },
+        {
+            "name": "Tasks",
+            "description": "11. Асинхронные задачи"
         }
     ],
     "paths": {
@@ -2803,6 +2807,153 @@
                                 },
                                 "schema": {
                                     "$ref": "#/components/schemas/Divisions.Tree.SuccessResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tasks": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Tasks"
+                ],
+                "summary": "11.01. Получить список асинхронных задач",
+                "description": "Получить список асинхронных задач",
+                "operationId": "tasks.getCollection",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Tasks.Collection.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Список асинхронных задач",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Tasks.Collection.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки валидации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ValidationErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Tasks"
+                ],
+                "summary": "11.02. Очистить список асинхронных задач",
+                "description": "Очистить список асинхронных задач",
+                "operationId": "tasks.deleteAll",
+                "responses": {
+                    "200": {
+                        "description": "Список успешно очищен",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.EmptySuccessResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tasks/{task_id}": {
+            "delete": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Tasks"
+                ],
+                "summary": "11.03. Скрыть асинхронную задачу из списка",
+                "description": "Скрыть асинхронную задачу из списка",
+                "operationId": "tasks.deleteOne",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Tasks.Path.Task.Id"}
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Задача успешно скрыта",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.EmptySuccessResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tasks/long-poll": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Tasks"
+                ],
+                "summary": "11.04. Запросить статус асинхронных задач",
+                "description": "Запросить статус асинхронных задач. Если хотя бы одна из задач, ID которых передан в теле запроса, находится в процессе исполнения, то backend будет ждать её завершения. Timeout ожидания - 30 секунд.",
+                "operationId": "tasks.longPoll",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Tasks.LongPoll.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Список асинхронных задач",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Tasks.Collection.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки валидации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ValidationErrorCollectionResponse"
                                 }
                             }
                         }
@@ -5907,6 +6058,103 @@
                         "example": "Московский филиал"
                     }
                 }
+            },
+            "Tasks.TaskAttribute.Id": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "ID",
+                        "example": 2048
+                    }
+                }
+            },
+            "Tasks.TaskAttribute.Type": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "description": "Тип",
+                        "example": "targets.report"
+                    }
+                }
+            },
+            "Tasks.TaskAttribute.Status": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "description": "Статус",
+                        "example": "done",
+                        "enum": ["new", "in_progress", "failed", "done"]
+                    }
+                }
+            },
+            "Tasks.TaskAttribute.CompletionPercent": {
+                "type": "object",
+                "properties": {
+                    "completion_percent": {
+                        "type": "integer",
+                        "description": "Процент исполнения",
+                        "example": 100,
+                        "nullable": true
+                    }
+                }
+            },
+            "Tasks.TaskDefaultObject": {
+                "type": "object",
+                "description": "Задача",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Tasks.TaskAttribute.Id"},
+                    {"$ref": "#/components/schemas/Tasks.TaskAttribute.Type"},
+                    {"$ref": "#/components/schemas/Tasks.TaskAttribute.Status"},
+                    {"$ref": "#/components/schemas/Tasks.TaskAttribute.CompletionPercent"}
+                ]
+            },
+            "Tasks.Collection.Request": {
+                "type": "object",
+                "properties": {
+                    "pagination": {
+                        "$ref": "#/components/schemas/Base.CursorPaginationBackward"
+                    }
+                }
+            },
+            "Tasks.Collection.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/Tasks.TaskDefaultObject"
+                                }
+                            }
+                        }
+                    },
+                    "meta": {
+                        "type": "object",
+                        "properties": {
+                            "pagination": {
+                                "$ref": "#/components/schemas/Base.CursorPaginationMeta"
+                            }
+                        }
+                    }
+                }
+            },
+            "Tasks.LongPoll.Request": {
+                "type": "object",
+                "properties": {
+                    "ids": {
+                        "type": "array",
+                        "description": "Список ID асинхронных задач",
+                        "items": {
+                            "type": "integer",
+                            "example": 2048
+                        }
+                    }
+                }
             }
         },
         "parameters": {
@@ -5986,6 +6234,16 @@
                 "required": true,
                 "description": "ID попытки согласования",
                 "example": 512,
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            "Tasks.Path.Task.Id": {
+                "name": "task_id",
+                "in": "path",
+                "required": true,
+                "description": "ID асрнхронной задачи",
+                "example": 2048,
                 "schema": {
                     "type": "integer"
                 }
