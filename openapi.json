@@ -55,6 +55,10 @@
         {
             "name": "Tasks",
             "description": "11. Асинхронные задачи"
+        },
+        {
+            "name": "Files",
+            "description": "12. Файлы"
         }
     ],
     "paths": {
@@ -3000,6 +3004,34 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/Base.ValidationErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/files/{file_id}/download": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Files"
+                ],
+                "summary": "12.01. Скачать файл",
+                "description": "Скачать файл",
+                "operationId": "files.downloadOne",
+                "responses": {
+                    "200": {
+                        "description": "Содержимое файла",
+                        "content": {
+                            "application/vnd.ms-excel": {
+                                "schema": {
+                                    "type": "string",
+                                    "format": "binary"
                                 }
                             }
                         }
@@ -6355,8 +6387,18 @@
                 "name": "task_id",
                 "in": "path",
                 "required": true,
-                "description": "ID асрнхронной задачи",
+                "description": "ID асинхронной задачи",
                 "example": 2048,
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            "Files.Path.File.Id": {
+                "name": "file_id",
+                "in": "path",
+                "required": true,
+                "description": "ID файла",
+                "example": 256,
                 "schema": {
                     "type": "integer"
                 }
