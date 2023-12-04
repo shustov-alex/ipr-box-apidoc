@@ -6101,6 +6101,17 @@
                     }
                 }
             },
+            "Tasks.TaskAttribute.FileId": {
+                "type": "object",
+                "properties": {
+                    "file_id": {
+                        "type": "integer",
+                        "description": "ID файла",
+                        "example": 128,
+                        "nullable": true
+                    }
+                }
+            },
             "Tasks.TaskDefaultObject": {
                 "type": "object",
                 "description": "Задача",
@@ -6108,7 +6119,8 @@
                     {"$ref": "#/components/schemas/Tasks.TaskAttribute.Id"},
                     {"$ref": "#/components/schemas/Tasks.TaskAttribute.Type"},
                     {"$ref": "#/components/schemas/Tasks.TaskAttribute.Status"},
-                    {"$ref": "#/components/schemas/Tasks.TaskAttribute.CompletionPercent"}
+                    {"$ref": "#/components/schemas/Tasks.TaskAttribute.CompletionPercent"},
+                    {"$ref": "#/components/schemas/Tasks.TaskAttribute.FileId"}
                 ]
             },
             "Tasks.Collection.Request": {
