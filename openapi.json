@@ -2193,6 +2193,52 @@
                 }
             }
         },
+        "/idp/generate-reports": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "IDP"
+                ],
+                "summary": "07.21. Сформировать отчёты",
+                "description": "Сформировать отчёты",
+                "operationId": "idp.generateReports",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Idp.GenerateReports.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Запрос на формирование отчётов принят",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Idp.GenerateReports.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки валидации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ValidationErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/materials/tree": {
             "post": {
                 "security": [
@@ -5621,6 +5667,61 @@
                         }
                     }
                 ]
+            },
+            "Idp.GenerateReports.Request": {
+                "type": "object",
+                "properties": {
+                    "employee_ids": {
+                        "type": "array",
+                        "description": "ID сотрудников",
+                        "items": {
+                            "type": "integer",
+                            "description": "ID сотрудника",
+                            "example": 64
+                        }
+                    },
+                    "reports": {
+                        "type": "array",
+                        "description": "Отчёты, которые нужно сформировать",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "type": {
+                                    "type": "string",
+                                    "description": "Тип отчёта",
+                                    "example": "idp.status_report",
+                                    "enum": ["idp.status_report", "targets.report"]
+                                },
+                                "years": {
+                                    "type": "array",
+                                    "description": "Годы, по которым осуществляется фильтрация. Если значение не передано, то будет обработана информация за все года.",
+                                    "nullable": true,
+                                    "items": {
+                                        "type": "integer",
+                                        "description": "Год",
+                                        "example": 2023
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "Idp.GenerateReports.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/Tasks.TaskDefaultObject"
+                                }
+                            }
+                        }
+                    }
+                }
             },
             "Materials.ItemAttribute.CategoryType": {
                 "type": "object",
