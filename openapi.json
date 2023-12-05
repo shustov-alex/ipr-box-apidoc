@@ -2083,11 +2083,11 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "ИПР будут согласованы в ближайшее время",
+                        "description": "Объект асинхронной задачи, в рамках которой будет проходить согласование ИПР",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Base.EmptySuccessResponse"
+                                    "$ref": "#/components/schemas/Idp.IdpCollection.SuccessResponse"
                                 }
                             }
                         }
@@ -5648,6 +5648,19 @@
                         }
                     }
                 ]
+            },
+            "Idp.IdpCollection.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "$ref": "#/components/schemas/Tasks.TaskDefaultObject"
+                            }
+                        }
+                    }
+                }
             },
             "Idp.Idp.CheckIfAttemptActionIsAvailable.SuccessResponse": {
                 "type": "object",
