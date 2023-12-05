@@ -5730,24 +5730,24 @@
                         "description": "Отчёты, которые нужно сформировать",
                         "items": {
                             "type": "object",
-                            "properties": {
-                                "type": {
-                                    "type": "string",
-                                    "description": "Тип отчёта",
-                                    "example": "idp.status_report",
-                                    "enum": ["idp.status_report", "targets.report"]
-                                },
-                                "years": {
-                                    "type": "array",
-                                    "description": "Годы, по которым осуществляется фильтрация. Если значение не передано, то будет обработана информация за все года.",
-                                    "nullable": true,
-                                    "items": {
-                                        "type": "integer",
-                                        "description": "Год",
-                                        "example": 2023
+                            "allOf": [
+                                {"$ref": "#/components/schemas/Tasks.TaskAttribute.Type"},
+                                {
+                                    "type": "object",
+                                    "properties": {
+                                        "years": {
+                                            "type": "array",
+                                            "description": "Годы, по которым осуществляется фильтрация. Если значение не передано, то будет обработана информация за все года.",
+                                            "nullable": true,
+                                            "items": {
+                                                "type": "integer",
+                                                "description": "Год",
+                                                "example": 2023
+                                            }
+                                        }
                                     }
                                 }
-                            }
+                            ]
                         }
                     }
                 }
@@ -6221,7 +6221,8 @@
                     "type": {
                         "type": "string",
                         "description": "Тип",
-                        "example": "targets.report"
+                        "example": "targets.report",
+                        "enum": ["idp.status_report", "targets.report", "idp.approve_collection"]
                     }
                 }
             },
