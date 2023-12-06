@@ -6222,7 +6222,7 @@
                         "type": "string",
                         "description": "Тип",
                         "example": "targets.report",
-                        "enum": ["idp.status_report", "targets.report", "idp.approve_collection"]
+                        "enum": ["idp.status_report", "targets.report", "idp.approve_collection", "materials.report"]
                     }
                 }
             },
