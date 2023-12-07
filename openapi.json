@@ -2664,7 +2664,7 @@
                     "Employees"
                 ],
                 "summary": "09.03. Получить краткую информацию о сотруднике",
-                "description": "Получить краткую информацию о сотруднике. Атрибут idps будет включен в ответ только если был указан в query-параметре extra_attributes.",
+                "description": "Получить краткую информацию о сотруднике. Атрибуты idps, position будут включены в ответ только если были указаны в query-параметре extra_attributes.",
                 "operationId": "employees.getEmployeeBriefDetails",
                 "parameters": [
                     {"$ref": "#/components/parameters/Employees.Path.Employee.Id"},
@@ -4066,6 +4066,16 @@
                                                 "items": {
                                                     "$ref": "#/components/schemas/Idp.Idp.DetailsBriefView"
                                                 }
+                                            },
+                                            "position": {
+                                                "type": "object",
+                                                "nullable": true,
+                                                "description": "Краткая информация о текущей должности. NULL, если дожность у сотрудника отсутствует.",
+                                                "allOf": [
+                                                    {"$ref": "#/components/schemas/Positions.ItemAttribute.Id"},
+                                                    {"$ref": "#/components/schemas/Positions.ItemAttribute.Name"},
+                                                    {"$ref": "#/components/schemas/Positions.ItemAttribute.PercentOfSuitability"}
+                                                ]
                                             }
                                         }
                                     }
@@ -4090,6 +4100,36 @@
                                 ]
                             }
                         }
+                    }
+                }
+            },
+            "Positions.ItemAttribute.Id": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "ID",
+                        "example": 256
+                    }
+                }
+            },
+            "Positions.ItemAttribute.Name": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Название",
+                        "example": "Сварщик"
+                    }
+                }
+            },
+            "Positions.ItemAttribute.PercentOfSuitability": {
+                "type": "object",
+                "properties": {
+                    "percent_of_suitability": {
+                        "type": "integer",
+                        "description": "Процент соответствия. NULL, если должность не предъявляет требований к навыкам.",
+                        "example": 25
                     }
                 }
             },
