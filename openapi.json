@@ -4975,7 +4975,7 @@
                 "properties": {
                     "count_of_targets": {
                         "type": "integer",
-                        "description": "Количество целей",
+                        "description": "Количество целей в статусах, отличных от cancelled.",
                         "example": 5
                     }
                 }
