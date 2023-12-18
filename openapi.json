@@ -59,6 +59,10 @@
         {
             "name": "Files",
             "description": "12. Файлы"
+        },
+        {
+            "name": "Notifications",
+            "description": "13. Уведомления"
         }
     ],
     "paths": {
@@ -3032,6 +3036,77 @@
                                 "schema": {
                                     "type": "string",
                                     "format": "binary"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/notifications": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Notifications"
+                ],
+                "summary": "13.01. Получить настройки уведомлений",
+                "description": "Получить настройки уведомлений. Секция 'self' присутствует всегда. Секция 'employees' будет добавлена если у пользователя есть хотя бы один сотрудник.",
+                "operationId": "notifications.getConfig",
+                "responses": {
+                    "200": {
+                        "description": "Список асинхронных задач",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Notifications.GetConfig.SuccessResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Notifications"
+                ],
+                "summary": "13.02. Сохранить настройки уведомлений",
+                "description": "Сохранить настройки уведомлений",
+                "operationId": "notifications.saveConfig",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Notifications.SaveConfig.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Настройки успешно сохранены",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.EmptySuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки валидации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ValidationErrorCollectionResponse"
                                 }
                             }
                         }
@@ -6351,6 +6426,131 @@
                         "items": {
                             "type": "integer",
                             "example": 2048
+                        }
+                    }
+                }
+            },
+            "Notifications.ConfigAttribute.Type": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "description": "Тип",
+                        "example": "employee.idp_actualization"
+                    }
+                }
+            },
+            "Notifications.ConfigAttribute.AvailableModes": {
+                "type": "object",
+                "properties": {
+                    "available_modes": {
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "description": "Доступные режимы",
+                            "enum": ["immediate", "daily", "never"]
+                        }
+                    }
+                }
+            },
+            "Notifications.ConfigAttribute.DefaultMode": {
+                "type": "object",
+                "properties": {
+                    "default_mode": {
+                        "type": "string",
+                        "description": "Режим по умолчанию",
+                        "enum": ["immediate", "daily", "never"]
+                    }
+                }
+            },
+            "Notifications.ConfigAttribute.SelectedMode": {
+                "type": "object",
+                "properties": {
+                    "selected_mode": {
+                        "type": "string",
+                        "description": "Выбранный режим",
+                        "enum": ["immediate", "daily", "never"]
+                    }
+                }
+            },
+            "Notifications.Sections.Self": {
+                "type": "object",
+                "properties": {
+                    "section": {
+                        "type": "string",
+                        "description": "Тип раздела",
+                        "enum": ["self"]
+                    },
+                    "config": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "description": "Конфигурация для конкретного типа",
+                            "allOf": [
+                                {"$ref": "#/components/schemas/Notifications.ConfigAttribute.Type"},
+                                {"$ref": "#/components/schemas/Notifications.ConfigAttribute.AvailableModes"},
+                                {"$ref": "#/components/schemas/Notifications.ConfigAttribute.DefaultMode"},
+                                {"$ref": "#/components/schemas/Notifications.ConfigAttribute.SelectedMode"}
+                            ]
+                        }
+                    }
+                }
+            },
+            "Notifications.Sections.Employees": {
+                "type": "object",
+                "properties": {
+                    "section": {
+                        "type": "string",
+                        "description": "Тип раздела",
+                        "enum": ["employees"]
+                    },
+                    "config": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "description": "Конфигурация для конкретного типа",
+                            "allOf": [
+                                {"$ref": "#/components/schemas/Notifications.ConfigAttribute.Type"},
+                                {"$ref": "#/components/schemas/Notifications.ConfigAttribute.AvailableModes"},
+                                {"$ref": "#/components/schemas/Notifications.ConfigAttribute.DefaultMode"},
+                                {"$ref": "#/components/schemas/Notifications.ConfigAttribute.SelectedMode"}
+                            ]
+                        }
+                    }
+                }
+            },
+            "Notifications.GetConfig.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "array",
+                                "items": {
+                                    "anyOf": [
+                                        {"$ref": "#/components/schemas/Notifications.Sections.Self"},
+                                        {"$ref": "#/components/schemas/Notifications.Sections.Employees"}
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "Notifications.SaveConfig.Request": {
+                "type": "object",
+                "description": "Объекты конфигурации, которые нужно сохранить",
+                "properties": {
+                    "config": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "description": "Конфигурация для конкретного типа",
+                            "allOf": [
+                                {"$ref": "#/components/schemas/Notifications.ConfigAttribute.Type"},
+                                {"$ref": "#/components/schemas/Notifications.ConfigAttribute.SelectedMode"}
+                            ]
                         }
                     }
                 }
