@@ -7,7 +7,7 @@
     },
     "servers": [
         {
-            "url": "http://idp-box.api.130.193.34.51.nip.io",
+            "url": "https://api.ipr.e-queo.xyz",
             "description": "Test server"
         }
     ],
