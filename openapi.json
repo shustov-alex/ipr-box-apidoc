@@ -6448,7 +6448,7 @@
                         "items": {
                             "type": "string",
                             "description": "Доступные режимы",
-                            "enum": ["immediate", "daily", "never"]
+                            "enum": ["immediately", "daily", "never"]
                         }
                     }
                 }
@@ -6459,7 +6459,7 @@
                     "default_mode": {
                         "type": "string",
                         "description": "Режим по умолчанию",
-                        "enum": ["immediate", "daily", "never"]
+                        "enum": ["immediately", "daily", "never"]
                     }
                 }
             },
@@ -6469,7 +6469,7 @@
                     "selected_mode": {
                         "type": "string",
                         "description": "Выбранный режим",
-                        "enum": ["immediate", "daily", "never"]
+                        "enum": ["immediately", "daily", "never"]
                     }
                 }
             },
