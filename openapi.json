@@ -3043,7 +3043,7 @@
                 }
             }
         },
-        "/notifications": {
+        "/notifications/config": {
             "get": {
                 "security": [
                     {
