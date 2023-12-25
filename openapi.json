@@ -3416,6 +3416,160 @@
                     }
                 }
             },
+            "Access.Right.AccessToAdminPanel": {
+                "type": "object",
+                "properties": {
+                    "app.admin.access_to_admin_panel": {
+                        "type": "string",
+                        "description": "Доступ к админ панели",
+                        "enum": ["granted", "denied"],
+                        "example": "granted"
+                    }
+                }
+            },
+            "Access.Right.AccessToEmployees": {
+                "type": "object",
+                "properties": {
+                    "app.employees.access_to_employees": {
+                        "type": "string",
+                        "description": "Доступ к разделу 'Сотрудники'",
+                        "enum": ["granted", "denied"],
+                        "example": "granted"
+                    }
+                }
+            },
+            "Access.Right.CreateTarget": {
+                "type": "object",
+                "properties": {
+                    "app.targets.create_target": {
+                        "type": "string",
+                        "description": "Создание цели",
+                        "enum": ["granted", "denied"],
+                        "example": "granted"
+                    }
+                }
+            },
+            "Access.Right.UpdateTarget": {
+                "type": "object",
+                "properties": {
+                    "app.targets.update_target": {
+                        "type": "string",
+                        "description": "Обновление цели",
+                        "enum": ["granted", "denied"],
+                        "example": "granted"
+                    }
+                }
+            },
+            "Access.Right.DeleteTarget": {
+                "type": "object",
+                "properties": {
+                    "app.targets.delete_target": {
+                        "type": "string",
+                        "description": "Удаление цели",
+                        "enum": ["granted", "denied"],
+                        "example": "granted"
+                    }
+                }
+            },
+            "Access.Right.CommentTarget": {
+                "type": "object",
+                "properties": {
+                    "app.targets.comment_target": {
+                        "type": "string",
+                        "description": "Комментирование цели",
+                        "enum": ["granted", "denied"],
+                        "example": "granted"
+                    }
+                }
+            },
+            "Access.Right.CreateIdp": {
+                "type": "object",
+                "properties": {
+                    "app.idp.create_idp": {
+                        "type": "string",
+                        "description": "Создать ИПР",
+                        "enum": ["granted", "denied"],
+                        "example": "granted"
+                    }
+                }
+            },
+            "Access.Right.DeleteIdp": {
+                "type": "object",
+                "properties": {
+                    "app.idp.delete_idp": {
+                        "type": "string",
+                        "description": "Удалить ИПР",
+                        "enum": ["granted", "denied"],
+                        "example": "granted"
+                    }
+                }
+            },
+            "Access.Right.GenerateReports": {
+                "type": "object",
+                "properties": {
+                    "app.idp.generate_reports": {
+                        "type": "string",
+                        "description": "Формирование отчётов",
+                        "enum": ["granted", "denied"],
+                        "example": "granted"
+                    }
+                }
+            },
+            "Access.Right.StartApproval": {
+                "type": "object",
+                "properties": {
+                    "app.idp.start_approval": {
+                        "type": "string",
+                        "description": "Запуск процесса согласования",
+                        "enum": ["granted", "denied"],
+                        "example": "granted"
+                    }
+                }
+            },
+            "Access.Right.CancelApproval": {
+                "type": "object",
+                "properties": {
+                    "app.idp.cancel_approval": {
+                        "type": "string",
+                        "description": "Отменить процесс согласования",
+                        "enum": ["granted", "denied"],
+                        "example": "granted"
+                    }
+                }
+            },
+            "Access.Right.ApproveStage": {
+                "type": "object",
+                "properties": {
+                    "app.idp.approve_stage": {
+                        "type": "string",
+                        "description": "Согласовать",
+                        "enum": ["granted", "denied"],
+                        "example": "granted"
+                    }
+                }
+            },
+            "Access.Right.RejectStage": {
+                "type": "object",
+                "properties": {
+                    "app.idp.reject_stage": {
+                        "type": "string",
+                        "description": "Отправить на доработку",
+                        "enum": ["granted", "denied"],
+                        "example": "granted"
+                    }
+                }
+            },
+            "Access.Right.UpdateRoute": {
+                "type": "object",
+                "properties": {
+                    "app.idp.update_route": {
+                        "type": "string",
+                        "description": "Редактиовать маршурт",
+                        "enum": ["granted", "denied"],
+                        "example": "granted"
+                    }
+                }
+            },
             "Auth.Login.Request": {
                 "type": "object",
                 "properties": {
@@ -3694,112 +3848,6 @@
                 },
                 "required": ["email", "text"]
             },
-
-
-
-            "Users.AccessRights.AccessToAdminPanel": {
-                "type": "object",
-                "properties": {
-                    "app.admin.access_to_admin_panel": {
-                        "type": "string",
-                        "description": "Доступ к админ панели",
-                        "enum": ["granted", "denied"],
-                        "example": "granted"
-                    }
-                }
-            },
-            "Users.AccessRights.AccessToEmployees": {
-                "type": "object",
-                "properties": {
-                    "app.employees.access_to_employees": {
-                        "type": "string",
-                        "description": "Доступ к разделу 'Сотрудники'",
-                        "enum": ["granted", "denied"],
-                        "example": "granted"
-                    }
-                }
-            },
-            "Users.AccessRights.CreateTarget": {
-                "type": "object",
-                "properties": {
-                    "app.targets.create_target": {
-                        "type": "string",
-                        "description": "Создание цели",
-                        "enum": ["granted", "denied"],
-                        "example": "granted"
-                    }
-                }
-            },
-            "Users.AccessRights.UpdateTarget": {
-                "type": "object",
-                "properties": {
-                    "app.targets.update_target": {
-                        "type": "string",
-                        "description": "Обновление цели",
-                        "enum": ["granted", "denied"],
-                        "example": "granted"
-                    }
-                }
-            },
-            "Users.AccessRights.DeleteTarget": {
-                "type": "object",
-                "properties": {
-                    "app.targets.delete_target": {
-                        "type": "string",
-                        "description": "Удаление цели",
-                        "enum": ["granted", "denied"],
-                        "example": "granted"
-                    }
-                }
-            },
-            "Users.AccessRights.CommentTarget": {
-                "type": "object",
-                "properties": {
-                    "app.targets.comment_target": {
-                        "type": "string",
-                        "description": "Комментирование цели",
-                        "enum": ["granted", "denied"],
-                        "example": "granted"
-                    }
-                }
-            },
-            "Users.AccessRights.CreateIdp": {
-                "type": "object",
-                "properties": {
-                    "app.idp.create_idp": {
-                        "type": "string",
-                        "description": "Создать ИПР",
-                        "enum": ["granted", "denied"],
-                        "example": "granted"
-                    }
-                }
-            },
-            "Users.AccessRights.DeleteIdp": {
-                "type": "object",
-                "properties": {
-                    "app.idp.delete_idp": {
-                        "type": "string",
-                        "description": "Удалить ИПР",
-                        "enum": ["granted", "denied"],
-                        "example": "granted"
-                    }
-                }
-            },
-            "Users.AccessRights.GenerateReports": {
-                "type": "object",
-                "properties": {
-                    "app.idp.generate_reports": {
-                        "type": "string",
-                        "description": "Формирование отчётов",
-                        "enum": ["granted", "denied"],
-                        "example": "granted"
-                    }
-                }
-            },
-
-
-
-
             "Users.UserAttribute.ID": {
                 "type": "object",
                 "properties": {
@@ -3877,15 +3925,15 @@
                     "access_rights": {
                         "type": "object",
                         "allOf": [
-                            {"$ref": "#/components/schemas/Users.AccessRights.AccessToAdminPanel"},
-                            {"$ref": "#/components/schemas/Users.AccessRights.AccessToEmployees"},
-                            {"$ref": "#/components/schemas/Users.AccessRights.CreateTarget"},
-                            {"$ref": "#/components/schemas/Users.AccessRights.UpdateTarget"},
-                            {"$ref": "#/components/schemas/Users.AccessRights.DeleteTarget"},
-                            {"$ref": "#/components/schemas/Users.AccessRights.CommentTarget"},
-                            {"$ref": "#/components/schemas/Users.AccessRights.CreateIdp"},
-                            {"$ref": "#/components/schemas/Users.AccessRights.DeleteIdp"},
-                            {"$ref": "#/components/schemas/Users.AccessRights.GenerateReports"}
+                            {"$ref": "#/components/schemas/Access.Right.AccessToAdminPanel"},
+                            {"$ref": "#/components/schemas/Access.Right.AccessToEmployees"},
+                            {"$ref": "#/components/schemas/Access.Right.CreateTarget"},
+                            {"$ref": "#/components/schemas/Access.Right.UpdateTarget"},
+                            {"$ref": "#/components/schemas/Access.Right.DeleteTarget"},
+                            {"$ref": "#/components/schemas/Access.Right.CommentTarget"},
+                            {"$ref": "#/components/schemas/Access.Right.CreateIdp"},
+                            {"$ref": "#/components/schemas/Access.Right.DeleteIdp"},
+                            {"$ref": "#/components/schemas/Access.Right.GenerateReports"}
                         ]
                     }
                 }
@@ -5435,61 +5483,6 @@
                     }
                 }
             },
-            "Idp.AccessRights.StartApproval": {
-                "type": "object",
-                "properties": {
-                    "app.idp.start_approval": {
-                        "type": "string",
-                        "description": "Запуск процесса согласования",
-                        "enum": ["granted", "denied"],
-                        "example": "granted"
-                    }
-                }
-            },
-            "Idp.AccessRights.CancelApproval": {
-                "type": "object",
-                "properties": {
-                    "app.idp.cancel_approval": {
-                        "type": "string",
-                        "description": "Отменить процесс согласования",
-                        "enum": ["granted", "denied"],
-                        "example": "granted"
-                    }
-                }
-            },
-            "Idp.AccessRights.ApproveStage": {
-                "type": "object",
-                "properties": {
-                    "app.idp.approve_stage": {
-                        "type": "string",
-                        "description": "Согласовать",
-                        "enum": ["granted", "denied"],
-                        "example": "granted"
-                    }
-                }
-            },
-            "Idp.AccessRights.RejectStage": {
-                "type": "object",
-                "properties": {
-                    "app.idp.reject_stage": {
-                        "type": "string",
-                        "description": "Отправить на доработку",
-                        "enum": ["granted", "denied"],
-                        "example": "granted"
-                    }
-                }
-            },
-            "Idp.AccessRights.UpdateRoute": {
-                "type": "object",
-                "properties": {
-                    "app.idp.update_route": {
-                        "type": "string",
-                        "description": "Редактиовать маршурт",
-                        "enum": ["granted", "denied"],
-                        "example": "granted"
-                    }
-                }
-            },
             "Idp.GetIdpAccessRights.SuccessResponse": {
                 "type": "object",
                 "properties": {
@@ -5499,13 +5492,13 @@
                             "success": {
                                 "type": "object",
                                 "allOf": [
-                                    {"$ref": "#/components/schemas/Idp.AccessRights.StartApproval"},
-                                    {"$ref": "#/components/schemas/Idp.AccessRights.CancelApproval"},
-                                    {"$ref": "#/components/schemas/Idp.AccessRights.ApproveStage"},
-                                    {"$ref": "#/components/schemas/Idp.AccessRights.RejectStage"},
-                                    {"$ref": "#/components/schemas/Idp.AccessRights.UpdateRoute"}
+                                    {"$ref": "#/components/schemas/Access.Right.StartApproval"},
+                                    {"$ref": "#/components/schemas/Access.Right.CancelApproval"},
+                                    {"$ref": "#/components/schemas/Access.Right.ApproveStage"},
+                                    {"$ref": "#/components/schemas/Access.Right.RejectStage"},
+                                    {"$ref": "#/components/schemas/Access.Right.UpdateRoute"}
                                 ],
-                                "required": ["app.idp.start_approval", "app.idp.delete_idp"]
+                                "required": ["app.idp.start_approval"]
                             }
                         }
                     }
@@ -5520,10 +5513,10 @@
                             "success": {
                                 "type": "object",
                                 "allOf": [
-                                    {"$ref": "#/components/schemas/Idp.AccessRights.CancelApproval"},
-                                    {"$ref": "#/components/schemas/Idp.AccessRights.ApproveStage"},
-                                    {"$ref": "#/components/schemas/Idp.AccessRights.RejectStage"},
-                                    {"$ref": "#/components/schemas/Idp.AccessRights.UpdateRoute"}
+                                    {"$ref": "#/components/schemas/Access.Right.CancelApproval"},
+                                    {"$ref": "#/components/schemas/Access.Right.ApproveStage"},
+                                    {"$ref": "#/components/schemas/Access.Right.RejectStage"},
+                                    {"$ref": "#/components/schemas/Access.Right.UpdateRoute"}
                                 ],
                                 "required": [
                                     "app.idp.cancel_approval",
