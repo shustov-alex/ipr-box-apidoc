@@ -2692,46 +2692,6 @@
                 }
             }
         },
-        "/employees/{employee_id}/access-rights": {
-            "get": {
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ],
-                "tags": [
-                    "Employees"
-                ],
-                "summary": "09.04. Получить права доступа в отношении сотрудника.",
-                "description": "Получить права доступа в отношении сотрудника.",
-                "operationId": "employees.getAccessRightsByEmployee",
-                "parameters": [
-                    {"$ref": "#/components/parameters/Employees.Path.Employee.Id"}
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Краткая информация о сотруднике",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Employees.AccessRightsByEmployee.SuccessResponse"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Запрашиваемый объект не найден",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Base.ObjectNotFoundErrorCollectionResponse"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
         "/divisions/tree": {
             "post": {
                 "security": [
@@ -4224,24 +4184,6 @@
                     }
                 }
             },
-            "Employees.AccessRightsByEmployee.SuccessResponse": {
-                "type": "object",
-                "properties": {
-                    "data": {
-                        "type": "object",
-                        "properties": {
-                            "success": {
-                                "type": "object",
-                                "allOf": [
-                                    {"$ref": "#/components/schemas/Idp.AccessRights.CreateIdp"},
-                                    {"$ref": "#/components/schemas/Idp.AccessRights.DeleteIdp"},
-                                    {"$ref": "#/components/schemas/Targets.AccessRights.CreateTarget"}
-                                ]
-                            }
-                        }
-                    }
-                }
-            },
             "Positions.ItemAttribute.Id": {
                 "type": "object",
                 "properties": {
@@ -4567,17 +4509,6 @@
                                 }
                             }
                         }
-                    }
-                }
-            },
-            "Targets.AccessRights.CreateTarget": {
-                "type": "object",
-                "properties": {
-                    "app.targets.create_target": {
-                        "type": "string",
-                        "description": "Создание цели",
-                        "enum": ["granted", "denied"],
-                        "example": "granted"
                     }
                 }
             },
@@ -5504,28 +5435,6 @@
                     }
                 }
             },
-            "Idp.AccessRights.CreateIdp": {
-                "type": "object",
-                "properties": {
-                    "app.idp.create_idp": {
-                        "type": "string",
-                        "description": "Создание ИПР",
-                        "enum": ["granted", "denied"],
-                        "example": "granted"
-                    }
-                }
-            },
-            "Idp.AccessRights.DeleteIdp": {
-                "type": "object",
-                "properties": {
-                    "app.idp.delete_idp": {
-                        "type": "string",
-                        "description": "Удаление ИПР",
-                        "enum": ["granted", "denied"],
-                        "example": "granted"
-                    }
-                }
-            },
             "Idp.AccessRights.StartApproval": {
                 "type": "object",
                 "properties": {
@@ -5590,7 +5499,6 @@
                             "success": {
                                 "type": "object",
                                 "allOf": [
-                                    {"$ref": "#/components/schemas/Idp.AccessRights.DeleteIdp"},
                                     {"$ref": "#/components/schemas/Idp.AccessRights.StartApproval"},
                                     {"$ref": "#/components/schemas/Idp.AccessRights.CancelApproval"},
                                     {"$ref": "#/components/schemas/Idp.AccessRights.ApproveStage"},
