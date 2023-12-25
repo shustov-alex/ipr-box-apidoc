@@ -3022,6 +3022,9 @@
                 "summary": "12.01. Скачать файл",
                 "description": "Скачать файл",
                 "operationId": "files.downloadOne",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Files.Path.File.Id"}
+                ],
                 "responses": {
                     "200": {
                         "description": "Содержимое файла",
@@ -3731,50 +3734,112 @@
                 },
                 "required": ["email", "text"]
             },
-            "Users.AccessRights.CreateOwnTarget": {
+
+
+
+            "Users.AccessRights.AccessToAdminPanel": {
                 "type": "object",
                 "properties": {
-                    "app.targets.create_own_target": {
+                    "app.admin.access_to_admin_panel": {
                         "type": "string",
-                        "description": "Право на создание собственной цели",
+                        "description": "Доступ к админ панели",
                         "enum": ["granted", "denied"],
                         "example": "granted"
                     }
                 }
             },
-            "Users.AccessRights.UpdateOwnTarget": {
+            "Users.AccessRights.AccessToEmployees": {
                 "type": "object",
                 "properties": {
-                    "app.targets.update_own_target": {
+                    "app.employees.access_to_employees": {
                         "type": "string",
-                        "description": "Право на редактирование собственной цели",
+                        "description": "Доступ к разделу 'Сотрудники'",
                         "enum": ["granted", "denied"],
                         "example": "granted"
                     }
                 }
             },
-            "Users.AccessRights.DeleteOwnTarget": {
+            "Users.AccessRights.CreateTarget": {
                 "type": "object",
                 "properties": {
-                    "app.targets.delete_own_target": {
+                    "app.targets.create_target": {
                         "type": "string",
-                        "description": "Право на удаление собственной цели",
+                        "description": "Создание цели",
                         "enum": ["granted", "denied"],
                         "example": "granted"
                     }
                 }
             },
-            "Users.AccessRights.LeaveCommentsOnOwnTarget": {
+            "Users.AccessRights.UpdateTarget": {
                 "type": "object",
                 "properties": {
-                    "app.targets.leave_comments_on_own_target": {
+                    "app.targets.update_target": {
                         "type": "string",
-                        "description": "Право на оставление комментариев к собственной цели",
+                        "description": "Обновление цели",
                         "enum": ["granted", "denied"],
                         "example": "granted"
                     }
                 }
             },
+            "Users.AccessRights.DeleteTarget": {
+                "type": "object",
+                "properties": {
+                    "app.targets.delete_target": {
+                        "type": "string",
+                        "description": "Удаление цели",
+                        "enum": ["granted", "denied"],
+                        "example": "granted"
+                    }
+                }
+            },
+            "Users.AccessRights.CommentTarget": {
+                "type": "object",
+                "properties": {
+                    "app.targets.comment_target": {
+                        "type": "string",
+                        "description": "Комментирование цели",
+                        "enum": ["granted", "denied"],
+                        "example": "granted"
+                    }
+                }
+            },
+            "Users.AccessRights.CreateIdp": {
+                "type": "object",
+                "properties": {
+                    "app.idp.create_idp": {
+                        "type": "string",
+                        "description": "Создать ИПР",
+                        "enum": ["granted", "denied"],
+                        "example": "granted"
+                    }
+                }
+            },
+            "Users.AccessRights.DeleteIdp": {
+                "type": "object",
+                "properties": {
+                    "app.idp.delete_idp": {
+                        "type": "string",
+                        "description": "Удалить ИПР",
+                        "enum": ["granted", "denied"],
+                        "example": "granted"
+                    }
+                }
+            },
+            "Users.AccessRights.GenerateReports": {
+                "type": "object",
+                "properties": {
+                    "app.idp.generate_reports": {
+                        "type": "string",
+                        "description": "Формирование отчётов",
+                        "enum": ["granted", "denied"],
+                        "example": "granted"
+                    }
+                }
+            },
+
+
+
+
             "Users.UserAttribute.ID": {
                 "type": "object",
                 "properties": {
@@ -3852,10 +3917,15 @@
                     "access_rights": {
                         "type": "object",
                         "allOf": [
-                            { "$ref": "#/components/schemas/Users.AccessRights.CreateOwnTarget" },
-                            { "$ref": "#/components/schemas/Users.AccessRights.UpdateOwnTarget" },
-                            { "$ref": "#/components/schemas/Users.AccessRights.DeleteOwnTarget" },
-                            { "$ref": "#/components/schemas/Users.AccessRights.LeaveCommentsOnOwnTarget" }
+                            {"$ref": "#/components/schemas/Users.AccessRights.AccessToAdminPanel"},
+                            {"$ref": "#/components/schemas/Users.AccessRights.AccessToEmployees"},
+                            {"$ref": "#/components/schemas/Users.AccessRights.CreateTarget"},
+                            {"$ref": "#/components/schemas/Users.AccessRights.UpdateTarget"},
+                            {"$ref": "#/components/schemas/Users.AccessRights.DeleteTarget"},
+                            {"$ref": "#/components/schemas/Users.AccessRights.CommentTarget"},
+                            {"$ref": "#/components/schemas/Users.AccessRights.CreateIdp"},
+                            {"$ref": "#/components/schemas/Users.AccessRights.DeleteIdp"},
+                            {"$ref": "#/components/schemas/Users.AccessRights.GenerateReports"}
                         ]
                     }
                 }
