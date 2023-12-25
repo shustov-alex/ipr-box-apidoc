@@ -804,8 +804,7 @@
                 "description": "Получить детальную информацию о цели",
                 "operationId": "targets.getTargetDetails",
                 "parameters": [
-                    {"$ref": "#/components/parameters/Targets.Path.Target.Id"},
-                    {"$ref": "#/components/parameters/Employees.Query.Employee.Id"}
+                    {"$ref": "#/components/parameters/Targets.Path.Target.Id"}
                 ],
                 "responses": {
                     "200": {
@@ -1071,8 +1070,7 @@
                 "description": "Получить количество связанных объектов",
                 "operationId": "targets.getCountOfRelations",
                 "parameters": [
-                    {"$ref": "#/components/parameters/Targets.Path.Target.Id"},
-                    {"$ref": "#/components/parameters/Employees.Query.Employee.Id"}
+                    {"$ref": "#/components/parameters/Targets.Path.Target.Id"}
                 ],
                 "responses": {
                     "200": {
@@ -1112,8 +1110,7 @@
                 "description": "Получить выбранные навыки по ID цели",
                 "operationId": "targets.getTargetSkills",
                 "parameters": [
-                    {"$ref": "#/components/parameters/Targets.Path.Target.Id"},
-                    {"$ref": "#/components/parameters/Employees.Query.Employee.Id"}
+                    {"$ref": "#/components/parameters/Targets.Path.Target.Id"}
                 ],
                 "responses": {
                     "200": {
@@ -1153,8 +1150,7 @@
                 "description": "Получить выбранные материалы по ID цели",
                 "operationId": "targets.getTargetMaterials",
                 "parameters": [
-                    {"$ref": "#/components/parameters/Targets.Path.Target.Id"},
-                    {"$ref": "#/components/parameters/Employees.Query.Employee.Id"}
+                    {"$ref": "#/components/parameters/Targets.Path.Target.Id"}
                 ],
                 "responses": {
                     "200": {
@@ -1195,8 +1191,7 @@
                 "operationId": "targets.getTargetMaterial",
                 "parameters": [
                     {"$ref": "#/components/parameters/Targets.Path.Target.Id"},
-                    {"$ref": "#/components/parameters/Materials.Path.Material.Id"},
-                    {"$ref": "#/components/parameters/Employees.Query.Employee.Id"}
+                    {"$ref": "#/components/parameters/Materials.Path.Material.Id"}
                 ],
                 "responses": {
                     "200": {
@@ -1236,8 +1231,7 @@
                 "description": "Получить комментарии по ID цели",
                 "operationId": "targets.getTargetComments",
                 "parameters": [
-                    {"$ref": "#/components/parameters/Targets.Path.Target.Id"},
-                    {"$ref": "#/components/parameters/Employees.Query.Employee.Id"}
+                    {"$ref": "#/components/parameters/Targets.Path.Target.Id"}
                 ],
                 "responses": {
                     "200": {
