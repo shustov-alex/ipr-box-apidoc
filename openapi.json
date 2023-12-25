@@ -3942,9 +3942,19 @@
                 "type": "object",
                 "properties": {
                     "role": {
-                        "type": "string",
-                        "description": "Роль",
-                        "example": "employee"
+                        "type": "object",
+                        "properties": {
+                            "id": {
+                                "type": "integer",
+                                "description": "ID роли",
+                                "example": 56
+                            },
+                            "name": {
+                                "type": "string",
+                                "description": "Название роли",
+                                "example": "Сотрудник"
+                            }
+                        }
                     }
                 }
             },
