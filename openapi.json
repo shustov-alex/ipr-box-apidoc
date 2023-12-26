@@ -4155,6 +4155,15 @@
                                                     "items": {
                                                         "$ref": "#/components/schemas/Divisions.DivisionBriefView"
                                                     }
+                                                },
+                                                "position": {
+                                                    "type": "object",
+                                                    "nullable": true,
+                                                    "description": "Текущая должность. NULL, если отсутствует.",
+                                                    "allOf": [
+                                                        {"$ref": "#/components/schemas/Positions.ItemAttribute.Id"},
+                                                        {"$ref": "#/components/schemas/Positions.ItemAttribute.Name"}
+                                                    ]
                                                 }
                                             }
                                         }
