@@ -63,6 +63,10 @@
         {
             "name": "Notifications",
             "description": "13. Уведомления"
+        },
+        {
+            "name": "AdminPanel",
+            "description": "14. Панель администратора"
         }
     ],
     "paths": {
@@ -3070,6 +3074,96 @@
                     }
                 }
             }
+        },
+        "/admin/roles": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanel"
+                ],
+                "summary": "14.01. Список всех ролей в системе",
+                "description": "Список всех ролей в системе",
+                "operationId": "adminPanel.getRoles",
+                "responses": {
+                    "200": {
+                        "description": "Список ролей",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.Roles.Collection.SuccessResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/users/sources": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanel"
+                ],
+                "summary": "14.02. Список возможных источников пользователей",
+                "description": "Список возможных источников пользователей",
+                "operationId": "adminPanel.getUserSources",
+                "responses": {
+                    "200": {
+                        "description": "Список источников",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.UserSources.Collection.SuccessResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/users": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanel"
+                ],
+                "summary": "14.03. Получить список пользователей",
+                "description": "Получить список пользователей (аккаунты + сотрудники)",
+                "operationId": "adminPanel.getUsers",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AdminPanel.Users.Collection.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Список пользователей",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.Users.Collection.SuccessResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -3570,6 +3664,34 @@
                     }
                 }
             },
+            "Roles.RoleAttribute.Id": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "ID роли",
+                        "example": 56
+                    }
+                }
+            },
+            "Roles.RoleAttribute.Name": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Название роли",
+                        "example": "Сотрудник"
+                    }
+                }
+            },
+            "Roles.DefaultView": {
+                "type": "object",
+                "description": "Роль",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Roles.RoleAttribute.Id"},
+                    {"$ref": "#/components/schemas/Roles.RoleAttribute.Name"}
+                ]
+            },
             "Auth.Login.Request": {
                 "type": "object",
                 "properties": {
@@ -3938,26 +4060,6 @@
                     }
                 }
             },
-            "Users.UserAttribute.Role": {
-                "type": "object",
-                "properties": {
-                    "role": {
-                        "type": "object",
-                        "properties": {
-                            "id": {
-                                "type": "integer",
-                                "description": "ID роли",
-                                "example": 56
-                            },
-                            "name": {
-                                "type": "string",
-                                "description": "Название роли",
-                                "example": "Сотрудник"
-                            }
-                        }
-                    }
-                }
-            },
             "Users.UserAttribute.CreatedAt": {
                 "type": "object",
                 "properties": {
@@ -3965,6 +4067,16 @@
                         "type": "string",
                         "description": "Дата создания",
                         "example": "2023-09-01 12:10:20 +03:00"
+                    }
+                }
+            },
+            "Users.UserAttribute.Source": {
+                "type": "object",
+                "properties": {
+                    "source": {
+                        "type": "string",
+                        "description": "Источник данных",
+                        "example": "academia"
                     }
                 }
             },
@@ -6115,10 +6227,17 @@
                     "author": {
                         "type": "object",
                         "allOf": [
-                            { "$ref": "#/components/schemas/Users.UserAttribute.ID" },
-                            { "$ref": "#/components/schemas/Users.UserAttribute.Role" },
-                            { "$ref": "#/components/schemas/Users.UserAttribute.FirstName" },
-                            { "$ref": "#/components/schemas/Users.UserAttribute.LastName" }
+                            {"$ref": "#/components/schemas/Users.UserAttribute.ID"},
+                            {"$ref": "#/components/schemas/Users.UserAttribute.FirstName"},
+                            {"$ref": "#/components/schemas/Users.UserAttribute.LastName"},
+                            {
+                                "type": "object",
+                                "properties": {
+                                    "role": {
+                                        "$ref": "#/components/schemas/Roles.DefaultView"
+                                    }
+                                }
+                            }
                         ]
                     }
                 }
@@ -6535,6 +6654,180 @@
                                 {"$ref": "#/components/schemas/Notifications.ConfigAttribute.Type"},
                                 {"$ref": "#/components/schemas/Notifications.ConfigAttribute.SelectedMode"}
                             ]
+                        }
+                    }
+                }
+            },
+            "AdminPanel.Roles.Collection.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/Roles.DefaultView"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "AdminPanel.UserSources.Collection.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string",
+                                    "description": "Источник данных о пользователе",
+                                    "enum": ["academia", "file"]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "AdminPanel.Users.Collection.Sort": {
+                "type": "object",
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/Base.Sort"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "attribute": {
+                                "type": "string",
+                                "description": "Значение, по которому производится сортировка. Если не указано, то будет использовано значение по умолчанию.",
+                                "enum": ["created_at", "id"],
+                                "example": "created_at"
+                            }
+                        }
+                    }
+                ]
+            },
+            "AdminPanel.Users.Collection.Filter": {
+                "type": "object",
+                "properties": {
+                    "archive": {
+                        "type": "boolean",
+                        "description": "Искать в архиве",
+                        "nullable": true,
+                        "example": false
+                    },
+                    "role_id": {
+                        "type": "integer",
+                        "description": "ID роли",
+                        "nullable": true,
+                        "example": 16
+                    },
+                    "division_ids": {
+                        "type": "array",
+                        "nullable": true,
+                        "items": {
+                            "type": "integer",
+                            "description": "ID элемента орг. структуры",
+                            "example": 256
+                        }
+                    },
+                    "created_after": {
+                        "type": "string",
+                        "description": "Включать в результат пользователей с датой создания больше указанной",
+                        "nullable": true,
+                        "example": "2023-12-26 11:57:01 +00:00"
+                    },
+                    "created_before": {
+                        "type": "string",
+                        "description": "Включать в результат пользователей с датой создания меньше указанной",
+                        "nullable": true,
+                        "example": "2023-12-26 11:57:01 +00:00"
+                    },
+                    "source": {
+                        "type": "string",
+                        "description": "Источник данных о пользователе",
+                        "nullable": true,
+                        "example": "academia"
+                    }
+                }
+            },
+            "AdminPanel.Users.Collection.Request": {
+                "type": "object",
+                "properties": {
+                    "sort": {
+                        "$ref": "#/components/schemas/AdminPanel.Users.Collection.Sort"
+                    },
+                    "filter": {
+                        "$ref": "#/components/schemas/AdminPanel.Users.Collection.Filter"
+                    },
+                    "pagination": {
+                        "$ref": "#/components/schemas/Base.OffsetPagination"
+                    }
+                },
+                "required": ["filter"]
+            },
+            "AdminPanel.Users.Collection.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "description": "Пользователь",
+                                    "allOf": [
+                                        {"$ref": "#/components/schemas/Users.UserAttribute.ID"},
+                                        {"$ref": "#/components/schemas/Users.UserAttribute.Source"},
+                                        {"$ref": "#/components/schemas/Users.UserAttribute.CreatedAt"},
+                                        {
+                                            "type": "object",
+                                            "properties": {
+                                                "employee": {
+                                                    "type": "object",
+                                                    "description": "Сотрудник. NULL, если отсутствует.",
+                                                    "nullable": true,
+                                                    "allOf": [
+                                                        { "$ref": "#/components/schemas/Employees.EmployeeAttribute.ID" },
+                                                        { "$ref": "#/components/schemas/Employees.EmployeeAttribute.FirstName" },
+                                                        { "$ref": "#/components/schemas/Employees.EmployeeAttribute.LastName" },
+                                                        {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "position": {
+                                                                    "type": "object",
+                                                                    "nullable": true,
+                                                                    "description": "Текущая должность. NULL, если отсутствует.",
+                                                                    "allOf": [
+                                                                        {"$ref": "#/components/schemas/Positions.ItemAttribute.Id"},
+                                                                        {"$ref": "#/components/schemas/Positions.ItemAttribute.Name"}
+                                                                    ]
+                                                                }
+                                                            }
+                                                        }
+                                                    ]
+                                                },
+                                                "role": {
+                                                    "$ref": "#/components/schemas/Roles.DefaultView"
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "meta": {
+                        "type": "object",
+                        "properties": {
+                            "pagination": {
+                                "$ref": "#/components/schemas/Base.OffsetPaginationMeta"
+                            }
                         }
                     }
                 }
