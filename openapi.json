@@ -6812,6 +6812,7 @@
                                                     "nullable": true,
                                                     "allOf": [
                                                         { "$ref": "#/components/schemas/Employees.EmployeeAttribute.ID" },
+                                                        { "$ref": "#/components/schemas/Employees.EmployeeAttribute.ExternalID" },
                                                         { "$ref": "#/components/schemas/Employees.EmployeeAttribute.FirstName" },
                                                         { "$ref": "#/components/schemas/Employees.EmployeeAttribute.LastName" },
                                                         {
