@@ -4076,7 +4076,7 @@
                     "source": {
                         "type": "string",
                         "description": "Источник данных",
-                        "example": "academia"
+                        "example": "idp"
                     }
                 }
             },
@@ -6685,7 +6685,7 @@
                                 "items": {
                                     "type": "string",
                                     "description": "Источник данных о пользователе",
-                                    "enum": ["academia", "file"]
+                                    "enum": ["equeo", "idp", "other"]
                                 }
                             }
                         }
@@ -6719,6 +6719,18 @@
                         "description": "Искать в архиве",
                         "nullable": true,
                         "example": false
+                    },
+                    "id": {
+                        "type": "string",
+                        "description": "ID пользователя (аккаунта)",
+                        "nullable": true,
+                        "example": "user_001"
+                    },
+                    "employee_text_query": {
+                        "type": "string",
+                        "description": "Текстовая строка для поиска по атрибутам сотрудника (внешний ID, имя, название должности)",
+                        "nullable": true,
+                        "example": "Иван"
                     },
                     "role_ids": {
                         "type": "array",
@@ -6756,7 +6768,7 @@
                         "items": {
                             "type": "string",
                             "description": "Источник данных о пользователе",
-                            "example": "academia"
+                            "example": "idp"
                         }
                     }
                 }
