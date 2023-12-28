@@ -6720,11 +6720,14 @@
                         "nullable": true,
                         "example": false
                     },
-                    "role_id": {
-                        "type": "integer",
-                        "description": "ID роли",
+                    "role_ids": {
+                        "type": "array",
                         "nullable": true,
-                        "example": 16
+                        "items": {
+                            "type": "integer",
+                            "description": "ID роли",
+                            "example": 16
+                        }
                     },
                     "division_ids": {
                         "type": "array",
@@ -6747,11 +6750,14 @@
                         "nullable": true,
                         "example": "2023-12-26 11:57:01 +00:00"
                     },
-                    "source": {
-                        "type": "string",
-                        "description": "Источник данных о пользователе",
+                    "sources": {
+                        "type": "array",
                         "nullable": true,
-                        "example": "academia"
+                        "items": {
+                            "type": "string",
+                            "description": "Источник данных о пользователе",
+                            "example": "academia"
+                        }
                     }
                 }
             },
