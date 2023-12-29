@@ -3379,8 +3379,8 @@
                 "tags": [
                     "AdminPanel"
                 ],
-                "summary": "14.09. Обновить пользователя",
-                "description": "Обновить пользователя",
+                "summary": "14.09. Обновить пользователя (аккаунт + сотрудник)",
+                "description": "Обновить пользователя (аккаунт + сотрудник)",
                 "operationId": "adminPanel.updateUserDetails",
                 "parameters": [
                     {"$ref": "#/components/parameters/AdminPanel.Path.User.Id"}
