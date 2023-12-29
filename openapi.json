@@ -3256,6 +3256,80 @@
                     }
                 }
             }
+        },
+        "/admin/users/import": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanel"
+                ],
+                "summary": "14.06. Импортировать пользователей",
+                "description": "Импортировать пользователей из xlsx-файла",
+                "operationId": "adminPanel.importUsers",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AdminPanel.Users.ImportCollection.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Объект асинхронной задачи, в рамках которой будет проходить импорт пользователей",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.Users.ImportCollection.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки валидации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ValidationErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/users/import/template": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanel"
+                ],
+                "summary": "14.07. Скачать шаблон для импорта пользователей",
+                "description": "Скачать шаблон для импорта пользователей",
+                "operationId": "adminPanel.getTemplateToImportUsers",
+                "responses": {
+                    "200": {
+                        "description": "xlsx-файл",
+                        "content": {
+                            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": {
+                                "schema": {
+                                    "type": "string",
+                                    "format": "binary"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -6953,7 +7027,8 @@
                             "example": "user_001"
                         }
                     }
-                }
+                },
+                "required": ["ids"]
             },
             "AdminPanel.Users.RestoreCollection.Request": {
                 "type": "object",
@@ -6964,6 +7039,37 @@
                             "type": "string",
                             "description": "ID пользователя (аккаунта)",
                             "example": "user_001"
+                        }
+                    }
+                },
+                "required": ["ids"]
+            },
+            "AdminPanel.Users.ImportCollection.Request": {
+                "type": "object",
+                "properties": {
+                    "file": {
+                        "description": "Импортируемый файл",
+                        "type": "string",
+                        "format": "binary"
+                    },
+                    "update_users": {
+                        "type": "boolean",
+                        "description": "Обновить данные пользователей, если они уже есть на платформе",
+                        "nullable": true,
+                        "example": true
+                    }
+                },
+                "required": ["file"]
+            },
+            "AdminPanel.Users.ImportCollection.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "$ref": "#/components/schemas/Tasks.TaskDefaultObject"
+                            }
                         }
                     }
                 }
