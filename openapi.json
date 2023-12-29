@@ -3164,6 +3164,52 @@
                     }
                 }
             }
+        },
+        "/admin/users/archive": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanel"
+                ],
+                "summary": "14.04. Архивация аккаунтов и сотрудников",
+                "description": "Архивация аккаунтов и сотрудников",
+                "operationId": "adminPanel.archiveUsers",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AdminPanel.Users.ArchiveCollection.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Аккаунты и сотрудники успешно отправлены в архив",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.EmptySuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки валидации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ValidationErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -6785,8 +6831,7 @@
                     "pagination": {
                         "$ref": "#/components/schemas/Base.OffsetPagination"
                     }
-                },
-                "required": ["filter"]
+                }
             },
             "AdminPanel.Users.Collection.SuccessResponse": {
                 "type": "object",
@@ -6847,6 +6892,19 @@
                             "pagination": {
                                 "$ref": "#/components/schemas/Base.OffsetPaginationMeta"
                             }
+                        }
+                    }
+                }
+            },
+            "AdminPanel.Users.ArchiveCollection.Request": {
+                "type": "object",
+                "properties": {
+                    "ids": {
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "description": "ID пользователя (аккаунта)",
+                            "example": "user_001"
                         }
                     }
                 }
