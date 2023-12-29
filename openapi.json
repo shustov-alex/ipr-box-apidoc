@@ -3330,6 +3330,36 @@
                     }
                 }
             }
+        },
+        "/admin/users/details/{user_id}": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanel"
+                ],
+                "summary": "14.08. Получить подробную информацию о пользователе (аккаунт + сотрудник)",
+                "description": "Получить подробную информацию о пользователе (аккаунт + сотрудник)",
+                "operationId": "adminPanel.getUserDetails",
+                "parameters": [
+                    {"$ref": "#/components/parameters/AdminPanel.Path.User.Id"}
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Подробная информация о пользователе",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.Users.UserDetails.SuccessResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -3850,7 +3880,7 @@
                     }
                 }
             },
-            "Roles.DefaultView": {
+            "Roles.RoleDefaultView": {
                 "type": "object",
                 "description": "Роль",
                 "allOf": [
@@ -4365,12 +4395,12 @@
                                     "type": "object",
                                     "description": "Сотрудник",
                                     "allOf": [
-                                        { "$ref": "#/components/schemas/Employees.EmployeeAttribute.ID" },
-                                        { "$ref": "#/components/schemas/Employees.EmployeeAttribute.ExternalID" },
-                                        { "$ref": "#/components/schemas/Employees.EmployeeAttribute.Status" },
-                                        { "$ref": "#/components/schemas/Employees.EmployeeAttribute.CreatedAt" },
-                                        { "$ref": "#/components/schemas/Employees.EmployeeAttribute.FirstName" },
-                                        { "$ref": "#/components/schemas/Employees.EmployeeAttribute.LastName" },
+                                        {"$ref": "#/components/schemas/Employees.EmployeeAttribute.ID"},
+                                        {"$ref": "#/components/schemas/Employees.EmployeeAttribute.ExternalID"},
+                                        {"$ref": "#/components/schemas/Employees.EmployeeAttribute.Status"},
+                                        {"$ref": "#/components/schemas/Employees.EmployeeAttribute.CreatedAt"},
+                                        {"$ref": "#/components/schemas/Employees.EmployeeAttribute.FirstName"},
+                                        {"$ref": "#/components/schemas/Employees.EmployeeAttribute.LastName"},
                                         {
                                             "type": "object",
                                             "properties": {
@@ -4431,17 +4461,11 @@
                                                 "divisions": {
                                                     "type": "array",
                                                     "items": {
-                                                        "$ref": "#/components/schemas/Divisions.DivisionBriefView"
+                                                        "$ref": "#/components/schemas/Divisions.DivisionDefaultView"
                                                     }
                                                 },
                                                 "position": {
-                                                    "type": "object",
-                                                    "nullable": true,
-                                                    "description": "Текущая должность. NULL, если отсутствует.",
-                                                    "allOf": [
-                                                        {"$ref": "#/components/schemas/Positions.ItemAttribute.Id"},
-                                                        {"$ref": "#/components/schemas/Positions.ItemAttribute.Name"}
-                                                    ]
+                                                    "$ref": "#/components/schemas/Positions.PositionDefaultView"
                                                 }
                                             }
                                         }
@@ -4516,8 +4540,7 @@
                                                 "nullable": true,
                                                 "description": "Краткая информация о текущей должности. NULL, если дожность у сотрудника отсутствует.",
                                                 "allOf": [
-                                                    {"$ref": "#/components/schemas/Positions.ItemAttribute.Id"},
-                                                    {"$ref": "#/components/schemas/Positions.ItemAttribute.Name"},
+                                                    {"$ref": "#/components/schemas/Positions.PositionDefaultView"},
                                                     {"$ref": "#/components/schemas/Positions.ItemAttribute.PercentOfSuitability"}
                                                 ]
                                             }
@@ -4558,6 +4581,15 @@
                         "example": 25
                     }
                 }
+            },
+            "Positions.PositionDefaultView": {
+                "type": "object",
+                "nullable": true,
+                "description": "Текущая должность. NULL, если отсутствует.",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Positions.ItemAttribute.Id"},
+                    {"$ref": "#/components/schemas/Positions.ItemAttribute.Name"}
+                ]
             },
             "Skills.LevelIndicator": {
                 "type": "object",
@@ -6400,7 +6432,7 @@
                                 "type": "object",
                                 "properties": {
                                     "role": {
-                                        "$ref": "#/components/schemas/Roles.DefaultView"
+                                        "$ref": "#/components/schemas/Roles.RoleDefaultView"
                                     }
                                 }
                             }
@@ -6574,7 +6606,7 @@
                     }
                 }
             },
-            "Divisions.DivisionBriefView": {
+            "Divisions.DivisionDefaultView": {
                 "type": "object",
                 "properties": {
                     "id": {
@@ -6833,7 +6865,7 @@
                             "success": {
                                 "type": "array",
                                 "items": {
-                                    "$ref": "#/components/schemas/Roles.DefaultView"
+                                    "$ref": "#/components/schemas/Roles.RoleDefaultView"
                                 }
                             }
                         }
@@ -6852,6 +6884,242 @@
                                     "type": "string",
                                     "description": "Источник данных о пользователе",
                                     "enum": ["equeo", "idp", "other"]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "AdminPanel.Users.UserDetails.Attribute.AccountId": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "ID пользователя (аккаунта)",
+                        "example": "user_001"
+                    }
+                }
+            },
+            "AdminPanel.Users.UserDetails.Attribute.AccountLogin": {
+                "type": "object",
+                "properties": {
+                    "login": {
+                        "type": "string",
+                        "description": "Логин пользователя (аккаунта)",
+                        "example": "user_001"
+                    }
+                }
+            },
+            "AdminPanel.Users.UserDetails.Attribute.AccountCreatedAt": {
+                "type": "object",
+                "properties": {
+                    "created_at": {
+                        "type": "string",
+                        "description": "Дата создания пользователя (аккаунта)",
+                        "example": "2023-09-01 12:10:20 +03:00"
+                    }
+                }
+            },
+            "AdminPanel.Users.UserDetails.Attribute.AccountUpdatedAt": {
+                "type": "object",
+                "properties": {
+                    "updated_at": {
+                        "type": "string",
+                        "description": "Дата обновления пользователя (аккаунта)",
+                        "example": "2023-09-01 12:10:20 +03:00"
+                    }
+                }
+            },
+            "AdminPanel.Users.UserDetails.Attribute.AccountFirstName": {
+                "type": "object",
+                "properties": {
+                    "first_name": {
+                        "type": "string",
+                        "description": "Имя пользователя (аккаунта)",
+                        "example": "Иван"
+                    }
+                }
+            },
+            "AdminPanel.Users.UserDetails.Attribute.AccountLastName": {
+                "type": "object",
+                "properties": {
+                    "last_name": {
+                        "type": "string",
+                        "description": "Фамилия пользователя (аккаунта)",
+                        "example": "Иванов"
+                    }
+                }
+            },
+            "AdminPanel.Users.UserDetails.Attribute.AccountEmail": {
+                "type": "object",
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "description": "Email пользователя (аккаунта)",
+                        "example": "ivanov.ivan@test.com"
+                    }
+                }
+            },
+            "AdminPanel.Users.UserDetails.Attribute.EmployeeId": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "ID сотрудника",
+                        "example": 128
+                    }
+                }
+            },
+            "AdminPanel.Users.UserDetails.Attribute.EmployeeFirstName": {
+                "type": "object",
+                "properties": {
+                    "first_name": {
+                        "type": "string",
+                        "description": "Имя сотрудника",
+                        "example": "Иван"
+                    }
+                }
+            },
+            "AdminPanel.Users.UserDetails.Attribute.EmployeeMiddleName": {
+                "type": "object",
+                "properties": {
+                    "middle_name": {
+                        "type": "string",
+                        "description": "Отчество сотрудника",
+                        "example": "Иванович"
+                    }
+                }
+            },
+            "AdminPanel.Users.UserDetails.Attribute.EmployeeLastName": {
+                "type": "object",
+                "properties": {
+                    "last_name": {
+                        "type": "string",
+                        "description": "Фамилия сотрудника",
+                        "example": "Иванов"
+                    }
+                }
+            },
+            "AdminPanel.Users.UserDetails.Attribute.EmployeeEmail": {
+                "type": "object",
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "description": "Email сотрудника",
+                        "example": "ivan.ivanov@test.com"
+                    }
+                }
+            },
+            "AdminPanel.Users.UserDetails.Attribute.EmployeePhone": {
+                "type": "object",
+                "properties": {
+                    "phone": {
+                        "type": "string",
+                        "description": "Номер телефона сотрудника",
+                        "example": "+71234567890"
+                    }
+                }
+            },
+            "AdminPanel.Users.UserDetails.Attribute.Role": {
+                "type": "object",
+                "properties": {
+                    "role": {
+                        "$ref": "#/components/schemas/Roles.RoleDefaultView"
+                    }
+                }
+            },
+            "AdminPanel.Users.UserDetails.Attribute.Position": {
+                "type": "object",
+                "properties": {
+                    "position": {
+                        "$ref": "#/components/schemas/Positions.PositionDefaultView"
+                    }
+                }
+            },
+            "AdminPanel.Users.UserDetails.Attribute.Division": {
+                "type": "object",
+                "properties": {
+                    "division": {
+                        "$ref": "#/components/schemas/Divisions.DivisionDefaultView"
+                    }
+                }
+            },
+            "AdminPanel.Users.UserDetails.Attribute.Chiefs": {
+                "type": "object",
+                "properties": {
+                    "chiefs": {
+                        "type": "array",
+                        "description": "Список руководителей",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "string",
+                                    "description": "ID руководителя",
+                                    "example": "user_010"
+                                },
+                                "first_name": {
+                                    "type": "string",
+                                    "description": "Имя руководителя",
+                                    "example": "Константин"
+                                },
+                                "last_name": {
+                                    "type": "string",
+                                    "description": "Фамилия руководителя",
+                                    "example": "Константинопольский"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "AdminPanel.Users.UserDetails.Attribute.DivisionAccess": {
+                "type": "object",
+                "properties": {
+                    "division_access": {
+                        "type": "array",
+                        "description": "Элементы орг. структуры, к которым есть доступ",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "integer",
+                                    "description": "ID элемента орг. структуры",
+                                    "example": 64
+                                },
+                                "name": {
+                                    "type": "string",
+                                    "description": "Название элемента орг. структуры",
+                                    "example": "Подразделение № 345"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "AdminPanel.Users.UserDetails.Attribute.IndividualAccess": {
+                "type": "object",
+                "properties": {
+                    "individual_access": {
+                        "type": "array",
+                        "description": "Сотрудники, к которым есть доступ в индивидуальном порядке",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "integer",
+                                    "description": "ID сотрудника",
+                                    "example": 64
+                                },
+                                "first_name": {
+                                    "type": "string",
+                                    "description": "Имя сотрудника",
+                                    "example": "Константин"
+                                },
+                                "last_name": {
+                                    "type": "string",
+                                    "description": "Фамилия сотрудника",
+                                    "example": "Константинопольский"
                                 }
                             }
                         }
@@ -6976,28 +7244,22 @@
                                                     "description": "Сотрудник. NULL, если отсутствует.",
                                                     "nullable": true,
                                                     "allOf": [
-                                                        { "$ref": "#/components/schemas/Employees.EmployeeAttribute.ID" },
-                                                        { "$ref": "#/components/schemas/Employees.EmployeeAttribute.ExternalID" },
-                                                        { "$ref": "#/components/schemas/Employees.EmployeeAttribute.FirstName" },
-                                                        { "$ref": "#/components/schemas/Employees.EmployeeAttribute.LastName" },
+                                                        {"$ref": "#/components/schemas/Employees.EmployeeAttribute.ID"},
+                                                        {"$ref": "#/components/schemas/Employees.EmployeeAttribute.ExternalID"},
+                                                        {"$ref": "#/components/schemas/Employees.EmployeeAttribute.FirstName"},
+                                                        {"$ref": "#/components/schemas/Employees.EmployeeAttribute.LastName"},
                                                         {
                                                             "type": "object",
                                                             "properties": {
                                                                 "position": {
-                                                                    "type": "object",
-                                                                    "nullable": true,
-                                                                    "description": "Текущая должность. NULL, если отсутствует.",
-                                                                    "allOf": [
-                                                                        {"$ref": "#/components/schemas/Positions.ItemAttribute.Id"},
-                                                                        {"$ref": "#/components/schemas/Positions.ItemAttribute.Name"}
-                                                                    ]
+                                                                    "$ref": "#/components/schemas/Positions.PositionDefaultView"
                                                                 }
                                                             }
                                                         }
                                                     ]
                                                 },
                                                 "role": {
-                                                    "$ref": "#/components/schemas/Roles.DefaultView"
+                                                    "$ref": "#/components/schemas/Roles.RoleDefaultView"
                                                 }
                                             }
                                         }
@@ -7069,6 +7331,51 @@
                         "properties": {
                             "success": {
                                 "$ref": "#/components/schemas/Tasks.TaskDefaultObject"
+                            }
+                        }
+                    }
+                }
+            },
+            "AdminPanel.Users.UserDetails.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "object",
+                                "allOf": [
+                                    {"$ref": "#/components/schemas/AdminPanel.Users.UserDetails.Attribute.AccountId"},
+                                    {"$ref": "#/components/schemas/AdminPanel.Users.UserDetails.Attribute.AccountLogin"},
+                                    {"$ref": "#/components/schemas/AdminPanel.Users.UserDetails.Attribute.AccountCreatedAt"},
+                                    {"$ref": "#/components/schemas/AdminPanel.Users.UserDetails.Attribute.AccountUpdatedAt"},
+                                    {"$ref": "#/components/schemas/AdminPanel.Users.UserDetails.Attribute.AccountFirstName"},
+                                    {"$ref": "#/components/schemas/AdminPanel.Users.UserDetails.Attribute.AccountLastName"},
+                                    {"$ref": "#/components/schemas/AdminPanel.Users.UserDetails.Attribute.AccountEmail"},
+                                    {"$ref": "#/components/schemas/AdminPanel.Users.UserDetails.Attribute.Role"},
+                                    {"$ref": "#/components/schemas/AdminPanel.Users.UserDetails.Attribute.DivisionAccess"},
+                                    {"$ref": "#/components/schemas/AdminPanel.Users.UserDetails.Attribute.IndividualAccess"},
+                                    {
+                                        "type": "object",
+                                        "description": "Сотрудник",
+                                        "properties": {
+                                            "employee": {
+                                                "type": "object",
+                                                "allOf": [
+                                                    {"$ref": "#/components/schemas/AdminPanel.Users.UserDetails.Attribute.EmployeeId"},
+                                                    {"$ref": "#/components/schemas/AdminPanel.Users.UserDetails.Attribute.EmployeeFirstName"},
+                                                    {"$ref": "#/components/schemas/AdminPanel.Users.UserDetails.Attribute.EmployeeMiddleName"},
+                                                    {"$ref": "#/components/schemas/AdminPanel.Users.UserDetails.Attribute.EmployeeLastName"},
+                                                    {"$ref": "#/components/schemas/AdminPanel.Users.UserDetails.Attribute.EmployeeEmail"},
+                                                    {"$ref": "#/components/schemas/AdminPanel.Users.UserDetails.Attribute.EmployeePhone"},
+                                                    {"$ref": "#/components/schemas/AdminPanel.Users.UserDetails.Attribute.Position"},
+                                                    {"$ref": "#/components/schemas/AdminPanel.Users.UserDetails.Attribute.Division"},
+                                                    {"$ref": "#/components/schemas/AdminPanel.Users.UserDetails.Attribute.Chiefs"}
+                                                ]
+                                            }
+                                        }
+                                    }
+                                ]
                             }
                         }
                     }
@@ -7174,6 +7481,16 @@
                 "example": 256,
                 "schema": {
                     "type": "integer"
+                }
+            },
+            "AdminPanel.Path.User.Id": {
+                "name": "user_id",
+                "in": "path",
+                "required": true,
+                "description": "ID пользователя (аккаунта).",
+                "example": "user_001",
+                "schema": {
+                    "type": "string"
                 }
             }
         },
