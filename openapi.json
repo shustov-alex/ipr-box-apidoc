@@ -3094,7 +3094,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/AdminPanel.Roles.Collection.SuccessResponse"
+                                    "$ref": "#/components/schemas/AdminPanel.Roles.GetCollection.SuccessResponse"
                                 }
                             }
                         }
@@ -3121,7 +3121,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/AdminPanel.UserSources.Collection.SuccessResponse"
+                                    "$ref": "#/components/schemas/AdminPanel.UserSources.GetCollection.SuccessResponse"
                                 }
                             }
                         }
@@ -3146,7 +3146,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/AdminPanel.Users.Collection.Request"
+                                "$ref": "#/components/schemas/AdminPanel.Users.GetCollection.Request"
                             }
                         }
                     }
@@ -3157,7 +3157,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/AdminPanel.Users.Collection.SuccessResponse"
+                                    "$ref": "#/components/schemas/AdminPanel.Users.GetCollection.SuccessResponse"
                                 }
                             }
                         }
@@ -3353,7 +3353,64 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/AdminPanel.Users.UserDetails.SuccessResponse"
+                                    "$ref": "#/components/schemas/AdminPanel.Users.GetUserDetails.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки валидации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ValidationErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanel"
+                ],
+                "summary": "14.09. Обновить пользователя",
+                "description": "Обновить пользователя",
+                "operationId": "adminPanel.updateUserDetails",
+                "parameters": [
+                    {"$ref": "#/components/parameters/AdminPanel.Path.User.Id"}
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AdminPanel.Users.UpdateUserDetails.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Подробная информация о пользователе",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.Users.GetUserDetails.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки валидации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ValidationErrorCollectionResponse"
                                 }
                             }
                         }
@@ -6856,7 +6913,7 @@
                     }
                 }
             },
-            "AdminPanel.Roles.Collection.SuccessResponse": {
+            "AdminPanel.Roles.GetCollection.SuccessResponse": {
                 "type": "object",
                 "properties": {
                     "data": {
@@ -6872,7 +6929,7 @@
                     }
                 }
             },
-            "AdminPanel.UserSources.Collection.SuccessResponse": {
+            "AdminPanel.UserSources.GetCollection.SuccessResponse": {
                 "type": "object",
                 "properties": {
                     "data": {
@@ -6907,6 +6964,16 @@
                         "type": "string",
                         "description": "Логин пользователя (аккаунта)",
                         "example": "user_001"
+                    }
+                }
+            },
+            "AdminPanel.Users.UserDetails.Attribute.AccountPassword": {
+                "type": "object",
+                "properties": {
+                    "login": {
+                        "type": "string",
+                        "description": "Пароль пользователя (аккаунта)",
+                        "example": "qwerty123"
                     }
                 }
             },
@@ -7207,7 +7274,7 @@
                     }
                 }
             },
-            "AdminPanel.Users.Collection.Request": {
+            "AdminPanel.Users.GetCollection.Request": {
                 "type": "object",
                 "properties": {
                     "sort": {
@@ -7221,7 +7288,7 @@
                     }
                 }
             },
-            "AdminPanel.Users.Collection.SuccessResponse": {
+            "AdminPanel.Users.GetCollection.SuccessResponse": {
                 "type": "object",
                 "properties": {
                     "data": {
@@ -7336,7 +7403,7 @@
                     }
                 }
             },
-            "AdminPanel.Users.UserDetails.SuccessResponse": {
+            "AdminPanel.Users.GetUserDetails.SuccessResponse": {
                 "type": "object",
                 "properties": {
                     "data": {
@@ -7380,6 +7447,78 @@
                         }
                     }
                 }
+            },
+            "AdminPanel.Users.UpdateUserDetails.Request": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/AdminPanel.Users.UserDetails.Attribute.AccountLogin"},
+                    {"$ref": "#/components/schemas/AdminPanel.Users.UserDetails.Attribute.AccountPassword"},
+                    {"$ref": "#/components/schemas/AdminPanel.Users.UserDetails.Attribute.AccountFirstName"},
+                    {"$ref": "#/components/schemas/AdminPanel.Users.UserDetails.Attribute.AccountLastName"},
+                    {"$ref": "#/components/schemas/AdminPanel.Users.UserDetails.Attribute.AccountEmail"},
+                    {
+                        "type": "object",
+                        "properties": {
+                            "role_id": {
+                                "type": "integer",
+                                "description": "ID роли",
+                                "example": 56
+                            },
+                            "division_access_ids": {
+                                "type": "array",
+                                "description": "ID элементов орг. структуры, к которым у пользователя есть доступ",
+                                "items": {
+                                    "type": "integer",
+                                    "description": "ID элемента орг. структуры",
+                                    "example": 64
+                                }
+                            },
+                            "individual_access_ids": {
+                                "type": "array",
+                                "description": "ID сотрудников, к которым у пользователя есть доступ в индивидуальном порядке",
+                                "items": {
+                                    "type": "integer",
+                                    "description": "ID сотрудника",
+                                    "example": 64
+                                }
+                            },
+                            "employee": {
+                                "type": "object",
+                                "allOf": [
+                                    {"$ref": "#/components/schemas/AdminPanel.Users.UserDetails.Attribute.EmployeeFirstName"},
+                                    {"$ref": "#/components/schemas/AdminPanel.Users.UserDetails.Attribute.EmployeeMiddleName"},
+                                    {"$ref": "#/components/schemas/AdminPanel.Users.UserDetails.Attribute.EmployeeLastName"},
+                                    {"$ref": "#/components/schemas/AdminPanel.Users.UserDetails.Attribute.EmployeeEmail"},
+                                    {"$ref": "#/components/schemas/AdminPanel.Users.UserDetails.Attribute.EmployeePhone"},
+                                    {
+                                        "type": "object",
+                                        "properties": {
+                                            "position_id": {
+                                                "type": "integer",
+                                                "description": "ID должности",
+                                                "example": 256
+                                            },
+                                            "division_id": {
+                                                "type": "integer",
+                                                "description": "ID элемента орг. структуры, которому принадлежит сотрудник",
+                                                "example": 256
+                                            },
+                                            "chief_ids": {
+                                                "type": "array",
+                                                "description": "ID руководителей",
+                                                "items": {
+                                                    "type": "string",
+                                                    "description": "ID руководителя (аккаунта)",
+                                                    "example": "user_010"
+                                                }
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ]
             }
         },
         "parameters": {
