@@ -3359,11 +3359,11 @@
                         }
                     },
                     "400": {
-                        "description": "Ошибки валидации",
+                        "description": "Запрашиваемый объект не найден",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Base.ValidationErrorCollectionResponse"
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundErrorCollectionResponse"
                                 }
                             }
                         }
@@ -3406,11 +3406,11 @@
                         }
                     },
                     "400": {
-                        "description": "Ошибки валидации",
+                        "description": "Ошибки",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Base.ValidationErrorCollectionResponse"
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundOrValidationErrorResponse"
                                 }
                             }
                         }
