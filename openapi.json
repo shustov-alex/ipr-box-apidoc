@@ -3257,6 +3257,52 @@
                 }
             }
         },
+        "/admin/users/create": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanel"
+                ],
+                "summary": "14.06. Создать пользователя (аккаунт + сотрудник)",
+                "description": "Создать пользователя (аккаунт + сотрудник)",
+                "operationId": "adminPanel.createUser",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AdminPanel.Users.CreateUser.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Подробная информация о пользователе",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.Users.GetUserDetails.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки валидации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ValidationErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/admin/users/import": {
             "post": {
                 "security": [
@@ -3267,7 +3313,7 @@
                 "tags": [
                     "AdminPanel"
                 ],
-                "summary": "14.06. Импортировать пользователей",
+                "summary": "14.07. Импортировать пользователей",
                 "description": "Импортировать пользователей из xlsx-файла",
                 "operationId": "adminPanel.importUsers",
                 "requestBody": {
@@ -3313,7 +3359,7 @@
                 "tags": [
                     "AdminPanel"
                 ],
-                "summary": "14.07. Скачать шаблон для импорта пользователей",
+                "summary": "14.08. Скачать шаблон для импорта пользователей",
                 "description": "Скачать шаблон для импорта пользователей",
                 "operationId": "adminPanel.getTemplateToImportUsers",
                 "responses": {
@@ -3331,7 +3377,7 @@
                 }
             }
         },
-        "/admin/users/details/{user_id}": {
+        "/admin/users/{user_id}/details": {
             "get": {
                 "security": [
                     {
@@ -3341,7 +3387,7 @@
                 "tags": [
                     "AdminPanel"
                 ],
-                "summary": "14.08. Получить подробную информацию о пользователе (аккаунт + сотрудник)",
+                "summary": "14.09. Получить подробную информацию о пользователе (аккаунт + сотрудник)",
                 "description": "Получить подробную информацию о пользователе (аккаунт + сотрудник)",
                 "operationId": "adminPanel.getUserDetails",
                 "parameters": [
@@ -3369,7 +3415,9 @@
                         }
                     }
                 }
-            },
+            }
+        },
+        "/admin/users/{user_id}/details/update": {
             "put": {
                 "security": [
                     {
@@ -3379,8 +3427,8 @@
                 "tags": [
                     "AdminPanel"
                 ],
-                "summary": "14.09. Обновить пользователя (аккаунт + сотрудник)",
-                "description": "Обновить пользователя (аккаунт + сотрудник)",
+                "summary": "14.10. Обновить пользователя (аккаунт + сотрудник)",
+                "description": "Обновить пользователя (аккаунт + сотрудник). Ни один из атрибутов не является обязательным. Если обновление атрибута не требуется, то его можно не указывать.",
                 "operationId": "adminPanel.updateUserDetails",
                 "parameters": [
                     {"$ref": "#/components/parameters/AdminPanel.Path.User.Id"}
@@ -6970,7 +7018,7 @@
             "AdminPanel.Users.UserDetails.Attribute.AccountPassword": {
                 "type": "object",
                 "properties": {
-                    "login": {
+                    "password": {
                         "type": "string",
                         "description": "Пароль пользователя (аккаунта)",
                         "example": "qwerty123"
@@ -7519,6 +7567,79 @@
                         }
                     }
                 ]
+            },
+            "AdminPanel.Users.CreateUser.Request": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/AdminPanel.Users.UserDetails.Attribute.AccountLogin"},
+                    {"$ref": "#/components/schemas/AdminPanel.Users.UserDetails.Attribute.AccountPassword"},
+                    {"$ref": "#/components/schemas/AdminPanel.Users.UserDetails.Attribute.AccountFirstName"},
+                    {"$ref": "#/components/schemas/AdminPanel.Users.UserDetails.Attribute.AccountLastName"},
+                    {"$ref": "#/components/schemas/AdminPanel.Users.UserDetails.Attribute.AccountEmail"},
+                    {
+                        "type": "object",
+                        "properties": {
+                            "role_id": {
+                                "type": "integer",
+                                "description": "ID роли",
+                                "example": 56
+                            },
+                            "division_access_ids": {
+                                "type": "array",
+                                "description": "ID элементов орг. структуры, к которым у пользователя есть доступ",
+                                "items": {
+                                    "type": "integer",
+                                    "description": "ID элемента орг. структуры",
+                                    "example": 64
+                                }
+                            },
+                            "individual_access_ids": {
+                                "type": "array",
+                                "description": "ID сотрудников, к которым у пользователя есть доступ в индивидуальном порядке",
+                                "items": {
+                                    "type": "integer",
+                                    "description": "ID сотрудника",
+                                    "example": 64
+                                }
+                            },
+                            "employee": {
+                                "type": "object",
+                                "allOf": [
+                                    {"$ref": "#/components/schemas/AdminPanel.Users.UserDetails.Attribute.EmployeeFirstName"},
+                                    {"$ref": "#/components/schemas/AdminPanel.Users.UserDetails.Attribute.EmployeeMiddleName"},
+                                    {"$ref": "#/components/schemas/AdminPanel.Users.UserDetails.Attribute.EmployeeLastName"},
+                                    {"$ref": "#/components/schemas/AdminPanel.Users.UserDetails.Attribute.EmployeeEmail"},
+                                    {"$ref": "#/components/schemas/AdminPanel.Users.UserDetails.Attribute.EmployeePhone"},
+                                    {
+                                        "type": "object",
+                                        "properties": {
+                                            "position_id": {
+                                                "type": "integer",
+                                                "description": "ID должности",
+                                                "example": 256
+                                            },
+                                            "division_id": {
+                                                "type": "integer",
+                                                "description": "ID элемента орг. структуры, которому принадлежит сотрудник",
+                                                "example": 256
+                                            },
+                                            "chief_ids": {
+                                                "type": "array",
+                                                "description": "ID руководителей",
+                                                "items": {
+                                                    "type": "string",
+                                                    "description": "ID руководителя (аккаунта)",
+                                                    "example": "user_010"
+                                                }
+                                            }
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "required": ["login", "password", "first_name", "last_name", "email", "role_id"]
             }
         },
         "parameters": {
