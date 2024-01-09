@@ -2732,6 +2732,42 @@
                 }
             }
         },
+        "/employees/quick-search": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Employees"
+                ],
+                "summary": "09.04. Быстрый поиск сотрудников.",
+                "description": "Быстрый поиск сотрудников.",
+                "operationId": "employees.quickSearch",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Base.QuickSearch.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Список найденных сотрудников",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Employees.QuickSearch.SuccessResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/divisions/tree": {
             "post": {
                 "security": [
@@ -4735,6 +4771,35 @@
                                         }
                                     }
                                 ]
+                            }
+                        }
+                    }
+                }
+            },
+            "Employees.QuickSearch.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "allOf": [
+                                        { "$ref": "#/components/schemas/Employees.EmployeeAttribute.ID" },
+                                        { "$ref": "#/components/schemas/Employees.EmployeeAttribute.FirstName" },
+                                        { "$ref": "#/components/schemas/Employees.EmployeeAttribute.LastName" }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "meta": {
+                        "type": "object",
+                        "properties": {
+                            "pagination": {
+                                "$ref": "#/components/schemas/Base.CursorPaginationMeta"
                             }
                         }
                     }
