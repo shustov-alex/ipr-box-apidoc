@@ -67,6 +67,10 @@
         {
             "name": "AdminPanel",
             "description": "14. Панель администратора"
+        },
+        {
+            "name": "Positions",
+            "description": "15. Должности"
         }
     ],
     "paths": {
@@ -3537,6 +3541,42 @@
                     }
                 }
             }
+        },
+        "/positions/quick-search": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Positions"
+                ],
+                "summary": "15.01. Быстрый поиск должностей.",
+                "description": "Быстрый поиск должностей.",
+                "operationId": "positions.quickSearch",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Base.QuickSearch.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Список найденных должностей",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Positions.QuickSearch.SuccessResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -4804,45 +4844,6 @@
                         }
                     }
                 }
-            },
-            "Positions.ItemAttribute.Id": {
-                "type": "object",
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "description": "ID",
-                        "example": 256
-                    }
-                }
-            },
-            "Positions.ItemAttribute.Name": {
-                "type": "object",
-                "properties": {
-                    "name": {
-                        "type": "string",
-                        "description": "Название",
-                        "example": "Сварщик"
-                    }
-                }
-            },
-            "Positions.ItemAttribute.PercentOfSuitability": {
-                "type": "object",
-                "properties": {
-                    "percent_of_suitability": {
-                        "type": "integer",
-                        "description": "Процент соответствия. NULL, если должность не предъявляет требований к навыкам.",
-                        "example": 25
-                    }
-                }
-            },
-            "Positions.PositionDefaultView": {
-                "type": "object",
-                "nullable": true,
-                "description": "Текущая должность. NULL, если отсутствует.",
-                "allOf": [
-                    {"$ref": "#/components/schemas/Positions.ItemAttribute.Id"},
-                    {"$ref": "#/components/schemas/Positions.ItemAttribute.Name"}
-                ]
             },
             "Skills.LevelIndicator": {
                 "type": "object",
@@ -7788,6 +7789,73 @@
                     }
                 ],
                 "required": ["login", "password", "first_name", "last_name", "email", "role_id"]
+            },
+            "Positions.ItemAttribute.Id": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "ID",
+                        "example": 256
+                    }
+                }
+            },
+            "Positions.ItemAttribute.Name": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Название",
+                        "example": "Сварщик"
+                    }
+                }
+            },
+            "Positions.ItemAttribute.PercentOfSuitability": {
+                "type": "object",
+                "properties": {
+                    "percent_of_suitability": {
+                        "type": "integer",
+                        "description": "Процент соответствия. NULL, если должность не предъявляет требований к навыкам.",
+                        "example": 25
+                    }
+                }
+            },
+            "Positions.PositionDefaultView": {
+                "type": "object",
+                "nullable": true,
+                "description": "Текущая должность. NULL, если отсутствует.",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Positions.ItemAttribute.Id"},
+                    {"$ref": "#/components/schemas/Positions.ItemAttribute.Name"}
+                ]
+            },
+            "Positions.QuickSearch.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "allOf": [
+                                        {"$ref": "#/components/schemas/Positions.ItemAttribute.Id"},
+                                        {"$ref": "#/components/schemas/Positions.ItemAttribute.Name"}
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "meta": {
+                        "type": "object",
+                        "properties": {
+                            "pagination": {
+                                "$ref": "#/components/schemas/Base.CursorPaginationMeta"
+                            }
+                        }
+                    }
+                }
             }
         },
         "parameters": {
