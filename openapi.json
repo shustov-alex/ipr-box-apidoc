@@ -484,6 +484,42 @@
                 }
             }
         },
+        "/users/quick-search": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "summary": "04.02. Быстрый поиск пользователей.",
+                "description": "Быстрый поиск пользователей.",
+                "operationId": "users.quickSearch",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Base.QuickSearch.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Список найденных пользователей",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Users.QuickSearch.SuccessResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/skills/tree": {
             "post": {
                 "security": [
@@ -3811,6 +3847,24 @@
                     }
                 }
             },
+            "Base.QuickSearch.Request": {
+                "type": "object",
+                "properties": {
+                    "filter": {
+                        "type": "object",
+                        "properties": {
+                            "query": {
+                                "type": "string",
+                                "description": "Текст для поиска по подстроке",
+                                "example": "some_text"
+                            }
+                        }
+                    },
+                    "pagination": {
+                        "$ref": "#/components/schemas/Base.CursorPaginationForward"
+                    }
+                }
+            },
             "Access.Right.AccessToAdminPanel": {
                 "type": "object",
                 "properties": {
@@ -4397,6 +4451,35 @@
                                     { "$ref": "#/components/schemas/Users.UserAttribute.EmployeeID" },
                                     { "$ref": "#/components/schemas/Users.UserAttribute.AccessRights" }
                                 ]
+                            }
+                        }
+                    }
+                }
+            },
+            "Users.QuickSearch.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "allOf": [
+                                        { "$ref": "#/components/schemas/Users.UserAttribute.ID" },
+                                        { "$ref": "#/components/schemas/Users.UserAttribute.FirstName" },
+                                        { "$ref": "#/components/schemas/Users.UserAttribute.LastName" }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "meta": {
+                        "type": "object",
+                        "properties": {
+                            "pagination": {
+                                "$ref": "#/components/schemas/Base.CursorPaginationMeta"
                             }
                         }
                     }
