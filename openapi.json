@@ -7163,6 +7163,17 @@
                     }
                 }
             },
+            "AdminPanel.Users.UserDetails.Attribute.AccountStatus": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "description": "Статус пользователя (аккаунта)",
+                        "example": "active",
+                        "enum": ["active", "archived"]
+                    }
+                }
+            },
             "AdminPanel.Users.UserDetails.Attribute.AccountPassword": {
                 "type": "object",
                 "properties": {
@@ -7610,6 +7621,7 @@
                                 "allOf": [
                                     {"$ref": "#/components/schemas/AdminPanel.Users.UserDetails.Attribute.AccountId"},
                                     {"$ref": "#/components/schemas/AdminPanel.Users.UserDetails.Attribute.AccountLogin"},
+                                    {"$ref": "#/components/schemas/AdminPanel.Users.UserDetails.Attribute.AccountStatus"},
                                     {"$ref": "#/components/schemas/AdminPanel.Users.UserDetails.Attribute.AccountCreatedAt"},
                                     {"$ref": "#/components/schemas/AdminPanel.Users.UserDetails.Attribute.AccountUpdatedAt"},
                                     {"$ref": "#/components/schemas/AdminPanel.Users.UserDetails.Attribute.AccountFirstName"},
