@@ -3808,6 +3808,300 @@
                     }
                 }
             }
+        },
+        "/admin/materials/directories/tree": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanelMaterials"
+                ],
+                "summary": "16.13. Получить дерево каталогов",
+                "description": "Получить дерево каталогов",
+                "operationId": "adminPanel.Materials.getTreeOfDirectories",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AdminPanel.Materials.TreeOfDirectories.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Дерево каталогов",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.Materials.TreeOfDirectories.SuccessResponse"
+                                },
+                                "example": {
+                                    "data": {
+                                        "success": [
+                                            {
+                                                "id": 137,
+                                                "parent_id": null,
+                                                "name": "Кондитерское производство",
+                                                "children": [
+                                                    {
+                                                        "id": 138,
+                                                        "parent_id": 137,
+                                                        "name": "Шоколад",
+                                                        "children": []
+                                                    },
+                                                    {
+                                                        "id": 141,
+                                                        "parent_id": 137,
+                                                        "name": "Карамель",
+                                                        "children": []
+                                                    },
+                                                    {
+                                                        "id": 143,
+                                                        "parent_id": 137,
+                                                        "name": "Производство напитков",
+                                                        "children": [
+                                                            {
+                                                                "id": 144,
+                                                                "parent_id": 143,
+                                                                "name": "Производство соков",
+                                                                "children": []
+                                                            },
+                                                            {
+                                                                "id": 147,
+                                                                "parent_id": 143,
+                                                                "name": "Производство безалкогольных напитков",
+                                                                "children": []
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "id": 203,
+                                                        "parent_id": 137,
+                                                        "name": "Created by Postman",
+                                                        "children": []
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": 150,
+                                                "parent_id": null,
+                                                "name": "Пищевая химия",
+                                                "children": [
+                                                    {
+                                                        "id": 151,
+                                                        "parent_id": 150,
+                                                        "name": "Пищевые добавки",
+                                                        "children": []
+                                                    },
+                                                    {
+                                                        "id": 154,
+                                                        "parent_id": 150,
+                                                        "name": "Пищевые ингредиенты",
+                                                        "children": []
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": 157,
+                                                "parent_id": null,
+                                                "name": "Производственный контроль",
+                                                "children": [
+                                                    {
+                                                        "id": 158,
+                                                        "parent_id": 157,
+                                                        "name": "Контроль сырья",
+                                                        "children": []
+                                                    },
+                                                    {
+                                                        "id": 161,
+                                                        "parent_id": 157,
+                                                        "name": "Контроль производства",
+                                                        "children": []
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": 164,
+                                                "parent_id": null,
+                                                "name": "Продвижение продукции",
+                                                "children": [
+                                                    {
+                                                        "id": 165,
+                                                        "parent_id": 164,
+                                                        "name": "Маркетинг",
+                                                        "children": []
+                                                    },
+                                                    {
+                                                        "id": 169,
+                                                        "parent_id": 164,
+                                                        "name": "Реклама",
+                                                        "children": []
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "id": 201,
+                                                "parent_id": null,
+                                                "name": "Created by Postman",
+                                                "children": []
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки валидации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ValidationErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/materials/directories/create": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanelMaterials"
+                ],
+                "summary": "16.14. Создать каталог",
+                "description": "Создать каталог",
+                "operationId": "adminPanel.Material.createDirectory",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AdminPanel.Materials.CreateDirectory.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Объект каталога",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.Materials.DirectoryDetails.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки валидации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ValidationErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/materials/directories/{directory_id}/rename": {
+            "put": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanelMaterials"
+                ],
+                "summary": "16.15. Переименовать каталог",
+                "description": "Переименовать каталог",
+                "operationId": "adminPanel.Material.renameDirectory",
+                "parameters": [
+                    {"$ref": "#/components/parameters/AdminPanel.Path.Directory.Id"}
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AdminPanel.Materials.RenameDirectory.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Объект каталога",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.Materials.DirectoryDetails.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки валидации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundOrValidationErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/materials/directories/{directory_id}/delete": {
+            "delete": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanelMaterials"
+                ],
+                "summary": "16.16. Удалить каталог",
+                "description": "Удалить каталог",
+                "operationId": "adminPanel.Material.deleteDirectory",
+                "parameters": [
+                    {"$ref": "#/components/parameters/AdminPanel.Path.Directory.Id"}
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Объект каталога",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.EmptySuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки валидации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundOrValidationErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -6976,6 +7270,32 @@
                     }
                 }
             },
+            "Materials.Directory.DetailView": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Materials.DirectoryAttribute.Id"},
+                    {"$ref": "#/components/schemas/Materials.DirectoryAttribute.ParentId"},
+                    {"$ref": "#/components/schemas/Materials.DirectoryAttribute.Name"}
+                ]
+            },
+            "Materials.TreeOfDirectories.ChildrenAttribute": {
+                "type": "object",
+                "properties": {
+                    "children": {
+                        "type": "array",
+                        "description": "Список дочерних элементов"
+                    }
+                }
+            },
+            "Materials.TreeOfDirectories.BaseObject": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Materials.DirectoryAttribute.Id"},
+                    {"$ref": "#/components/schemas/Materials.DirectoryAttribute.ParentId"},
+                    {"$ref": "#/components/schemas/Materials.DirectoryAttribute.Name"},
+                    {"$ref": "#/components/schemas/Materials.TreeOfDirectories.ChildrenAttribute"}
+                ]
+            },
             "Materials.Directory.AdminPanelCollectionView": {
                 "type": "object",
                 "allOf": [
@@ -8626,6 +8946,61 @@
                         }
                     }
                 ]
+            },
+            "AdminPanel.Materials.TreeOfDirectories.Request": {
+                "type": "object",
+                "properties": {
+                    "filter": {
+                        "type": "object",
+                        "allOf": [
+                            { "$ref": "#/components/schemas/Materials.DirectoryAttribute.Name" }
+                        ]
+                    }
+                }
+            },
+            "AdminPanel.Materials.TreeOfDirectories.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/Materials.TreeOfDirectories.BaseObject"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "AdminPanel.Materials.CreateDirectory.Request": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Materials.DirectoryAttribute.Name"},
+                    {"$ref": "#/components/schemas/Materials.DirectoryAttribute.ParentId"}
+                ],
+                "required": ["name"]
+            },
+            "AdminPanel.Materials.RenameDirectory.Request": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Materials.DirectoryAttribute.Name"}
+                ],
+                "required": ["name"]
+            },
+            "AdminPanel.Materials.DirectoryDetails.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "$ref": "#/components/schemas/Materials.Directory.DetailView"
+                            }
+                        }
+                    }
+                }
             }
         },
         "parameters": {
@@ -8744,7 +9119,17 @@
                 "in": "path",
                 "required": true,
                 "description": "ID материала.",
-                "example": 345,
+                "example": 34,
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            "AdminPanel.Path.Directory.Id": {
+                "name": "directory_id",
+                "in": "path",
+                "required": true,
+                "description": "ID каталога.",
+                "example": 45,
                 "schema": {
                     "type": "integer"
                 }
