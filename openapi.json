@@ -65,12 +65,16 @@
             "description": "13. Уведомления"
         },
         {
-            "name": "AdminPanel",
-            "description": "14. Панель администратора"
+            "name": "AdminPanelUsers",
+            "description": "14. Панель администратора, пользователи"
         },
         {
             "name": "Positions",
             "description": "15. Должности"
+        },
+        {
+            "name": "AdminPanelMaterials",
+            "description": "16. Панель администратора, материалы"
         }
     ],
     "paths": {
@@ -2285,258 +2289,6 @@
                 }
             }
         },
-        "/materials/tree": {
-            "post": {
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ],
-                "tags": [
-                    "Materials"
-                ],
-                "summary": "08.01. Получить дерево материалов",
-                "description": "Получить дерево материалов",
-                "operationId": "materials.getTree",
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/Materials.Tree.Request"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Дерево материалов",
-                        "content": {
-                            "application/json": {
-                                "example": {
-                                    "data": {
-                                        "success": [
-                                            {
-                                                "type": "category",
-                                                "id": 1,
-                                                "parent_id": null,
-                                                "name": "Курсы",
-                                                "children": [
-                                                    {
-                                                        "type": "category",
-                                                        "id": 10,
-                                                        "parent_id": 1,
-                                                        "name": "Эквио",
-                                                        "children": [
-                                                            {
-                                                                "type": "material",
-                                                                "id": 100,
-                                                                "parent_id": 10,
-                                                                "name": "Курс 'Профессия дизайнер'",
-                                                                "is_paid": false,
-                                                                "skills": [
-                                                                    {
-                                                                        "id": 123,
-                                                                        "name": "Навык 123"
-                                                                    },
-                                                                    {
-                                                                        "id": 456,
-                                                                        "name": "Навык 456"
-                                                                    }
-                                                                ],
-                                                                "children": []
-                                                            },
-                                                            {
-                                                                "type": "material",
-                                                                "id": 101,
-                                                                "parent_id": 10,
-                                                                "name": "Курс 'Основы дизайн мышления'",
-                                                                "is_paid": false,
-                                                                "skills": [
-                                                                    {
-                                                                        "id": 123,
-                                                                        "name": "Навык 123"
-                                                                    },
-                                                                    {
-                                                                        "id": 456,
-                                                                        "name": "Навык 456"
-                                                                    }
-                                                                ],
-                                                                "children": []
-                                                            },
-                                                            {
-                                                                "type": "material",
-                                                                "id": 102,
-                                                                "parent_id": 10,
-                                                                "name": "Курс 'Дизайн исследования'",
-                                                                "is_paid": true,
-                                                                "skills": [
-                                                                    {
-                                                                        "id": 123,
-                                                                        "name": "Навык 123"
-                                                                    },
-                                                                    {
-                                                                        "id": 456,
-                                                                        "name": "Навык 456"
-                                                                    }
-                                                                ],
-                                                                "children": []
-                                                            }
-                                                        ]
-                                                    },
-                                                    {
-                                                        "type": "category",
-                                                        "id": 11,
-                                                        "parent_id": 1,
-                                                        "name": "SkillBox",
-                                                        "children": [
-                                                            {
-                                                                "type": "material",
-                                                                "id": 110,
-                                                                "parent_id": 11,
-                                                                "name": "Какой-то материал, ID 110",
-                                                                "is_paid": true,
-                                                                "skills": [
-                                                                    {
-                                                                        "id": 123,
-                                                                        "name": "Навык 123"
-                                                                    },
-                                                                    {
-                                                                        "id": 456,
-                                                                        "name": "Навык 456"
-                                                                    }
-                                                                ],
-                                                                "children": []
-                                                            },
-                                                            {
-                                                                "type": "material",
-                                                                "id": 111,
-                                                                "parent_id": 11,
-                                                                "name": "Какой-то материал, ID 111",
-                                                                "is_paid": true,
-                                                                "skills": [
-                                                                    {
-                                                                        "id": 123,
-                                                                        "name": "Навык 123"
-                                                                    },
-                                                                    {
-                                                                        "id": 456,
-                                                                        "name": "Навык 456"
-                                                                    }
-                                                                ],
-                                                                "children": []
-                                                            }
-                                                        ]
-                                                    }
-                                                ]
-                                            },
-                                            {
-                                                "type": "category",
-                                                "id": 2,
-                                                "parent_id": null,
-                                                "name": "Книги",
-                                                "children": [
-                                                    {
-                                                        "type": "category",
-                                                        "id": 20,
-                                                        "parent_id": 2,
-                                                        "name": "Какая-то категория, ID 20",
-                                                        "children": [
-                                                            {
-                                                                "type": "material",
-                                                                "id": 200,
-                                                                "parent_id": 20,
-                                                                "name": "Какой-то материал, ID 200",
-                                                                "is_paid": false,
-                                                                "skills": [
-                                                                    {
-                                                                        "id": 123,
-                                                                        "name": "Навык 123"
-                                                                    },
-                                                                    {
-                                                                        "id": 456,
-                                                                        "name": "Навык 456"
-                                                                    }
-                                                                ],
-                                                                "children": []
-                                                            },
-                                                            {
-                                                                "type": "material",
-                                                                "id": 201,
-                                                                "parent_id": 20,
-                                                                "name": "Какой-то материал, ID 201",
-                                                                "is_paid": false,
-                                                                "skills": [
-                                                                    {
-                                                                        "id": 123,
-                                                                        "name": "Навык 123"
-                                                                    },
-                                                                    {
-                                                                        "id": 456,
-                                                                        "name": "Навык 456"
-                                                                    }
-                                                                ],
-                                                                "children": []
-                                                            }
-                                                        ]
-                                                    },
-                                                    {
-                                                        "type": "category",
-                                                        "id": 21,
-                                                        "parent_id": 2,
-                                                        "name": "Какая-то категория, ID 21",
-                                                        "children": [
-                                                            {
-                                                                "type": "material",
-                                                                "id": 210,
-                                                                "parent_id": 21,
-                                                                "name": "Какой-то материал, ID 210",
-                                                                "is_paid": false,
-                                                                "skills": [
-                                                                    {
-                                                                        "id": 123,
-                                                                        "name": "Навык 123"
-                                                                    },
-                                                                    {
-                                                                        "id": 456,
-                                                                        "name": "Навык 456"
-                                                                    }
-                                                                ],
-                                                                "children": []
-                                                            },
-                                                            {
-                                                                "type": "material",
-                                                                "id": 211,
-                                                                "parent_id": 21,
-                                                                "name": "Какой-то материал, ID 211",
-                                                                "is_paid": false,
-                                                                "skills": [
-                                                                    {
-                                                                        "id": 123,
-                                                                        "name": "Навык 123"
-                                                                    },
-                                                                    {
-                                                                        "id": 456,
-                                                                        "name": "Навык 456"
-                                                                    }
-                                                                ],
-                                                                "children": []
-                                                            }
-                                                        ]
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    }
-                                },
-                                "schema": {
-                                    "$ref": "#/components/schemas/Materials.Tree.SuccessResponse"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
         "/materials/{material_id}": {
             "get": {
                 "security": [
@@ -3158,11 +2910,11 @@
                     }
                 ],
                 "tags": [
-                    "AdminPanel"
+                    "AdminPanelUsers"
                 ],
                 "summary": "14.01. Список всех ролей в системе",
                 "description": "Список всех ролей в системе",
-                "operationId": "adminPanel.getRoles",
+                "operationId": "adminPanel.Users.getRoles",
                 "responses": {
                     "200": {
                         "description": "Список ролей",
@@ -3185,11 +2937,11 @@
                     }
                 ],
                 "tags": [
-                    "AdminPanel"
+                    "AdminPanelUsers"
                 ],
                 "summary": "14.02. Список возможных источников пользователей",
                 "description": "Список возможных источников пользователей",
-                "operationId": "adminPanel.getUserSources",
+                "operationId": "adminPanel.Users.getSources",
                 "responses": {
                     "200": {
                         "description": "Список источников",
@@ -3212,11 +2964,11 @@
                     }
                 ],
                 "tags": [
-                    "AdminPanel"
+                    "AdminPanelUsers"
                 ],
                 "summary": "14.03. Получить список пользователей",
                 "description": "Получить список пользователей (аккаунты + сотрудники)",
-                "operationId": "adminPanel.getUsers",
+                "operationId": "adminPanel.Users.getUsers",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -3248,11 +3000,11 @@
                     }
                 ],
                 "tags": [
-                    "AdminPanel"
+                    "AdminPanelUsers"
                 ],
                 "summary": "14.04. Архивировать аккаунты и связанных с ними сотрудников",
                 "description": "Архивировать аккаунты и связанных с ними сотрудников",
-                "operationId": "adminPanel.archiveUsers",
+                "operationId": "adminPanel.Users.archiveUsers",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -3294,11 +3046,11 @@
                     }
                 ],
                 "tags": [
-                    "AdminPanel"
+                    "AdminPanelUsers"
                 ],
                 "summary": "14.05. Восстановить из архива аккаунты и связанных с ними сотрудников",
                 "description": "Восстановить из архива аккаунты и связанных с ними сотрудников",
-                "operationId": "adminPanel.restoreUsers",
+                "operationId": "adminPanel.Users.restoreUsers",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -3340,11 +3092,11 @@
                     }
                 ],
                 "tags": [
-                    "AdminPanel"
+                    "AdminPanelUsers"
                 ],
                 "summary": "14.06. Создать пользователя (аккаунт + сотрудник)",
                 "description": "Создать пользователя (аккаунт + сотрудник)",
-                "operationId": "adminPanel.createUser",
+                "operationId": "adminPanel.Users.createUser",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -3386,11 +3138,11 @@
                     }
                 ],
                 "tags": [
-                    "AdminPanel"
+                    "AdminPanelUsers"
                 ],
                 "summary": "14.07. Импортировать пользователей",
                 "description": "Импортировать пользователей из xlsx-файла",
-                "operationId": "adminPanel.importUsers",
+                "operationId": "adminPanel.Users.importUsers",
                 "requestBody": {
                     "content": {
                         "multipart/form-data": {
@@ -3432,11 +3184,11 @@
                     }
                 ],
                 "tags": [
-                    "AdminPanel"
+                    "AdminPanelUsers"
                 ],
                 "summary": "14.08. Скачать шаблон для импорта пользователей",
                 "description": "Скачать шаблон для импорта пользователей",
-                "operationId": "adminPanel.getTemplateToImportUsers",
+                "operationId": "adminPanel.Users.getTemplateToImportUsers",
                 "responses": {
                     "200": {
                         "description": "xlsx-файл",
@@ -3460,11 +3212,11 @@
                     }
                 ],
                 "tags": [
-                    "AdminPanel"
+                    "AdminPanelUsers"
                 ],
                 "summary": "14.09. Получить подробную информацию о пользователе (аккаунт + сотрудник)",
                 "description": "Получить подробную информацию о пользователе (аккаунт + сотрудник)",
-                "operationId": "adminPanel.getUserDetails",
+                "operationId": "adminPanel.Users.getUserDetails",
                 "parameters": [
                     {"$ref": "#/components/parameters/AdminPanel.Path.User.Id"}
                 ],
@@ -3500,11 +3252,11 @@
                     }
                 ],
                 "tags": [
-                    "AdminPanel"
+                    "AdminPanelUsers"
                 ],
                 "summary": "14.10. Обновить пользователя (аккаунт + сотрудник)",
                 "description": "Обновить пользователя (аккаунт + сотрудник). Ни один из атрибутов не является обязательным. Если обновление атрибута не требуется, то его можно не указывать.",
-                "operationId": "adminPanel.updateUserDetails",
+                "operationId": "adminPanel.Users.updateUserDetails",
                 "parameters": [
                     {"$ref": "#/components/parameters/AdminPanel.Path.User.Id"}
                 ],
@@ -3570,6 +3322,486 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/Positions.QuickSearch.SuccessResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/materials/types": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanelMaterials"
+                ],
+                "summary": "16.01. Список возможных типов материалов",
+                "description": "Список возможных типов материалов",
+                "operationId": "adminPanel.Materials.getTypes",
+                "responses": {
+                    "200": {
+                        "description": "Список типов",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.MaterialTypes.GetCollection.SuccessResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/materials/sources": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanelMaterials"
+                ],
+                "summary": "16.02. Список возможных источников материалов",
+                "description": "Список возможных источников материалов",
+                "operationId": "adminPanel.Materials.getSources",
+                "responses": {
+                    "200": {
+                        "description": "Список истоничков",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.MaterialSources.GetCollection.SuccessResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/materials/count-of-awaiting-publication": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanelMaterials"
+                ],
+                "summary": "16.03. Количество материалов, которые ожидают публикации",
+                "description": "Количество материалов, которые ожидают публикации",
+                "operationId": "adminPanel.Materials.getCountOfAwaitingPublication",
+                "responses": {
+                    "200": {
+                        "description": "Количество материалов, которые ожидают публикации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.Materials.CountSuccessResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/materials": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanelMaterials"
+                ],
+                "summary": "16.04. Получить список каталогов и материалов",
+                "description": "Получить список каталогов и материалов",
+                "operationId": "adminPanel.Materials.getCollection",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AdminPanel.Materials.GetCollection.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Список каталогов и материалов",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.Materials.GetCollection.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки валидации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ValidationErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/materials/publish": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanelMaterials"
+                ],
+                "summary": "16.05. Опубликовать материалы",
+                "description": "Опубликовать материалы",
+                "operationId": "adminPanel.Materials.publishCollection",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AdminPanel.Materials.ObjectIdsAndDirectoryIdRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Количество опубликованных материалов",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.Materials.CountSuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки валидации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ValidationErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/materials/archive": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanelMaterials"
+                ],
+                "summary": "16.06. Архивировать материалы",
+                "description": "Архивировать материалы",
+                "operationId": "adminPanel.Materials.archiveCollection",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AdminPanel.Materials.ObjectIdsRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Количество заархивированных материалов",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.Materials.CountSuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки валидации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ValidationErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/materials/delete": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanelMaterials"
+                ],
+                "summary": "16.07. Удалить материалы",
+                "description": "Удалить материалы",
+                "operationId": "adminPanel.Materials.deleteCollection",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AdminPanel.Materials.ObjectIdsRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Количество удалённых материалов",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.Materials.CountSuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки валидации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ValidationErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/materials/move": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanelMaterials"
+                ],
+                "summary": "16.08. Переместить каталоги и материалы",
+                "description": "Переместить каталоги и материалы",
+                "operationId": "adminPanel.Materials.moveCollection",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AdminPanel.Materials.ObjectIdsAndDirectoryIdRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Количество перемещенных объектов (каталоги + материалы)",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.Materials.CountSuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки валидации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ValidationErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/materials/import": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanelMaterials"
+                ],
+                "summary": "16.09. Импортировать материалы",
+                "description": "Импортировать материалы из xlsx-файла",
+                "operationId": "adminPanel.Materials.importMaterials",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AdminPanel.Materials.ImportMaterials.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Объект асинхронной задачи, в рамках которой будет проходить импорт",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.Materials.ImportMaterials.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки валидации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ValidationErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/materials/import/template": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanelMaterials"
+                ],
+                "summary": "16.10. Скачать шаблон для импорта материалов",
+                "description": "Скачать шаблон для импорта материалов",
+                "operationId": "adminPanel.Materials.getTemplateToImportMaterials",
+                "responses": {
+                    "200": {
+                        "description": "xlsx-файл",
+                        "content": {
+                            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": {
+                                "schema": {
+                                    "type": "string",
+                                    "format": "binary"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/materials/create": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanelMaterials"
+                ],
+                "summary": "16.11. Создать материал",
+                "description": "Создать материал",
+                "operationId": "adminPanel.Material.createMaterial",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AdminPanel.Materials.CreateMaterial.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Подробная информация о материале",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.Materials.GetMaterialDetails.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки валидации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ValidationErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/materials/{material_id}/update": {
+            "put": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanelMaterials"
+                ],
+                "summary": "16.12. Обновить материал",
+                "description": "Обновить материал",
+                "operationId": "adminPanel.Material.createMaterial",
+                "parameters": [
+                    {"$ref": "#/components/parameters/AdminPanel.Path.Material.Id"}
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AdminPanel.Materials.UpdateMaterial.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Подробная информация о материале",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.Materials.GetMaterialDetails.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки валидации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundOrValidationErrorResponse"
                                 }
                             }
                         }
@@ -5547,8 +5779,8 @@
             "Targets.TargetMaterial.CollectionView": {
                 "type": "object",
                 "allOf": [
-                    {"$ref": "#/components/schemas/Materials.Material.CollectionView"},
-                    {"$ref": "#/components/schemas/Materials.ItemAttribute.Reason"}
+                    {"$ref": "#/components/schemas/Materials.Material.DetailView"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.Reason"}
                 ]
             },
             "Targets.TargetMaterials.SuccessResponse": {
@@ -5571,7 +5803,7 @@
                 "type": "object",
                 "allOf": [
                     {"$ref": "#/components/schemas/Materials.Material.DetailView"},
-                    {"$ref": "#/components/schemas/Materials.ItemAttribute.Reason"}
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.Reason"}
                 ]
             },
             "Targets.TargetMaterial.SuccessResponse": {
@@ -6430,29 +6662,70 @@
                     }
                 }
             },
-            "Materials.ItemAttribute.CategoryType": {
+            "Materials.DirectoryAttribute.EntityType": {
                 "type": "object",
                 "properties": {
-                    "type": {
+                    "entity_type": {
                         "type": "string",
-                        "description": "Тип объекта",
-                        "enum": ["category"],
-                        "example": "category"
+                        "description": "Тип сущности",
+                        "example": "material_directory"
                     }
                 }
             },
-            "Materials.ItemAttribute.MaterialType": {
+            "Materials.DirectoryAttribute.Id": {
                 "type": "object",
                 "properties": {
-                    "type": {
+                    "id": {
+                        "type": "integer",
+                        "description": "ID",
+                        "example": 234
+                    }
+                }
+            },
+            "Materials.DirectoryAttribute.ParentId": {
+                "type": "object",
+                "properties": {
+                    "parent_id": {
+                        "type": "integer",
+                        "nullable": true,
+                        "description": "ID родительского каталога",
+                        "example": 345
+                    }
+                }
+            },
+            "Materials.DirectoryAttribute.Name": {
+                "type": "object",
+                "properties": {
+                    "name": {
                         "type": "string",
-                        "description": "Тип объекта",
+                        "nullable": true,
+                        "description": "Название",
+                        "example": "Название"
+                    }
+                }
+            },
+            "Materials.DirectoryAttribute.CreatedAt": {
+                "type": "object",
+                "properties": {
+                    "created_at": {
+                        "type": "string",
+                        "description": "Дата создания",
+                        "example": "2023-09-01 12:10:20 +03:00"
+                    }
+                }
+            },
+            "Materials.MaterialAttribute.EntityType": {
+                "type": "object",
+                "properties": {
+                    "entity_type": {
+                        "type": "string",
+                        "description": "Тип сущности",
                         "enum": ["material"],
                         "example": "material"
                     }
                 }
             },
-            "Materials.ItemAttribute.ID": {
+            "Materials.MaterialAttribute.Id": {
                 "type": "object",
                 "properties": {
                     "id": {
@@ -6462,38 +6735,73 @@
                     }
                 }
             },
-            "Materials.ItemAttribute.ParentID": {
+            "Materials.MaterialAttribute.ParentId": {
                 "type": "object",
                 "properties": {
                     "parent_id": {
                         "type": "integer",
-                        "description": "ID родителя",
-                        "example": 512,
-                        "nullable": true
+                        "nullable": true,
+                        "description": "ID каталога",
+                        "example": 512
                     }
                 }
             },
-            "Materials.ItemAttribute.Name": {
+            "Materials.MaterialAttribute.DirectoryId": {
+                "type": "object",
+                "properties": {
+                    "directory_id": {
+                        "type": "integer",
+                        "nullable": true,
+                        "description": "ID каталога",
+                        "example": 512
+                    }
+                }
+            },
+            "Materials.MaterialAttribute.Status": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "description": "Статус",
+                        "example": "published",
+                        "enum": ["published", "awaiting_publication", "archived"]
+                    }
+                }
+            },
+            "Materials.MaterialAttribute.Name": {
                 "type": "object",
                 "properties": {
                     "name": {
                         "type": "string",
+                        "nullable": true,
                         "description": "Название",
                         "example": "My name"
                     }
                 }
             },
-            "Materials.ItemAttribute.Description": {
+            "Materials.MaterialAttribute.Description": {
                 "type": "object",
                 "properties": {
                     "description": {
                         "type": "string",
+                        "nullable": true,
                         "description": "Описание",
                         "example": "My description"
                     }
                 }
             },
-            "Materials.ItemAttribute.IsPaid": {
+            "Materials.MaterialAttribute.Price": {
+                "type": "object",
+                "properties": {
+                    "price": {
+                        "type": "number",
+                        "format": "float",
+                        "description": "Стоимость материала",
+                        "example": 5000.00
+                    }
+                }
+            },
+            "Materials.MaterialAttribute.IsPaid": {
                 "type": "object",
                 "properties": {
                     "is_paid": {
@@ -6503,18 +6811,146 @@
                     }
                 }
             },
-            "Materials.ItemAttribute.Reason": {
+            "Materials.MaterialAttribute.TypeName": {
                 "type": "object",
                 "properties": {
-                    "reason": {
+                    "type_name": {
                         "type": "string",
-                        "description": "Обоснование",
-                        "example": "My reason",
-                        "nullable": true
+                        "description": "Название типа",
+                        "example": "Название типа"
                     }
                 }
             },
-            "Materials.ItemAttribute.Skills": {
+            "Materials.MaterialAttribute.TypeId": {
+                "type": "object",
+                "properties": {
+                    "type_id": {
+                        "type": "integer",
+                        "description": "ID типа",
+                        "example": 67
+                    }
+                }
+            },
+            "Materials.MaterialAttribute.SourceName": {
+                "type": "object",
+                "properties": {
+                    "source_name": {
+                        "type": "string",
+                        "description": "Название источника",
+                        "example": "Название источника"
+                    }
+                }
+            },
+            "Materials.MaterialAttribute.SourceId": {
+                "type": "object",
+                "properties": {
+                    "source_id": {
+                        "type": "integer",
+                        "description": "ID источника",
+                        "example": 78
+                    }
+                }
+            },
+            "Materials.MaterialAttribute.CreatedAt": {
+                "type": "object",
+                "properties": {
+                    "created_at": {
+                        "type": "string",
+                        "description": "Дата создания",
+                        "example": "2023-09-01 12:10:20 +03:00"
+                    }
+                }
+            },
+            "Materials.MaterialAttribute.UpdatedAt": {
+                "type": "object",
+                "properties": {
+                    "updated_at": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "Дата обновления",
+                        "example": "2023-09-01 12:10:20 +03:00"
+                    }
+                }
+            },
+            "Materials.MaterialAttribute.Url": {
+                "type": "object",
+                "properties": {
+                    "url": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "URL",
+                        "example": "google.com"
+                    }
+                }
+            },
+            "Materials.MaterialAttribute.StartAt": {
+                "type": "object",
+                "properties": {
+                    "start_at": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "Дата начала мероприятия",
+                        "example": "2023-09-01 12:00:00 +03:00"
+                    }
+                }
+            },
+            "Materials.MaterialAttribute.EndAt": {
+                "type": "object",
+                "properties": {
+                    "end_at": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "Дата окончания мароприятия",
+                        "example": "2023-09-03 14:00:00 +03:00"
+                    }
+                }
+            },
+            "Materials.MaterialAttribute.Duration": {
+                "type": "object",
+                "properties": {
+                    "duration": {
+                        "type": "integer",
+                        "nullable": true,
+                        "description": "Длительность (в часах)",
+                        "example": 24
+                    }
+                }
+            },
+            "Materials.MaterialAttribute.Provider": {
+                "type": "object",
+                "properties": {
+                    "provider": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "Провайдер",
+                        "example": null
+                    }
+                }
+            },
+            "Materials.MaterialAttribute.Trainer": {
+                "type": "object",
+                "properties": {
+                    "trainer": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "Тренер",
+                        "example": null
+                    }
+                }
+            },
+            "Materials.MaterialAttribute.Rating": {
+                "type": "object",
+                "properties": {
+                    "rating": {
+                        "type": "number",
+                        "format": "float",
+                        "nullable": true,
+                        "description": "Рейтинг. Максимальное значение - 5.0.",
+                        "example": null
+                    }
+                }
+            },
+            "Materials.MaterialAttribute.Skills": {
                 "type": "object",
                 "properties": {
                     "skills": {
@@ -6529,84 +6965,69 @@
                     }
                 }
             },
-            "Materials.TreeItemAttribute.Children": {
+            "Materials.MaterialAttribute.Reason": {
                 "type": "object",
                 "properties": {
-                    "children": {
-                        "type": "array",
-                        "description": "Список дочерних элементов"
+                    "reason": {
+                        "type": "string",
+                        "description": "Обоснование",
+                        "example": "My reason",
+                        "nullable": true
                     }
                 }
             },
-            "Materials.TreeItem.Base": {
+            "Materials.Directory.AdminPanelCollectionView": {
                 "type": "object",
                 "allOf": [
-                    {"$ref": "#/components/schemas/Materials.ItemAttribute.ID"},
-                    {"$ref": "#/components/schemas/Materials.ItemAttribute.ParentID"},
-                    {"$ref": "#/components/schemas/Materials.ItemAttribute.Name"},
-                    {"$ref": "#/components/schemas/Materials.TreeItemAttribute.Children"}
+                    {"$ref": "#/components/schemas/Materials.DirectoryAttribute.EntityType"},
+                    {"$ref": "#/components/schemas/Materials.DirectoryAttribute.Id"},
+                    {"$ref": "#/components/schemas/Materials.DirectoryAttribute.ParentId"},
+                    {"$ref": "#/components/schemas/Materials.DirectoryAttribute.Name"},
+                    {"$ref": "#/components/schemas/Materials.DirectoryAttribute.CreatedAt"}
                 ]
             },
-            "Materials.TreeItem.Category": {
+            "Materials.Material.AdminPanelCollectionView": {
                 "type": "object",
                 "allOf": [
-                    {"$ref": "#/components/schemas/Materials.ItemAttribute.CategoryType"},
-                    {"$ref": "#/components/schemas/Materials.TreeItem.Base"}
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.EntityType"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.Id"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.ParentId"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.Name"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.TypeName"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.SourceName"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.CreatedAt"}
                 ]
-            },
-            "Materials.TreeItem.Material": {
-                "type": "object",
-                "allOf": [
-                    {"$ref": "#/components/schemas/Materials.ItemAttribute.MaterialType"},
-                    {"$ref": "#/components/schemas/Materials.TreeItem.Base"},
-                    {"$ref": "#/components/schemas/Materials.ItemAttribute.IsPaid"},
-                    {"$ref": "#/components/schemas/Materials.ItemAttribute.Skills"}
-                ]
-            },
-            "Materials.Tree.Request": {
-                "type": "object",
-                "properties": {
-                    "filter": {
-                        "type": "object",
-                        "allOf": [
-                            { "$ref": "#/components/schemas/Materials.ItemAttribute.Name" }
-                        ]
-                    }
-                }
-            },
-            "Materials.Tree.SuccessResponse": {
-                "type": "object",
-                "properties": {
-                    "data": {
-                        "type": "object",
-                        "properties": {
-                            "success": {
-                                "type": "array",
-                                "items": {
-                                    "anyOf": [
-                                        { "$ref": "#/components/schemas/Materials.TreeItem.Category" },
-                                        { "$ref": "#/components/schemas/Materials.TreeItem.Material" }
-                                    ]
-                                }
-                            }
-                        }
-                    }
-                }
             },
             "Materials.Material.CollectionView": {
                 "type": "object",
                 "allOf": [
-                    {"$ref": "#/components/schemas/Materials.ItemAttribute.ID"},
-                    {"$ref": "#/components/schemas/Materials.ItemAttribute.Name"},
-                    {"$ref": "#/components/schemas/Materials.ItemAttribute.IsPaid"}
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.Id"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.Name"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.IsPaid"}
                 ]
             },
             "Materials.Material.DetailView": {
                 "type": "object",
                 "allOf": [
-                    {"$ref": "#/components/schemas/Materials.Material.CollectionView"},
-                    {"$ref": "#/components/schemas/Materials.ItemAttribute.Description"},
-                    {"$ref": "#/components/schemas/Materials.ItemAttribute.Skills"}
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.Id"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.Status"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.TypeId"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.SourceId"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.DirectoryId"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.Name"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.Description"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.IsPaid"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.Price"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.Url"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.StartAt"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.EndAt"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.Duration"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.Provider"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.Trainer"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.Rating"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.CreatedAt"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.UpdatedAt"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.Skills"}
                 ]
             },
             "Materials.MaterialDetails.SuccessResponse": {
@@ -7867,6 +8288,344 @@
                         }
                     }
                 }
+            },
+            "AdminPanel.MaterialTypes.GetCollection.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "description": "ID типа",
+                                            "example": 1
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "description": "Название типа",
+                                            "example": "Прочее"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "AdminPanel.MaterialSources.GetCollection.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "description": "ID источника",
+                                            "example": 1
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "description": "Название источника",
+                                            "example": "ИПР"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "AdminPanel.Materials.CountSuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "object",
+                                "properties": {
+                                    "count": {
+                                        "type": "integer",
+                                        "description": "Количество элементов",
+                                        "example": 2
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "AdminPanel.Materials.Collection.Sort": {
+                "type": "object",
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/Base.Sort"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "attribute": {
+                                "type": "string",
+                                "description": "Значение, по которому производится сортировка. Если не указано, то будет использовано значение по умолчанию.",
+                                "enum": ["id", "created_at", "name"],
+                                "example": "id"
+                            }
+                        }
+                    }
+                ]
+            },
+            "AdminPanel.Materials.Collection.Filter": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "description": "Статус",
+                        "example": "published"
+                    },
+                    "parent_id": {
+                        "type": "integer",
+                        "description": "ID родительского элемента",
+                        "nullable": true,
+                        "example": null
+                    },
+                    "id": {
+                        "type": "integer",
+                        "description": "ID элемента",
+                        "nullable": true,
+                        "example": 345
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Текстовая строка для поиска по названию",
+                        "nullable": true,
+                        "example": "Лучший материал"
+                    },
+                    "type_ids": {
+                        "type": "array",
+                        "nullable": true,
+                        "items": {
+                            "type": "integer",
+                            "description": "ID типа",
+                            "example": 16
+                        }
+                    },
+                    "source_ids": {
+                        "type": "array",
+                        "nullable": true,
+                        "items": {
+                            "type": "integer",
+                            "description": "ID источника",
+                            "example": 256
+                        }
+                    },
+                    "created_after": {
+                        "type": "string",
+                        "description": "Включать в результат элементы с датой создания больше указанной",
+                        "nullable": true,
+                        "example": "2023-12-26 11:57:01 +00:00"
+                    },
+                    "created_before": {
+                        "type": "string",
+                        "description": "Включать в результат элементы с датой создания меньше указанной",
+                        "nullable": true,
+                        "example": "2023-12-26 11:57:01 +00:00"
+                    }
+                }
+            },
+            "AdminPanel.Materials.GetCollection.Request": {
+                "type": "object",
+                "properties": {
+                    "sort": {
+                        "$ref": "#/components/schemas/AdminPanel.Materials.Collection.Sort"
+                    },
+                    "filter": {
+                        "$ref": "#/components/schemas/AdminPanel.Materials.Collection.Filter"
+                    },
+                    "pagination": {
+                        "$ref": "#/components/schemas/Base.OffsetPagination"
+                    }
+                }
+            },
+            "AdminPanel.Materials.GetCollection.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "description": "Объект каталога или материала",
+                                    "anyOf": [
+                                        {"$ref": "#/components/schemas/Materials.Directory.AdminPanelCollectionView"},
+                                        {"$ref": "#/components/schemas/Materials.Material.AdminPanelCollectionView"}
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "meta": {
+                        "type": "object",
+                        "properties": {
+                            "pagination": {
+                                "$ref": "#/components/schemas/Base.OffsetPaginationMeta"
+                            }
+                        }
+                    }
+                }
+            },
+            "AdminPanel.Materials.ObjectIdsRequest": {
+                "type": "object",
+                "properties": {
+                    "ids": {
+                        "type": "array",
+                        "description": "ID каталога или материала",
+                        "example": 123
+                    }
+                }
+            },
+            "AdminPanel.Materials.ObjectIdsAndDirectoryIdRequest": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/AdminPanel.Materials.ObjectIdsRequest"},
+                    {
+                        "type": "object",
+                        "properties": {
+                            "directory_id": {
+                                "type": "integer",
+                                "nullable": true,
+                                "description": "ID каталога",
+                                "example":null
+                            }
+                        }
+                    }
+                ]
+            },
+            "AdminPanel.Materials.ImportMaterials.Request": {
+                "type": "object",
+                "properties": {
+                    "file": {
+                        "description": "Импортируемый файл",
+                        "type": "string",
+                        "format": "binary"
+                    },
+                    "publish": {
+                        "type": "boolean",
+                        "description": "Опубликовать сразу",
+                        "nullable": true,
+                        "example": true
+                    },
+                    "directory_id": {
+                        "type": "integer",
+                        "description": "ID каталога",
+                        "nullable": true,
+                        "example": 67
+                    }
+                },
+                "required": ["file"]
+            },
+            "AdminPanel.Materials.ImportMaterials.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "$ref": "#/components/schemas/Tasks.TaskDefaultObject"
+                            }
+                        }
+                    }
+                }
+            },
+            "AdminPanel.Materials.CreateMaterial.Request": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.TypeId"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.Name"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.Url"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.StartAt"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.EndAt"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.Duration"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.Provider"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.Trainer"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.Price"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.Description"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.DirectoryId"},
+                    {
+                        "type": "object",
+                        "properties": {
+                            "publish": {
+                                "type": "boolean",
+                                "nullable": true,
+                                "description": "Флаг, отвечающий за мгновенную публикацию",
+                                "example": false
+                            },
+                            "skill_ids": {
+                                "type": "array",
+                                "description": "ID навыков",
+                                "items": {
+                                    "type": "integer",
+                                    "description": "ID навыка",
+                                    "example": 64
+                                }
+                            }
+                        }
+                    }
+                ],
+                "required": ["type_id", "name"]
+            },
+            "AdminPanel.Materials.GetMaterialDetails.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "$ref": "#/components/schemas/Materials.Material.DetailView"
+                            }
+                        }
+                    }
+                }
+            },
+            "AdminPanel.Materials.UpdateMaterial.Request": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.Name"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.Url"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.StartAt"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.EndAt"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.Duration"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.Provider"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.Trainer"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.Price"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.Description"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.DirectoryId"},
+                    {
+                        "type": "object",
+                        "properties": {
+                            "skill_ids": {
+                                "type": "array",
+                                "description": "ID навыков",
+                                "items": {
+                                    "type": "integer",
+                                    "description": "ID навыка",
+                                    "example": 64
+                                }
+                            }
+                        }
+                    }
+                ]
             }
         },
         "parameters": {
@@ -7978,6 +8737,16 @@
                 "example": "user_001",
                 "schema": {
                     "type": "string"
+                }
+            },
+            "AdminPanel.Path.Material.Id": {
+                "name": "material_id",
+                "in": "path",
+                "required": true,
+                "description": "ID материала.",
+                "example": 345,
+                "schema": {
+                    "type": "integer"
                 }
             }
         },
