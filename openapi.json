@@ -3772,7 +3772,7 @@
                 ],
                 "summary": "16.12. Обновить материал",
                 "description": "Обновить материал",
-                "operationId": "adminPanel.Material.createMaterial",
+                "operationId": "adminPanel.Material.updateMaterial",
                 "parameters": [
                     {"$ref": "#/components/parameters/AdminPanel.Path.Material.Id"}
                 ],
