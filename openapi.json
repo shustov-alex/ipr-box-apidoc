@@ -548,7 +548,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Skills.Tree.Request"
+                                "$ref": "#/components/schemas/Base.GetTree.Request"
                             }
                         }
                     }
@@ -2306,7 +2306,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Materials.getTree.Request"
+                                "$ref": "#/components/schemas/Base.GetTree.Request"
                             }
                         }
                     }
@@ -3113,7 +3113,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Divisions.Tree.Request"
+                                "$ref": "#/components/schemas/Base.GetTree.Request"
                             }
                         }
                     }
@@ -4398,7 +4398,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/AdminPanel.Materials.TreeOfDirectories.Request"
+                                "$ref": "#/components/schemas/Base.GetTree.Request"
                             }
                         }
                     }
@@ -5035,6 +5035,21 @@
                     },
                     "pagination": {
                         "$ref": "#/components/schemas/Base.CursorPaginationForward"
+                    }
+                }
+            },
+            "Base.GetTree.Request": {
+                "type": "object",
+                "properties": {
+                    "filter": {
+                        "type": "object",
+                        "properties": {
+                            "name": {
+                                "type": "string",
+                                "description": "Строка, по которой будет производиться поиск",
+                                "example": "find me"
+                            }
+                        }
                     }
                 }
             },
@@ -6208,17 +6223,6 @@
                     {"$ref": "#/components/schemas/Skills.ItemAttribute.CurrentLevelIndicatorID"},
                     {"$ref": "#/components/schemas/Skills.ItemAttribute.RequiredLevelIndicatorID"}
                 ]
-            },
-            "Skills.Tree.Request": {
-                "type": "object",
-                "properties": {
-                    "filter": {
-                        "type": "object",
-                        "allOf": [
-                            { "$ref": "#/components/schemas/Skills.ItemAttribute.Name" }
-                        ]
-                    }
-                }
             },
             "Skills.Tree.SuccessResponse": {
                 "type": "object",
@@ -7952,17 +7956,6 @@
                     {"$ref": "#/components/schemas/Materials.MaterialAttribute.Skills"}
                 ]
             },
-            "Materials.getTree.Request": {
-                "type": "object",
-                "properties": {
-                    "filter": {
-                        "type": "object",
-                        "allOf": [
-                            { "$ref": "#/components/schemas/Materials.DirectoryAttribute.Name" }
-                        ]
-                    }
-                }
-            },
             "Materials.getTree.SuccessResponse": {
                 "type": "object",
                 "properties": {
@@ -8205,17 +8198,6 @@
                     {"$ref": "#/components/schemas/Divisions.ItemAttribute.Name"},
                     {"$ref": "#/components/schemas/Divisions.TreeItemAttribute.Children"}
                 ]
-            },
-            "Divisions.Tree.Request": {
-                "type": "object",
-                "properties": {
-                    "filter": {
-                        "type": "object",
-                        "allOf": [
-                            { "$ref": "#/components/schemas/Divisions.ItemAttribute.Name" }
-                        ]
-                    }
-                }
             },
             "Divisions.Tree.SuccessResponse": {
                 "type": "object",
@@ -9581,17 +9563,6 @@
                         }
                     }
                 ]
-            },
-            "AdminPanel.Materials.TreeOfDirectories.Request": {
-                "type": "object",
-                "properties": {
-                    "filter": {
-                        "type": "object",
-                        "allOf": [
-                            { "$ref": "#/components/schemas/Materials.DirectoryAttribute.Name" }
-                        ]
-                    }
-                }
             },
             "AdminPanel.Materials.TreeOfDirectories.SuccessResponse": {
                 "type": "object",
