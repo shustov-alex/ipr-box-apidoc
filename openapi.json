@@ -2289,6 +2289,578 @@
                 }
             }
         },
+        "/materials/tree": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Materials"
+                ],
+                "summary": "08.01. Получить дерево каталогов и материалов",
+                "description": "Дерево каталогов и материалов. У каталогв могут быть дочерние элементы, у материала - нет. Если на одном уровне располагаются и каталоги, и материалы, то каталоги всегда расположены первыми.",
+                "operationId": "materials.getTree",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Materials.getTree.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Дерево каталогов и материалов",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Materials.getTree.SuccessResponse"
+                                },
+                                "example": {
+                                    "data": {
+                                        "success": [
+                                            {
+                                                "entity_type": "material_directory",
+                                                "id": 501,
+                                                "parent_id": null,
+                                                "name": "Кондитерское производство",
+                                                "children": [
+                                                    {
+                                                        "entity_type": "material_directory",
+                                                        "id": 502,
+                                                        "parent_id": 501,
+                                                        "name": "Шоколад",
+                                                        "children": [
+                                                            {
+                                                                "entity_type": "material",
+                                                                "id": 503,
+                                                                "parent_id": 502,
+                                                                "name": "Темперирование",
+                                                                "is_paid": false,
+                                                                "skills": [
+                                                                    {
+                                                                        "id": 4,
+                                                                        "name": "Документооборот"
+                                                                    },
+                                                                    {
+                                                                        "id": 25,
+                                                                        "name": "Видение целого"
+                                                                    },
+                                                                    {
+                                                                        "id": 26,
+                                                                        "name": "Взаимозависимость"
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "entity_type": "material",
+                                                                "id": 504,
+                                                                "parent_id": 502,
+                                                                "name": "Формовка",
+                                                                "is_paid": false,
+                                                                "skills": [
+                                                                    {
+                                                                        "id": 7,
+                                                                        "name": "Презентации"
+                                                                    },
+                                                                    {
+                                                                        "id": 18,
+                                                                        "name": "Расстановка приоритетов"
+                                                                    },
+                                                                    {
+                                                                        "id": 25,
+                                                                        "name": "Видение целого"
+                                                                    },
+                                                                    {
+                                                                        "id": 26,
+                                                                        "name": "Взаимозависимость"
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "entity_type": "material_directory",
+                                                        "id": 505,
+                                                        "parent_id": 501,
+                                                        "name": "Карамель",
+                                                        "children": [
+                                                            {
+                                                                "entity_type": "material",
+                                                                "id": 506,
+                                                                "parent_id": 505,
+                                                                "name": "Варка карамели",
+                                                                "is_paid": false,
+                                                                "skills": [
+                                                                    {
+                                                                        "id": 6,
+                                                                        "name": "Публичные выступления"
+                                                                    },
+                                                                    {
+                                                                        "id": 29,
+                                                                        "name": "Гибкость мышления"
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "entity_type": "material_directory",
+                                                "id": 507,
+                                                "parent_id": null,
+                                                "name": "Производство напитков",
+                                                "children": [
+                                                    {
+                                                        "entity_type": "material_directory",
+                                                        "id": 508,
+                                                        "parent_id": 507,
+                                                        "name": "Производство соков",
+                                                        "children": [
+                                                            {
+                                                                "entity_type": "material",
+                                                                "id": 509,
+                                                                "parent_id": 508,
+                                                                "name": "Экстракция сока",
+                                                                "is_paid": false,
+                                                                "skills": [
+                                                                    {
+                                                                        "id": 10,
+                                                                        "name": "Эмпатия"
+                                                                    },
+                                                                    {
+                                                                        "id": 25,
+                                                                        "name": "Видение целого"
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "entity_type": "material",
+                                                                "id": 510,
+                                                                "parent_id": 508,
+                                                                "name": "Фильтрация сока",
+                                                                "is_paid": false,
+                                                                "skills": [
+                                                                    {
+                                                                        "id": 10,
+                                                                        "name": "Эмпатия"
+                                                                    },
+                                                                    {
+                                                                        "id": 16,
+                                                                        "name": "Календарное планирование"
+                                                                    },
+                                                                    {
+                                                                        "id": 23,
+                                                                        "name": "Оценка аргументов"
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "entity_type": "material_directory",
+                                                        "id": 511,
+                                                        "parent_id": 507,
+                                                        "name": "Производство безалкогольных напитков",
+                                                        "children": [
+                                                            {
+                                                                "entity_type": "material",
+                                                                "id": 512,
+                                                                "parent_id": 511,
+                                                                "name": "Сиропы",
+                                                                "is_paid": false,
+                                                                "skills": [
+                                                                    {
+                                                                        "id": 16,
+                                                                        "name": "Календарное планирование"
+                                                                    },
+                                                                    {
+                                                                        "id": 19,
+                                                                        "name": "Тайм-боксинг"
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "entity_type": "material",
+                                                                "id": 513,
+                                                                "parent_id": 511,
+                                                                "name": "Газирование",
+                                                                "is_paid": false,
+                                                                "skills": [
+                                                                    {
+                                                                        "id": 16,
+                                                                        "name": "Календарное планирование"
+                                                                    },
+                                                                    {
+                                                                        "id": 28,
+                                                                        "name": "Генерация идей"
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "entity_type": "material_directory",
+                                                "id": 514,
+                                                "parent_id": null,
+                                                "name": "Пищевая химия",
+                                                "children": [
+                                                    {
+                                                        "entity_type": "material_directory",
+                                                        "id": 515,
+                                                        "parent_id": 514,
+                                                        "name": "Пищевые добавки",
+                                                        "children": [
+                                                            {
+                                                                "entity_type": "material",
+                                                                "id": 516,
+                                                                "parent_id": 515,
+                                                                "name": "Консерванты",
+                                                                "is_paid": false,
+                                                                "skills": [
+                                                                    {
+                                                                        "id": 11,
+                                                                        "name": "Активное слушание"
+                                                                    },
+                                                                    {
+                                                                        "id": 12,
+                                                                        "name": "Убеждение"
+                                                                    },
+                                                                    {
+                                                                        "id": 18,
+                                                                        "name": "Расстановка приоритетов"
+                                                                    },
+                                                                    {
+                                                                        "id": 22,
+                                                                        "name": "Анализ данных"
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "entity_type": "material",
+                                                                "id": 517,
+                                                                "parent_id": 515,
+                                                                "name": "Красители",
+                                                                "is_paid": false,
+                                                                "skills": [
+                                                                    {
+                                                                        "id": 10,
+                                                                        "name": "Эмпатия"
+                                                                    },
+                                                                    {
+                                                                        "id": 29,
+                                                                        "name": "Гибкость мышления"
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "entity_type": "material_directory",
+                                                        "id": 518,
+                                                        "parent_id": 514,
+                                                        "name": "Пищевые ингредиенты",
+                                                        "children": [
+                                                            {
+                                                                "entity_type": "material",
+                                                                "id": 519,
+                                                                "parent_id": 518,
+                                                                "name": "Углеводы",
+                                                                "is_paid": false,
+                                                                "skills": [
+                                                                    {
+                                                                        "id": 4,
+                                                                        "name": "Документооборот"
+                                                                    },
+                                                                    {
+                                                                        "id": 19,
+                                                                        "name": "Тайм-боксинг"
+                                                                    },
+                                                                    {
+                                                                        "id": 28,
+                                                                        "name": "Генерация идей"
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "entity_type": "material",
+                                                                "id": 520,
+                                                                "parent_id": 518,
+                                                                "name": "Жиры",
+                                                                "is_paid": false,
+                                                                "skills": [
+                                                                    {
+                                                                        "id": 8,
+                                                                        "name": "Переговоры"
+                                                                    },
+                                                                    {
+                                                                        "id": 23,
+                                                                        "name": "Оценка аргументов"
+                                                                    },
+                                                                    {
+                                                                        "id": 25,
+                                                                        "name": "Видение целого"
+                                                                    },
+                                                                    {
+                                                                        "id": 29,
+                                                                        "name": "Гибкость мышления"
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "entity_type": "material_directory",
+                                                "id": 521,
+                                                "parent_id": null,
+                                                "name": "Производственный контроль",
+                                                "children": [
+                                                    {
+                                                        "entity_type": "material_directory",
+                                                        "id": 522,
+                                                        "parent_id": 521,
+                                                        "name": "Контроль сырья",
+                                                        "children": [
+                                                            {
+                                                                "entity_type": "material",
+                                                                "id": 523,
+                                                                "parent_id": 522,
+                                                                "name": "Органолептика",
+                                                                "is_paid": false,
+                                                                "skills": [
+                                                                    {
+                                                                        "id": 3,
+                                                                        "name": "Деловая переписка"
+                                                                    },
+                                                                    {
+                                                                        "id": 23,
+                                                                        "name": "Оценка аргументов"
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "entity_type": "material",
+                                                                "id": 524,
+                                                                "parent_id": 522,
+                                                                "name": "Лабораторные методы",
+                                                                "is_paid": false,
+                                                                "skills": [
+                                                                    {
+                                                                        "id": 8,
+                                                                        "name": "Переговоры"
+                                                                    },
+                                                                    {
+                                                                        "id": 18,
+                                                                        "name": "Расстановка приоритетов"
+                                                                    },
+                                                                    {
+                                                                        "id": 28,
+                                                                        "name": "Генерация идей"
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "entity_type": "material_directory",
+                                                        "id": 525,
+                                                        "parent_id": 521,
+                                                        "name": "Контроль производства",
+                                                        "children": [
+                                                            {
+                                                                "entity_type": "material",
+                                                                "id": 526,
+                                                                "parent_id": 525,
+                                                                "name": "Контроль температуры",
+                                                                "is_paid": false,
+                                                                "skills": [
+                                                                    {
+                                                                        "id": 6,
+                                                                        "name": "Публичные выступления"
+                                                                    },
+                                                                    {
+                                                                        "id": 7,
+                                                                        "name": "Презентации"
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "entity_type": "material",
+                                                                "id": 527,
+                                                                "parent_id": 525,
+                                                                "name": "Контроль влажности",
+                                                                "is_paid": false,
+                                                                "skills": [
+                                                                    {
+                                                                        "id": 12,
+                                                                        "name": "Убеждение"
+                                                                    },
+                                                                    {
+                                                                        "id": 26,
+                                                                        "name": "Взаимозависимость"
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            },
+                                            {
+                                                "entity_type": "material_directory",
+                                                "id": 528,
+                                                "parent_id": null,
+                                                "name": "Продвижение продукции",
+                                                "children": [
+                                                    {
+                                                        "entity_type": "material_directory",
+                                                        "id": 529,
+                                                        "parent_id": 528,
+                                                        "name": "Маркетинг",
+                                                        "children": [
+                                                            {
+                                                                "entity_type": "material",
+                                                                "id": 530,
+                                                                "parent_id": 529,
+                                                                "name": "Опросы",
+                                                                "is_paid": false,
+                                                                "skills": [
+                                                                    {
+                                                                        "id": 6,
+                                                                        "name": "Публичные выступления"
+                                                                    },
+                                                                    {
+                                                                        "id": 11,
+                                                                        "name": "Активное слушание"
+                                                                    },
+                                                                    {
+                                                                        "id": 12,
+                                                                        "name": "Убеждение"
+                                                                    },
+                                                                    {
+                                                                        "id": 22,
+                                                                        "name": "Анализ данных"
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "entity_type": "material",
+                                                                "id": 531,
+                                                                "parent_id": 529,
+                                                                "name": "Фокус-группы",
+                                                                "is_paid": false,
+                                                                "skills": [
+                                                                    {
+                                                                        "id": 10,
+                                                                        "name": "Эмпатия"
+                                                                    },
+                                                                    {
+                                                                        "id": 15,
+                                                                        "name": "Планирование задач"
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "entity_type": "material",
+                                                                "id": 532,
+                                                                "parent_id": 529,
+                                                                "name": "Брендинг",
+                                                                "is_paid": false,
+                                                                "skills": [
+                                                                    {
+                                                                        "id": 10,
+                                                                        "name": "Эмпатия"
+                                                                    },
+                                                                    {
+                                                                        "id": 29,
+                                                                        "name": "Гибкость мышления"
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    },
+                                                    {
+                                                        "entity_type": "material_directory",
+                                                        "id": 533,
+                                                        "parent_id": 528,
+                                                        "name": "Реклама",
+                                                        "children": [
+                                                            {
+                                                                "entity_type": "material",
+                                                                "id": 534,
+                                                                "parent_id": 533,
+                                                                "name": "Билборды",
+                                                                "is_paid": false,
+                                                                "skills": [
+                                                                    {
+                                                                        "id": 4,
+                                                                        "name": "Документооборот"
+                                                                    },
+                                                                    {
+                                                                        "id": 11,
+                                                                        "name": "Активное слушание"
+                                                                    },
+                                                                    {
+                                                                        "id": 23,
+                                                                        "name": "Оценка аргументов"
+                                                                    },
+                                                                    {
+                                                                        "id": 25,
+                                                                        "name": "Видение целого"
+                                                                    }
+                                                                ]
+                                                            },
+                                                            {
+                                                                "entity_type": "material",
+                                                                "id": 535,
+                                                                "parent_id": 533,
+                                                                "name": "Транзитная реклама",
+                                                                "is_paid": false,
+                                                                "skills": [
+                                                                    {
+                                                                        "id": 6,
+                                                                        "name": "Публичные выступления"
+                                                                    },
+                                                                    {
+                                                                        "id": 19,
+                                                                        "name": "Тайм-боксинг"
+                                                                    },
+                                                                    {
+                                                                        "id": 26,
+                                                                        "name": "Взаимозависимость"
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ]
+                                                    }
+                                                ]
+                                            }
+                                        ]
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки валидации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ValidationErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/materials/{material_id}": {
             "get": {
                 "security": [
@@ -7296,6 +7868,36 @@
                     {"$ref": "#/components/schemas/Materials.TreeOfDirectories.ChildrenAttribute"}
                 ]
             },
+            "Materials.Tree.ChildrenAttribute": {
+                "type": "object",
+                "properties": {
+                    "children": {
+                        "type": "array",
+                        "description": "Список дочерних элементов"
+                    }
+                }
+            },
+            "Materials.Tree.DirectoryObject": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Materials.DirectoryAttribute.EntityType"},
+                    {"$ref": "#/components/schemas/Materials.DirectoryAttribute.Id"},
+                    {"$ref": "#/components/schemas/Materials.DirectoryAttribute.ParentId"},
+                    {"$ref": "#/components/schemas/Materials.DirectoryAttribute.Name"},
+                    {"$ref": "#/components/schemas/Materials.Tree.ChildrenAttribute"}
+                ]
+            },
+            "Materials.Tree.MaterialObject": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.EntityType"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.Id"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.ParentId"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.Name"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.IsPaid"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.Skills"}
+                ]
+            },
             "Materials.Directory.AdminPanelCollectionView": {
                 "type": "object",
                 "allOf": [
@@ -7349,6 +7951,37 @@
                     {"$ref": "#/components/schemas/Materials.MaterialAttribute.UpdatedAt"},
                     {"$ref": "#/components/schemas/Materials.MaterialAttribute.Skills"}
                 ]
+            },
+            "Materials.getTree.Request": {
+                "type": "object",
+                "properties": {
+                    "filter": {
+                        "type": "object",
+                        "allOf": [
+                            { "$ref": "#/components/schemas/Materials.DirectoryAttribute.Name" }
+                        ]
+                    }
+                }
+            },
+            "Materials.getTree.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "anyOf": [
+                                        {"$ref": "#/components/schemas/Materials.Tree.DirectoryObject"},
+                                        {"$ref": "#/components/schemas/Materials.Tree.MaterialObject"}
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
             },
             "Materials.MaterialDetails.SuccessResponse": {
                 "type": "object",
