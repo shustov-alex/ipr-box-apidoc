@@ -4381,6 +4381,84 @@
                 }
             }
         },
+        "/admin/materials/{material_id}/assignments": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanelMaterials"
+                ],
+                "summary": "16.13. Получить список назначений материала",
+                "description": "Получить список назначений материала",
+                "operationId": "adminPanel.Materials.getAssignmentCollection",
+                "parameters": [
+                    {"$ref": "#/components/parameters/AdminPanel.Path.Material.Id"}
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AdminPanel.Materials.GetAssignmentCollection.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Список назначений",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.Materials.GetAssignmentCollection.SuccessResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/materials/{material_id}/assignments/update-status": {
+            "put": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanelMaterials"
+                ],
+                "summary": "16.14. Получить список назначений материала",
+                "description": "Получить список назначений материала",
+                "operationId": "adminPanel.Materials.updateAssignmentStatuses",
+                "parameters": [
+                    {"$ref": "#/components/parameters/AdminPanel.Path.Material.Id"}
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AdminPanel.Materials.UpdateAssignmentStatuses.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Список назначений",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.Materials.CountSuccessResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/admin/materials/directories/tree": {
             "post": {
                 "security": [
@@ -4391,7 +4469,7 @@
                 "tags": [
                     "AdminPanelMaterials"
                 ],
-                "summary": "16.13. Получить дерево каталогов",
+                "summary": "16.15. Получить дерево каталогов",
                 "description": "Получить дерево каталогов",
                 "operationId": "adminPanel.Materials.getTreeOfDirectories",
                 "requestBody": {
@@ -4550,7 +4628,7 @@
                 "tags": [
                     "AdminPanelMaterials"
                 ],
-                "summary": "16.14. Создать каталог",
+                "summary": "16.16. Создать каталог",
                 "description": "Создать каталог",
                 "operationId": "adminPanel.Material.createDirectory",
                 "requestBody": {
@@ -4596,7 +4674,7 @@
                 "tags": [
                     "AdminPanelMaterials"
                 ],
-                "summary": "16.15. Переименовать каталог",
+                "summary": "16.17. Переименовать каталог",
                 "description": "Переименовать каталог",
                 "operationId": "adminPanel.Material.renameDirectory",
                 "parameters": [
@@ -4645,7 +4723,7 @@
                 "tags": [
                     "AdminPanelMaterials"
                 ],
-                "summary": "16.16. Удалить каталог",
+                "summary": "16.18. Удалить каталог",
                 "description": "Удалить каталог",
                 "operationId": "adminPanel.Material.deleteDirectory",
                 "parameters": [
@@ -9419,6 +9497,167 @@
                                 "$ref": "#/components/schemas/Base.OffsetPaginationMeta"
                             }
                         }
+                    }
+                }
+            },
+            "AdminPanel.Materials.AssignmentCollection.Filter": {
+                "type": "object",
+                "properties": {
+                    "statuses": {
+                        "type": "array",
+                        "nullable": true,
+                        "items": {
+                            "type": "string",
+                            "description": "Статус назначения",
+                            "example": "not_started",
+                            "enum": ["not_started", "in_progress", "cancelled", "failed", "done"]
+                        }
+                    },
+                    "idp_years": {
+                        "type": "array",
+                        "nullable": true,
+                        "items": {
+                            "type": "integer",
+                            "description": "Год ИПР",
+                            "example": 2024
+                        }
+                    },
+                    "idp_statuses": {
+                        "type": "array",
+                        "nullable": true,
+                        "items": {
+                            "type": "string",
+                            "description": "Статус ИПР",
+                            "example": "draft",
+                            "enum": ["draft", "approval", "approved", "not_approved", "cancelled"]
+                        }
+                    },
+                    "division_ids": {
+                        "type": "array",
+                        "nullable": true,
+                        "items": {
+                            "type": "integer",
+                            "description": "ID элемента орг. структуры",
+                            "example": 16
+                        }
+                    },
+                    "employee_statuses": {
+                        "type": "array",
+                        "nullable": true,
+                        "items": {
+                            "type": "string",
+                            "description": "Статус сотрудника",
+                            "example": "active",
+                            "enum": ["active", "archived"]
+                        }
+                    },
+                    "target_name": {
+                        "type": "string",
+                        "description": "Название цели",
+                        "example": "Моя цель"
+                    },
+                    "employee_text_query": {
+                        "type": "string",
+                        "description": "Текстовая строка для поиска по атрибутам сотрудника (внешний ID, имя, название должности)",
+                        "nullable": true,
+                        "example": "Иван"
+                    }
+                }
+            },
+            "AdminPanel.Materials.GetAssignmentCollection.Request": {
+                "type": "object",
+                "properties": {
+                    "filter": {
+                        "$ref": "#/components/schemas/AdminPanel.Materials.AssignmentCollection.Filter"
+                    },
+                    "pagination": {
+                        "$ref": "#/components/schemas/Base.OffsetPagination"
+                    }
+                }
+            },
+            "AdminPanel.Materials.GetAssignmentCollection.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "description": "Объект назначения. Табличное отображние.",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string",
+                                            "description": "Статус назначения",
+                                            "example": "not_started",
+                                            "enum": ["not_started", "in_progress", "cancelled", "failed", "done"]
+                                        },
+                                        "target": {
+                                            "type": "object",
+                                            "description": "Цель",
+                                            "allOf": [
+                                                {"$ref": "#/components/schemas/Targets.TargetAttribute.ID"},
+                                                {"$ref": "#/components/schemas/Targets.TargetAttribute.Name"}
+                                            ]
+                                        },
+                                        "idp": {
+                                            "type": "object",
+                                            "description": "ИПР",
+                                            "allOf": [
+                                                {"$ref": "#/components/schemas/Idp.IdpAttribute.Year"},
+                                                {"$ref": "#/components/schemas/Idp.IdpAttribute.Status"}
+                                            ]
+                                        },
+                                        "employee": {
+                                            "type": "object",
+                                            "description": "Сотрудник",
+                                            "allOf": [
+                                                {"$ref": "#/components/schemas/Employees.EmployeeAttribute.ID"},
+                                                {"$ref": "#/components/schemas/Employees.EmployeeAttribute.ExternalID"},
+                                                {"$ref": "#/components/schemas/Employees.EmployeeAttribute.FirstName"},
+                                                {"$ref": "#/components/schemas/Employees.EmployeeAttribute.LastName"},
+                                                {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "position": {
+                                                            "$ref": "#/components/schemas/Positions.PositionDefaultView"
+                                                        }
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "meta": {
+                        "type": "object",
+                        "properties": {
+                            "pagination": {
+                                "$ref": "#/components/schemas/Base.OffsetPaginationMeta"
+                            }
+                        }
+                    }
+                }
+            },
+            "AdminPanel.Materials.UpdateAssignmentStatuses.Request": {
+                "type": "object",
+                "properties": {
+                    "target_ids": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "description": "ID цели",
+                            "example": 32
+                        }
+                    },
+                    "status": {
+                        "type": "string",
+                        "description": "Статус назначения",
+                        "example": "not_started",
+                        "enum": ["not_started", "in_progress", "cancelled", "failed", "done"]
                     }
                 }
             },
