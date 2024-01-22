@@ -3993,7 +3993,7 @@
                     "AdminPanelMaterials"
                 ],
                 "summary": "16.04. Получить список каталогов и материалов",
-                "description": "Получить список каталогов и материалов",
+                "description": "Получить список каталогов и материалов. Атрибуты 'count_of_assignments' и 'can_assignment_status_be_changed' возвращаются только для опубликованных и архивных материалов.",
                 "operationId": "adminPanel.Materials.getCollection",
                 "requestBody": {
                     "content": {
@@ -7913,6 +7913,26 @@
                     }
                 }
             },
+            "Materials.MaterialAttribute.CountOfAssignments": {
+                "type": "object",
+                "properties": {
+                    "count_of_assignments": {
+                        "type": "integer",
+                        "description": "Количество назначений",
+                        "example": 0
+                    }
+                }
+            },
+            "Materials.MaterialAttribute.AssignmentStatusChangeFlag": {
+                "type": "object",
+                "properties": {
+                    "can_assignment_status_be_changed": {
+                        "type": "boolean",
+                        "description": "Может ли быть изменён статус назначений",
+                        "example": true
+                    }
+                }
+            },
             "Materials.MaterialAttribute.Reason": {
                 "type": "object",
                 "properties": {
@@ -7999,7 +8019,9 @@
                     {"$ref": "#/components/schemas/Materials.MaterialAttribute.Name"},
                     {"$ref": "#/components/schemas/Materials.MaterialAttribute.TypeName"},
                     {"$ref": "#/components/schemas/Materials.MaterialAttribute.SourceName"},
-                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.CreatedAt"}
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.CreatedAt"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.CountOfAssignments"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.AssignmentStatusChangeFlag"}
                 ]
             },
             "Materials.Material.CollectionView": {
