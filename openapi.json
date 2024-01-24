@@ -3322,6 +3322,16 @@
                                 }
                             }
                         }
+                    },
+                    "400": {
+                        "description": "Запрашиваемый объект не найден",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundErrorCollectionResponse"
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -3365,6 +3375,46 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/Base.ValidationErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/tasks/{task_id}/error-details": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Tasks"
+                ],
+                "summary": "11.05. Получить список подробных ошибок",
+                "description": "Получить список подробных ошибок",
+                "operationId": "tasks.getErrorDetails",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Tasks.Path.Task.Id"}
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Список подробных ошибок",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Tasks.GetErrorDetails.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Запрашиваемый объект не найден",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundErrorCollectionResponse"
                                 }
                             }
                         }
@@ -8418,6 +8468,21 @@
                     {"$ref": "#/components/schemas/Tasks.TaskAttribute.ErrorDetailsFlag"}
                 ]
             },
+            "Tasks.ErrorDetailObject": {
+                "type": "object",
+                "properties": {
+                    "row": {
+                        "type": "integer",
+                        "description": "Номер строки в файле, на которой произошла ошибка",
+                        "example": 2
+                    },
+                    "message": {
+                        "type": "string",
+                        "description": "Текст ошибки",
+                        "example": "Атрибут 'login' должен быть уникальным"
+                    }
+                }
+            },
             "Tasks.Collection.Request": {
                 "type": "object",
                 "properties": {
@@ -8459,6 +8524,22 @@
                         "items": {
                             "type": "integer",
                             "example": 2048
+                        }
+                    }
+                }
+            },
+            "Tasks.GetErrorDetails.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/Tasks.ErrorDetailObject"
+                                }
+                            }
                         }
                     }
                 }
