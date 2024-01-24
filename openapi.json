@@ -8408,7 +8408,7 @@
                         "type": "string",
                         "description": "Статус",
                         "example": "done",
-                        "enum": ["new", "in_progress", "failed", "done"]
+                        "enum": ["new", "in_progress", "failed", "done", "done_partially"]
                     }
                 }
             },
