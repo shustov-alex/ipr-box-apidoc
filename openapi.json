@@ -8384,6 +8384,27 @@
                     }
                 }
             },
+            "Tasks.TaskAttribute.Message": {
+                "type": "object",
+                "properties": {
+                    "message": {
+                        "type": "string",
+                        "description": "Комментарий по результатам выполнения задачи",
+                        "example": null,
+                        "nullable": true
+                    }
+                }
+            },
+            "Tasks.TaskAttribute.ErrorDetailsFlag": {
+                "type": "object",
+                "properties": {
+                    "has_error_details": {
+                        "type": "boolean",
+                        "description": "Флаг, обозначающий наличие подробных ошибок. Для получения подробных ошибок обращаться к методу 11.05.",
+                        "example": false
+                    }
+                }
+            },
             "Tasks.TaskDefaultObject": {
                 "type": "object",
                 "description": "Задача",
@@ -8392,7 +8413,9 @@
                     {"$ref": "#/components/schemas/Tasks.TaskAttribute.Type"},
                     {"$ref": "#/components/schemas/Tasks.TaskAttribute.Status"},
                     {"$ref": "#/components/schemas/Tasks.TaskAttribute.CompletionPercent"},
-                    {"$ref": "#/components/schemas/Tasks.TaskAttribute.FileId"}
+                    {"$ref": "#/components/schemas/Tasks.TaskAttribute.FileId"},
+                    {"$ref": "#/components/schemas/Tasks.TaskAttribute.Message"},
+                    {"$ref": "#/components/schemas/Tasks.TaskAttribute.ErrorDetailsFlag"}
                 ]
             },
             "Tasks.Collection.Request": {
