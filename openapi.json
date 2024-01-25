@@ -8397,7 +8397,14 @@
                         "type": "string",
                         "description": "Тип",
                         "example": "targets.report",
-                        "enum": ["idp.status_report", "targets.report", "idp.approve_collection", "materials.report"]
+                        "enum": [
+                            "idp.status_report",
+                            "idp.approve_collection",
+                            "targets.report",
+                            "materials.report",
+                            "materials.import",
+                            "users.import"
+                        ]
                     }
                 }
             },
