@@ -4781,7 +4781,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Объект каталога",
+                        "description": "Каталог успешно удалён",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -4796,6 +4796,36 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/Base.ObjectNotFoundOrValidationErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/materials/directories/{directory_id}/path": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanelMaterials"
+                ],
+                "summary": "16.19. Получить путь от каталога до корня",
+                "description": "Получить путь от каталога до корня",
+                "operationId": "adminPanel.Material.getPathToDirectory",
+                "parameters": [
+                    {"$ref": "#/components/parameters/AdminPanel.Path.Directory.Id"}
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Объект каталога",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.Materials.GetPathToDirectory.SuccessResponse"
                                 }
                             }
                         }
@@ -9975,6 +10005,22 @@
                         "properties": {
                             "success": {
                                 "$ref": "#/components/schemas/Materials.Directory.DetailView"
+                            }
+                        }
+                    }
+                }
+            },
+            "AdminPanel.Materials.GetPathToDirectory.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/Materials.Directory.DetailView"
+                                }
                             }
                         }
                     }
