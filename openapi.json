@@ -3100,6 +3100,42 @@
                 }
             }
         },
+        "/employees/quick-search-extended": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Employees"
+                ],
+                "summary": "09.05. Расширенная версия быстрого поиска сотрудников",
+                "description": "Расширенная версия быстрого поиска сотрудников",
+                "operationId": "employees.quickSearchExtended",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Base.QuickSearch.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Список найденных сотрудников",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Employees.QuickSearchExtended.SuccessResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/divisions/tree": {
             "post": {
                 "security": [
@@ -6059,7 +6095,7 @@
                                     "description": "Сотрудник",
                                     "allOf": [
                                         {"$ref": "#/components/schemas/Employees.EmployeeAttribute.Id"},
-                                        {"$ref": "#/components/schemas/Employees.EmployeeAttribute.ExternalID"},
+                                        {"$ref": "#/components/schemas/Employees.EmployeeAttribute.ExternalId"},
                                         {"$ref": "#/components/schemas/Employees.EmployeeAttribute.Status"},
                                         {"$ref": "#/components/schemas/Employees.EmployeeAttribute.CreatedAt"},
                                         {"$ref": "#/components/schemas/Employees.EmployeeAttribute.FirstName"},
@@ -6186,7 +6222,7 @@
                                 "type": "object",
                                 "allOf": [
                                     { "$ref": "#/components/schemas/Employees.EmployeeAttribute.Id" },
-                                    { "$ref": "#/components/schemas/Employees.EmployeeAttribute.ExternalID" },
+                                    { "$ref": "#/components/schemas/Employees.EmployeeAttribute.ExternalId" },
                                     { "$ref": "#/components/schemas/Employees.EmployeeAttribute.FirstName" },
                                     { "$ref": "#/components/schemas/Employees.EmployeeAttribute.LastName" },
                                     {
@@ -6229,6 +6265,37 @@
                                         { "$ref": "#/components/schemas/Employees.EmployeeAttribute.Id" },
                                         { "$ref": "#/components/schemas/Employees.EmployeeAttribute.FirstName" },
                                         { "$ref": "#/components/schemas/Employees.EmployeeAttribute.LastName" }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "meta": {
+                        "type": "object",
+                        "properties": {
+                            "pagination": {
+                                "$ref": "#/components/schemas/Base.CursorPaginationMeta"
+                            }
+                        }
+                    }
+                }
+            },
+            "Employees.QuickSearchExtended.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "allOf": [
+                                        {"$ref": "#/components/schemas/Employees.EmployeeAttribute.Id"},
+                                        {"$ref": "#/components/schemas/Employees.EmployeeAttribute.FirstName"},
+                                        {"$ref": "#/components/schemas/Employees.EmployeeAttribute.LastName"},
+                                        {"$ref": "#/components/schemas/Employees.EmployeeAttribute.Email"},
+                                        {"$ref": "#/components/schemas/Employees.EmployeeAttribute.ExternalId"}
                                     ]
                                 }
                             }
@@ -8807,13 +8874,13 @@
                     }
                 }
             },
-            "Employees.EmployeeAttribute.ExternalID": {
+            "Employees.EmployeeAttribute.ExternalId": {
                 "type": "object",
                 "properties": {
                     "external_id": {
                         "type": "string",
                         "description": "Внешний ID",
-                        "example": "my_id"
+                        "example": "employee_external_id"
                     }
                 }
             },
@@ -8825,6 +8892,16 @@
                         "description": "Статус",
                         "enum": ["active", "archived"],
                         "example": "active"
+                    }
+                }
+            },
+            "Employees.EmployeeAttribute.Email": {
+                "type": "object",
+                "properties": {
+                    "email": {
+                        "type": "string",
+                        "description": "Email",
+                        "example": "employee.of.the.month@test.com"
                     }
                 }
             },
@@ -9656,7 +9733,7 @@
                                                     "nullable": true,
                                                     "allOf": [
                                                         {"$ref": "#/components/schemas/Employees.EmployeeAttribute.Id"},
-                                                        {"$ref": "#/components/schemas/Employees.EmployeeAttribute.ExternalID"},
+                                                        {"$ref": "#/components/schemas/Employees.EmployeeAttribute.ExternalId"},
                                                         {"$ref": "#/components/schemas/Employees.EmployeeAttribute.FirstName"},
                                                         {"$ref": "#/components/schemas/Employees.EmployeeAttribute.LastName"},
                                                         {
@@ -10315,7 +10392,7 @@
                                             "description": "Сотрудник",
                                             "allOf": [
                                                 {"$ref": "#/components/schemas/Employees.EmployeeAttribute.Id"},
-                                                {"$ref": "#/components/schemas/Employees.EmployeeAttribute.ExternalID"},
+                                                {"$ref": "#/components/schemas/Employees.EmployeeAttribute.ExternalId"},
                                                 {"$ref": "#/components/schemas/Employees.EmployeeAttribute.FirstName"},
                                                 {"$ref": "#/components/schemas/Employees.EmployeeAttribute.LastName"},
                                                 {
