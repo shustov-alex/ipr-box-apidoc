@@ -4873,6 +4873,42 @@
                 }
             }
         },
+        "/admin/target-templates": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanel.TargetTemplates"
+                ],
+                "summary": "17.01. Получить список шаблонов цели",
+                "description": "Получить список шаблонов цели",
+                "operationId": "adminPanel.TargetTemplates.getCollection",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AdminPanel.TargetTemplates.GetCollection.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Список шаблонов",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.TargetTemplates.GetCollection.SuccessResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/admin/target-templates/create": {
             "post": {
                 "security": [
@@ -7618,6 +7654,46 @@
                         "example": "2023-09-01 12:10:20 +03:00"
                     }
                 }
+            },
+            "TargetTemplates.CollectionView": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/TargetTemplates.TemplateAttribute.Id"},
+                    {"$ref": "#/components/schemas/TargetTemplates.TemplateAttribute.Name"},
+                    {"$ref": "#/components/schemas/TargetTemplates.TemplateAttribute.AssignmentType"},
+                    {
+                        "type": "object",
+                        "properties": {
+                            "recurrent_assignment": {
+                                "type": "object",
+                                "nullable": true,
+                                "allOf": [
+                                    {"$ref": "#/components/schemas/TargetTemplates.RecurrentAssignmentAttribute.PeriodType"},
+                                    {"$ref": "#/components/schemas/TargetTemplates.RecurrentAssignmentAttribute.PeriodMultiplier"},
+                                    {"$ref": "#/components/schemas/TargetTemplates.RecurrentAssignmentAttribute.Frequency"}
+                                ]
+                            },
+                            "count_of_assignments": {
+                                "type": "integer",
+                                "description": "Количество назначений",
+                                "example": 55
+                            },
+                            "count_of_scope_settings": {
+                                "type": "integer",
+                                "description": "Количество настроек области действия",
+                                "example": 3
+                            },
+                            "scope_settings": {
+                                "type": "object",
+                                "allOf": [
+                                    {"$ref": "#/components/schemas/TargetTemplates.ScopeAttribute.Roles"},
+                                    {"$ref": "#/components/schemas/TargetTemplates.ScopeAttribute.Divisions"},
+                                    {"$ref": "#/components/schemas/TargetTemplates.ScopeAttribute.Employees"}
+                                ]
+                            }
+                        }
+                    }
+                ]
             },
             "Idp.IdpAttribute.Id": {
                 "type": "object",
@@ -10734,6 +10810,108 @@
                                 "items": {
                                     "$ref": "#/components/schemas/Materials.Directory.DetailView"
                                 }
+                            }
+                        }
+                    }
+                }
+            },
+            "AdminPanel.TargetTemplates.Collection.Sort": {
+                "type": "object",
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/Base.Sort"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "attribute": {
+                                "type": "string",
+                                "description": "Значение, по которому производится сортировка. Если не указано, то будет использовано значение по умолчанию.",
+                                "enum": ["count_of_assignments"],
+                                "example": "count_of_assignments"
+                            }
+                        }
+                    }
+                ]
+            },
+            "AdminPanel.TargetTemplates.Collection.Filter": {
+                "type": "object",
+                "properties": {
+                    "assignment_type": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "Тип назначения (одноразовый, повторяющийся)",
+                        "enum": ["once", "recurrent"],
+                        "example": "recurrent"
+                    },
+                    "role_ids": {
+                        "type": "array",
+                        "nullable": true,
+                        "items": {
+                            "type": "integer",
+                            "description": "ID роли",
+                            "example": 8
+                        }
+                    },
+                    "division_ids": {
+                        "type": "array",
+                        "nullable": true,
+                        "items": {
+                            "type": "integer",
+                            "description": "ID элемента орг. структуры",
+                            "example": 16
+                        }
+                    },
+                    "employee_ids": {
+                        "type": "array",
+                        "nullable": true,
+                        "items": {
+                            "type": "integer",
+                            "description": "ID сотрудника",
+                            "example": 32
+                        }
+                    },
+                    "name": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "Текстовая строка для поиска по названию",
+                        "example": "Лучший шаблон"
+                    }
+                }
+            },
+            "AdminPanel.TargetTemplates.GetCollection.Request": {
+                "type": "object",
+                "properties": {
+                    "sort": {
+                        "$ref": "#/components/schemas/AdminPanel.TargetTemplates.Collection.Sort"
+                    },
+                    "filter": {
+                        "$ref": "#/components/schemas/AdminPanel.TargetTemplates.Collection.Filter"
+                    },
+                    "pagination": {
+                        "$ref": "#/components/schemas/Base.OffsetPagination"
+                    }
+                }
+            },
+            "AdminPanel.TargetTemplates.GetCollection.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/TargetTemplates.CollectionView"
+                                }
+                            }
+                        }
+                    },
+                    "meta": {
+                        "type": "object",
+                        "properties": {
+                            "pagination": {
+                                "$ref": "#/components/schemas/Base.OffsetPaginationMeta"
                             }
                         }
                     }
