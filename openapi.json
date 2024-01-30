@@ -75,6 +75,10 @@
         {
             "name": "AdminPanelMaterials",
             "description": "16. Панель администратора, материалы"
+        },
+        {
+            "name": "AdminPanelTargetTemplates",
+            "description": "16. Панель администратора, шаблоны целей"
         }
     ],
     "paths": {
@@ -4832,6 +4836,36 @@
                     }
                 }
             }
+        },
+        "/admin/target-templates/{template_id}": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanelTargetTemplates"
+                ],
+                "summary": "17.XX. Получить шаблон цели",
+                "description": "Получить шаблон цели",
+                "operationId": "adminPanel.TargetTemplate.getTemplate",
+                "parameters": [
+                    {"$ref": "#/components/parameters/AdminPanel.Path.TargetTemplate.Id"}
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Шаблон цели",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.TargetTemplates.GetTemplate.SuccessResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -5671,7 +5705,7 @@
                 },
                 "required": ["email", "text"]
             },
-            "Users.UserAttribute.ID": {
+            "Users.UserAttribute.Id": {
                 "type": "object",
                 "properties": {
                     "id": {
@@ -5790,7 +5824,7 @@
                             "success": {
                                 "type": "object",
                                 "allOf": [
-                                    { "$ref": "#/components/schemas/Users.UserAttribute.ID" },
+                                    { "$ref": "#/components/schemas/Users.UserAttribute.Id" },
                                     { "$ref": "#/components/schemas/Users.UserAttribute.Email" },
                                     { "$ref": "#/components/schemas/Users.UserAttribute.FirstName" },
                                     { "$ref": "#/components/schemas/Users.UserAttribute.LastName" },
@@ -5813,7 +5847,7 @@
                                 "items": {
                                     "type": "object",
                                     "allOf": [
-                                        { "$ref": "#/components/schemas/Users.UserAttribute.ID" },
+                                        { "$ref": "#/components/schemas/Users.UserAttribute.Id" },
                                         { "$ref": "#/components/schemas/Users.UserAttribute.FirstName" },
                                         { "$ref": "#/components/schemas/Users.UserAttribute.LastName" }
                                     ]
@@ -5929,7 +5963,7 @@
                                     "type": "object",
                                     "description": "Сотрудник",
                                     "allOf": [
-                                        {"$ref": "#/components/schemas/Employees.EmployeeAttribute.ID"},
+                                        {"$ref": "#/components/schemas/Employees.EmployeeAttribute.Id"},
                                         {"$ref": "#/components/schemas/Employees.EmployeeAttribute.ExternalID"},
                                         {"$ref": "#/components/schemas/Employees.EmployeeAttribute.Status"},
                                         {"$ref": "#/components/schemas/Employees.EmployeeAttribute.CreatedAt"},
@@ -5943,7 +5977,7 @@
                                                     "description": "ИПР",
                                                     "nullable": true,
                                                     "allOf": [
-                                                        { "$ref": "#/components/schemas/Idp.IdpAttribute.ID" },
+                                                        { "$ref": "#/components/schemas/Idp.IdpAttribute.Id" },
                                                         { "$ref": "#/components/schemas/Idp.IdpAttribute.Status" },
                                                         { "$ref": "#/components/schemas/Idp.IdpAttribute.CountOfTargets" },
                                                         { "$ref": "#/components/schemas/Idp.IdpAttribute.CountOfTargetsDone" },
@@ -6056,7 +6090,7 @@
                             "success": {
                                 "type": "object",
                                 "allOf": [
-                                    { "$ref": "#/components/schemas/Employees.EmployeeAttribute.ID" },
+                                    { "$ref": "#/components/schemas/Employees.EmployeeAttribute.Id" },
                                     { "$ref": "#/components/schemas/Employees.EmployeeAttribute.ExternalID" },
                                     { "$ref": "#/components/schemas/Employees.EmployeeAttribute.FirstName" },
                                     { "$ref": "#/components/schemas/Employees.EmployeeAttribute.LastName" },
@@ -6097,7 +6131,7 @@
                                 "items": {
                                     "type": "object",
                                     "allOf": [
-                                        { "$ref": "#/components/schemas/Employees.EmployeeAttribute.ID" },
+                                        { "$ref": "#/components/schemas/Employees.EmployeeAttribute.Id" },
                                         { "$ref": "#/components/schemas/Employees.EmployeeAttribute.FirstName" },
                                         { "$ref": "#/components/schemas/Employees.EmployeeAttribute.LastName" }
                                     ]
@@ -6151,7 +6185,7 @@
                     }
                 }
             },
-            "Skills.ItemAttribute.ID": {
+            "Skills.ItemAttribute.Id": {
                 "type": "object",
                 "properties": {
                     "id": {
@@ -6178,7 +6212,7 @@
                     "name": {
                         "type": "string",
                         "description": "Название",
-                        "example": "My name"
+                        "example": "My skill"
                     }
                 }
             },
@@ -6260,7 +6294,7 @@
                 "type": "object",
                 "allOf": [
                     {"$ref": "#/components/schemas/Skills.ItemAttribute.CompetencyClusterType"},
-                    {"$ref": "#/components/schemas/Skills.ItemAttribute.ID"},
+                    {"$ref": "#/components/schemas/Skills.ItemAttribute.Id"},
                     {"$ref": "#/components/schemas/Skills.ItemAttribute.ParentID"},
                     {"$ref": "#/components/schemas/Skills.ItemAttribute.Name"}
                 ]
@@ -6269,7 +6303,7 @@
                 "type": "object",
                 "allOf": [
                     {"$ref": "#/components/schemas/Skills.ItemAttribute.CompetencyType"},
-                    {"$ref": "#/components/schemas/Skills.ItemAttribute.ID"},
+                    {"$ref": "#/components/schemas/Skills.ItemAttribute.Id"},
                     {"$ref": "#/components/schemas/Skills.ItemAttribute.ParentID"},
                     {"$ref": "#/components/schemas/Skills.ItemAttribute.Name"}
                 ]
@@ -6278,7 +6312,7 @@
                 "type": "object",
                 "allOf": [
                     {"$ref": "#/components/schemas/Skills.ItemAttribute.Type"},
-                    {"$ref": "#/components/schemas/Skills.ItemAttribute.ID"},
+                    {"$ref": "#/components/schemas/Skills.ItemAttribute.Id"},
                     {"$ref": "#/components/schemas/Skills.ItemAttribute.ParentID"},
                     {"$ref": "#/components/schemas/Skills.ItemAttribute.Name"},
                     {"$ref": "#/components/schemas/Skills.ItemAttribute.CurrentLevelIndicatorID"},
@@ -6323,7 +6357,7 @@
                 "type": "object",
                 "allOf": [
                     {"$ref": "#/components/schemas/Skills.ItemAttribute.Type"},
-                    {"$ref": "#/components/schemas/Skills.ItemAttribute.ID"},
+                    {"$ref": "#/components/schemas/Skills.ItemAttribute.Id"},
                     {"$ref": "#/components/schemas/Skills.ItemAttribute.Name"},
                     {"$ref": "#/components/schemas/Skills.ItemAttribute.Description"}
                 ]
@@ -6353,7 +6387,7 @@
             "Skills.TreeItem.Base": {
                 "type": "object",
                 "allOf": [
-                    {"$ref": "#/components/schemas/Skills.ItemAttribute.ID"},
+                    {"$ref": "#/components/schemas/Skills.ItemAttribute.Id"},
                     {"$ref": "#/components/schemas/Skills.ItemAttribute.ParentID"},
                     {"$ref": "#/components/schemas/Skills.ItemAttribute.Name"},
                     {"$ref": "#/components/schemas/Skills.TreeItemAttribute.Children"}
@@ -6417,7 +6451,7 @@
                     }
                 }
             },
-            "Targets.TargetAttribute.ID": {
+            "Targets.TargetAttribute.Id": {
                 "type": "object",
                 "properties": {
                     "id": {
@@ -6537,7 +6571,7 @@
                         "items": {
                             "type": "object",
                             "allOf": [
-                                {"$ref": "#/components/schemas/Skills.ItemAttribute.ID"},
+                                {"$ref": "#/components/schemas/Skills.ItemAttribute.Id"},
                                 {"$ref": "#/components/schemas/Skills.ItemAttribute.Name"}
                             ]
                         }
@@ -6609,7 +6643,7 @@
             "Targets.Target.Base": {
                 "type": "object",
                 "allOf": [
-                    {"$ref": "#/components/schemas/Targets.TargetAttribute.ID"},
+                    {"$ref": "#/components/schemas/Targets.TargetAttribute.Id"},
                     {"$ref": "#/components/schemas/Targets.TargetAttribute.Name"},
                     {"$ref": "#/components/schemas/Targets.TargetAttribute.Status"},
                     {"$ref": "#/components/schemas/Targets.TargetAttribute.Priority"},
@@ -6899,7 +6933,416 @@
                     }
                 }
             },
-            "Idp.IdpAttribute.ID": {
+            "TargetTemplates.TemplateAttribute.Id": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "ID",
+                        "example": 16
+                    }
+                }
+            },
+            "TargetTemplates.TemplateAttribute.Name": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Название",
+                        "example": "Best target"
+                    }
+                }
+            },
+            "TargetTemplates.TemplateAttribute.Description": {
+                "type": "object",
+                "properties": {
+                    "description": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "Описание",
+                        "example": "Place description here"
+                    }
+                }
+            },
+            "TargetTemplates.TemplateAttribute.Priority": {
+                "type": "object",
+                "properties": {
+                    "priority": {
+                        "type": "string",
+                        "description": "Приоритет",
+                        "enum": ["low", "medium", "high"],
+                        "example": "medium"
+                    }
+                }
+            },
+            "TargetTemplates.TemplateAttribute.ApplyToCurrentUsers": {
+                "type": "object",
+                "properties": {
+                    "apply_to_current_users": {
+                        "type": "boolean",
+                        "nullable": true,
+                        "description": "Применить к текущим сотрудникам",
+                        "example": false
+                    }
+                }
+            },
+            "TargetTemplates.TemplateAttribute.AssignmentType": {
+                "type": "object",
+                "properties": {
+                    "assignment_type": {
+                        "type": "string",
+                        "description": "Тип назначения (одноразовый, повторяющийся)",
+                        "enum": ["once", "recurrent"],
+                        "example": "recurrent"
+                    }
+                }
+            },
+            "TargetTemplates.RecurrentAssignmentAttribute.PeriodType": {
+                "type": "object",
+                "properties": {
+                    "period_type": {
+                        "type": "string",
+                        "description": "Тип периода",
+                        "enum": ["day", "week", "month", "year"],
+                        "example": "month"
+                    }
+                }
+            },
+            "TargetTemplates.RecurrentAssignmentAttribute.PeriodMultiplier": {
+                "type": "object",
+                "properties": {
+                    "period_multiplier": {
+                        "type": "integer",
+                        "description": "Мультипликатор периода",
+                        "example": 3
+                    }
+                }
+            },
+            "TargetTemplates.RecurrentAssignmentAttribute.Frequency": {
+                "type": "object",
+                "properties": {
+                    "frequency": {
+                        "type": "integer",
+                        "description": "Частота назначений",
+                        "example": 1
+                    }
+                }
+            },
+            "TargetTemplates.RecurrentAssignmentAttribute.UseCompletionBasedOffset": {
+                "type": "object",
+                "properties": {
+                    "use_completion_based_offset": {
+                        "type": "boolean",
+                        "description": "Использовать сдвиг на основании даты фактического прохождения",
+                        "example": true
+                    }
+                }
+            },
+            "TargetTemplates.TemplateAttribute.RecurrentAssignment": {
+                "type": "object",
+                "properties": {
+                    "recurrent_assignment": {
+                        "type": "object",
+                        "nullable": true,
+                        "allOf": [
+                            {"$ref": "#/components/schemas/TargetTemplates.RecurrentAssignmentAttribute.PeriodType"},
+                            {"$ref": "#/components/schemas/TargetTemplates.RecurrentAssignmentAttribute.PeriodMultiplier"},
+                            {"$ref": "#/components/schemas/TargetTemplates.RecurrentAssignmentAttribute.Frequency"},
+                            {"$ref": "#/components/schemas/TargetTemplates.RecurrentAssignmentAttribute.UseCompletionBasedOffset"}
+                        ]
+                    }
+                }
+            },
+            "TargetTemplates.DeadlineAttribute.IsCustom": {
+                "type": "object",
+                "properties": {
+                    "is_custom": {
+                        "type": "boolean",
+                        "description": "Флаг, отвечающий за установку срока вручную",
+                        "example": true
+                    }
+                }
+            },
+            "TargetTemplates.DeadlineAttribute.PeriodType": {
+                "type": "object",
+                "properties": {
+                    "period_type": {
+                        "type": "string",
+                        "description": "Тип периода",
+                        "enum": ["day", "week", "month", "year"],
+                        "example": "day"
+                    }
+                }
+            },
+            "TargetTemplates.DeadlineAttribute.Value": {
+                "type": "object",
+                "properties": {
+                    "value": {
+                        "type": "integer",
+                        "description": "Значение",
+                        "example": 5
+                    }
+                }
+            },
+            "TargetTemplates.TemplateAttribute.Deadline": {
+                "type": "object",
+                "properties": {
+                    "deadline": {
+                        "type": "object",
+                        "allOf": [
+                            {"$ref": "#/components/schemas/TargetTemplates.DeadlineAttribute.IsCustom"},
+                            {"$ref": "#/components/schemas/TargetTemplates.DeadlineAttribute.PeriodType"},
+                            {"$ref": "#/components/schemas/TargetTemplates.DeadlineAttribute.Value"}
+                        ]
+                    }
+                }
+            },
+            "TargetTemplates.ScopeAttribute.RoleIds": {
+                "type": "object",
+                "properties": {
+                    "role_ids": {
+                        "type": "array",
+                        "description": "ID ролей",
+                        "items": {
+                            "type": "integer",
+                            "description": "ID роли",
+                            "example": 32
+                        }
+                    }
+                }
+            },
+            "TargetTemplates.ScopeAttribute.Roles": {
+                "type": "object",
+                "properties": {
+                    "roles": {
+                        "type": "array",
+                        "description": "Роли",
+                        "items": {
+                            "type": "object",
+                            "allOf": [
+                                {"$ref": "#/components/schemas/Roles.RoleAttribute.Id"},
+                                {"$ref": "#/components/schemas/Roles.RoleAttribute.Name"}
+                            ]
+                        }
+                    }
+                }
+            },
+            "TargetTemplates.ScopeAttribute.DivisionIds": {
+                "type": "object",
+                "properties": {
+                    "division_ids": {
+                        "type": "array",
+                        "description": "ID подразделений",
+                        "items": {
+                            "type": "integer",
+                            "description": "ID подразделения",
+                            "example": 64
+                        }
+                    }
+                }
+            },
+            "TargetTemplates.ScopeAttribute.Divisions": {
+                "type": "object",
+                "properties": {
+                    "divisions": {
+                        "type": "array",
+                        "description": "Подразделения",
+                        "items": {
+                            "type": "object",
+                            "allOf": [
+                                {"$ref": "#/components/schemas/Divisions.ItemAttribute.Id"},
+                                {"$ref": "#/components/schemas/Divisions.ItemAttribute.Name"}
+                            ]
+                        }
+                    }
+                }
+            },
+            "TargetTemplates.ScopeAttribute.EmployeeIds": {
+                "type": "object",
+                "properties": {
+                    "employee_ids": {
+                        "type": "array",
+                        "description": "ID сотрудников",
+                        "items": {
+                            "type": "integer",
+                            "description": "ID сотрудника",
+                            "example": 128
+                        }
+                    }
+                }
+            },
+            "TargetTemplates.ScopeAttribute.Employees": {
+                "type": "object",
+                "properties": {
+                    "employees": {
+                        "type": "array",
+                        "description": "Сотрудники",
+                        "items": {
+                            "type": "object",
+                            "allOf": [
+                                {"$ref": "#/components/schemas/Employees.EmployeeAttribute.Id"},
+                                {"$ref": "#/components/schemas/Employees.EmployeeAttribute.FirstName"},
+                                {"$ref": "#/components/schemas/Employees.EmployeeAttribute.LastName"}
+                            ]
+                        }
+                    }
+                }
+            },
+            "TargetTemplates.TemplateAttribute.Scope.Ids": {
+                "type": "object",
+                "properties": {
+                    "scope": {
+                        "type": "object",
+                        "allOf": [
+                            {"$ref": "#/components/schemas/TargetTemplates.ScopeAttribute.RoleIds"},
+                            {"$ref": "#/components/schemas/TargetTemplates.ScopeAttribute.DivisionIds"},
+                            {"$ref": "#/components/schemas/TargetTemplates.ScopeAttribute.EmployeeIds"}
+                        ]
+                    }
+                }
+            },
+            "TargetTemplates.TemplateAttribute.Scope.Objects": {
+                "type": "object",
+                "properties": {
+                    "scope": {
+                        "type": "object",
+                        "allOf": [
+                            {"$ref": "#/components/schemas/TargetTemplates.ScopeAttribute.Roles"},
+                            {"$ref": "#/components/schemas/TargetTemplates.ScopeAttribute.Divisions"},
+                            {"$ref": "#/components/schemas/TargetTemplates.ScopeAttribute.Employees"}
+                        ]
+                    }
+                }
+            },
+            "TargetTemplates.ScopeExtraAttribute.EmployeeIds": {
+                "type": "object",
+                "properties": {
+                    "employee_ids": {
+                        "type": "array",
+                        "description": "ID сотрудников",
+                        "items": {
+                            "type": "integer",
+                            "description": "ID сотрудника",
+                            "example": 128
+                        }
+                    }
+                }
+            },
+            "TargetTemplates.ScopeExtraAttribute.Employees": {
+                "type": "object",
+                "properties": {
+                    "employees": {
+                        "type": "array",
+                        "description": "Сотрудники",
+                        "items": {
+                            "type": "object",
+                            "allOf": [
+                                {"$ref": "#/components/schemas/Employees.EmployeeAttribute.Id"},
+                                {"$ref": "#/components/schemas/Employees.EmployeeAttribute.FirstName"},
+                                {"$ref": "#/components/schemas/Employees.EmployeeAttribute.LastName"}
+                            ]
+                        }
+                    }
+                }
+            },
+            "TargetTemplates.TemplateAttribute.ScopeExtra.Ids": {
+                "type": "object",
+                "properties": {
+                    "scope_extra": {
+                        "$ref": "#/components/schemas/TargetTemplates.ScopeExtraAttribute.EmployeeIds"
+                    }
+                }
+            },
+            "TargetTemplates.TemplateAttribute.ScopeExtra.Objects": {
+                "type": "object",
+                "properties": {
+                    "scope_extra": {
+                        "$ref": "#/components/schemas/TargetTemplates.ScopeExtraAttribute.Employees"
+                    }
+                }
+            },
+            "TargetTemplates.TemplateAttribute.MaterialIds": {
+                "type": "object",
+                "properties": {
+                    "material_ids": {
+                        "type": "array",
+                        "description": "ID выбранных материалов",
+                        "items": {
+                            "type": "integer",
+                            "description": "ID материала",
+                            "example": 256
+                        }
+                    }
+                }
+            },
+            "TargetTemplates.TemplateAttribute.Materials": {
+                "type": "object",
+                "properties": {
+                    "materials": {
+                        "type": "array",
+                        "description": "Выбранные материалы",
+                        "items": {
+                            "type": "object",
+                            "allOf": [
+                                {"$ref": "#/components/schemas/Materials.MaterialAttribute.Id"},
+                                {"$ref": "#/components/schemas/Materials.MaterialAttribute.Name"}
+                            ]
+                        }
+                    }
+                }
+            },
+            "TargetTemplates.TemplateAttribute.SkillIds": {
+                "type": "object",
+                "properties": {
+                    "skill_ids": {
+                        "type": "array",
+                        "description": "ID выбранных навыков",
+                        "items": {
+                            "type": "integer",
+                            "description": "ID навыка",
+                            "example": 512
+                        }
+                    }
+                }
+            },
+            "TargetTemplates.TemplateAttribute.Skills": {
+                "type": "object",
+                "properties": {
+                    "skills": {
+                        "type": "array",
+                        "description": "Выбранные навыки",
+                        "items": {
+                            "type": "object",
+                            "allOf": [
+                                {"$ref": "#/components/schemas/Skills.ItemAttribute.Id"},
+                                {"$ref": "#/components/schemas/Skills.ItemAttribute.Name"}
+                            ]
+                        }
+                    }
+                }
+            },
+            "TargetTemplates.TemplateAttribute.CreatedAt": {
+                "type": "object",
+                "properties": {
+                    "created_at": {
+                        "type": "string",
+                        "description": "Дата создания",
+                        "example": "2023-09-01 12:10:20 +03:00"
+                    }
+                }
+            },
+            "TargetTemplates.TemplateAttribute.UpdatedAt": {
+                "type": "object",
+                "properties": {
+                    "updated_at": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "Дата обновления",
+                        "example": "2023-09-01 12:10:20 +03:00"
+                    }
+                }
+            },
+            "Idp.IdpAttribute.Id": {
                 "type": "object",
                 "properties": {
                     "id": {
@@ -6972,7 +7415,7 @@
                     }
                 }
             },
-            "Idp.RouteStageAttribute.ID": {
+            "Idp.RouteStageAttribute.Id": {
                 "type": "object",
                 "properties": {
                     "id": {
@@ -7112,12 +7555,12 @@
             "Idp.RouteUser": {
                 "type": "object",
                 "allOf": [
-                    {"$ref": "#/components/schemas/Users.UserAttribute.ID"},
+                    {"$ref": "#/components/schemas/Users.UserAttribute.Id"},
                     {"$ref": "#/components/schemas/Users.UserAttribute.FirstName"},
                     {"$ref": "#/components/schemas/Users.UserAttribute.LastName"}
                 ]
             },
-            "Idp.ApprovalAttemptAttribute.ID": {
+            "Idp.ApprovalAttemptAttribute.Id": {
                 "type": "object",
                 "properties": {
                     "id": {
@@ -7200,7 +7643,7 @@
             "Idp.ApprovalStage": {
                 "type": "object",
                 "allOf": [
-                    {"$ref": "#/components/schemas/Idp.RouteStageAttribute.ID"},
+                    {"$ref": "#/components/schemas/Idp.RouteStageAttribute.Id"},
                     {"$ref": "#/components/schemas/Idp.RouteStageAttribute.SerialNumber"},
                     {"$ref": "#/components/schemas/Idp.RouteStageAttribute.Name"},
                     {"$ref": "#/components/schemas/Idp.RouteStageAttribute.VoteStrategy"},
@@ -7222,7 +7665,7 @@
             "Idp.ApprovalAttempt": {
                 "type": "object",
                 "allOf": [
-                    {"$ref": "#/components/schemas/Idp.ApprovalAttemptAttribute.ID"},
+                    {"$ref": "#/components/schemas/Idp.ApprovalAttemptAttribute.Id"},
                     {"$ref": "#/components/schemas/Idp.ApprovalAttemptAttribute.SerialNumber"},
                     {"$ref": "#/components/schemas/Idp.ApprovalAttemptAttribute.Status"},
                     {"$ref": "#/components/schemas/Idp.ApprovalAttemptAttribute.Initiator"},
@@ -7245,7 +7688,7 @@
             "Idp.Idp.DetailsBriefView": {
                 "type": "object",
                 "allOf": [
-                    {"$ref": "#/components/schemas/Idp.IdpAttribute.ID"},
+                    {"$ref": "#/components/schemas/Idp.IdpAttribute.Id"},
                     {"$ref": "#/components/schemas/Idp.IdpAttribute.Year"},
                     {"$ref": "#/components/schemas/Idp.IdpAttribute.Status"}
                 ]
@@ -7444,7 +7887,7 @@
                         "items": {
                             "type": "object",
                             "allOf": [
-                                {"$ref": "#/components/schemas/Idp.RouteStageAttribute.ID"},
+                                {"$ref": "#/components/schemas/Idp.RouteStageAttribute.Id"},
                                 {"$ref": "#/components/schemas/Idp.RouteStageAttribute.Name"},
                                 {"$ref": "#/components/schemas/Idp.RouteStageAttribute.VoteStrategy"},
                                 {"$ref": "#/components/schemas/Idp.RouteStageAttribute.ApproverIDs"}
@@ -7803,7 +8246,7 @@
                         "type": "string",
                         "nullable": true,
                         "description": "Название",
-                        "example": "My name"
+                        "example": "My material"
                     }
                 }
             },
@@ -7986,7 +8429,7 @@
                         "items": {
                             "type": "object",
                             "allOf": [
-                                {"$ref": "#/components/schemas/Skills.ItemAttribute.ID"},
+                                {"$ref": "#/components/schemas/Skills.ItemAttribute.Id"},
                                 {"$ref": "#/components/schemas/Skills.ItemAttribute.Name"}
                             ]
                         }
@@ -8199,7 +8642,7 @@
                     }
                 }
             },
-            "Comments.CommentAttribute.ID": {
+            "Comments.CommentAttribute.Id": {
                 "type": "object",
                 "properties": {
                     "id": {
@@ -8225,7 +8668,7 @@
                     "author": {
                         "type": "object",
                         "allOf": [
-                            {"$ref": "#/components/schemas/Users.UserAttribute.ID"},
+                            {"$ref": "#/components/schemas/Users.UserAttribute.Id"},
                             {"$ref": "#/components/schemas/Users.UserAttribute.FirstName"},
                             {"$ref": "#/components/schemas/Users.UserAttribute.LastName"},
                             {
@@ -8253,13 +8696,13 @@
             "Comments.Comment": {
                 "type": "object",
                 "allOf": [
-                    { "$ref": "#/components/schemas/Comments.CommentAttribute.ID" },
+                    { "$ref": "#/components/schemas/Comments.CommentAttribute.Id" },
                     { "$ref": "#/components/schemas/Comments.CommentAttribute.CreatedAt" },
                     { "$ref": "#/components/schemas/Comments.CommentAttribute.Author" },
                     { "$ref": "#/components/schemas/Comments.CommentAttribute.Text" }
                 ]
             },
-            "Employees.EmployeeAttribute.ID": {
+            "Employees.EmployeeAttribute.Id": {
                 "type": "object",
                 "properties": {
                     "id": {
@@ -8330,7 +8773,7 @@
                     }
                 }
             },
-            "Divisions.ItemAttribute.ID": {
+            "Divisions.ItemAttribute.Id": {
                 "type": "object",
                 "properties": {
                     "id": {
@@ -8357,7 +8800,7 @@
                     "name": {
                         "type": "string",
                         "description": "Название",
-                        "example": "My name"
+                        "example": "My division"
                     }
                 }
             },
@@ -8373,7 +8816,7 @@
             "Divisions.TreeItem.Base": {
                 "type": "object",
                 "allOf": [
-                    {"$ref": "#/components/schemas/Divisions.ItemAttribute.ID"},
+                    {"$ref": "#/components/schemas/Divisions.ItemAttribute.Id"},
                     {"$ref": "#/components/schemas/Divisions.ItemAttribute.ParentID"},
                     {"$ref": "#/components/schemas/Divisions.ItemAttribute.Name"},
                     {"$ref": "#/components/schemas/Divisions.TreeItemAttribute.Children"}
@@ -9104,7 +9547,7 @@
                                     "type": "object",
                                     "description": "Пользователь",
                                     "allOf": [
-                                        {"$ref": "#/components/schemas/Users.UserAttribute.ID"},
+                                        {"$ref": "#/components/schemas/Users.UserAttribute.Id"},
                                         {"$ref": "#/components/schemas/Users.UserAttribute.Source"},
                                         {"$ref": "#/components/schemas/Users.UserAttribute.CreatedAt"},
                                         {"$ref": "#/components/schemas/Users.UserAttribute.FirstName"},
@@ -9117,7 +9560,7 @@
                                                     "description": "Сотрудник. NULL, если отсутствует.",
                                                     "nullable": true,
                                                     "allOf": [
-                                                        {"$ref": "#/components/schemas/Employees.EmployeeAttribute.ID"},
+                                                        {"$ref": "#/components/schemas/Employees.EmployeeAttribute.Id"},
                                                         {"$ref": "#/components/schemas/Employees.EmployeeAttribute.ExternalID"},
                                                         {"$ref": "#/components/schemas/Employees.EmployeeAttribute.FirstName"},
                                                         {"$ref": "#/components/schemas/Employees.EmployeeAttribute.LastName"},
@@ -9760,7 +10203,7 @@
                                             "type": "object",
                                             "description": "Цель",
                                             "allOf": [
-                                                {"$ref": "#/components/schemas/Targets.TargetAttribute.ID"},
+                                                {"$ref": "#/components/schemas/Targets.TargetAttribute.Id"},
                                                 {"$ref": "#/components/schemas/Targets.TargetAttribute.Name"}
                                             ]
                                         },
@@ -9776,7 +10219,7 @@
                                             "type": "object",
                                             "description": "Сотрудник",
                                             "allOf": [
-                                                {"$ref": "#/components/schemas/Employees.EmployeeAttribute.ID"},
+                                                {"$ref": "#/components/schemas/Employees.EmployeeAttribute.Id"},
                                                 {"$ref": "#/components/schemas/Employees.EmployeeAttribute.ExternalID"},
                                                 {"$ref": "#/components/schemas/Employees.EmployeeAttribute.FirstName"},
                                                 {"$ref": "#/components/schemas/Employees.EmployeeAttribute.LastName"},
@@ -10025,6 +10468,33 @@
                         }
                     }
                 }
+            },
+            "AdminPanel.TargetTemplates.GetTemplate.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "object",
+                                "allOf": [
+                                    {"$ref": "#/components/schemas/TargetTemplates.TemplateAttribute.Id"},
+                                    {"$ref": "#/components/schemas/TargetTemplates.TemplateAttribute.Name"},
+                                    {"$ref": "#/components/schemas/TargetTemplates.TemplateAttribute.Description"},
+                                    {"$ref": "#/components/schemas/TargetTemplates.TemplateAttribute.Priority"},
+                                    {"$ref": "#/components/schemas/TargetTemplates.TemplateAttribute.Scope.Objects"},
+                                    {"$ref": "#/components/schemas/TargetTemplates.TemplateAttribute.ScopeExtra.Objects"},
+                                    {"$ref": "#/components/schemas/TargetTemplates.TemplateAttribute.ApplyToCurrentUsers"},
+                                    {"$ref": "#/components/schemas/TargetTemplates.TemplateAttribute.AssignmentType"},
+                                    {"$ref": "#/components/schemas/TargetTemplates.TemplateAttribute.RecurrentAssignment"},
+                                    {"$ref": "#/components/schemas/TargetTemplates.TemplateAttribute.Deadline"},
+                                    {"$ref": "#/components/schemas/TargetTemplates.TemplateAttribute.Materials"},
+                                    {"$ref": "#/components/schemas/TargetTemplates.TemplateAttribute.Skills"}
+                                ]
+                            }
+                        }
+                    }
+                }
             }
         },
         "parameters": {
@@ -10154,6 +10624,16 @@
                 "required": true,
                 "description": "ID каталога.",
                 "example": 45,
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            "AdminPanel.Path.TargetTemplate.Id": {
+                "name": "template_id",
+                "in": "path",
+                "required": true,
+                "description": "ID шаблона цели.",
+                "example": 56,
                 "schema": {
                     "type": "integer"
                 }
