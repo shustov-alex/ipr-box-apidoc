@@ -4837,6 +4837,52 @@
                 }
             }
         },
+        "/admin/target-templates/create": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanelTargetTemplates"
+                ],
+                "summary": "17.XX. Создать шаблон цели",
+                "description": "Создать шаблон цели",
+                "operationId": "adminPanel.TargetTemplate.createTemplate",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AdminPanel.TargetTemplates.UpsertTemplate.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Шаблон цели",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.TargetTemplates.GetTemplate.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки валидации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ValidationErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/admin/target-templates/{template_id}": {
             "get": {
                 "security": [
@@ -4860,6 +4906,55 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/AdminPanel.TargetTemplates.GetTemplate.SuccessResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/target-templates/{template_id}/update": {
+            "put": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanelTargetTemplates"
+                ],
+                "summary": "17.XX. Обновить шаблон цели",
+                "description": "Обновить шаблон цели",
+                "operationId": "adminPanel.TargetTemplate.updateTemplate",
+                "parameters": [
+                    {"$ref": "#/components/parameters/AdminPanel.Path.TargetTemplate.Id"}
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AdminPanel.TargetTemplates.UpsertTemplate.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Шаблон цели",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.TargetTemplates.GetTemplate.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Объект не найден или имеют место ошибки валидации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundOrValidationErrorResponse"
                                 }
                             }
                         }
@@ -10468,6 +10563,23 @@
                         }
                     }
                 }
+            },
+            "AdminPanel.TargetTemplates.UpsertTemplate.Request": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/TargetTemplates.TemplateAttribute.Name"},
+                    {"$ref": "#/components/schemas/TargetTemplates.TemplateAttribute.Description"},
+                    {"$ref": "#/components/schemas/TargetTemplates.TemplateAttribute.Priority"},
+                    {"$ref": "#/components/schemas/TargetTemplates.TemplateAttribute.Scope.Ids"},
+                    {"$ref": "#/components/schemas/TargetTemplates.TemplateAttribute.ScopeExtra.Ids"},
+                    {"$ref": "#/components/schemas/TargetTemplates.TemplateAttribute.ApplyToCurrentUsers"},
+                    {"$ref": "#/components/schemas/TargetTemplates.TemplateAttribute.AssignmentType"},
+                    {"$ref": "#/components/schemas/TargetTemplates.TemplateAttribute.RecurrentAssignment"},
+                    {"$ref": "#/components/schemas/TargetTemplates.TemplateAttribute.Deadline"},
+                    {"$ref": "#/components/schemas/TargetTemplates.TemplateAttribute.MaterialIds"},
+                    {"$ref": "#/components/schemas/TargetTemplates.TemplateAttribute.SkillIds"}
+                ],
+                "required": ["name", "priority", "assignment_type", "deadline"]
             },
             "AdminPanel.TargetTemplates.GetTemplate.SuccessResponse": {
                 "type": "object",
