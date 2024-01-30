@@ -4064,7 +4064,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/AdminPanel.Materials.CountSuccessResponse"
+                                    "$ref": "#/components/schemas/Base.CountSuccessResponse"
                                 }
                             }
                         }
@@ -4146,7 +4146,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/AdminPanel.Materials.CountSuccessResponse"
+                                    "$ref": "#/components/schemas/Base.CountSuccessResponse"
                                 }
                             }
                         }
@@ -4192,7 +4192,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/AdminPanel.Materials.CountSuccessResponse"
+                                    "$ref": "#/components/schemas/Base.CountSuccessResponse"
                                 }
                             }
                         }
@@ -4238,7 +4238,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/AdminPanel.Materials.CountSuccessResponse"
+                                    "$ref": "#/components/schemas/Base.CountSuccessResponse"
                                 }
                             }
                         }
@@ -4284,7 +4284,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/AdminPanel.Materials.CountSuccessResponse"
+                                    "$ref": "#/components/schemas/Base.CountSuccessResponse"
                                 }
                             }
                         }
@@ -4388,7 +4388,7 @@
                 ],
                 "summary": "16.11. Создать материал",
                 "description": "Создать материал",
-                "operationId": "adminPanel.Material.createMaterial",
+                "operationId": "adminPanel.Materials.createMaterial",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -4434,7 +4434,7 @@
                 ],
                 "summary": "16.12. Обновить материал",
                 "description": "Обновить материал",
-                "operationId": "adminPanel.Material.updateMaterial",
+                "operationId": "adminPanel.Materials.updateMaterial",
                 "parameters": [
                     {"$ref": "#/components/parameters/AdminPanel.Path.Material.Id"}
                 ],
@@ -4541,7 +4541,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/AdminPanel.Materials.CountSuccessResponse"
+                                    "$ref": "#/components/schemas/Base.CountSuccessResponse"
                                 }
                             }
                         }
@@ -4720,7 +4720,7 @@
                 ],
                 "summary": "16.16. Создать каталог",
                 "description": "Создать каталог",
-                "operationId": "adminPanel.Material.createDirectory",
+                "operationId": "adminPanel.Materials.createDirectory",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -4766,7 +4766,7 @@
                 ],
                 "summary": "16.17. Переименовать каталог",
                 "description": "Переименовать каталог",
-                "operationId": "adminPanel.Material.renameDirectory",
+                "operationId": "adminPanel.Materials.renameDirectory",
                 "parameters": [
                     {"$ref": "#/components/parameters/AdminPanel.Path.Directory.Id"}
                 ],
@@ -4815,7 +4815,7 @@
                 ],
                 "summary": "16.18. Удалить каталог",
                 "description": "Удалить каталог",
-                "operationId": "adminPanel.Material.deleteDirectory",
+                "operationId": "adminPanel.Materials.deleteDirectory",
                 "parameters": [
                     {"$ref": "#/components/parameters/AdminPanel.Path.Directory.Id"}
                 ],
@@ -4855,7 +4855,7 @@
                 ],
                 "summary": "16.19. Получить путь от каталога до корня",
                 "description": "Получить путь от каталога до корня",
-                "operationId": "adminPanel.Material.getPathToDirectory",
+                "operationId": "adminPanel.Materials.getPathToDirectory",
                 "parameters": [
                     {"$ref": "#/components/parameters/AdminPanel.Path.Directory.Id"}
                 ],
@@ -4885,7 +4885,7 @@
                 ],
                 "summary": "17.XX. Создать шаблон цели",
                 "description": "Создать шаблон цели",
-                "operationId": "adminPanel.TargetTemplate.createTemplate",
+                "operationId": "adminPanel.TargetTemplates.createTemplate",
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -4919,6 +4919,52 @@
                 }
             }
         },
+        "/admin/target-templates/delete": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanelTargetTemplates"
+                ],
+                "summary": "17.XX. Удалить шаблоны целей",
+                "description": "Удалить шаблоны целей",
+                "operationId": "adminPanel.TargetTemplates.deleteCollection",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AdminPanel.TargetTemplates.ObjectIdsRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Количество удалённых шаблонов",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.CountSuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки валидации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ValidationErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/admin/target-templates/{template_id}": {
             "get": {
                 "security": [
@@ -4931,7 +4977,7 @@
                 ],
                 "summary": "17.XX. Получить шаблон цели",
                 "description": "Получить шаблон цели",
-                "operationId": "adminPanel.TargetTemplate.getTemplate",
+                "operationId": "adminPanel.TargetTemplates.getTemplate",
                 "parameters": [
                     {"$ref": "#/components/parameters/AdminPanel.Path.TargetTemplate.Id"}
                 ],
@@ -4961,7 +5007,7 @@
                 ],
                 "summary": "17.XX. Обновить шаблон цели",
                 "description": "Обновить шаблон цели",
-                "operationId": "adminPanel.TargetTemplate.updateTemplate",
+                "operationId": "adminPanel.TargetTemplates.updateTemplate",
                 "parameters": [
                     {"$ref": "#/components/parameters/AdminPanel.Path.TargetTemplate.Id"}
                 ],
@@ -4987,6 +5033,46 @@
                     },
                     "400": {
                         "description": "Объект не найден или имеют место ошибки валидации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundOrValidationErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/target-templates/{template_id}/delete": {
+            "delete": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanelTargetTemplates"
+                ],
+                "summary": "17.XX. Удалить шаблон цели",
+                "description": "Удалить шаблон цели",
+                "operationId": "adminPanel.TargetTemplates.deleteTemplate",
+                "parameters": [
+                    {"$ref": "#/components/parameters/AdminPanel.Path.TargetTemplate.Id"}
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Шаблон успешно удалён",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.EmptySuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки валидации",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -5371,6 +5457,26 @@
                                 "type": "string",
                                 "description": "Строка, по которой будет производиться поиск",
                                 "example": "find me"
+                            }
+                        }
+                    }
+                }
+            },
+            "Base.CountSuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "object",
+                                "properties": {
+                                    "count": {
+                                        "type": "integer",
+                                        "description": "Количество",
+                                        "example": 2
+                                    }
+                                }
                             }
                         }
                     }
@@ -10138,26 +10244,6 @@
                     }
                 }
             },
-            "AdminPanel.Materials.CountSuccessResponse": {
-                "type": "object",
-                "properties": {
-                    "data": {
-                        "type": "object",
-                        "properties": {
-                            "success": {
-                                "type": "object",
-                                "properties": {
-                                    "count": {
-                                        "type": "integer",
-                                        "description": "Количество элементов",
-                                        "example": 2
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            },
             "AdminPanel.Materials.Collection.Sort": {
                 "type": "object",
                 "allOf": [
@@ -10444,8 +10530,11 @@
                 "properties": {
                     "ids": {
                         "type": "array",
-                        "description": "ID каталога или материала",
-                        "example": 123
+                        "items": {
+                            "type": "integer",
+                            "description": "ID каталога или материала",
+                            "example": 123
+                        }
                     }
                 }
             },
@@ -10657,6 +10746,19 @@
                     {"$ref": "#/components/schemas/TargetTemplates.TemplateAttribute.SkillIds"}
                 ],
                 "required": ["name", "priority", "assignment_type", "deadline"]
+            },
+            "AdminPanel.TargetTemplates.ObjectIdsRequest": {
+                "type": "object",
+                "properties": {
+                    "ids": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "description": "ID шаблонов",
+                            "example": 123
+                        }
+                    }
+                }
             },
             "AdminPanel.TargetTemplates.GetTemplate.SuccessResponse": {
                 "type": "object",
