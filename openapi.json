@@ -6170,6 +6170,15 @@
                             "description": "ID элемента орг. структуры",
                             "example": 256
                         }
+                    },
+                    "target_template_ids": {
+                        "type": "array",
+                        "nullable": true,
+                        "items": {
+                            "type": "integer",
+                            "description": "ID шаблонов целей, из которых были созданы цели сотрудников",
+                            "example": 512
+                        }
                     }
                 }
             },
