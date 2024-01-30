@@ -69,16 +69,16 @@
             "description": "14. Должности"
         },
         {
-            "name": "AdminPanelUsers",
+            "name": "AdminPanel.Users",
             "description": "15. Панель администратора, пользователи"
         },
         {
-            "name": "AdminPanelMaterials",
+            "name": "AdminPanel.Materials",
             "description": "16. Панель администратора, материалы"
         },
         {
-            "name": "AdminPanelTargetTemplates",
-            "description": "16. Панель администратора, шаблоны целей"
+            "name": "AdminPanel.TargetTemplates",
+            "description": "17. Панель администратора, шаблоны целей"
         }
     ],
     "paths": {
@@ -3608,7 +3608,7 @@
                     }
                 ],
                 "tags": [
-                    "AdminPanelUsers"
+                    "AdminPanel.Users"
                 ],
                 "summary": "15.01. Список всех ролей в системе",
                 "description": "Список всех ролей в системе",
@@ -3635,7 +3635,7 @@
                     }
                 ],
                 "tags": [
-                    "AdminPanelUsers"
+                    "AdminPanel.Users"
                 ],
                 "summary": "15.02. Список возможных источников пользователей",
                 "description": "Список возможных источников пользователей",
@@ -3662,7 +3662,7 @@
                     }
                 ],
                 "tags": [
-                    "AdminPanelUsers"
+                    "AdminPanel.Users"
                 ],
                 "summary": "15.03. Получить список пользователей",
                 "description": "Получить список пользователей (аккаунты + сотрудники)",
@@ -3698,7 +3698,7 @@
                     }
                 ],
                 "tags": [
-                    "AdminPanelUsers"
+                    "AdminPanel.Users"
                 ],
                 "summary": "15.04. Архивировать аккаунты и связанных с ними сотрудников",
                 "description": "Архивировать аккаунты и связанных с ними сотрудников",
@@ -3744,7 +3744,7 @@
                     }
                 ],
                 "tags": [
-                    "AdminPanelUsers"
+                    "AdminPanel.Users"
                 ],
                 "summary": "15.05. Восстановить из архива аккаунты и связанных с ними сотрудников",
                 "description": "Восстановить из архива аккаунты и связанных с ними сотрудников",
@@ -3790,7 +3790,7 @@
                     }
                 ],
                 "tags": [
-                    "AdminPanelUsers"
+                    "AdminPanel.Users"
                 ],
                 "summary": "15.06. Создать пользователя (аккаунт + сотрудник)",
                 "description": "Создать пользователя (аккаунт + сотрудник)",
@@ -3836,7 +3836,7 @@
                     }
                 ],
                 "tags": [
-                    "AdminPanelUsers"
+                    "AdminPanel.Users"
                 ],
                 "summary": "15.07. Импортировать пользователей",
                 "description": "Импортировать пользователей из xlsx-файла",
@@ -3882,7 +3882,7 @@
                     }
                 ],
                 "tags": [
-                    "AdminPanelUsers"
+                    "AdminPanel.Users"
                 ],
                 "summary": "15.08. Скачать шаблон для импорта пользователей",
                 "description": "Скачать шаблон для импорта пользователей",
@@ -3910,7 +3910,7 @@
                     }
                 ],
                 "tags": [
-                    "AdminPanelUsers"
+                    "AdminPanel.Users"
                 ],
                 "summary": "15.09. Получить подробную информацию о пользователе (аккаунт + сотрудник)",
                 "description": "Получить подробную информацию о пользователе (аккаунт + сотрудник)",
@@ -3950,7 +3950,7 @@
                     }
                 ],
                 "tags": [
-                    "AdminPanelUsers"
+                    "AdminPanel.Users"
                 ],
                 "summary": "15.10. Обновить пользователя (аккаунт + сотрудник)",
                 "description": "Обновить пользователя (аккаунт + сотрудник). Ни один из атрибутов не является обязательным. Если обновление атрибута не требуется, то его можно не указывать.",
@@ -3999,7 +3999,7 @@
                     }
                 ],
                 "tags": [
-                    "AdminPanelMaterials"
+                    "AdminPanel.Materials"
                 ],
                 "summary": "16.01. Список возможных типов материалов",
                 "description": "Список возможных типов материалов",
@@ -4026,7 +4026,7 @@
                     }
                 ],
                 "tags": [
-                    "AdminPanelMaterials"
+                    "AdminPanel.Materials"
                 ],
                 "summary": "16.02. Список возможных источников материалов",
                 "description": "Список возможных источников материалов",
@@ -4053,7 +4053,7 @@
                     }
                 ],
                 "tags": [
-                    "AdminPanelMaterials"
+                    "AdminPanel.Materials"
                 ],
                 "summary": "16.03. Количество материалов, которые ожидают публикации",
                 "description": "Количество материалов, которые ожидают публикации",
@@ -4080,7 +4080,7 @@
                     }
                 ],
                 "tags": [
-                    "AdminPanelMaterials"
+                    "AdminPanel.Materials"
                 ],
                 "summary": "16.04. Получить список каталогов и материалов",
                 "description": "Получить список каталогов и материалов. Атрибуты 'count_of_assignments' и 'can_assignment_status_be_changed' возвращаются только для опубликованных и архивных материалов.",
@@ -4126,7 +4126,7 @@
                     }
                 ],
                 "tags": [
-                    "AdminPanelMaterials"
+                    "AdminPanel.Materials"
                 ],
                 "summary": "16.05. Опубликовать материалы",
                 "description": "Опубликовать материалы",
@@ -4172,7 +4172,7 @@
                     }
                 ],
                 "tags": [
-                    "AdminPanelMaterials"
+                    "AdminPanel.Materials"
                 ],
                 "summary": "16.06. Архивировать материалы",
                 "description": "Архивировать материалы",
@@ -4218,7 +4218,7 @@
                     }
                 ],
                 "tags": [
-                    "AdminPanelMaterials"
+                    "AdminPanel.Materials"
                 ],
                 "summary": "16.07. Удалить материалы",
                 "description": "Удалить материалы",
@@ -4264,7 +4264,7 @@
                     }
                 ],
                 "tags": [
-                    "AdminPanelMaterials"
+                    "AdminPanel.Materials"
                 ],
                 "summary": "16.08. Переместить каталоги и материалы",
                 "description": "Переместить каталоги и материалы",
@@ -4310,7 +4310,7 @@
                     }
                 ],
                 "tags": [
-                    "AdminPanelMaterials"
+                    "AdminPanel.Materials"
                 ],
                 "summary": "16.09. Импортировать материалы",
                 "description": "Импортировать материалы из xlsx-файла",
@@ -4356,7 +4356,7 @@
                     }
                 ],
                 "tags": [
-                    "AdminPanelMaterials"
+                    "AdminPanel.Materials"
                 ],
                 "summary": "16.10. Скачать шаблон для импорта материалов",
                 "description": "Скачать шаблон для импорта материалов",
@@ -4384,7 +4384,7 @@
                     }
                 ],
                 "tags": [
-                    "AdminPanelMaterials"
+                    "AdminPanel.Materials"
                 ],
                 "summary": "16.11. Создать материал",
                 "description": "Создать материал",
@@ -4430,7 +4430,7 @@
                     }
                 ],
                 "tags": [
-                    "AdminPanelMaterials"
+                    "AdminPanel.Materials"
                 ],
                 "summary": "16.12. Обновить материал",
                 "description": "Обновить материал",
@@ -4479,7 +4479,7 @@
                     }
                 ],
                 "tags": [
-                    "AdminPanelMaterials"
+                    "AdminPanel.Materials"
                 ],
                 "summary": "16.13. Получить список назначений материала",
                 "description": "Получить список назначений материала",
@@ -4518,7 +4518,7 @@
                     }
                 ],
                 "tags": [
-                    "AdminPanelMaterials"
+                    "AdminPanel.Materials"
                 ],
                 "summary": "16.14. Получить список назначений материала",
                 "description": "Получить список назначений материала",
@@ -4557,7 +4557,7 @@
                     }
                 ],
                 "tags": [
-                    "AdminPanelMaterials"
+                    "AdminPanel.Materials"
                 ],
                 "summary": "16.15. Получить дерево каталогов",
                 "description": "Получить дерево каталогов",
@@ -4716,7 +4716,7 @@
                     }
                 ],
                 "tags": [
-                    "AdminPanelMaterials"
+                    "AdminPanel.Materials"
                 ],
                 "summary": "16.16. Создать каталог",
                 "description": "Создать каталог",
@@ -4762,7 +4762,7 @@
                     }
                 ],
                 "tags": [
-                    "AdminPanelMaterials"
+                    "AdminPanel.Materials"
                 ],
                 "summary": "16.17. Переименовать каталог",
                 "description": "Переименовать каталог",
@@ -4811,7 +4811,7 @@
                     }
                 ],
                 "tags": [
-                    "AdminPanelMaterials"
+                    "AdminPanel.Materials"
                 ],
                 "summary": "16.18. Удалить каталог",
                 "description": "Удалить каталог",
@@ -4851,7 +4851,7 @@
                     }
                 ],
                 "tags": [
-                    "AdminPanelMaterials"
+                    "AdminPanel.Materials"
                 ],
                 "summary": "16.19. Получить путь от каталога до корня",
                 "description": "Получить путь от каталога до корня",
@@ -4881,9 +4881,9 @@
                     }
                 ],
                 "tags": [
-                    "AdminPanelTargetTemplates"
+                    "AdminPanel.TargetTemplates"
                 ],
-                "summary": "17.XX. Создать шаблон цели",
+                "summary": "17.02. Создать шаблон цели",
                 "description": "Создать шаблон цели",
                 "operationId": "adminPanel.TargetTemplates.createTemplate",
                 "requestBody": {
@@ -4927,9 +4927,9 @@
                     }
                 ],
                 "tags": [
-                    "AdminPanelTargetTemplates"
+                    "AdminPanel.TargetTemplates"
                 ],
-                "summary": "17.XX. Удалить шаблоны целей",
+                "summary": "17.03. Удалить шаблоны целей",
                 "description": "Удалить шаблоны целей",
                 "operationId": "adminPanel.TargetTemplates.deleteCollection",
                 "requestBody": {
@@ -4973,9 +4973,9 @@
                     }
                 ],
                 "tags": [
-                    "AdminPanelTargetTemplates"
+                    "AdminPanel.TargetTemplates"
                 ],
-                "summary": "17.XX. Получить шаблон цели",
+                "summary": "17.04. Получить шаблон цели",
                 "description": "Получить шаблон цели",
                 "operationId": "adminPanel.TargetTemplates.getTemplate",
                 "parameters": [
@@ -5003,9 +5003,9 @@
                     }
                 ],
                 "tags": [
-                    "AdminPanelTargetTemplates"
+                    "AdminPanel.TargetTemplates"
                 ],
-                "summary": "17.XX. Обновить шаблон цели",
+                "summary": "17.05. Обновить шаблон цели",
                 "description": "Обновить шаблон цели",
                 "operationId": "adminPanel.TargetTemplates.updateTemplate",
                 "parameters": [
@@ -5052,9 +5052,9 @@
                     }
                 ],
                 "tags": [
-                    "AdminPanelTargetTemplates"
+                    "AdminPanel.TargetTemplates"
                 ],
-                "summary": "17.XX. Удалить шаблон цели",
+                "summary": "17.06. Удалить шаблон цели",
                 "description": "Удалить шаблон цели",
                 "operationId": "adminPanel.TargetTemplates.deleteTemplate",
                 "parameters": [
