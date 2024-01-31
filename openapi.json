@@ -4171,7 +4171,7 @@
             }
         },
         "/admin/materials/delete": {
-            "delete": {
+            "post": {
                 "security": [
                     {
                         "bearerAuth": []
