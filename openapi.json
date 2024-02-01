@@ -7937,10 +7937,11 @@
                 "type": "object",
                 "properties": {
                     "duration": {
-                        "type": "integer",
+                        "type": "number",
+                        "format": "float",
                         "nullable": true,
                         "description": "Длительность (в часах)",
-                        "example": 24
+                        "example": 24.00
                     }
                 }
             },
