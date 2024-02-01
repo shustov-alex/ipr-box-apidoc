@@ -10838,12 +10838,16 @@
             "AdminPanel.TargetTemplates.Collection.Filter": {
                 "type": "object",
                 "properties": {
-                    "assignment_type": {
-                        "type": "string",
+                    "assignment_types": {
+                        "type": "array",
                         "nullable": true,
-                        "description": "Тип назначения (одноразовый, повторяющийся)",
-                        "enum": ["once", "recurrent"],
-                        "example": "recurrent"
+                        "items": {
+                            "type": "string",
+                            "nullable": true,
+                            "description": "Тип назначения (одноразовый, повторяющийся)",
+                            "enum": ["once", "recurrent"],
+                            "example": "recurrent"
+                        }
                     },
                     "role_ids": {
                         "type": "array",
