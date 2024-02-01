@@ -4480,8 +4480,8 @@
                 "tags": [
                     "AdminPanelMaterials"
                 ],
-                "summary": "16.14. Получить список назначений материала",
-                "description": "Получить список назначений материала",
+                "summary": "16.14. Обновить статусы назначений",
+                "description": "Обновить статусы назначений",
                 "operationId": "adminPanel.Materials.updateAssignmentStatuses",
                 "parameters": [
                     {"$ref": "#/components/parameters/AdminPanel.Path.Material.Id"}
@@ -4497,7 +4497,7 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Список назначений",
+                        "description": "Количество успешно обновлённых элементов",
                         "content": {
                             "application/json": {
                                 "schema": {
