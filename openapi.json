@@ -1404,6 +1404,56 @@
                 }
             }
         },
+        "/targets/{target_id}/materials/{material_id}/update-assignment-status": {
+            "put": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Targets"
+                ],
+                "summary": "06.15. Обновить статус назначения материала",
+                "description": "Обновить статус назначения материала",
+                "operationId": "targets.updateAssignmentStatus",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Targets.Path.Target.Id"},
+                    {"$ref": "#/components/parameters/Materials.Path.Material.Id"}
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Targets.UpdateAssignmentStatus.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Статус успешно обновлен",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.EmptySuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки при обновлении статуса",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundOrValidationErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/idp": {
             "get": {
                 "security": [
@@ -7154,8 +7204,9 @@
             "Targets.TargetMaterial.CollectionView": {
                 "type": "object",
                 "allOf": [
-                    {"$ref": "#/components/schemas/Materials.Material.DetailView"},
-                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.Reason"}
+                    {"$ref": "#/components/schemas/Materials.Material.BriefView"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.Reason"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.AssignmentStatus"}
                 ]
             },
             "Targets.TargetMaterials.SuccessResponse": {
@@ -7178,7 +7229,9 @@
                 "type": "object",
                 "allOf": [
                     {"$ref": "#/components/schemas/Materials.Material.DetailView"},
-                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.Reason"}
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.Reason"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.AssignmentStatus"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.AssignmentStatusChangeFlag"}
                 ]
             },
             "Targets.TargetMaterial.SuccessResponse": {
@@ -7214,6 +7267,12 @@
                 "type": "object",
                 "allOf": [
                     { "$ref": "#/components/schemas/Comments.CommentAttribute.Text" }
+                ]
+            },
+            "Targets.UpdateAssignmentStatus.Request": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.AssignmentStatus"}
                 ]
             },
             "Targets.CountOfRelations.SuccessResponse": {
@@ -8821,6 +8880,17 @@
                     }
                 }
             },
+            "Materials.MaterialAttribute.AssignmentStatus": {
+                "type": "object",
+                "properties": {
+                    "assignment_status": {
+                        "type": "string",
+                        "description": "Статус назначения",
+                        "example": "not_started",
+                        "enum": ["not_started", "in_progress", "cancelled", "failed", "done"]
+                    }
+                }
+            },
             "Materials.Directory.DetailView": {
                 "type": "object",
                 "allOf": [
@@ -8931,6 +9001,14 @@
                     {"$ref": "#/components/schemas/Materials.MaterialAttribute.CreatedAt"},
                     {"$ref": "#/components/schemas/Materials.MaterialAttribute.UpdatedAt"},
                     {"$ref": "#/components/schemas/Materials.MaterialAttribute.Skills"}
+                ]
+            },
+            "Materials.Material.BriefView": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.Id"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.Name"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.IsPaid"}
                 ]
             },
             "Materials.getTree.SuccessResponse": {
