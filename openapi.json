@@ -6832,7 +6832,9 @@
                 "type": "object",
                 "allOf": [
                     {"$ref": "#/components/schemas/Materials.Material.DetailView"},
-                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.Reason"}
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.Reason"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.AssignmentStatus"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.AssignmentStatusChangeFlag"}
                 ]
             },
             "Targets.TargetMaterial.SuccessResponse": {
