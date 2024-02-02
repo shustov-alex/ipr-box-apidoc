@@ -1400,6 +1400,56 @@
                 }
             }
         },
+        "/targets/{target_id}/materials/{material_id}/update-assignment-status": {
+            "put": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Targets"
+                ],
+                "summary": "06.15. Обновить статус назначения материала",
+                "description": "Обновить статус назначения материала",
+                "operationId": "targets.updateAssignmentStatus",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Targets.Path.Target.Id"},
+                    {"$ref": "#/components/parameters/Materials.Path.Material.Id"}
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Targets.UpdateAssignmentStatus.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Статус успешно обновлен",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.EmptySuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки при обновлении статуса",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundOrValidationErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/idp": {
             "get": {
                 "security": [
@@ -6870,6 +6920,12 @@
                 "type": "object",
                 "allOf": [
                     { "$ref": "#/components/schemas/Comments.CommentAttribute.Text" }
+                ]
+            },
+            "Targets.UpdateAssignmentStatus.Request": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.AssignmentStatus"}
                 ]
             },
             "Targets.CountOfRelations.SuccessResponse": {
