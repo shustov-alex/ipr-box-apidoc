@@ -1450,6 +1450,55 @@
                 }
             }
         },
+        "/targets/{target_id}/update-percent": {
+            "put": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Targets"
+                ],
+                "summary": "06.16. Обновить процент цели",
+                "description": "Обновить процент цели",
+                "operationId": "targets.updatePercent",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Targets.Path.Target.Id"}
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Targets.UpdatePercent.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Процент изменён успешно",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.EmptySuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки обновления процента",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundOrValidationErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/idp": {
             "get": {
                 "security": [
@@ -6549,6 +6598,16 @@
                     }
                 }
             },
+            "Targets.TargetAttribute.Percent": {
+                "type": "object",
+                "properties": {
+                    "percent": {
+                        "type": "integer",
+                        "description": "Процент",
+                        "example": 75
+                    }
+                }
+            },
             "Targets.TargetAttribute.CreatedAt": {
                 "type": "object",
                 "properties": {
@@ -6757,7 +6816,8 @@
                 "type": "object",
                 "allOf": [
                     {"$ref": "#/components/schemas/Targets.Target.Base"},
-                    {"$ref": "#/components/schemas/Targets.TargetAttribute.Description"}
+                    {"$ref": "#/components/schemas/Targets.TargetAttribute.Description"},
+                    {"$ref": "#/components/schemas/Targets.TargetAttribute.Percent"}
                 ]
             },
             "Targets.TargetDetails.SuccessResponse": {
@@ -6775,18 +6835,15 @@
             },
             "Targets.UpdateStatus.Request": {
                 "type": "object",
-                "properties": {
-                    "status": {
-                        "type": "string",
-                        "enum": [
-                            "not_started",
-                            "in_progress",
-                            "done",
-                            "cancelled"
-                        ],
-                        "example": "not_started"
-                    }
-                }
+                "allOf": [
+                    {"$ref": "#/components/schemas/Targets.TargetAttribute.Status"}
+                ]
+            },
+            "Targets.UpdatePercent.Request": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Targets.TargetAttribute.Percent"}
+                ]
             },
             "Targets.StatusGroup": {
                 "type": "object",
