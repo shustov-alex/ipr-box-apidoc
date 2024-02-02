@@ -6807,8 +6807,9 @@
             "Targets.TargetMaterial.CollectionView": {
                 "type": "object",
                 "allOf": [
-                    {"$ref": "#/components/schemas/Materials.Material.DetailView"},
-                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.Reason"}
+                    {"$ref": "#/components/schemas/Materials.Material.BriefView"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.Reason"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.AssignmentStatus"}
                 ]
             },
             "Targets.TargetMaterials.SuccessResponse": {
@@ -8025,6 +8026,17 @@
                     }
                 }
             },
+            "Materials.MaterialAttribute.AssignmentStatus": {
+                "type": "object",
+                "properties": {
+                    "assignment_status": {
+                        "type": "string",
+                        "description": "Статус назначения",
+                        "example": "not_started",
+                        "enum": ["not_started", "in_progress", "cancelled", "failed", "done"]
+                    }
+                }
+            },
             "Materials.Directory.DetailView": {
                 "type": "object",
                 "allOf": [
@@ -8135,6 +8147,14 @@
                     {"$ref": "#/components/schemas/Materials.MaterialAttribute.CreatedAt"},
                     {"$ref": "#/components/schemas/Materials.MaterialAttribute.UpdatedAt"},
                     {"$ref": "#/components/schemas/Materials.MaterialAttribute.Skills"}
+                ]
+            },
+            "Materials.Material.BriefView": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.Id"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.Name"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.IsPaid"}
                 ]
             },
             "Materials.getTree.SuccessResponse": {
