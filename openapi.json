@@ -7457,12 +7457,12 @@
                     }
                 }
             },
-            "TargetTemplates.RecurrentAssignmentAttribute.UseCompletionBasedOffset": {
+            "TargetTemplates.RecurrentAssignmentAttribute.UseDeadlineBasedOffset": {
                 "type": "object",
                 "properties": {
-                    "use_completion_based_offset": {
+                    "use_deadline_based_offset": {
                         "type": "boolean",
-                        "description": "Использовать сдвиг на основании даты фактического прохождения",
+                        "description": "Использовать сдвиг на основании крайнего срока исполнения",
                         "example": true
                     }
                 }
@@ -7477,7 +7477,7 @@
                             {"$ref": "#/components/schemas/TargetTemplates.RecurrentAssignmentAttribute.PeriodType"},
                             {"$ref": "#/components/schemas/TargetTemplates.RecurrentAssignmentAttribute.PeriodMultiplier"},
                             {"$ref": "#/components/schemas/TargetTemplates.RecurrentAssignmentAttribute.Frequency"},
-                            {"$ref": "#/components/schemas/TargetTemplates.RecurrentAssignmentAttribute.UseCompletionBasedOffset"}
+                            {"$ref": "#/components/schemas/TargetTemplates.RecurrentAssignmentAttribute.UseDeadlineBasedOffset"}
                         ]
                     }
                 }
