@@ -7070,7 +7070,8 @@
                     {"$ref": "#/components/schemas/Targets.TargetAttribute.Status"},
                     {"$ref": "#/components/schemas/Targets.TargetAttribute.Priority"},
                     {"$ref": "#/components/schemas/Targets.TargetAttribute.CreatedAt"},
-                    {"$ref": "#/components/schemas/Targets.TargetAttribute.Deadline"}
+                    {"$ref": "#/components/schemas/Targets.TargetAttribute.Deadline"},
+                    {"$ref": "#/components/schemas/Targets.TargetAttribute.Percent"}
                 ]
             },
             "Targets.Filters.IdpId": {
@@ -7163,8 +7164,7 @@
                 "type": "object",
                 "allOf": [
                     {"$ref": "#/components/schemas/Targets.Target.Base"},
-                    {"$ref": "#/components/schemas/Targets.TargetAttribute.Description"},
-                    {"$ref": "#/components/schemas/Targets.TargetAttribute.Percent"}
+                    {"$ref": "#/components/schemas/Targets.TargetAttribute.Description"}
                 ]
             },
             "Targets.TargetDetails.SuccessResponse": {
