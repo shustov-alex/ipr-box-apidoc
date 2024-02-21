@@ -10865,6 +10865,7 @@
             "AdminPanel.Materials.UpdateMaterial.Request": {
                 "type": "object",
                 "allOf": [
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.TypeId"},
                     {"$ref": "#/components/schemas/Materials.MaterialAttribute.Name"},
                     {"$ref": "#/components/schemas/Materials.MaterialAttribute.Url"},
                     {"$ref": "#/components/schemas/Materials.MaterialAttribute.StartAt"},
