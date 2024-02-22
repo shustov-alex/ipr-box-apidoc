@@ -3047,7 +3047,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Materials.ManualMaterialToUpsert"
+                                "$ref": "#/components/schemas/Materials.ManualMaterialToValidate"
                             }
                         }
                     }
@@ -7069,14 +7069,33 @@
                                 "type": "array",
                                 "description": "Материалы",
                                 "items": {
-                                    "$ref": "#/components/schemas/Targets.MaterialToAdd"
-                                }
-                            },
-                            "manual_materials": {
-                                "type": "array",
-                                "description": "Материалы не из каталога, которые требуется создать или обновить",
-                                "items": {
-                                    "$ref": "#/components/schemas/Materials.ManualMaterialToUpsert"
+                                    "oneOf": [
+                                        {
+                                            "type": "object",
+                                            "allOf": [
+                                                {"$ref": "#/components/schemas/Materials.MaterialAttribute.Id"},
+                                                {"$ref": "#/components/schemas/Materials.MaterialAttribute.Reason"}
+                                            ]
+                                        },
+                                        {
+                                            "type": "object",
+                                            "allOf": [
+                                                {"$ref": "#/components/schemas/Materials.MaterialAttribute.Id"},
+                                                {"$ref": "#/components/schemas/Materials.MaterialAttribute.Reason"},
+                                                {"$ref": "#/components/schemas/Materials.MaterialAttribute.TypeId"},
+                                                {"$ref": "#/components/schemas/Materials.MaterialAttribute.Name"},
+                                                {"$ref": "#/components/schemas/Materials.MaterialAttribute.Url"},
+                                                {"$ref": "#/components/schemas/Materials.MaterialAttribute.StartAt"},
+                                                {"$ref": "#/components/schemas/Materials.MaterialAttribute.EndAt"},
+                                                {"$ref": "#/components/schemas/Materials.MaterialAttribute.Duration"},
+                                                {"$ref": "#/components/schemas/Materials.MaterialAttribute.Provider"},
+                                                {"$ref": "#/components/schemas/Materials.MaterialAttribute.Trainer"},
+                                                {"$ref": "#/components/schemas/Materials.MaterialAttribute.Price"},
+                                                {"$ref": "#/components/schemas/Materials.MaterialAttribute.Description"},
+                                                {"$ref": "#/components/schemas/Materials.MaterialAttribute.SkillIds"}
+                                            ]
+                                        }
+                                    ]
                                 }
                             }
                         }
@@ -8750,6 +8769,20 @@
                     }
                 }
             },
+            "Materials.MaterialAttribute.SkillIds": {
+                "type": "object",
+                "properties": {
+                    "skill_ids": {
+                        "type": "array",
+                        "description": "ID навыков",
+                        "items": {
+                            "type": "integer",
+                            "description": "ID навыка",
+                            "example": 64
+                        }
+                    }
+                }
+            },
             "Materials.MaterialAttribute.Status": {
                 "type": "object",
                 "properties": {
@@ -9196,7 +9229,7 @@
                     }
                 }
             },
-            "Materials.ManualMaterialToUpsert": {
+            "Materials.ManualMaterialToValidate": {
                 "type": "object",
                 "allOf": [
                     {"$ref": "#/components/schemas/Materials.MaterialAttribute.Id"},
@@ -9211,20 +9244,7 @@
                     {"$ref": "#/components/schemas/Materials.MaterialAttribute.Price"},
                     {"$ref": "#/components/schemas/Materials.MaterialAttribute.Description"},
                     {"$ref": "#/components/schemas/Materials.MaterialAttribute.DirectoryId"},
-                    {
-                        "type": "object",
-                        "properties": {
-                            "skill_ids": {
-                                "type": "array",
-                                "description": "ID навыков",
-                                "items": {
-                                    "type": "integer",
-                                    "description": "ID навыка",
-                                    "example": 64
-                                }
-                            }
-                        }
-                    }
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.SkillIds"}
                 ]
             },
             "Comments.CommentAttribute.Id": {
@@ -10922,6 +10942,7 @@
                     {"$ref": "#/components/schemas/Materials.MaterialAttribute.Price"},
                     {"$ref": "#/components/schemas/Materials.MaterialAttribute.Description"},
                     {"$ref": "#/components/schemas/Materials.MaterialAttribute.DirectoryId"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.SkillIds"},
                     {
                         "type": "object",
                         "properties": {
@@ -10930,15 +10951,6 @@
                                 "nullable": true,
                                 "description": "Флаг, отвечающий за мгновенную публикацию",
                                 "example": false
-                            },
-                            "skill_ids": {
-                                "type": "array",
-                                "description": "ID навыков",
-                                "items": {
-                                    "type": "integer",
-                                    "description": "ID навыка",
-                                    "example": 64
-                                }
                             }
                         }
                     }
@@ -10972,20 +10984,7 @@
                     {"$ref": "#/components/schemas/Materials.MaterialAttribute.Price"},
                     {"$ref": "#/components/schemas/Materials.MaterialAttribute.Description"},
                     {"$ref": "#/components/schemas/Materials.MaterialAttribute.DirectoryId"},
-                    {
-                        "type": "object",
-                        "properties": {
-                            "skill_ids": {
-                                "type": "array",
-                                "description": "ID навыков",
-                                "items": {
-                                    "type": "integer",
-                                    "description": "ID навыка",
-                                    "example": 64
-                                }
-                            }
-                        }
-                    }
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.SkillIds"}
                 ]
             },
             "AdminPanel.Materials.TreeOfDirectories.SuccessResponse": {
