@@ -3047,7 +3047,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Materials.Validation.Request"
+                                "$ref": "#/components/schemas/Materials.ManualMaterialToUpsert"
                             }
                         }
                     }
@@ -7071,6 +7071,13 @@
                                 "items": {
                                     "$ref": "#/components/schemas/Targets.MaterialToAdd"
                                 }
+                            },
+                            "manual_materials": {
+                                "type": "array",
+                                "description": "Материалы не из каталога, которые требуется создать или обновить",
+                                "items": {
+                                    "$ref": "#/components/schemas/Materials.ManualMaterialToUpsert"
+                                }
                             }
                         }
                     }
@@ -9189,7 +9196,7 @@
                     }
                 }
             },
-            "Materials.Validation.Request": {
+            "Materials.ManualMaterialToUpsert": {
                 "type": "object",
                 "allOf": [
                     {"$ref": "#/components/schemas/Materials.MaterialAttribute.Id"},
