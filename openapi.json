@@ -8891,6 +8891,16 @@
                     }
                 }
             },
+            "Materials.MaterialAttribute.IsManual": {
+                "type": "object",
+                "properties": {
+                    "is_manual": {
+                        "type": "boolean",
+                        "description": "Флаг, обозначающий что материал создан вручную",
+                        "example": false
+                    }
+                }
+            },
             "Materials.MaterialAttribute.Skills": {
                 "type": "object",
                 "properties": {
@@ -9057,7 +9067,8 @@
                     {"$ref": "#/components/schemas/Materials.MaterialAttribute.Rating"},
                     {"$ref": "#/components/schemas/Materials.MaterialAttribute.CreatedAt"},
                     {"$ref": "#/components/schemas/Materials.MaterialAttribute.UpdatedAt"},
-                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.Skills"}
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.Skills"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.IsManual"}
                 ]
             },
             "Materials.Material.BriefView": {
@@ -9065,7 +9076,8 @@
                 "allOf": [
                     {"$ref": "#/components/schemas/Materials.MaterialAttribute.Id"},
                     {"$ref": "#/components/schemas/Materials.MaterialAttribute.Name"},
-                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.IsPaid"}
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.IsPaid"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.IsManual"}
                 ]
             },
             "Materials.getTree.SuccessResponse": {
