@@ -3030,6 +3030,52 @@
                 }
             }
         },
+        "/materials/validate": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Materials"
+                ],
+                "summary": "08.04. Валидация материала.",
+                "description": "Валидация материала.",
+                "operationId": "materials.validateMaterial",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Materials.Validation.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Валидация прошла успешно",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.EmptySuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки валидации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundOrValidationErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/employees": {
             "post": {
                 "security": [
@@ -9142,6 +9188,37 @@
                         }
                     }
                 }
+            },
+            "Materials.Validation.Request": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.Id"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.TypeId"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.Name"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.Url"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.StartAt"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.EndAt"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.Duration"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.Provider"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.Trainer"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.Price"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.Description"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.DirectoryId"},
+                    {
+                        "type": "object",
+                        "properties": {
+                            "skill_ids": {
+                                "type": "array",
+                                "description": "ID навыков",
+                                "items": {
+                                    "type": "integer",
+                                    "description": "ID навыка",
+                                    "example": 64
+                                }
+                            }
+                        }
+                    }
+                ]
             },
             "Comments.CommentAttribute.Id": {
                 "type": "object",
