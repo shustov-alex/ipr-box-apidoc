@@ -3076,6 +3076,60 @@
                 }
             }
         },
+        "/materials/types": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Materials"
+                ],
+                "summary": "08.05. Список возможных типов материалов",
+                "description": "Список возможных типов материалов",
+                "operationId": "materials.getTypes",
+                "responses": {
+                    "200": {
+                        "description": "Список типов",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Materials.GetTypeCollection.SuccessResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/materials/sources": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Materials"
+                ],
+                "summary": "08.06. Список возможных источников материалов",
+                "description": "Список возможных источников материалов",
+                "operationId": "materials.getSources",
+                "responses": {
+                    "200": {
+                        "description": "Список истоничков",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Materials.GetSourceCollection.SuccessResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/employees": {
             "post": {
                 "security": [
@@ -4138,6 +4192,7 @@
         },
         "/admin/materials/types": {
             "get": {
+                "deprecated": true,
                 "security": [
                     {
                         "bearerAuth": []
@@ -4155,7 +4210,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/AdminPanel.MaterialTypes.GetCollection.SuccessResponse"
+                                    "$ref": "#/components/schemas/Materials.GetTypeCollection.SuccessResponse"
                                 }
                             }
                         }
@@ -4165,6 +4220,7 @@
         },
         "/admin/materials/sources": {
             "get": {
+                "deprecated": true,
                 "security": [
                     {
                         "bearerAuth": []
@@ -4182,7 +4238,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/AdminPanel.MaterialSources.GetCollection.SuccessResponse"
+                                    "$ref": "#/components/schemas/Materials.GetSourceCollection.SuccessResponse"
                                 }
                             }
                         }
@@ -9247,6 +9303,62 @@
                     {"$ref": "#/components/schemas/Materials.MaterialAttribute.SkillIds"}
                 ]
             },
+            "Materials.GetTypeCollection.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "description": "ID типа",
+                                            "example": 1
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "description": "Название типа",
+                                            "example": "Прочее"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "Materials.GetSourceCollection.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "description": "ID источника",
+                                            "example": 1
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "description": "Название источника",
+                                            "example": "ИПР"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
             "Comments.CommentAttribute.Id": {
                 "type": "object",
                 "properties": {
@@ -10520,62 +10632,6 @@
                         "properties": {
                             "pagination": {
                                 "$ref": "#/components/schemas/Base.CursorPaginationMeta"
-                            }
-                        }
-                    }
-                }
-            },
-            "AdminPanel.MaterialTypes.GetCollection.SuccessResponse": {
-                "type": "object",
-                "properties": {
-                    "data": {
-                        "type": "object",
-                        "properties": {
-                            "success": {
-                                "type": "array",
-                                "items": {
-                                    "type": "object",
-                                    "properties": {
-                                        "id": {
-                                            "type": "integer",
-                                            "description": "ID типа",
-                                            "example": 1
-                                        },
-                                        "name": {
-                                            "type": "string",
-                                            "description": "Название типа",
-                                            "example": "Прочее"
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            "AdminPanel.MaterialSources.GetCollection.SuccessResponse": {
-                "type": "object",
-                "properties": {
-                    "data": {
-                        "type": "object",
-                        "properties": {
-                            "success": {
-                                "type": "array",
-                                "items": {
-                                    "type": "object",
-                                    "properties": {
-                                        "id": {
-                                            "type": "integer",
-                                            "description": "ID источника",
-                                            "example": 1
-                                        },
-                                        "name": {
-                                            "type": "string",
-                                            "description": "Название источника",
-                                            "example": "ИПР"
-                                        }
-                                    }
-                                }
                             }
                         }
                     }
