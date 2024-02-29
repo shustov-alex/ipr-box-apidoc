@@ -3707,7 +3707,7 @@
                 "operationId": "notifications.getConfig",
                 "responses": {
                     "200": {
-                        "description": "Список асинхронных задач",
+                        "description": "Настройки уведомлений",
                         "content": {
                             "application/json": {
                                 "schema": {
