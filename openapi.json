@@ -6226,9 +6226,14 @@
                         "type": "string",
                         "description": "Текст запроса",
                         "example": "Ничего не работает. Ничего не понятно."
+                    },
+                    "company_id": {
+                        "type": "integer",
+                        "description": "ID компании",
+                        "example": 1
                     }
                 },
-                "required": ["email", "text"]
+                "required": ["email", "text", "company_id"]
             },
             "Users.UserAttribute.Id": {
                 "type": "object",
