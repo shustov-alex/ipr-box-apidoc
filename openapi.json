@@ -6013,9 +6013,14 @@
                         "type": "string",
                         "description": "Логин",
                         "example": "your_login"
+                    },
+                    "company_id": {
+                        "type": "integer",
+                        "description": "ID компании",
+                        "example": 1
                     }
                 },
-                "required": ["login"]
+                "required": ["login", "company_id"]
             },
             "Auth.ResetPassword.ForgotPassword.SuccessResponse": {
                 "type": "object",
@@ -6200,9 +6205,14 @@
                         "type": "string",
                         "description": "JWT, выданный 'Академией Equeo'",
                         "example": "eyJhbGciOiJIUzI1NiIsInR5cGUiOiJKV1QifQ.eyJpc3MiOiJlcXVlb19hdXRoX3NlcnZlciIsInN1YiI6IjJuZF91c2VyIiwiY29tcGFueV9pZCI6MSwiZXhwIjoxNjkyODkzMDQ3LCJpYXQiOjE2OTI4MDY2NDd9.3uuI7Hjb_5n1JFz36Uialz8PIc7hEMLTRh-83X3U7wA"
+                    },
+                    "company_id": {
+                        "type": "integer",
+                        "description": "ID компании",
+                        "example": 1
                     }
                 },
-                "required": ["token"]
+                "required": ["token", "company_id"]
             },
             "Feedback.NewTicket.Request": {
                 "type": "object",
