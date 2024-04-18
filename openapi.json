@@ -5943,9 +5943,14 @@
                         "type": "string",
                         "description": "Пароль",
                         "example": "your_password"
+                    },
+                    "company_id": {
+                        "type": "integer",
+                        "description": "ID компании",
+                        "example": 1
                     }
                 },
-                "required": ["login", "password"]
+                "required": ["login", "password", "company_id"]
             },
             "Auth.Login.SuccessResponse": {
                 "type": "object",
@@ -5976,9 +5981,15 @@
                                         "type": "string",
                                         "description": "Refresh token. Используется для обновления пары access token / refresh token.",
                                         "example": "G1O8jaQj4KyGOc3-fbrIF30j5eUU_kqs9O2qDXk1"
+                                    },
+                                    "company_id": {
+                                        "type": "integer",
+                                        "description": "ID компании",
+                                        "nullable": true,
+                                        "example": 1
                                     }
                                 },
-                                "required": ["access_token", "token_type", "expires_in", "refresh_token"]
+                                "required": ["access_token", "token_type", "expires_in", "refresh_token", "company_id"]
                             }
                         }
                     }
