@@ -82,7 +82,7 @@
         }
     ],
     "paths": {
-        "/configuration": {
+        "/configuration/{company_sub_domain}": {
             "get": {
                 "security": [],
                 "tags": [
@@ -90,14 +90,17 @@
                 ],
                 "summary": "01.01. Получить конфигурацию компании",
                 "description": "Получить конфигурацию компании",
-                "operationId": "base.getConfiguration",
+                "operationId": "companies.getConfiguration",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Path.Company.SubDomain"}
+                ],
                 "responses": {
                     "200": {
                         "description": "Объект конфигурации",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Base.Configuration.Response"
+                                    "$ref": "#/components/schemas/Companies.Configuration.Response"
                                 }
                             }
                         }
@@ -5627,7 +5630,27 @@
                     }
                 }
             },
-            "Base.Configuration.Response": {
+            "Companies.CompanyAttribute.Id": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "ID",
+                        "example": 1
+                    }
+                }
+            },
+            "Companies.CompanyAttribute.Name": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Название",
+                        "example": "Лучшая компания"
+                    }
+                }
+            },
+            "Companies.Configuration.Response": {
                 "type": "object",
                 "properties": {
                     "data": {
@@ -5636,6 +5659,13 @@
                             "success": {
                                 "type": "object",
                                 "properties": {
+                                    "company": {
+                                        "type": "object",
+                                        "allOf": [
+                                            {"$ref": "#/components/schemas/Companies.CompanyAttribute.Id"},
+                                            {"$ref": "#/components/schemas/Companies.CompanyAttribute.Name"}
+                                        ]
+                                    },
                                     "feature_flags": {
                                         "type": "object",
                                         "properties": {
@@ -11276,6 +11306,16 @@
                 "example": ["first_attribute_name", "second_attribute_name"],
                 "schema": {
                     "type": "array"
+                }
+            },
+            "Companies.Path.Company.SubDomain": {
+                "name": "sub_domain",
+                "in": "path",
+                "required": true,
+                "description": "Поддомен компании",
+                "example": "test",
+                "schema": {
+                    "type": "string"
                 }
             },
             "Skills.Path.Skill.Id": {
