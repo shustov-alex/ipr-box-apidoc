@@ -5830,7 +5830,7 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Feature-флаги",
+                        "description": "Настройки брендирования",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -5919,11 +5919,100 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Feature-флаги",
+                        "description": "Настройки брендирования",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/AdminPanel.Companies.GetBrandingColors.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundOrValidationErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/companies/{company_id}/notifications": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanel.Companies"
+                ],
+                "summary": "18.15. Получить настройки уведомлений",
+                "description": "Получить настройки уведомлений",
+                "operationId": "adminPanel.Companies.getNotificationsConfig",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Path.Company.Id"}
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Настройки уведомлений",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.Companies.GetNotificationsConfig.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Запрашиваемый объект не найден",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/companies/{company_id}/notifications/update": {
+            "put": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanel.Companies"
+                ],
+                "summary": "18.16. Обновить настройки уведомлений",
+                "description": "Обновить настройки уведомлений",
+                "operationId": "adminPanel.Companies.updateNotificationsConfig",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Path.Company.Id"}
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AdminPanel.Companies.UpdateNotificationsConfig.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Настройки уведомлений",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.Companies.GetNotificationsConfig.SuccessResponse"
                                 }
                             }
                         }
@@ -6430,6 +6519,67 @@
                         "type": "string",
                         "description": "Цвет ссылок",
                         "example": "556ef7"
+                    }
+                }
+            },
+            "Companies.NotificationConfigAttribute.Sender": {
+                "type": "object",
+                "properties": {
+                    "sender": {
+                        "type": "string",
+                        "description": "Отправитель",
+                        "example": "noreply@e-queo.com"
+                    }
+                }
+            },
+            "Companies.NotificationConfigAttribute.SupportEmail": {
+                "type": "object",
+                "properties": {
+                    "support_email": {
+                        "type": "string",
+                        "description": "Email техподдержки",
+                        "example": "support@e-queo.com"
+                    }
+                }
+            },
+            "Companies.NotificationConfig.Type": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "description": "Тип уведомления",
+                        "example": "employee.new_idp",
+                        "enum": [
+                            "employee.new_idp",
+                            "employee.idp_is_not_completed_anymore",
+                            "employee.idp_is_cancelled_or_not_approved",
+                            "employee.idp_is_approved",
+                            "approver.idp_can_be_approved"
+                        ]
+                    }
+                }
+            },
+            "Companies.NotificationConfig.SelectedMode": {
+                "type": "object",
+                "properties": {
+                    "selected_mode": {
+                        "type": "string",
+                        "description": "Выбранный режим",
+                        "enum": ["enabled", "disabled"]
+                    }
+                }
+            },
+            "Companies.NotificationConfig": {
+                "type": "object",
+                "properties": {
+                    "notification_config": {
+                        "type": "array",
+                        "items": {
+                            "allOf": [
+                                {"$ref": "#/components/schemas/Companies.NotificationConfig.Type"},
+                                {"$ref": "#/components/schemas/Companies.NotificationConfig.SelectedMode"}
+                            ]
+                        }
                     }
                 }
             },
@@ -12405,6 +12555,32 @@
                     {"$ref": "#/components/schemas/Companies.BrandingAttributes.Colors.Error"},
                     {"$ref": "#/components/schemas/Companies.BrandingAttributes.Colors.Correct"},
                     {"$ref": "#/components/schemas/Companies.BrandingAttributes.Colors.Link"}
+                ]
+            },
+            "AdminPanel.Companies.GetNotificationsConfig.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "object",
+                                "allOf": [
+                                    {"$ref": "#/components/schemas/Companies.NotificationConfigAttribute.Sender"},
+                                    {"$ref": "#/components/schemas/Companies.NotificationConfigAttribute.SupportEmail"},
+                                    {"$ref": "#/components/schemas/Companies.NotificationConfig"}
+                                ]
+                            }
+                        }
+                    }
+                }
+            },
+            "AdminPanel.Companies.UpdateNotificationsConfig.Request": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Companies.NotificationConfigAttribute.Sender"},
+                    {"$ref": "#/components/schemas/Companies.NotificationConfigAttribute.SupportEmail"},
+                    {"$ref": "#/components/schemas/Companies.NotificationConfig"}
                 ]
             }
         },
