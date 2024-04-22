@@ -11779,6 +11779,7 @@
             "AdminPanel.Companies.UpdateBaseSettings.Request": {
                 "type": "object",
                 "allOf": [
+                    {"$ref": "#/components/schemas/Companies.CompanyAttribute.Status"},
                     {"$ref": "#/components/schemas/Companies.CompanyAttribute.SubDomain"},
                     {"$ref": "#/components/schemas/Companies.CompanyAttribute.Name"},
                     {"$ref": "#/components/schemas/Companies.CompanyAttribute.UserLimit"}
