@@ -5603,7 +5603,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Основные настройки компании",
+                        "description": "Настройки intercom",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -5652,11 +5652,100 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Основные настройки компании",
+                        "description": "Настройки intercom",
                         "content": {
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/AdminPanel.Companies.GetIntercomSettings.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundOrValidationErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/companies/{company_id}/feature-flags": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanel.Companies"
+                ],
+                "summary": "18.09. Получить feature-флаги",
+                "description": "Получить feature-флаги",
+                "operationId": "adminPanel.Companies.getFeatureFlags",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Path.Company.Id"}
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Feature-флаги",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.Companies.GetFeatureFlags.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Запрашиваемый объект не найден",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/companies/{company_id}/feature-flags/update": {
+            "put": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanel.Companies"
+                ],
+                "summary": "18.10. Обновить feature-флаги",
+                "description": "Обновить feature-флаги",
+                "operationId": "adminPanel.Companies.updateFeatureFlags",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Path.Company.Id"}
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AdminPanel.Companies.UpdateFeatureFlags.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Feature-флаги",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.Companies.GetFeatureFlags.SuccessResponse"
                                 }
                             }
                         }
@@ -6060,6 +6149,26 @@
                         "description": "Название компании для связи через Intercom",
                         "nullable": true,
                         "example": "Лучшая компания"
+                    }
+                }
+            },
+            "Companies.FeatureFlag.RememberMe": {
+                "type": "object",
+                "properties": {
+                    "remember_me": {
+                        "type": "boolean",
+                        "description": "Функция 'Запомнить меня' на форме атворизации",
+                        "example": true
+                    }
+                }
+            },
+            "Companies.FeatureFlag.ResetPassword": {
+                "type": "object",
+                "properties": {
+                    "reset_password": {
+                        "type": "boolean",
+                        "description": "Функция 'Восстановление пароля'",
+                        "example": true
                     }
                 }
             },
@@ -11955,6 +12064,30 @@
                 "allOf": [
                     {"$ref": "#/components/schemas/Companies.IntercomSettingsAttribute.CompanyId"},
                     {"$ref": "#/components/schemas/Companies.IntercomSettingsAttribute.CompanyName"}
+                ]
+            },
+            "AdminPanel.Companies.GetFeatureFlags.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "object",
+                                "allOf": [
+                                    {"$ref": "#/components/schemas/Companies.FeatureFlag.RememberMe"},
+                                    {"$ref": "#/components/schemas/Companies.FeatureFlag.ResetPassword"}
+                                ]
+                            }
+                        }
+                    }
+                }
+            },
+            "AdminPanel.Companies.UpdateFeatureFlags.Request": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Companies.FeatureFlag.RememberMe"},
+                    {"$ref": "#/components/schemas/Companies.FeatureFlag.ResetPassword"}
                 ]
             }
         },
