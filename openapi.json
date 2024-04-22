@@ -5409,6 +5409,95 @@
                     }
                 }
             }
+        },
+        "/admin/companies/{company_id}/base-settings": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanel.Companies"
+                ],
+                "summary": "18.04. Получить основные настройки компании",
+                "description": "Получить основные настройки компании",
+                "operationId": "adminPanel.Companies.getBaseSettings",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Path.Company.Id"}
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Основные настройки компании",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.Companies.GetBaseSettings.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Запрашиваемый объект не найден",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/companies/{company_id}/base-settings/update": {
+            "put": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanel.Companies"
+                ],
+                "summary": "18.05. Обновить основные настройки компании",
+                "description": "Обновить основные настройки компании",
+                "operationId": "adminPanel.Companies.updateBaseSettings",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Path.Company.Id"}
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AdminPanel.Companies.UpdateBaseSettings.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Основные настройки компании",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.Companies.GetBaseSettings.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundOrValidationErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -11569,6 +11658,14 @@
                         }
                     }
                 }
+            },
+            "AdminPanel.Companies.UpdateBaseSettings.Request": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Companies.CompanyAttribute.SubDomain"},
+                    {"$ref": "#/components/schemas/Companies.CompanyAttribute.Name"},
+                    {"$ref": "#/components/schemas/Companies.CompanyAttribute.UserLimit"}
+                ]
             }
         },
         "parameters": {
@@ -11590,6 +11687,16 @@
                 "example": "test",
                 "schema": {
                     "type": "string"
+                }
+            },
+            "Companies.Path.Company.Id": {
+                "name": "company_id",
+                "in": "path",
+                "required": true,
+                "description": "ID компании",
+                "example": 123,
+                "schema": {
+                    "type": "integer"
                 }
             },
             "Skills.Path.Skill.Id": {
