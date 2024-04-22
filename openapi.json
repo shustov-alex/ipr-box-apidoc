@@ -5584,6 +5584,95 @@
                     }
                 }
             }
+        },
+        "/admin/companies/{company_id}/intercom": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanel.Companies"
+                ],
+                "summary": "18.07. Получить настройки intercom",
+                "description": "Получить настройки intercom",
+                "operationId": "adminPanel.Companies.getIntercomSettings",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Path.Company.Id"}
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Основные настройки компании",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.Companies.GetIntercomSettings.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Запрашиваемый объект не найден",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/companies/{company_id}/intercom/update": {
+            "put": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanel.Companies"
+                ],
+                "summary": "18.08. Обновить настройки intercom",
+                "description": "Обновить настройки intercom",
+                "operationId": "adminPanel.Companies.updateIntercomSettings",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Path.Company.Id"}
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AdminPanel.Companies.UpdateIntercomSettings.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Основные настройки компании",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.Companies.GetIntercomSettings.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundOrValidationErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -5949,6 +6038,28 @@
                         "type": "string",
                         "description": "Поддомен",
                         "example": "best-company"
+                    }
+                }
+            },
+            "Companies.IntercomSettingsAttribute.CompanyId": {
+                "type": "object",
+                "properties": {
+                    "company_id": {
+                        "type": "string",
+                        "description": "ID компании для связи через Intercom",
+                        "nullable": true
+                        "example": 1
+                    }
+                }
+            },
+            "Companies.IntercomSettingsAttribute.CompanyName": {
+                "type": "object",
+                "properties": {
+                    "company_name": {
+                        "type": "string",
+                        "description": "Название компании для связи через Intercom",
+                        "nullable": true,
+                        "example": "Лучшая компания"
                     }
                 }
             },
@@ -11821,6 +11932,30 @@
                         }
                     }
                 }
+            },
+            "AdminPanel.Companies.GetIntercomSettings.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "object",
+                                "allOf": [
+                                    {"$ref": "#/components/schemas/Companies.IntercomSettingsAttribute.CompanyId"},
+                                    {"$ref": "#/components/schemas/Companies.IntercomSettingsAttribute.CompanyName"}
+                                ]
+                            }
+                        }
+                    }
+                }
+            },
+            "AdminPanel.Companies.UpdateIntercomSettings.Request": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Companies.IntercomSettingsAttribute.CompanyId"},
+                    {"$ref": "#/components/schemas/Companies.IntercomSettingsAttribute.CompanyName"}
+                ]
             }
         },
         "parameters": {
