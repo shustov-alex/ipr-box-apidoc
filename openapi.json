@@ -6047,7 +6047,7 @@
                     "company_id": {
                         "type": "string",
                         "description": "ID компании для связи через Intercom",
-                        "nullable": true
+                        "nullable": true,
                         "example": 1
                     }
                 }
