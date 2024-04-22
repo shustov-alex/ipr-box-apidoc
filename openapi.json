@@ -5763,7 +5763,7 @@
                 }
             }
         },
-        "/admin/companies/{company_id}/branding": {
+        "/admin/companies/{company_id}/branding/images": {
             "get": {
                 "security": [
                     {
@@ -5773,9 +5773,9 @@
                 "tags": [
                     "AdminPanel.Companies"
                 ],
-                "summary": "18.11. Получить настройки брендирования",
-                "description": "Получить настройки брендирования",
-                "operationId": "adminPanel.Companies.getBranding",
+                "summary": "18.11. Настройки брендирования. Получить изображения.",
+                "description": "Настройки брендирования. Получить изображения.",
+                "operationId": "adminPanel.Companies.getBrandingImages",
                 "parameters": [
                     {"$ref": "#/components/parameters/Companies.Path.Company.Id"}
                 ],
@@ -5785,7 +5785,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/AdminPanel.Companies.GetBranding.SuccessResponse"
+                                    "$ref": "#/components/schemas/AdminPanel.Companies.GetBrandingImages.SuccessResponse"
                                 }
                             }
                         }
@@ -5803,7 +5803,7 @@
                 }
             }
         },
-        "/admin/companies/{company_id}/branding/update": {
+        "/admin/companies/{company_id}/branding/images/update": {
             "put": {
                 "security": [
                     {
@@ -5813,9 +5813,9 @@
                 "tags": [
                     "AdminPanel.Companies"
                 ],
-                "summary": "18.12. Обновить настройки брендирования",
-                "description": "Обновить настройки брендирования",
-                "operationId": "adminPanel.Companies.updateBranding",
+                "summary": "18.12. Настройки брендирования. Обновить изображения.",
+                "description": "Настройки брендирования. Обновить изображения.",
+                "operationId": "adminPanel.Companies.updateBrandingImages",
                 "parameters": [
                     {"$ref": "#/components/parameters/Companies.Path.Company.Id"}
                 ],
@@ -5823,7 +5823,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/AdminPanel.Companies.UpdateBranding.Request"
+                                "$ref": "#/components/schemas/AdminPanel.Companies.UpdateBrandingImages.Request"
                             }
                         }
                     }
@@ -5834,7 +5834,96 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/AdminPanel.Companies.GetBranding.SuccessResponse"
+                                    "$ref": "#/components/schemas/AdminPanel.Companies.GetBrandingImages.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundOrValidationErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/companies/{company_id}/branding/colors": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanel.Companies"
+                ],
+                "summary": "18.13. Настройки брендирования. Получить цвета.",
+                "description": "Настройки брендирования. Получить цвета.",
+                "operationId": "adminPanel.Companies.getBrandingColors",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Path.Company.Id"}
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Настройки брендирования",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.Companies.GetBrandingColors.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Запрашиваемый объект не найден",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/companies/{company_id}/branding/colors/update": {
+            "put": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanel.Companies"
+                ],
+                "summary": "18.14. Настройки брендирования. Обновить цвета.",
+                "description": "Настройки брендирования. Обновить цвета.",
+                "operationId": "adminPanel.Companies.updateBrandingColors",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Path.Company.Id"}
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AdminPanel.Companies.UpdateBrandingColors.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Feature-флаги",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.Companies.GetBrandingColors.SuccessResponse"
                                 }
                             }
                         }
@@ -6261,66 +6350,86 @@
                     }
                 }
             },
-            "Companies.Branding.Images": {
+            "Companies.BrandingAttributes.Images.LogoId": {
                 "type": "object",
                 "properties": {
-                    "images": {
-                        "type": "object",
-                        "properties": {
-                            "logo_id": {
-                                "type": "integer",
-                                "description": "ID логотипа",
-                                "nullable": true,
-                                "example": 10
-                            },
-                            "auth_id": {
-                                "type": "integer",
-                                "description": "ID изображения на странице авторизации",
-                                "nullable": true,
-                                "example": 20
-                            },
-                            "background_id": {
-                                "type": "integer",
-                                "description": "ID фонового изображения",
-                                "nullable": true,
-                                "example": 30
-                            }
-                        }
+                    "logo_id": {
+                        "type": "integer",
+                        "description": "ID логотипа",
+                        "nullable": true,
+                        "example": 10
                     }
                 }
             },
-            "Companies.Branding.Colors": {
+            "Companies.BrandingAttributes.Images.AuthId": {
                 "type": "object",
                 "properties": {
-                    "colors": {
-                        "type": "object",
-                        "properties": {
-                            "base": {
-                                "type": "string",
-                                "description": "Основной цвет",
-                                "example": "ffc629"
-                            },
-                            "notification": {
-                                "type": "string",
-                                "description": "Уведомления",
-                                "example": "f9a207"
-                            },
-                            "error": {
-                                "type": "string",
-                                "description": "Ошибка",
-                                "example": "fd4a5c"
-                            },
-                            "correct": {
-                                "type": "string",
-                                "description": "Правильный цвет",
-                                "example": "00c08b"
-                            },
-                            "link": {
-                                "type": "string",
-                                "description": "Цвет ссылок",
-                                "example": "556ef7"
-                            }
-                        }
+                    "auth_id": {
+                        "type": "integer",
+                        "description": "ID изображения на странице авторизации",
+                        "nullable": true,
+                        "example": 20
+                    }
+                }
+            },
+            "Companies.BrandingAttributes.Images.BackgroundId": {
+                "type": "object",
+                "properties": {
+                    "background_id": {
+                        "type": "integer",
+                        "description": "ID фонового изображения",
+                        "nullable": true,
+                        "example": 30
+                    }
+                }
+            },
+            "Companies.BrandingAttributes.Colors.Base": {
+                "type": "object",
+                "properties": {
+                    "base": {
+                        "type": "string",
+                        "description": "Основной цвет",
+                        "example": "ffc629"
+                    }
+                }
+            },
+            "Companies.BrandingAttributes.Colors.Notification": {
+                "type": "object",
+                "properties": {
+                    "notification": {
+                        "type": "string",
+                        "description": "Уведомления",
+                        "example": "f9a207"
+                    }
+                }
+            },
+            "Companies.BrandingAttributes.Colors.Error": {
+                "type": "object",
+                "properties": {
+                    "error": {
+                        "type": "string",
+                        "description": "Ошибка",
+                        "example": "fd4a5c"
+                    }
+                }
+            },
+            "Companies.BrandingAttributes.Colors.Correct": {
+                "type": "object",
+                "properties": {
+                    "correct": {
+                        "type": "string",
+                        "description": "Правильный цвет",
+                        "example": "00c08b"
+                    }
+                }
+            },
+            "Companies.BrandingAttributes.Colors.Link": {
+                "type": "object",
+                "properties": {
+                    "link": {
+                        "type": "string",
+                        "description": "Цвет ссылок",
+                        "example": "556ef7"
                     }
                 }
             },
@@ -12242,7 +12351,7 @@
                     {"$ref": "#/components/schemas/Companies.FeatureFlag.ResetPassword"}
                 ]
             },
-            "AdminPanel.Companies.GetBranding.SuccessResponse": {
+            "AdminPanel.Companies.GetBrandingImages.SuccessResponse": {
                 "type": "object",
                 "properties": {
                     "data": {
@@ -12251,19 +12360,51 @@
                             "success": {
                                 "type": "object",
                                 "allOf": [
-                                    {"$ref": "#/components/schemas/Companies.Branding.Images"},
-                                    {"$ref": "#/components/schemas/Companies.Branding.Colors"}
+                                    {"$ref": "#/components/schemas/Companies.BrandingAttributes.Images.LogoId"},
+                                    {"$ref": "#/components/schemas/Companies.BrandingAttributes.Images.AuthId"},
+                                    {"$ref": "#/components/schemas/Companies.BrandingAttributes.Images.BackgroundId"}
                                 ]
                             }
                         }
                     }
                 }
             },
-            "AdminPanel.Companies.UpdateBranding.Request": {
+            "AdminPanel.Companies.UpdateBrandingImages.Request": {
                 "type": "object",
                 "allOf": [
-                    {"$ref": "#/components/schemas/Companies.Branding.Images"},
-                    {"$ref": "#/components/schemas/Companies.Branding.Colors"}
+                    {"$ref": "#/components/schemas/Companies.BrandingAttributes.Images.LogoId"},
+                    {"$ref": "#/components/schemas/Companies.BrandingAttributes.Images.AuthId"},
+                    {"$ref": "#/components/schemas/Companies.BrandingAttributes.Images.BackgroundId"}
+                ]
+            },
+            "AdminPanel.Companies.GetBrandingColors.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "object",
+                                "allOf": [
+                                    {"$ref": "#/components/schemas/Companies.BrandingAttributes.Colors.Base"},
+                                    {"$ref": "#/components/schemas/Companies.BrandingAttributes.Colors.Notification"},
+                                    {"$ref": "#/components/schemas/Companies.BrandingAttributes.Colors.Error"},
+                                    {"$ref": "#/components/schemas/Companies.BrandingAttributes.Colors.Correct"},
+                                    {"$ref": "#/components/schemas/Companies.BrandingAttributes.Colors.Link"}
+                                ]
+                            }
+                        }
+                    }
+                }
+            },
+            "AdminPanel.Companies.UpdateBrandingColors.Request": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Companies.BrandingAttributes.Colors.Base"},
+                    {"$ref": "#/components/schemas/Companies.BrandingAttributes.Colors.Notification"},
+                    {"$ref": "#/components/schemas/Companies.BrandingAttributes.Colors.Error"},
+                    {"$ref": "#/components/schemas/Companies.BrandingAttributes.Colors.Correct"},
+                    {"$ref": "#/components/schemas/Companies.BrandingAttributes.Colors.Link"}
                 ]
             }
         },
