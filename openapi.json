@@ -5364,6 +5364,52 @@
                 }
             }
         },
+        "/admin/companies/update-status": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanel.Companies"
+                ],
+                "summary": "18.02. Массовое изменение статуса компаний",
+                "description": "Массовое изменение статуса компаний",
+                "operationId": "adminPanel.Companies.massUpdateStatus",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AdminPanel.Companies.MassUpdateStatus.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Статус компаний успешно изменён",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.EmptySuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки валидации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ValidationErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/admin/companies/create": {
             "post": {
                 "security": [
@@ -5374,7 +5420,7 @@
                 "tags": [
                     "AdminPanel.Companies"
                 ],
-                "summary": "18.02. Создать компанию",
+                "summary": "18.03. Создать компанию",
                 "description": "Создать компанию",
                 "operationId": "adminPanel.Companies.createCompany",
                 "requestBody": {
@@ -5420,7 +5466,7 @@
                 "tags": [
                     "AdminPanel.Companies"
                 ],
-                "summary": "18.03. Получить краткую историю изменений",
+                "summary": "18.04. Получить краткую историю изменений",
                 "description": "Получить краткую историю изменений",
                 "operationId": "adminPanel.Companies.getChangeHistory",
                 "parameters": [
@@ -5460,7 +5506,7 @@
                 "tags": [
                     "AdminPanel.Companies"
                 ],
-                "summary": "18.04. Получить основные настройки компании",
+                "summary": "18.05. Получить основные настройки компании",
                 "description": "Получить основные настройки компании",
                 "operationId": "adminPanel.Companies.getBaseSettings",
                 "parameters": [
@@ -5500,7 +5546,7 @@
                 "tags": [
                     "AdminPanel.Companies"
                 ],
-                "summary": "18.05. Обновить основные настройки компании",
+                "summary": "18.06. Обновить основные настройки компании",
                 "description": "Обновить основные настройки компании",
                 "operationId": "adminPanel.Companies.updateBaseSettings",
                 "parameters": [
@@ -11679,6 +11725,26 @@
                         }
                     }
                 }
+            },
+            "AdminPanel.Companies.MassUpdateStatus.Request": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "description": "Статус",
+                        "example": "active",
+                        "enum": ["active", "hidden"]
+                    },
+                    "ids": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer",
+                            "description": "ID компании",
+                            "example": 123
+                        }
+                    }
+                },
+                "required": ["status", "ids"]
             },
             "AdminPanel.Companies.CreateCompany.Request": {
                 "type": "object",
