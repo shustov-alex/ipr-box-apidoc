@@ -5875,6 +5875,16 @@
                     }
                 }
             },
+            "Companies.CompanyAttribute.ActualCountOfUsers": {
+                "type": "object",
+                "properties": {
+                    "actual_count_of_users": {
+                        "type": "integer",
+                        "description": "Текущее количество пользователей в компании",
+                        "example": 800
+                    }
+                }
+            },
             "Companies.CompanyAttribute.Status": {
                 "type": "object",
                 "properties": {
@@ -11653,7 +11663,8 @@
                                         {"$ref": "#/components/schemas/Companies.CompanyAttribute.Id"},
                                         {"$ref": "#/components/schemas/Companies.CompanyAttribute.Status"},
                                         {"$ref": "#/components/schemas/Companies.CompanyAttribute.Name"},
-                                        {"$ref": "#/components/schemas/Companies.CompanyAttribute.UserLimit"}
+                                        {"$ref": "#/components/schemas/Companies.CompanyAttribute.UserLimit"},
+                                        {"$ref": "#/components/schemas/Companies.CompanyAttribute.ActualCountOfUsers"}
                                     ]
                                 }
                             }
