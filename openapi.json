@@ -79,6 +79,10 @@
         {
             "name": "AdminPanel.TargetTemplates",
             "description": "17. Панель администратора, шаблоны целей"
+        },
+        {
+            "name": "AdminPanel.Companies",
+            "description": "18. Панель администратора, список компаний"
         }
     ],
     "paths": {
@@ -5323,6 +5327,42 @@
                     }
                 }
             }
+        },
+        "/admin/companies": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanel.Companies"
+                ],
+                "summary": "18.01. Получить список компаний",
+                "description": "Получить список компаний",
+                "operationId": "adminPanel.Companies.getCompanies",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AdminPanel.Companies.GetCollection.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Список компаний",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.Companies.GetCollection.SuccessResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -5647,6 +5687,27 @@
                         "type": "string",
                         "description": "Название",
                         "example": "Лучшая компания"
+                    }
+                }
+            },
+            "Companies.CompanyAttribute.UserLimit": {
+                "type": "object",
+                "properties": {
+                    "user_limit": {
+                        "type": "integer",
+                        "description": "Лимит пользователей",
+                        "example": 1000
+                    }
+                }
+            },
+            "Companies.CompanyAttribute.Status": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "description": "Статус",
+                        "example": "active",
+                        "enum": ["active", "hidden"]
                     }
                 }
             },
@@ -11317,6 +11378,107 @@
                                     {"$ref": "#/components/schemas/TargetTemplates.TemplateAttribute.Materials"},
                                     {"$ref": "#/components/schemas/TargetTemplates.TemplateAttribute.Skills"}
                                 ]
+                            }
+                        }
+                    }
+                }
+            },
+            "AdminPanel.Companies.Collection.Sort": {
+                "type": "object",
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/Base.Sort"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "attribute": {
+                                "type": "string",
+                                "description": "Значение, по которому производится сортировка. Если не указано, то будет использовано значение по умолчанию.",
+                                "enum": ["id", "name", "user_limit"],
+                                "example": "id"
+                            }
+                        }
+                    }
+                ]
+            },
+            "AdminPanel.Companies.Collection.Filter": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "ID компании",
+                        "nullable": true,
+                        "example": 123
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "Название компании",
+                        "nullable": true,
+                        "example": "Лучшая компания"
+                    },
+                    "statuses": {
+                        "type": "array",
+                        "nullable": true,
+                        "items": {
+                            "type": "string",
+                            "description": "Статус компании",
+                            "example": "active",
+                            "enum": ["active", "hidden"]
+                        }
+                    },
+                    "user_limits": {
+                        "type": "array",
+                        "nullable": true,
+                        "items": {
+                            "type": "string",
+                            "description": "Лимит пользователей",
+                            "example": "exceeded",
+                            "enum": ["exceeded", "ninety_percent"]
+                        }
+                    }
+                }
+            },
+            "AdminPanel.Companies.GetCollection.Request": {
+                "type": "object",
+                "properties": {
+                    "sort": {
+                        "$ref": "#/components/schemas/AdminPanel.Companies.Collection.Sort"
+                    },
+                    "filter": {
+                        "$ref": "#/components/schemas/AdminPanel.Companies.Collection.Filter"
+                    },
+                    "pagination": {
+                        "$ref": "#/components/schemas/Base.OffsetPagination"
+                    }
+                }
+            },
+            "AdminPanel.Companies.GetCollection.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "description": "Компания",
+                                    "allOf": [
+                                        {"$ref": "#/components/schemas/Companies.CompanyAttribute.Id"},
+                                        {"$ref": "#/components/schemas/Companies.CompanyAttribute.Status"},
+                                        {"$ref": "#/components/schemas/Companies.CompanyAttribute.Name"},
+                                        {"$ref": "#/components/schemas/Companies.CompanyAttribute.UserLimit"}
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "meta": {
+                        "type": "object",
+                        "properties": {
+                            "pagination": {
+                                "$ref": "#/components/schemas/Base.OffsetPaginationMeta"
                             }
                         }
                     }
