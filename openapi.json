@@ -5410,6 +5410,46 @@
                 }
             }
         },
+        "/admin/companies/{company_id}/change-history": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanel.Companies"
+                ],
+                "summary": "18.03. Получить краткую историю изменений",
+                "description": "Получить краткую историю изменений",
+                "operationId": "adminPanel.Companies.getChangeHistory",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Path.Company.Id"}
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Основные настройки компании",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.Companies.GetChangeHistory.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Запрашиваемый объект не найден",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/admin/companies/{company_id}/base-settings": {
             "get": {
                 "security": [
@@ -11666,6 +11706,43 @@
                     {"$ref": "#/components/schemas/Companies.CompanyAttribute.Name"},
                     {"$ref": "#/components/schemas/Companies.CompanyAttribute.UserLimit"}
                 ]
+            },
+            "AdminPanel.Companies.GetChangeHistory.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "type": {
+                                            "type": "string",
+                                            "description": "Тип записи",
+                                            "example": "updated",
+                                            "enum": [
+                                                "updated",
+                                                "created"
+                                            ]
+                                        },
+                                        "admin_login": {
+                                            "type": "string",
+                                            "description": "Логин администратора",
+                                            "example": "admin_login"
+                                        },
+                                        "datetime": {
+                                            "type": "string",
+                                            "description": "Дата и время",
+                                            "example": "2023-09-01 12:10:20 +03:00"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         },
         "parameters": {
