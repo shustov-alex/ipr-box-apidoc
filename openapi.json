@@ -5363,6 +5363,52 @@
                     }
                 }
             }
+        },
+        "/admin/companies/create": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanel.Companies"
+                ],
+                "summary": "18.02. Создать компанию",
+                "description": "Создать компанию",
+                "operationId": "adminPanel.Companies.createCompany",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AdminPanel.Companies.CreateCompany.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Основные настройки компании",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.Companies.GetBaseSettings.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки валидации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ValidationErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -5708,6 +5754,16 @@
                         "description": "Статус",
                         "example": "active",
                         "enum": ["active", "hidden"]
+                    }
+                }
+            },
+            "Companies.CompanyAttribute.SubDomain": {
+                "type": "object",
+                "properties": {
+                    "sub_domain": {
+                        "type": "string",
+                        "description": "Поддомен",
+                        "example": "best-company"
                     }
                 }
             },
@@ -11479,6 +11535,36 @@
                         "properties": {
                             "pagination": {
                                 "$ref": "#/components/schemas/Base.OffsetPaginationMeta"
+                            }
+                        }
+                    }
+                }
+            },
+            "AdminPanel.Companies.CreateCompany.Request": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Companies.CompanyAttribute.SubDomain"},
+                    {"$ref": "#/components/schemas/Companies.CompanyAttribute.Name"},
+                    {"$ref": "#/components/schemas/Companies.CompanyAttribute.UserLimit"},
+                    {"$ref": "#/components/schemas/Companies.CompanyAttribute.Status"}
+                ],
+                "required": ["sub_domain", "name", "user_limit"]
+            },
+            "AdminPanel.Companies.GetBaseSettings.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "object",
+                                "allOf": [
+                                    {"$ref": "#/components/schemas/Companies.CompanyAttribute.Id"},
+                                    {"$ref": "#/components/schemas/Companies.CompanyAttribute.Status"},
+                                    {"$ref": "#/components/schemas/Companies.CompanyAttribute.SubDomain"},
+                                    {"$ref": "#/components/schemas/Companies.CompanyAttribute.Name"},
+                                    {"$ref": "#/components/schemas/Companies.CompanyAttribute.UserLimit"}
+                                ]
                             }
                         }
                     }
