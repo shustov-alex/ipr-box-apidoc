@@ -5762,6 +5762,95 @@
                     }
                 }
             }
+        },
+        "/admin/companies/{company_id}/branding": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanel.Companies"
+                ],
+                "summary": "18.11. Получить настройки брендирования",
+                "description": "Получить настройки брендирования",
+                "operationId": "adminPanel.Companies.getBranding",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Path.Company.Id"}
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Настройки брендирования",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.Companies.GetBranding.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Запрашиваемый объект не найден",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/companies/{company_id}/branding/update": {
+            "put": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanel.Companies"
+                ],
+                "summary": "18.12. Обновить настройки брендирования",
+                "description": "Обновить настройки брендирования",
+                "operationId": "adminPanel.Companies.updateBranding",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Path.Company.Id"}
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AdminPanel.Companies.UpdateBranding.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Feature-флаги",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.Companies.GetBranding.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundOrValidationErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -6169,6 +6258,69 @@
                         "type": "boolean",
                         "description": "Функция 'Восстановление пароля'",
                         "example": true
+                    }
+                }
+            },
+            "Companies.Branding.Images": {
+                "type": "object",
+                "properties": {
+                    "images": {
+                        "type": "object",
+                        "properties": {
+                            "logo_id": {
+                                "type": "integer",
+                                "description": "ID логотипа",
+                                "nullable": true,
+                                "example": 10
+                            },
+                            "auth_id": {
+                                "type": "integer",
+                                "description": "ID изображения на странице авторизации",
+                                "nullable": true,
+                                "example": 20
+                            },
+                            "background_id": {
+                                "type": "integer",
+                                "description": "ID фонового изображения",
+                                "nullable": true,
+                                "example": 30
+                            }
+                        }
+                    }
+                }
+            },
+            "Companies.Branding.Colors": {
+                "type": "object",
+                "properties": {
+                    "colors": {
+                        "type": "object",
+                        "properties": {
+                            "base": {
+                                "type": "string",
+                                "description": "Основной цвет",
+                                "example": "ffc629"
+                            },
+                            "notification": {
+                                "type": "string",
+                                "description": "Уведомления",
+                                "example": "f9a207"
+                            },
+                            "error": {
+                                "type": "string",
+                                "description": "Ошибка",
+                                "example": "fd4a5c"
+                            },
+                            "correct": {
+                                "type": "string",
+                                "description": "Правильный цвет",
+                                "example": "00c08b"
+                            },
+                            "link": {
+                                "type": "string",
+                                "description": "Цвет ссылок",
+                                "example": "556ef7"
+                            }
+                        }
                     }
                 }
             },
@@ -12088,6 +12240,30 @@
                 "allOf": [
                     {"$ref": "#/components/schemas/Companies.FeatureFlag.RememberMe"},
                     {"$ref": "#/components/schemas/Companies.FeatureFlag.ResetPassword"}
+                ]
+            },
+            "AdminPanel.Companies.GetBranding.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "object",
+                                "allOf": [
+                                    {"$ref": "#/components/schemas/Companies.Branding.Images"},
+                                    {"$ref": "#/components/schemas/Companies.Branding.Colors"}
+                                ]
+                            }
+                        }
+                    }
+                }
+            },
+            "AdminPanel.Companies.UpdateBranding.Request": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Companies.Branding.Images"},
+                    {"$ref": "#/components/schemas/Companies.Branding.Colors"}
                 ]
             }
         },
