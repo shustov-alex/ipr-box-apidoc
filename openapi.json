@@ -5862,7 +5862,7 @@
                 "tags": [
                     "AdminPanel.Companies"
                 ],
-                "summary": "18.15. Получить настройки уведомлений",
+                "summary": "18.13. Получить настройки уведомлений",
                 "description": "Получить настройки уведомлений",
                 "operationId": "adminPanel.Companies.getNotificationsConfig",
                 "parameters": [
@@ -5902,7 +5902,7 @@
                 "tags": [
                     "AdminPanel.Companies"
                 ],
-                "summary": "18.16. Обновить настройки уведомлений",
+                "summary": "18.14. Обновить настройки уведомлений",
                 "description": "Обновить настройки уведомлений",
                 "operationId": "adminPanel.Companies.updateNotificationsConfig",
                 "parameters": [
