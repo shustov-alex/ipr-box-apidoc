@@ -5940,6 +5940,95 @@
                     }
                 }
             }
+        },
+        "/admin/companies/{company_id}/roles": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanel.Companies"
+                ],
+                "summary": "18.15. Получить настройки ролей",
+                "description": "Получить настройки ролей",
+                "operationId": "adminPanel.Companies.getRoles",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Path.Company.Id"}
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Настройки ролей",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.Companies.GetRoles.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Запрашиваемый объект не найден",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/companies/{company_id}/roles/update": {
+            "put": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanel.Companies"
+                ],
+                "summary": "18.16. Обновить настройки ролей",
+                "description": "Обновить настройки ролей",
+                "operationId": "adminPanel.Companies.updateRoles",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Path.Company.Id"}
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AdminPanel.Companies.UpdateRoles.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Настройки ролей",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.Companies.GetRoles.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundOrValidationErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -6604,7 +6693,7 @@
                     }
                 }
             },
-            "Access.Right.AccessToEmployees": {
+            "Access.Right.AccessToEmployees.Brief": {
                 "type": "object",
                 "properties": {
                     "app.employees.access_to_employees": {
@@ -6612,6 +6701,17 @@
                         "description": "Доступ к разделу 'Сотрудники'",
                         "enum": ["granted", "denied"],
                         "example": "granted"
+                    }
+                }
+            },
+            "Access.Right.AccessToEmployees.Detailed": {
+                "type": "object",
+                "properties": {
+                    "app.employees.access_to_employees": {
+                        "type": "string",
+                        "description": "Доступ к разделу 'Сотрудники'",
+                        "enum": ["all", "scope", "none"],
+                        "example": "scope"
                     }
                 }
             },
@@ -6767,12 +6867,58 @@
                     }
                 }
             },
+            "Roles.RoleAttribute.LocalizedName": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "object",
+                        "properties": {
+                            "ru": {
+                                "type": "string",
+                                "description": "Название роли (ru)",
+                                "example": "Сотрудник"
+                            },
+                            "en": {
+                                "type": "string",
+                                "description": "Название роли (en)",
+                                "example": "Employee"
+                            }
+                        }
+                    }
+                }
+            },
             "Roles.RoleDefaultView": {
                 "type": "object",
                 "description": "Роль",
                 "allOf": [
                     {"$ref": "#/components/schemas/Roles.RoleAttribute.Id"},
                     {"$ref": "#/components/schemas/Roles.RoleAttribute.Name"}
+                ]
+            },
+            "Roles.RoleAdminView": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Roles.RoleAttribute.Id"},
+                    {"$ref": "#/components/schemas/Roles.RoleAttribute.LocalizedName"},
+                    {
+                        "type": "object",
+                        "properties": {
+                            "access_rights": {
+                                "type": "object",
+                                "allOf": [
+                                    {"$ref": "#/components/schemas/Access.Right.AccessToEmployees.Detailed"},
+                                    {"$ref": "#/components/schemas/Access.Right.CreateTarget"},
+                                    {"$ref": "#/components/schemas/Access.Right.UpdateTarget"},
+                                    {"$ref": "#/components/schemas/Access.Right.DeleteTarget"},
+                                    {"$ref": "#/components/schemas/Access.Right.CreateIdp"},
+                                    {"$ref": "#/components/schemas/Access.Right.DeleteIdp"},
+                                    {"$ref": "#/components/schemas/Access.Right.AccessToAdminPanel"},
+                                    {"$ref": "#/components/schemas/Access.Right.GenerateReports"},
+                                    {"$ref": "#/components/schemas/Access.Right.CommentTarget"}
+                                ]
+                            }
+                        }
+                    }
                 ]
             },
             "Auth.Login.Request": {
@@ -7157,7 +7303,7 @@
                         "type": "object",
                         "allOf": [
                             {"$ref": "#/components/schemas/Access.Right.AccessToAdminPanel"},
-                            {"$ref": "#/components/schemas/Access.Right.AccessToEmployees"},
+                            {"$ref": "#/components/schemas/Access.Right.AccessToEmployees.Brief"},
                             {"$ref": "#/components/schemas/Access.Right.CreateTarget"},
                             {"$ref": "#/components/schemas/Access.Right.UpdateTarget"},
                             {"$ref": "#/components/schemas/Access.Right.DeleteTarget"},
@@ -12493,6 +12639,50 @@
                     {"$ref": "#/components/schemas/Companies.NotificationConfigAttribute.SupportEmail"},
                     {"$ref": "#/components/schemas/Companies.NotificationConfig"}
                 ]
+            },
+            "AdminPanel.Companies.GetRoles.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "object",
+                                "properties": {
+                                    "active": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/Roles.RoleAdminView"
+                                        }
+                                    },
+                                    "archived": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/Roles.RoleAdminView"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "AdminPanel.Companies.UpdateRoles.Request": {
+                "type": "object",
+                "properties": {
+                    "active": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Roles.RoleAdminView"
+                        }
+                    },
+                    "archived": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Roles.RoleAdminView"
+                        }
+                    }
+                }
             }
         },
         "parameters": {
