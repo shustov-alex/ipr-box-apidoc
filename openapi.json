@@ -6887,6 +6887,16 @@
                     }
                 }
             },
+            "Roles.RoleAttribute.CountOfUsers": {
+                "type": "object",
+                "properties": {
+                    "count_of_users": {
+                        "type": "integer",
+                        "description": "Количество аккаунтов в данной роли",
+                        "example": 588
+                    }
+                }
+            },
             "Roles.RoleDefaultView": {
                 "type": "object",
                 "description": "Роль",
@@ -6895,7 +6905,7 @@
                     {"$ref": "#/components/schemas/Roles.RoleAttribute.Name"}
                 ]
             },
-            "Roles.RoleAdminView": {
+            "Roles.RoleAdminView.ToSave": {
                 "type": "object",
                 "allOf": [
                     {"$ref": "#/components/schemas/Roles.RoleAttribute.Id"},
@@ -6919,6 +6929,13 @@
                             }
                         }
                     }
+                ]
+            },
+            "Roles.RoleAdminView.ToDisplay": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Roles.RoleAdminView.ToSave"},
+                    {"$ref": "#/components/schemas/Roles.RoleAttribute.CountOfUsers"}
                 ]
             },
             "Auth.Login.Request": {
@@ -12652,13 +12669,13 @@
                                     "active": {
                                         "type": "array",
                                         "items": {
-                                            "$ref": "#/components/schemas/Roles.RoleAdminView"
+                                            "$ref": "#/components/schemas/Roles.RoleAdminView.ToDisplay"
                                         }
                                     },
                                     "archived": {
                                         "type": "array",
                                         "items": {
-                                            "$ref": "#/components/schemas/Roles.RoleAdminView"
+                                            "$ref": "#/components/schemas/Roles.RoleAdminView.ToDisplay"
                                         }
                                     }
                                 }
@@ -12673,13 +12690,13 @@
                     "active": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/Roles.RoleAdminView"
+                            "$ref": "#/components/schemas/Roles.RoleAdminView.ToSave"
                         }
                     },
                     "archived": {
                         "type": "array",
                         "items": {
-                            "$ref": "#/components/schemas/Roles.RoleAdminView"
+                            "$ref": "#/components/schemas/Roles.RoleAdminView.ToSave"
                         }
                     }
                 }
