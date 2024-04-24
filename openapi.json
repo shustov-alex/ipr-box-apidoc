@@ -4325,68 +4325,6 @@
                 }
             }
         },
-        "/admin/materials/types": {
-            "get": {
-                "deprecated": true,
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ],
-                "tags": [
-                    "AdminPanel.Materials"
-                ],
-                "summary": "16.01. Список возможных типов материалов",
-                "description": "Список возможных типов материалов",
-                "operationId": "adminPanel.Materials.getTypes",
-                "parameters": [
-                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Список типов",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Materials.GetTypeCollection.SuccessResponse"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/admin/materials/sources": {
-            "get": {
-                "deprecated": true,
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ],
-                "tags": [
-                    "AdminPanel.Materials"
-                ],
-                "summary": "16.02. Список возможных источников материалов",
-                "description": "Список возможных источников материалов",
-                "operationId": "adminPanel.Materials.getSources",
-                "parameters": [
-                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Список истоничков",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/Materials.GetSourceCollection.SuccessResponse"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
         "/admin/materials/count-of-awaiting-publication": {
             "get": {
                 "security": [
