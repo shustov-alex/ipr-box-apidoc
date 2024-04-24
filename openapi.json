@@ -6864,6 +6864,17 @@
                     }
                 }
             },
+            "Access.Right.AccessToSuperAdminPanel": {
+                "type": "object",
+                "properties": {
+                    "app.admin.access_to_super_admin_panel": {
+                        "type": "string",
+                        "description": "Доступ к панели суперадминистратора",
+                        "enum": ["granted", "denied"],
+                        "example": "denied"
+                    }
+                }
+            },
             "Access.Right.AccessToAdminPanel": {
                 "type": "object",
                 "properties": {
@@ -7171,14 +7182,11 @@
                                         "description": "Refresh token. Используется для обновления пары access token / refresh token.",
                                         "example": "G1O8jaQj4KyGOc3-fbrIF30j5eUU_kqs9O2qDXk1"
                                     },
-                                    "company_id": {
-                                        "type": "integer",
-                                        "description": "ID компании",
-                                        "nullable": true,
-                                        "example": 1
+                                    "user_profile": {
+                                        "$ref": "#/components/schemas/Users.Profile"
                                     }
                                 },
-                                "required": ["access_token", "token_type", "expires_in", "refresh_token", "company_id"]
+                                "required": ["access_token", "token_type", "expires_in", "refresh_token", "user_profile"]
                             }
                         }
                     }
@@ -7434,7 +7442,17 @@
                     }
                 }
             },
-            "Users.UserAttribute.EmployeeID": {
+            "Users.UserAttribute.CompanyId": {
+                "type": "object",
+                "properties": {
+                    "company_id": {
+                        "type": "integer",
+                        "description": "ID компании",
+                        "example": 10
+                    }
+                }
+            },
+            "Users.UserAttribute.EmployeeId": {
                 "type": "object",
                 "properties": {
                     "employee_id": {
@@ -7501,6 +7519,7 @@
                     "access_rights": {
                         "type": "object",
                         "allOf": [
+                            {"$ref": "#/components/schemas/Access.Right.AccessToSuperAdminPanel"},
                             {"$ref": "#/components/schemas/Access.Right.AccessToAdminPanel"},
                             {"$ref": "#/components/schemas/Access.Right.AccessToEmployees.Brief"},
                             {"$ref": "#/components/schemas/Access.Right.CreateTarget"},
@@ -7534,6 +7553,18 @@
                     }
                 }
             },
+            "Users.Profile": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Users.UserAttribute.Id"},
+                    {"$ref": "#/components/schemas/Users.UserAttribute.CompanyId"},
+                    {"$ref": "#/components/schemas/Users.UserAttribute.Email"},
+                    {"$ref": "#/components/schemas/Users.UserAttribute.FirstName"},
+                    {"$ref": "#/components/schemas/Users.UserAttribute.LastName"},
+                    {"$ref": "#/components/schemas/Users.UserAttribute.EmployeeId"},
+                    {"$ref": "#/components/schemas/Users.UserAttribute.AccessRights"}
+                ]
+            },
             "Users.Profile.SuccessResponse": {
                 "type": "object",
                 "properties": {
@@ -7541,15 +7572,7 @@
                         "type": "object",
                         "properties": {
                             "success": {
-                                "type": "object",
-                                "allOf": [
-                                    { "$ref": "#/components/schemas/Users.UserAttribute.Id" },
-                                    { "$ref": "#/components/schemas/Users.UserAttribute.Email" },
-                                    { "$ref": "#/components/schemas/Users.UserAttribute.FirstName" },
-                                    { "$ref": "#/components/schemas/Users.UserAttribute.LastName" },
-                                    { "$ref": "#/components/schemas/Users.UserAttribute.EmployeeID" },
-                                    { "$ref": "#/components/schemas/Users.UserAttribute.AccessRights" }
-                                ]
+                                "$ref": "#/components/schemas/Users.Profile"
                             }
                         }
                     }
