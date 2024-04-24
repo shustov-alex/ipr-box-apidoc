@@ -516,6 +516,9 @@
                 "summary": "04.02. Быстрый поиск пользователей.",
                 "description": "Быстрый поиск пользователей.",
                 "operationId": "users.quickSearch",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -553,6 +556,7 @@
                 "description": "Получить дерево навыков",
                 "operationId": "skills.getTree",
                 "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"},
                     {"$ref": "#/components/parameters/Employees.Query.Employee.Id"}
                 ],
                 "requestBody": {
@@ -737,6 +741,7 @@
                 "operationId": "skills.getSkillDetails",
                 "parameters": [
                     {"$ref": "#/components/parameters/Skills.Path.Skill.Id"},
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"},
                     {"$ref": "#/components/parameters/Employees.Query.Employee.Id"}
                 ],
                 "responses": {
@@ -767,7 +772,8 @@
                 "description": "Получить краткую информацию о навыке",
                 "operationId": "skills.getSkillDetailsBrief",
                 "parameters": [
-                    {"$ref": "#/components/parameters/Skills.Path.Skill.Id"}
+                    {"$ref": "#/components/parameters/Skills.Path.Skill.Id"},
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
                 ],
                 "responses": {
                     "200": {
@@ -796,6 +802,9 @@
                 "summary": "05.04. Получить все возможные индикаторы навыков",
                 "description": "Получить все возможные индикаторы навыков",
                 "operationId": "skills.getLevelIndicators",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
+                ],
                 "responses": {
                     "200": {
                         "description": "Список индикаторов",
@@ -824,6 +833,7 @@
                 "description": "Получить список целей. Максимальное количество элементов - 1000.",
                 "operationId": "targets.getCollection",
                 "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"},
                     {"$ref": "#/components/parameters/Employees.Query.Employee.Id"}
                 ],
                 "requestBody": {
@@ -863,7 +873,8 @@
                 "description": "Получить детальную информацию о цели",
                 "operationId": "targets.getTargetDetails",
                 "parameters": [
-                    {"$ref": "#/components/parameters/Targets.Path.Target.Id"}
+                    {"$ref": "#/components/parameters/Targets.Path.Target.Id"},
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
                 ],
                 "responses": {
                     "200": {
@@ -903,6 +914,7 @@
                 "description": "Обновить статус цели",
                 "operationId": "targets.updateStatus",
                 "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"},
                     {"$ref": "#/components/parameters/Targets.Path.Target.Id"}
                 ],
                 "requestBody": {
@@ -952,6 +964,7 @@
                 "description": "Получить группы статусов целей",
                 "operationId": "targets.getStatusGroups",
                 "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"},
                     {"$ref": "#/components/parameters/Employees.Query.Employee.Id"}
                 ],
                 "requestBody": {
@@ -991,6 +1004,7 @@
                 "description": "Создать цель",
                 "operationId": "targets.createTarget",
                 "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"},
                     {"$ref": "#/components/parameters/Employees.Query.Employee.Id"}
                 ],
                 "requestBody": {
@@ -1040,7 +1054,8 @@
                 "description": "Обновить цель",
                 "operationId": "targets.updateTarget",
                 "parameters": [
-                    {"$ref": "#/components/parameters/Targets.Path.Target.Id"}
+                    {"$ref": "#/components/parameters/Targets.Path.Target.Id"},
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
                 ],
                 "requestBody": {
                     "content": {
@@ -1089,7 +1104,8 @@
                 "description": "Удалить цель",
                 "operationId": "targets.deleteTarget",
                 "parameters": [
-                    {"$ref": "#/components/parameters/Targets.Path.Target.Id"}
+                    {"$ref": "#/components/parameters/Targets.Path.Target.Id"},
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
                 ],
                 "responses": {
                     "200": {
@@ -1129,7 +1145,8 @@
                 "description": "Получить количество связанных объектов",
                 "operationId": "targets.getCountOfRelations",
                 "parameters": [
-                    {"$ref": "#/components/parameters/Targets.Path.Target.Id"}
+                    {"$ref": "#/components/parameters/Targets.Path.Target.Id"},
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
                 ],
                 "responses": {
                     "200": {
@@ -1169,7 +1186,8 @@
                 "description": "Получить выбранные навыки по ID цели",
                 "operationId": "targets.getTargetSkills",
                 "parameters": [
-                    {"$ref": "#/components/parameters/Targets.Path.Target.Id"}
+                    {"$ref": "#/components/parameters/Targets.Path.Target.Id"},
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
                 ],
                 "responses": {
                     "200": {
@@ -1209,7 +1227,8 @@
                 "description": "Получить выбранные материалы по ID цели",
                 "operationId": "targets.getTargetMaterials",
                 "parameters": [
-                    {"$ref": "#/components/parameters/Targets.Path.Target.Id"}
+                    {"$ref": "#/components/parameters/Targets.Path.Target.Id"},
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
                 ],
                 "responses": {
                     "200": {
@@ -1250,7 +1269,8 @@
                 "operationId": "targets.getTargetMaterial",
                 "parameters": [
                     {"$ref": "#/components/parameters/Targets.Path.Target.Id"},
-                    {"$ref": "#/components/parameters/Materials.Path.Material.Id"}
+                    {"$ref": "#/components/parameters/Materials.Path.Material.Id"},
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
                 ],
                 "responses": {
                     "200": {
@@ -1290,7 +1310,8 @@
                 "description": "Получить комментарии по ID цели",
                 "operationId": "targets.getTargetComments",
                 "parameters": [
-                    {"$ref": "#/components/parameters/Targets.Path.Target.Id"}
+                    {"$ref": "#/components/parameters/Targets.Path.Target.Id"},
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
                 ],
                 "responses": {
                     "200": {
@@ -1330,7 +1351,8 @@
                 "description": "Оставить комментарий к цели",
                 "operationId": "targets.leaveCommentOnTarget",
                 "parameters": [
-                    {"$ref": "#/components/parameters/Targets.Path.Target.Id"}
+                    {"$ref": "#/components/parameters/Targets.Path.Target.Id"},
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
                 ],
                 "requestBody": {
                     "content": {
@@ -1378,6 +1400,9 @@
                 "summary": "06.14. Создать несколько целей",
                 "description": "Создать несколько целей",
                 "operationId": "targets.createTargetCollection",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -1426,7 +1451,8 @@
                 "operationId": "targets.updateAssignmentStatus",
                 "parameters": [
                     {"$ref": "#/components/parameters/Targets.Path.Target.Id"},
-                    {"$ref": "#/components/parameters/Materials.Path.Material.Id"}
+                    {"$ref": "#/components/parameters/Materials.Path.Material.Id"},
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
                 ],
                 "requestBody": {
                     "content": {
@@ -1475,7 +1501,8 @@
                 "description": "Обновить процент цели",
                 "operationId": "targets.updatePercent",
                 "parameters": [
-                    {"$ref": "#/components/parameters/Targets.Path.Target.Id"}
+                    {"$ref": "#/components/parameters/Targets.Path.Target.Id"},
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
                 ],
                 "requestBody": {
                     "content": {
@@ -1524,6 +1551,7 @@
                 "description": "Коллекция доступных сотруднику ИПР",
                 "operationId": "idp.getCollection",
                 "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"},
                     {"$ref": "#/components/parameters/Employees.Query.Employee.Id"}
                 ],
                 "responses": {
@@ -1553,6 +1581,9 @@
                 "summary": "07.02. Получить маршрут по умолчанию",
                 "description": "Получить маршрут по умолчанию",
                 "operationId": "idp.getDefaultRoute",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
+                ],
                 "responses": {
                     "200": {
                         "description": "Согласование, маршрут по умолчанию",
@@ -1582,6 +1613,7 @@
                 "operationId": "idp.getIdpDetails",
                 "parameters": [
                     {"$ref": "#/components/parameters/Idp.Path.Idp.Id"},
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"},
                     {"$ref": "#/components/parameters/Base.Query.ExtraAttributes"}
                 ],
                 "responses": {
@@ -1622,7 +1654,8 @@
                 "description": "Получить список прав по работе с ИПР. В ответ также будут включены права по работе с последней попыткой (если такая есть).",
                 "operationId": "idp.getIdpAccessRights",
                 "parameters": [
-                    {"$ref": "#/components/parameters/Idp.Path.Idp.Id"}
+                    {"$ref": "#/components/parameters/Idp.Path.Idp.Id"},
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
                 ],
                 "responses": {
                     "200": {
@@ -1662,7 +1695,8 @@
                 "description": "Получить список попыток согласования ИПР",
                 "operationId": "idp.getApprovalAttempts",
                 "parameters": [
-                    {"$ref": "#/components/parameters/Idp.Path.Idp.Id"}
+                    {"$ref": "#/components/parameters/Idp.Path.Idp.Id"},
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
                 ],
                 "requestBody": {
                     "content": {
@@ -1701,7 +1735,8 @@
                 "description": "Запуск согласования",
                 "operationId": "idp.startApprovalAttempt",
                 "parameters": [
-                    {"$ref": "#/components/parameters/Idp.Path.Idp.Id"}
+                    {"$ref": "#/components/parameters/Idp.Path.Idp.Id"},
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
                 ],
                 "requestBody": {
                     "content": {
@@ -1751,7 +1786,8 @@
                 "operationId": "idp.cancelApprovalAttempt",
                 "parameters": [
                     {"$ref": "#/components/parameters/Idp.Path.Idp.Id"},
-                    {"$ref": "#/components/parameters/Idp.Path.ApprovalAttempt.Id"}
+                    {"$ref": "#/components/parameters/Idp.Path.ApprovalAttempt.Id"},
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
                 ],
                 "responses": {
                     "200": {
@@ -1792,7 +1828,8 @@
                 "operationId": "idp.approveStage",
                 "parameters": [
                     {"$ref": "#/components/parameters/Idp.Path.Idp.Id"},
-                    {"$ref": "#/components/parameters/Idp.Path.ApprovalAttempt.Id"}
+                    {"$ref": "#/components/parameters/Idp.Path.ApprovalAttempt.Id"},
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
                 ],
                 "requestBody": {
                     "content": {
@@ -1842,7 +1879,8 @@
                 "operationId": "idp.rejectStage",
                 "parameters": [
                     {"$ref": "#/components/parameters/Idp.Path.Idp.Id"},
-                    {"$ref": "#/components/parameters/Idp.Path.ApprovalAttempt.Id"}
+                    {"$ref": "#/components/parameters/Idp.Path.ApprovalAttempt.Id"},
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
                 ],
                 "requestBody": {
                     "content": {
@@ -1892,7 +1930,8 @@
                 "operationId": "idp.updateApprovalAttemptRoute",
                 "parameters": [
                     {"$ref": "#/components/parameters/Idp.Path.Idp.Id"},
-                    {"$ref": "#/components/parameters/Idp.Path.ApprovalAttempt.Id"}
+                    {"$ref": "#/components/parameters/Idp.Path.ApprovalAttempt.Id"},
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
                 ],
                 "requestBody": {
                     "content": {
@@ -1942,7 +1981,8 @@
                 "operationId": "idp.getAttemptAccessRights",
                 "parameters": [
                     {"$ref": "#/components/parameters/Idp.Path.Idp.Id"},
-                    {"$ref": "#/components/parameters/Idp.Path.ApprovalAttempt.Id"}
+                    {"$ref": "#/components/parameters/Idp.Path.ApprovalAttempt.Id"},
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
                 ],
                 "responses": {
                     "200": {
@@ -1982,7 +2022,8 @@
                 "description": "Поиск согласующих.",
                 "operationId": "idp.searchForApprovers",
                 "parameters": [
-                    {"$ref": "#/components/parameters/Idp.Path.Idp.Id"}
+                    {"$ref": "#/components/parameters/Idp.Path.Idp.Id"},
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
                 ],
                 "requestBody": {
                     "content": {
@@ -2020,6 +2061,9 @@
                 "summary": "07.13. Получить все возможные года, которые есть в ИПР сотрудников",
                 "description": "Получить все возможные года, которые есть в ИПР сотрудников",
                 "operationId": "idp.getYearsOfAllEmployees",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
+                ],
                 "responses": {
                     "200": {
                         "description": "Года ИПР",
@@ -2048,6 +2092,7 @@
                 "description": "Создать ИПР",
                 "operationId": "idp.createIdp",
                 "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"},
                     {"$ref": "#/components/parameters/Employees.Query.Employee.Id"}
                 ],
                 "requestBody": {
@@ -2097,7 +2142,8 @@
                 "description": "Удалить ИПР",
                 "operationId": "idp.deleteIdp",
                 "parameters": [
-                    {"$ref": "#/components/parameters/Idp.Path.Idp.Id"}
+                    {"$ref": "#/components/parameters/Idp.Path.Idp.Id"},
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
                 ],
                 "responses": {
                     "200": {
@@ -2136,6 +2182,9 @@
                 "summary": "07.16. Создать несколько ИПР",
                 "description": "Создать несколько ИПР",
                 "operationId": "idp.massCreateIdp",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -2182,6 +2231,9 @@
                 "summary": "07.17. Можно ли согласовать ИПР для нескольких сотрудников",
                 "description": "Можно ли согласовать ИПР для нескольких сотрудников",
                 "operationId": "idp.checkIfApprovalIsAvailable",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -2228,6 +2280,9 @@
                 "summary": "07.18. Согласовать ИПР для нескольких сотрудников",
                 "description": "Согласовать ИПР для нескольких сотрудников",
                 "operationId": "idp.approveCollection",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -2274,6 +2329,9 @@
                 "summary": "07.19. Можно ли отправить на доработку ИПР для нескольких сотрудников",
                 "description": "Можно ли отправить на доработку ИПР для нескольких сотрудников",
                 "operationId": "idp.checkIfRejectionIsAvailable",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -2320,6 +2378,9 @@
                 "summary": "07.20. Отправить на доработку ИПР для нескольких сотрудников",
                 "description": "Отправить на доработку ИПР для нескольких сотрудников",
                 "operationId": "idp.rejectCollection",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -2366,6 +2427,9 @@
                 "summary": "07.21. Сформировать отчёты",
                 "description": "Сформировать отчёты",
                 "operationId": "idp.generateReports",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -2412,6 +2476,9 @@
                 "summary": "08.01. Получить дерево каталогов и материалов",
                 "description": "Дерево каталогов и материалов. У каталогв могут быть дочерние элементы, у материала - нет. Если на одном уровне располагаются и каталоги, и материалы, то каталоги всегда расположены первыми.",
                 "operationId": "materials.getTree",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -2985,7 +3052,8 @@
                 "description": "Получить детальную информацию о материале",
                 "operationId": "materials.getMaterialDetails",
                 "parameters": [
-                    {"$ref": "#/components/parameters/Materials.Path.Material.Id"}
+                    {"$ref": "#/components/parameters/Materials.Path.Material.Id"},
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
                 ],
                 "responses": {
                     "200": {
@@ -3014,6 +3082,9 @@
                 "summary": "08.03. Получить список материалов по ID навыков.",
                 "description": "Получить список материалов по ID навыков.",
                 "operationId": "materials.getBySkills",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -3050,6 +3121,9 @@
                 "summary": "08.04. Валидация материала.",
                 "description": "Валидация материала.",
                 "operationId": "materials.validateMaterial",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -3096,6 +3170,9 @@
                 "summary": "08.05. Список возможных типов материалов",
                 "description": "Список возможных типов материалов",
                 "operationId": "materials.getTypes",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
+                ],
                 "responses": {
                     "200": {
                         "description": "Список типов",
@@ -3123,6 +3200,9 @@
                 "summary": "08.06. Список возможных источников материалов",
                 "description": "Список возможных источников материалов",
                 "operationId": "materials.getSources",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
+                ],
                 "responses": {
                     "200": {
                         "description": "Список истоничков",
@@ -3150,6 +3230,9 @@
                 "summary": "09.01. Получить список сотрудников",
                 "description": "Получить список сотрудников",
                 "operationId": "employees.getCollection",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -3196,6 +3279,9 @@
                 "summary": "09.02. Получить количество сотрудников",
                 "description": "Получить количество сотрудников",
                 "operationId": "employees.getCount",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -3244,6 +3330,7 @@
                 "operationId": "employees.getEmployeeBriefDetails",
                 "parameters": [
                     {"$ref": "#/components/parameters/Employees.Path.Employee.Id"},
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"},
                     {"$ref": "#/components/parameters/Base.Query.ExtraAttributes"}
                 ],
                 "responses": {
@@ -3283,6 +3370,9 @@
                 "summary": "09.04. Быстрый поиск сотрудников.",
                 "description": "Быстрый поиск сотрудников.",
                 "operationId": "employees.quickSearch",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -3319,6 +3409,9 @@
                 "summary": "09.05. Расширенная версия быстрого поиска сотрудников",
                 "description": "Расширенная версия быстрого поиска сотрудников",
                 "operationId": "employees.quickSearchExtended",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -3355,6 +3448,9 @@
                 "summary": "10.01. Получить дерево элементов орг. структуры",
                 "description": "Получить дерево элементов орг. структуры",
                 "operationId": "divisions.getTree",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -3712,6 +3808,9 @@
                 "summary": "13.01. Получить настройки уведомлений",
                 "description": "Получить настройки уведомлений.",
                 "operationId": "notifications.getConfig",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
+                ],
                 "responses": {
                     "200": {
                         "description": "Настройки уведомлений",
@@ -3737,6 +3836,9 @@
                 "summary": "13.02. Сохранить настройки уведомлений",
                 "description": "Сохранить настройки уведомлений",
                 "operationId": "notifications.saveConfig",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -3783,6 +3885,9 @@
                 "summary": "14.01. Быстрый поиск должностей.",
                 "description": "Быстрый поиск должностей.",
                 "operationId": "positions.quickSearch",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -3819,6 +3924,9 @@
                 "summary": "15.01. Список всех ролей в системе",
                 "description": "Список всех ролей в системе",
                 "operationId": "adminPanel.Users.getRoles",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
+                ],
                 "responses": {
                     "200": {
                         "description": "Список ролей",
@@ -3846,6 +3954,9 @@
                 "summary": "15.02. Список возможных источников пользователей",
                 "description": "Список возможных источников пользователей",
                 "operationId": "adminPanel.Users.getSources",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
+                ],
                 "responses": {
                     "200": {
                         "description": "Список источников",
@@ -3873,6 +3984,9 @@
                 "summary": "15.03. Получить список пользователей",
                 "description": "Получить список пользователей (аккаунты + сотрудники)",
                 "operationId": "adminPanel.Users.getUsers",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -3909,6 +4023,9 @@
                 "summary": "15.04. Архивировать аккаунты и связанных с ними сотрудников",
                 "description": "Архивировать аккаунты и связанных с ними сотрудников",
                 "operationId": "adminPanel.Users.archiveUsers",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -3955,6 +4072,9 @@
                 "summary": "15.05. Восстановить из архива аккаунты и связанных с ними сотрудников",
                 "description": "Восстановить из архива аккаунты и связанных с ними сотрудников",
                 "operationId": "adminPanel.Users.restoreUsers",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -4001,6 +4121,9 @@
                 "summary": "15.06. Создать пользователя (аккаунт + сотрудник)",
                 "description": "Создать пользователя (аккаунт + сотрудник)",
                 "operationId": "adminPanel.Users.createUser",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -4047,6 +4170,9 @@
                 "summary": "15.07. Импортировать пользователей",
                 "description": "Импортировать пользователей из xlsx-файла",
                 "operationId": "adminPanel.Users.importUsers",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
+                ],
                 "requestBody": {
                     "content": {
                         "multipart/form-data": {
@@ -4122,7 +4248,8 @@
                 "description": "Получить подробную информацию о пользователе (аккаунт + сотрудник)",
                 "operationId": "adminPanel.Users.getUserDetails",
                 "parameters": [
-                    {"$ref": "#/components/parameters/AdminPanel.Path.User.Id"}
+                    {"$ref": "#/components/parameters/AdminPanel.Path.User.Id"},
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
                 ],
                 "responses": {
                     "200": {
@@ -4162,7 +4289,8 @@
                 "description": "Обновить пользователя (аккаунт + сотрудник). Ни один из атрибутов не является обязательным. Если обновление атрибута не требуется, то его можно не указывать.",
                 "operationId": "adminPanel.Users.updateUserDetails",
                 "parameters": [
-                    {"$ref": "#/components/parameters/AdminPanel.Path.User.Id"}
+                    {"$ref": "#/components/parameters/AdminPanel.Path.User.Id"},
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
                 ],
                 "requestBody": {
                     "content": {
@@ -4211,6 +4339,9 @@
                 "summary": "16.01. Список возможных типов материалов",
                 "description": "Список возможных типов материалов",
                 "operationId": "adminPanel.Materials.getTypes",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
+                ],
                 "responses": {
                     "200": {
                         "description": "Список типов",
@@ -4239,6 +4370,9 @@
                 "summary": "16.02. Список возможных источников материалов",
                 "description": "Список возможных источников материалов",
                 "operationId": "adminPanel.Materials.getSources",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
+                ],
                 "responses": {
                     "200": {
                         "description": "Список истоничков",
@@ -4266,6 +4400,9 @@
                 "summary": "16.03. Количество материалов, которые ожидают публикации",
                 "description": "Количество материалов, которые ожидают публикации",
                 "operationId": "adminPanel.Materials.getCountOfAwaitingPublication",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
+                ],
                 "responses": {
                     "200": {
                         "description": "Количество материалов, которые ожидают публикации",
@@ -4293,6 +4430,9 @@
                 "summary": "16.04. Получить список каталогов и материалов",
                 "description": "Получить список каталогов и материалов. Атрибуты 'count_of_assignments' и 'can_assignment_status_be_changed' возвращаются только для опубликованных и архивных материалов.",
                 "operationId": "adminPanel.Materials.getCollection",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -4339,6 +4479,9 @@
                 "summary": "16.05. Опубликовать материалы",
                 "description": "Опубликовать материалы",
                 "operationId": "adminPanel.Materials.publishCollection",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -4385,6 +4528,9 @@
                 "summary": "16.06. Архивировать материалы",
                 "description": "Архивировать материалы",
                 "operationId": "adminPanel.Materials.archiveCollection",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -4431,6 +4577,9 @@
                 "summary": "16.07. Удалить материалы",
                 "description": "Удалить материалы",
                 "operationId": "adminPanel.Materials.deleteCollection",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -4477,6 +4626,9 @@
                 "summary": "16.08. Переместить каталоги и материалы",
                 "description": "Переместить каталоги и материалы",
                 "operationId": "adminPanel.Materials.moveCollection",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -4523,6 +4675,9 @@
                 "summary": "16.09. Импортировать материалы",
                 "description": "Импортировать материалы из xlsx-файла",
                 "operationId": "adminPanel.Materials.importMaterials",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
+                ],
                 "requestBody": {
                     "content": {
                         "multipart/form-data": {
@@ -4597,6 +4752,9 @@
                 "summary": "16.11. Создать материал",
                 "description": "Создать материал",
                 "operationId": "adminPanel.Materials.createMaterial",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -4644,7 +4802,8 @@
                 "description": "Обновить материал",
                 "operationId": "adminPanel.Materials.updateMaterial",
                 "parameters": [
-                    {"$ref": "#/components/parameters/AdminPanel.Path.Material.Id"}
+                    {"$ref": "#/components/parameters/AdminPanel.Path.Material.Id"},
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
                 ],
                 "requestBody": {
                     "content": {
@@ -4693,7 +4852,8 @@
                 "description": "Получить список назначений материала",
                 "operationId": "adminPanel.Materials.getAssignmentCollection",
                 "parameters": [
-                    {"$ref": "#/components/parameters/AdminPanel.Path.Material.Id"}
+                    {"$ref": "#/components/parameters/AdminPanel.Path.Material.Id"},
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
                 ],
                 "requestBody": {
                     "content": {
@@ -4732,7 +4892,8 @@
                 "description": "Обновить статусы назначений",
                 "operationId": "adminPanel.Materials.updateAssignmentStatuses",
                 "parameters": [
-                    {"$ref": "#/components/parameters/AdminPanel.Path.Material.Id"}
+                    {"$ref": "#/components/parameters/AdminPanel.Path.Material.Id"},
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
                 ],
                 "requestBody": {
                     "content": {
@@ -4770,6 +4931,9 @@
                 "summary": "16.15. Получить дерево каталогов",
                 "description": "Получить дерево каталогов",
                 "operationId": "adminPanel.Materials.getTreeOfDirectories",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -4929,6 +5093,9 @@
                 "summary": "16.16. Создать каталог",
                 "description": "Создать каталог",
                 "operationId": "adminPanel.Materials.createDirectory",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -4976,7 +5143,8 @@
                 "description": "Переименовать каталог",
                 "operationId": "adminPanel.Materials.renameDirectory",
                 "parameters": [
-                    {"$ref": "#/components/parameters/AdminPanel.Path.Directory.Id"}
+                    {"$ref": "#/components/parameters/AdminPanel.Path.Directory.Id"},
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
                 ],
                 "requestBody": {
                     "content": {
@@ -5025,7 +5193,8 @@
                 "description": "Удалить каталог",
                 "operationId": "adminPanel.Materials.deleteDirectory",
                 "parameters": [
-                    {"$ref": "#/components/parameters/AdminPanel.Path.Directory.Id"}
+                    {"$ref": "#/components/parameters/AdminPanel.Path.Directory.Id"},
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
                 ],
                 "responses": {
                     "200": {
@@ -5065,7 +5234,8 @@
                 "description": "Получить путь от каталога до корня",
                 "operationId": "adminPanel.Materials.getPathToDirectory",
                 "parameters": [
-                    {"$ref": "#/components/parameters/AdminPanel.Path.Directory.Id"}
+                    {"$ref": "#/components/parameters/AdminPanel.Path.Directory.Id"},
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
                 ],
                 "responses": {
                     "200": {
@@ -5094,6 +5264,9 @@
                 "summary": "17.01. Получить список шаблонов цели",
                 "description": "Получить список шаблонов цели",
                 "operationId": "adminPanel.TargetTemplates.getCollection",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -5130,6 +5303,9 @@
                 "summary": "17.02. Создать шаблон цели",
                 "description": "Создать шаблон цели",
                 "operationId": "adminPanel.TargetTemplates.createTemplate",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -5176,6 +5352,9 @@
                 "summary": "17.03. Удалить шаблоны целей",
                 "description": "Удалить шаблоны целей",
                 "operationId": "adminPanel.TargetTemplates.deleteCollection",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -5223,7 +5402,8 @@
                 "description": "Получить шаблон цели",
                 "operationId": "adminPanel.TargetTemplates.getTemplate",
                 "parameters": [
-                    {"$ref": "#/components/parameters/AdminPanel.Path.TargetTemplate.Id"}
+                    {"$ref": "#/components/parameters/AdminPanel.Path.TargetTemplate.Id"},
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
                 ],
                 "responses": {
                     "200": {
@@ -5253,7 +5433,8 @@
                 "description": "Обновить шаблон цели",
                 "operationId": "adminPanel.TargetTemplates.updateTemplate",
                 "parameters": [
-                    {"$ref": "#/components/parameters/AdminPanel.Path.TargetTemplate.Id"}
+                    {"$ref": "#/components/parameters/AdminPanel.Path.TargetTemplate.Id"},
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
                 ],
                 "requestBody": {
                     "content": {
@@ -5302,7 +5483,8 @@
                 "description": "Удалить шаблон цели",
                 "operationId": "adminPanel.TargetTemplates.deleteTemplate",
                 "parameters": [
-                    {"$ref": "#/components/parameters/AdminPanel.Path.TargetTemplate.Id"}
+                    {"$ref": "#/components/parameters/AdminPanel.Path.TargetTemplate.Id"},
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
                 ],
                 "responses": {
                     "200": {
@@ -12729,6 +12911,16 @@
                 "required": true,
                 "description": "ID компании",
                 "example": 123,
+                "schema": {
+                    "type": "integer"
+                }
+            },
+            "Companies.Query.Company.Id": {
+                "name": "company_id",
+                "in": "query",
+                "required": false,
+                "description": "ID компании. Должен быть передан суперадмином для работы с контентом конкретной компании.",
+                "example": 10,
                 "schema": {
                     "type": "integer"
                 }
