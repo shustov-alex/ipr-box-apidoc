@@ -6211,6 +6211,95 @@
                     }
                 }
             }
+        },
+        "/admin/companies/{company_id}/materials": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanel.Companies"
+                ],
+                "summary": "18.17. Получить настройки материалов",
+                "description": "Получить настройки материалов",
+                "operationId": "adminPanel.Companies.getMaterialSettings",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Path.Company.Id"}
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Настройки материалов",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.Companies.GetMaterialSettings.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Запрашиваемый объект не найден",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/companies/{company_id}/materials/update": {
+            "put": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanel.Companies"
+                ],
+                "summary": "18.18. Обновить настройки материалов",
+                "description": "Обновить настройки материалов",
+                "operationId": "adminPanel.Companies.updateMaterialSettings",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Path.Company.Id"}
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AdminPanel.Companies.UpdateMaterialSettings.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Настройки материалов",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.Companies.GetMaterialSettings.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundOrValidationErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -10368,6 +10457,86 @@
                     }
                 }
             },
+            "Materials.SourceAttribute.Id": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "ID источника",
+                        "example": 89
+                    }
+                }
+            },
+            "Materials.SourceAttribute.Name": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Название источника",
+                        "example": "Источник материалов"
+                    }
+                }
+            },
+            "Materials.SourceAttribute.LocalizedName": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "object",
+                        "properties": {
+                            "ru": {
+                                "type": "string",
+                                "description": "Название источника (ru)",
+                                "example": "Источник материалов"
+                            },
+                            "en": {
+                                "type": "string",
+                                "description": "Название источника (en)",
+                                "example": "Material source"
+                            }
+                        }
+                    }
+                }
+            },
+            "Materials.TypeAttribute.Id": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "ID типа",
+                        "example": 98
+                    }
+                }
+            },
+            "Materials.TypeAttribute.Name": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Название типа",
+                        "example": "Тип материалов"
+                    }
+                }
+            },
+            "Materials.TypeAttribute.LocalizedName": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "object",
+                        "properties": {
+                            "ru": {
+                                "type": "string",
+                                "description": "Название типа (ru)",
+                                "example": "Тип материалов"
+                            },
+                            "en": {
+                                "type": "string",
+                                "description": "Название типа (en)",
+                                "example": "Material type"
+                            }
+                        }
+                    }
+                }
+            },
             "Materials.Directory.DetailView": {
                 "type": "object",
                 "allOf": [
@@ -10581,18 +10750,10 @@
                                 "type": "array",
                                 "items": {
                                     "type": "object",
-                                    "properties": {
-                                        "id": {
-                                            "type": "integer",
-                                            "description": "ID типа",
-                                            "example": 1
-                                        },
-                                        "name": {
-                                            "type": "string",
-                                            "description": "Название типа",
-                                            "example": "Прочее"
-                                        }
-                                    }
+                                    "allOf": [
+                                        {"$ref": "#/components/schemas/Materials.TypeAttribute.Id"},
+                                        {"$ref": "#/components/schemas/Materials.TypeAttribute.Name"}
+                                    ]
                                 }
                             }
                         }
@@ -10609,18 +10770,10 @@
                                 "type": "array",
                                 "items": {
                                     "type": "object",
-                                    "properties": {
-                                        "id": {
-                                            "type": "integer",
-                                            "description": "ID источника",
-                                            "example": 1
-                                        },
-                                        "name": {
-                                            "type": "string",
-                                            "description": "Название источника",
-                                            "example": "ИПР"
-                                        }
-                                    }
+                                    "allOf": [
+                                        {"$ref": "#/components/schemas/Materials.SourceAttribute.Id"},
+                                        {"$ref": "#/components/schemas/Materials.SourceAttribute.Name"}
+                                    ]
                                 }
                             }
                         }
@@ -12903,6 +13056,76 @@
                         "items": {
                             "$ref": "#/components/schemas/Roles.RoleAdminView.ToSave"
                         }
+                    }
+                }
+            },
+            "AdminPanel.Companies.GetMaterialSettings.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "object",
+                                "properties": {
+                                    "sources": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "allOf": [
+                                                {"$ref": "#/components/schemas/Materials.SourceAttribute.Id"},
+                                                {"$ref": "#/components/schemas/Materials.SourceAttribute.LocalizedName"}
+                                            ]
+                                        }
+                                    },
+                                    "types": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "allOf": [
+                                                {"$ref": "#/components/schemas/Materials.TypeAttribute.Id"},
+                                                {"$ref": "#/components/schemas/Materials.TypeAttribute.LocalizedName"}
+                                            ]
+                                        }
+                                    },
+                                    "default_source_id": {
+                                        "type": "integer",
+                                        "description": "ID источника по умолчанию",
+                                        "example": 15
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "AdminPanel.Companies.UpdateMaterialSettings.Request": {
+                "type": "object",
+                "properties": {
+                    "sources": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "allOf": [
+                                {"$ref": "#/components/schemas/Materials.SourceAttribute.Id"},
+                                {"$ref": "#/components/schemas/Materials.SourceAttribute.LocalizedName"}
+                            ]
+                        }
+                    },
+                    "types": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "allOf": [
+                                {"$ref": "#/components/schemas/Materials.TypeAttribute.Id"},
+                                {"$ref": "#/components/schemas/Materials.TypeAttribute.LocalizedName"}
+                            ]
+                        }
+                    },
+                    "default_source_id": {
+                        "type": "integer",
+                        "description": "ID источника по умолчанию",
+                        "example": 15
                     }
                 }
             }
