@@ -7448,7 +7448,7 @@
                     "company_id": {
                         "type": "integer",
                         "description": "ID компании",
-                        "example": 10
+                        "example": 1
                     }
                 }
             },
@@ -12933,7 +12933,7 @@
                 "in": "path",
                 "required": true,
                 "description": "ID компании",
-                "example": 123,
+                "example": 1,
                 "schema": {
                     "type": "integer"
                 }
@@ -12943,7 +12943,7 @@
                 "in": "query",
                 "required": false,
                 "description": "ID компании. Должен быть передан суперадмином для работы с контентом конкретной компании.",
-                "example": 10,
+                "example": 1,
                 "schema": {
                     "type": "integer"
                 }
