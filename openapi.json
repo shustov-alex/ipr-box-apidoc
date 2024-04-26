@@ -6808,21 +6808,6 @@
                                             {"$ref": "#/components/schemas/Companies.CompanyAttribute.Name"}
                                         ]
                                     },
-                                    "feature_flags": {
-                                        "type": "object",
-                                        "properties": {
-                                            "remember_me": {
-                                                "type": "boolean",
-                                                "description": "Страница входа. Функция 'Запомнить меня'.",
-                                                "example": true
-                                            },
-                                            "reset_password": {
-                                                "type": "boolean",
-                                                "description": "Страница входа. Функция 'Восстановить пароль'.",
-                                                "example": true
-                                            }
-                                        }
-                                    },
                                     "language_ids": {
                                         "type": "array",
                                         "description": "ID языка",
@@ -6831,6 +6816,20 @@
                                             "enum": ["ru", "en", "fr"],
                                             "example": "en"
                                         }
+                                    },
+                                    "feature_flags": {
+                                        "type": "object",
+                                        "allOf": [
+                                            {"$ref": "#/components/schemas/Companies.FeatureFlag.RememberMe"},
+                                            {"$ref": "#/components/schemas/Companies.FeatureFlag.ResetPassword"}
+                                        ]
+                                    },
+                                    "intercom": {
+                                        "type": "object",
+                                        "allOf": [
+                                            {"$ref": "#/components/schemas/Companies.IntercomSettingsAttribute.CompanyId"},
+                                            {"$ref": "#/components/schemas/Companies.IntercomSettingsAttribute.CompanyName"}
+                                        ]
                                     }
                                 }
                             }
