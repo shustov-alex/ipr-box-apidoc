@@ -12798,7 +12798,7 @@
                 "type": "object",
                 "properties": {
                     "pagination": {
-                        "$ref": "#/components/schemas/Base.CursorPaginationForward"
+                        "$ref": "#/components/schemas/Base.CursorPaginationBackward"
                     }
                 }
             },
