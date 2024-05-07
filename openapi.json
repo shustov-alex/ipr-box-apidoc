@@ -7009,6 +7009,17 @@
                     }
                 }
             },
+            "Access.Right.UpdateIdpRoute": {
+                "type": "object",
+                "properties": {
+                    "app.idp.update_route": {
+                        "type": "string",
+                        "description": "Редактировать маршрут ИПР",
+                        "enum": ["granted", "denied"],
+                        "example": "granted"
+                    }
+                }
+            },
             "Access.Right.GenerateReports": {
                 "type": "object",
                 "properties": {
@@ -7150,6 +7161,7 @@
                                     {"$ref": "#/components/schemas/Access.Right.DeleteTarget"},
                                     {"$ref": "#/components/schemas/Access.Right.CreateIdp"},
                                     {"$ref": "#/components/schemas/Access.Right.DeleteIdp"},
+                                    {"$ref": "#/components/schemas/Access.Right.UpdateIdpRoute"},
                                     {"$ref": "#/components/schemas/Access.Right.AccessToAdminPanel"},
                                     {"$ref": "#/components/schemas/Access.Right.GenerateReports"},
                                     {"$ref": "#/components/schemas/Access.Right.CommentTarget"}
