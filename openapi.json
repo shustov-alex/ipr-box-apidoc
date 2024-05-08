@@ -7096,6 +7096,17 @@
                     }
                 }
             },
+            "Roles.RoleAttribute.Status": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "description": "Статус роли",
+                        "example": "active",
+                        "enum": ["active", "archived"]
+                    }
+                }
+            },
             "Roles.RoleAttribute.Name": {
                 "type": "object",
                 "properties": {
@@ -7135,14 +7146,6 @@
                         "example": 588
                     }
                 }
-            },
-            "Roles.RoleDefaultView": {
-                "type": "object",
-                "description": "Роль",
-                "allOf": [
-                    {"$ref": "#/components/schemas/Roles.RoleAttribute.Id"},
-                    {"$ref": "#/components/schemas/Roles.RoleAttribute.Name"}
-                ]
             },
             "Roles.RoleAdminView.ToSave": {
                 "type": "object",
@@ -9003,7 +9006,8 @@
                             "type": "object",
                             "allOf": [
                                 {"$ref": "#/components/schemas/Roles.RoleAttribute.Id"},
-                                {"$ref": "#/components/schemas/Roles.RoleAttribute.Name"}
+                                {"$ref": "#/components/schemas/Roles.RoleAttribute.Name"},
+                                {"$ref": "#/components/schemas/Roles.RoleAttribute.Status"}
                             ]
                         }
                     }
@@ -10781,7 +10785,12 @@
                                 "type": "object",
                                 "properties": {
                                     "role": {
-                                        "$ref": "#/components/schemas/Roles.RoleDefaultView"
+                                        "type": "object",
+                                        "allOf": [
+                                            {"$ref": "#/components/schemas/Roles.RoleAttribute.Id"},
+                                            {"$ref": "#/components/schemas/Roles.RoleAttribute.Name"},
+                                            {"$ref": "#/components/schemas/Roles.RoleAttribute.Status"}
+                                        ]
                                     }
                                 }
                             }
@@ -11274,7 +11283,11 @@
                             "success": {
                                 "type": "array",
                                 "items": {
-                                    "$ref": "#/components/schemas/Roles.RoleDefaultView"
+                                    "type": "object",
+                                    "allOf": [
+                                        {"$ref": "#/components/schemas/Roles.RoleAttribute.Id"},
+                                        {"$ref": "#/components/schemas/Roles.RoleAttribute.Name"}
+                                    ]
                                 }
                             }
                         }
@@ -11454,7 +11467,12 @@
                 "type": "object",
                 "properties": {
                     "role": {
-                        "$ref": "#/components/schemas/Roles.RoleDefaultView"
+                        "type": "object",
+                        "allOf": [
+                            {"$ref": "#/components/schemas/Roles.RoleAttribute.Id"},
+                            {"$ref": "#/components/schemas/Roles.RoleAttribute.Name"},
+                            {"$ref": "#/components/schemas/Roles.RoleAttribute.Status"}
+                        ]
                     }
                 }
             },
@@ -11691,7 +11709,12 @@
                                                     ]
                                                 },
                                                 "role": {
-                                                    "$ref": "#/components/schemas/Roles.RoleDefaultView"
+                                                    "type": "object",
+                                                    "allOf": [
+                                                        {"$ref": "#/components/schemas/Roles.RoleAttribute.Id"},
+                                                        {"$ref": "#/components/schemas/Roles.RoleAttribute.Name"},
+                                                        {"$ref": "#/components/schemas/Roles.RoleAttribute.Status"}
+                                                    ]
                                                 }
                                             }
                                         }
