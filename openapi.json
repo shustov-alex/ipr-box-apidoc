@@ -7297,13 +7297,18 @@
             "Auth.ResetPassword.CheckToken.Request": {
                 "type": "object",
                 "properties": {
+                    "company_id": {
+                        "type": "integer",
+                        "description": "ID компании",
+                        "example": 1
+                    },
                     "token": {
                         "type": "string",
                         "description": "Токен, полученный из URL",
                         "example": "NDQStklU3VNpnlkp1i22kVVPe4QZxk0nkJi7llE0"
                     }
                 },
-                "required": ["token"]
+                "required": ["company_id", "token"]
             },
             "Auth.PasswordRequirement.AttributeMatch": {
                 "type": "object",
@@ -7380,6 +7385,11 @@
             "Auth.ResetPassword.SaveNewPassword.Request": {
                 "type": "object",
                 "properties": {
+                    "company_id": {
+                        "type": "integer",
+                        "description": "ID компании",
+                        "example": 1
+                    },
                     "token": {
                         "type": "string",
                         "description": "Токен, полученный из URL",
@@ -7391,7 +7401,7 @@
                         "example": "your_new_password"
                     }
                 },
-                "required": ["token", "password"]
+                "required": ["company_id", "token", "password"]
             },
             "Auth.ResetPassword.PasswordRequirement.Error": {
                 "type": "object",
