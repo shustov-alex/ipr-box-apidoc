@@ -10596,6 +10596,7 @@
                 "properties": {
                     "image": {
                         "type": "object",
+                        "nullable": true,
                         "properties": {
                             "origin": {
                                 "type": "string",
