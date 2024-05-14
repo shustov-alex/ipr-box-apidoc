@@ -2530,7 +2530,15 @@
                                                                         "id": 26,
                                                                         "name": "Взаимозависимость"
                                                                     }
-                                                                ]
+                                                                ],
+                                                                "image": {
+                                                                    "origin": "https://best-picture.png",
+                                                                    "sm": "https://best-picture.png",
+                                                                    "md": "https://best-picture.png",
+                                                                    "lg": "https://best-picture.png",
+                                                                    "xl": "https://best-picture.png",
+                                                                    "xxl": "https://best-picture.png"
+                                                                }
                                                             },
                                                             {
                                                                 "entity_type": "material",
@@ -2555,7 +2563,15 @@
                                                                         "id": 26,
                                                                         "name": "Взаимозависимость"
                                                                     }
-                                                                ]
+                                                                ],
+                                                                "image": {
+                                                                    "origin": "https://best-picture.png",
+                                                                    "sm": "https://best-picture.png",
+                                                                    "md": "https://best-picture.png",
+                                                                    "lg": "https://best-picture.png",
+                                                                    "xl": "https://best-picture.png",
+                                                                    "xxl": "https://best-picture.png"
+                                                                }
                                                             }
                                                         ]
                                                     },
@@ -2580,7 +2596,15 @@
                                                                         "id": 29,
                                                                         "name": "Гибкость мышления"
                                                                     }
-                                                                ]
+                                                                ],
+                                                                "image": {
+                                                                    "origin": "https://best-picture.png",
+                                                                    "sm": "https://best-picture.png",
+                                                                    "md": "https://best-picture.png",
+                                                                    "lg": "https://best-picture.png",
+                                                                    "xl": "https://best-picture.png",
+                                                                    "xxl": "https://best-picture.png"
+                                                                }
                                                             }
                                                         ]
                                                     }
@@ -2613,7 +2637,15 @@
                                                                         "id": 25,
                                                                         "name": "Видение целого"
                                                                     }
-                                                                ]
+                                                                ],
+                                                                "image": {
+                                                                    "origin": "https://best-picture.png",
+                                                                    "sm": "https://best-picture.png",
+                                                                    "md": "https://best-picture.png",
+                                                                    "lg": "https://best-picture.png",
+                                                                    "xl": "https://best-picture.png",
+                                                                    "xxl": "https://best-picture.png"
+                                                                }
                                                             },
                                                             {
                                                                 "entity_type": "material",
@@ -2634,7 +2666,15 @@
                                                                         "id": 23,
                                                                         "name": "Оценка аргументов"
                                                                     }
-                                                                ]
+                                                                ],
+                                                                "image": {
+                                                                    "origin": "https://best-picture.png",
+                                                                    "sm": "https://best-picture.png",
+                                                                    "md": "https://best-picture.png",
+                                                                    "lg": "https://best-picture.png",
+                                                                    "xl": "https://best-picture.png",
+                                                                    "xxl": "https://best-picture.png"
+                                                                }
                                                             }
                                                         ]
                                                     },
@@ -2659,7 +2699,15 @@
                                                                         "id": 19,
                                                                         "name": "Тайм-боксинг"
                                                                     }
-                                                                ]
+                                                                ],
+                                                                "image": {
+                                                                    "origin": "https://best-picture.png",
+                                                                    "sm": "https://best-picture.png",
+                                                                    "md": "https://best-picture.png",
+                                                                    "lg": "https://best-picture.png",
+                                                                    "xl": "https://best-picture.png",
+                                                                    "xxl": "https://best-picture.png"
+                                                                }
                                                             },
                                                             {
                                                                 "entity_type": "material",
@@ -2676,7 +2724,15 @@
                                                                         "id": 28,
                                                                         "name": "Генерация идей"
                                                                     }
-                                                                ]
+                                                                ],
+                                                                "image": {
+                                                                    "origin": "https://best-picture.png",
+                                                                    "sm": "https://best-picture.png",
+                                                                    "md": "https://best-picture.png",
+                                                                    "lg": "https://best-picture.png",
+                                                                    "xl": "https://best-picture.png",
+                                                                    "xxl": "https://best-picture.png"
+                                                                }
                                                             }
                                                         ]
                                                     }
@@ -2717,7 +2773,15 @@
                                                                         "id": 22,
                                                                         "name": "Анализ данных"
                                                                     }
-                                                                ]
+                                                                ],
+                                                                "image": {
+                                                                    "origin": "https://best-picture.png",
+                                                                    "sm": "https://best-picture.png",
+                                                                    "md": "https://best-picture.png",
+                                                                    "lg": "https://best-picture.png",
+                                                                    "xl": "https://best-picture.png",
+                                                                    "xxl": "https://best-picture.png"
+                                                                }
                                                             },
                                                             {
                                                                 "entity_type": "material",
@@ -2734,7 +2798,15 @@
                                                                         "id": 29,
                                                                         "name": "Гибкость мышления"
                                                                     }
-                                                                ]
+                                                                ],
+                                                                "image": {
+                                                                    "origin": "https://best-picture.png",
+                                                                    "sm": "https://best-picture.png",
+                                                                    "md": "https://best-picture.png",
+                                                                    "lg": "https://best-picture.png",
+                                                                    "xl": "https://best-picture.png",
+                                                                    "xxl": "https://best-picture.png"
+                                                                }
                                                             }
                                                         ]
                                                     },
@@ -2763,7 +2835,15 @@
                                                                         "id": 28,
                                                                         "name": "Генерация идей"
                                                                     }
-                                                                ]
+                                                                ],
+                                                                "image": {
+                                                                    "origin": "https://best-picture.png",
+                                                                    "sm": "https://best-picture.png",
+                                                                    "md": "https://best-picture.png",
+                                                                    "lg": "https://best-picture.png",
+                                                                    "xl": "https://best-picture.png",
+                                                                    "xxl": "https://best-picture.png"
+                                                                }
                                                             },
                                                             {
                                                                 "entity_type": "material",
@@ -2788,7 +2868,15 @@
                                                                         "id": 29,
                                                                         "name": "Гибкость мышления"
                                                                     }
-                                                                ]
+                                                                ],
+                                                                "image": {
+                                                                    "origin": "https://best-picture.png",
+                                                                    "sm": "https://best-picture.png",
+                                                                    "md": "https://best-picture.png",
+                                                                    "lg": "https://best-picture.png",
+                                                                    "xl": "https://best-picture.png",
+                                                                    "xxl": "https://best-picture.png"
+                                                                }
                                                             }
                                                         ]
                                                     }
@@ -2821,7 +2909,15 @@
                                                                         "id": 23,
                                                                         "name": "Оценка аргументов"
                                                                     }
-                                                                ]
+                                                                ],
+                                                                "image": {
+                                                                    "origin": "https://best-picture.png",
+                                                                    "sm": "https://best-picture.png",
+                                                                    "md": "https://best-picture.png",
+                                                                    "lg": "https://best-picture.png",
+                                                                    "xl": "https://best-picture.png",
+                                                                    "xxl": "https://best-picture.png"
+                                                                }
                                                             },
                                                             {
                                                                 "entity_type": "material",
@@ -2842,7 +2938,15 @@
                                                                         "id": 28,
                                                                         "name": "Генерация идей"
                                                                     }
-                                                                ]
+                                                                ],
+                                                                "image": {
+                                                                    "origin": "https://best-picture.png",
+                                                                    "sm": "https://best-picture.png",
+                                                                    "md": "https://best-picture.png",
+                                                                    "lg": "https://best-picture.png",
+                                                                    "xl": "https://best-picture.png",
+                                                                    "xxl": "https://best-picture.png"
+                                                                }
                                                             }
                                                         ]
                                                     },
@@ -2867,7 +2971,15 @@
                                                                         "id": 7,
                                                                         "name": "Презентации"
                                                                     }
-                                                                ]
+                                                                ],
+                                                                "image": {
+                                                                    "origin": "https://best-picture.png",
+                                                                    "sm": "https://best-picture.png",
+                                                                    "md": "https://best-picture.png",
+                                                                    "lg": "https://best-picture.png",
+                                                                    "xl": "https://best-picture.png",
+                                                                    "xxl": "https://best-picture.png"
+                                                                }
                                                             },
                                                             {
                                                                 "entity_type": "material",
@@ -2884,7 +2996,15 @@
                                                                         "id": 26,
                                                                         "name": "Взаимозависимость"
                                                                     }
-                                                                ]
+                                                                ],
+                                                                "image": {
+                                                                    "origin": "https://best-picture.png",
+                                                                    "sm": "https://best-picture.png",
+                                                                    "md": "https://best-picture.png",
+                                                                    "lg": "https://best-picture.png",
+                                                                    "xl": "https://best-picture.png",
+                                                                    "xxl": "https://best-picture.png"
+                                                                }
                                                             }
                                                         ]
                                                     }
@@ -2925,7 +3045,15 @@
                                                                         "id": 22,
                                                                         "name": "Анализ данных"
                                                                     }
-                                                                ]
+                                                                ],
+                                                                "image": {
+                                                                    "origin": "https://best-picture.png",
+                                                                    "sm": "https://best-picture.png",
+                                                                    "md": "https://best-picture.png",
+                                                                    "lg": "https://best-picture.png",
+                                                                    "xl": "https://best-picture.png",
+                                                                    "xxl": "https://best-picture.png"
+                                                                }
                                                             },
                                                             {
                                                                 "entity_type": "material",
@@ -2942,7 +3070,15 @@
                                                                         "id": 15,
                                                                         "name": "Планирование задач"
                                                                     }
-                                                                ]
+                                                                ],
+                                                                "image": {
+                                                                    "origin": "https://best-picture.png",
+                                                                    "sm": "https://best-picture.png",
+                                                                    "md": "https://best-picture.png",
+                                                                    "lg": "https://best-picture.png",
+                                                                    "xl": "https://best-picture.png",
+                                                                    "xxl": "https://best-picture.png"
+                                                                }
                                                             },
                                                             {
                                                                 "entity_type": "material",
@@ -2959,7 +3095,15 @@
                                                                         "id": 29,
                                                                         "name": "Гибкость мышления"
                                                                     }
-                                                                ]
+                                                                ],
+                                                                "image": {
+                                                                    "origin": "https://best-picture.png",
+                                                                    "sm": "https://best-picture.png",
+                                                                    "md": "https://best-picture.png",
+                                                                    "lg": "https://best-picture.png",
+                                                                    "xl": "https://best-picture.png",
+                                                                    "xxl": "https://best-picture.png"
+                                                                }
                                                             }
                                                         ]
                                                     },
@@ -2992,7 +3136,15 @@
                                                                         "id": 25,
                                                                         "name": "Видение целого"
                                                                     }
-                                                                ]
+                                                                ],
+                                                                "image": {
+                                                                    "origin": "https://best-picture.png",
+                                                                    "sm": "https://best-picture.png",
+                                                                    "md": "https://best-picture.png",
+                                                                    "lg": "https://best-picture.png",
+                                                                    "xl": "https://best-picture.png",
+                                                                    "xxl": "https://best-picture.png"
+                                                                }
                                                             },
                                                             {
                                                                 "entity_type": "material",
@@ -3013,7 +3165,15 @@
                                                                         "id": 26,
                                                                         "name": "Взаимозависимость"
                                                                     }
-                                                                ]
+                                                                ],
+                                                                "image": {
+                                                                    "origin": "https://best-picture.png",
+                                                                    "sm": "https://best-picture.png",
+                                                                    "md": "https://best-picture.png",
+                                                                    "lg": "https://best-picture.png",
+                                                                    "xl": "https://best-picture.png",
+                                                                    "xxl": "https://best-picture.png"
+                                                                }
                                                             }
                                                         ]
                                                     }
@@ -8719,7 +8879,8 @@
                 "allOf": [
                     {"$ref": "#/components/schemas/Materials.Material.BriefView"},
                     {"$ref": "#/components/schemas/Materials.MaterialAttribute.Reason"},
-                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.AssignmentStatus"}
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.AssignmentStatus"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.Image"}
                 ]
             },
             "Targets.TargetMaterials.SuccessResponse": {
@@ -8744,7 +8905,8 @@
                     {"$ref": "#/components/schemas/Materials.Material.DetailView"},
                     {"$ref": "#/components/schemas/Materials.MaterialAttribute.Reason"},
                     {"$ref": "#/components/schemas/Materials.MaterialAttribute.AssignmentStatus"},
-                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.AssignmentStatusChangeFlag"}
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.AssignmentStatusChangeFlag"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.Image"}
                 ]
             },
             "Targets.TargetMaterial.SuccessResponse": {
@@ -10429,6 +10591,46 @@
                     }
                 }
             },
+            "Materials.MaterialAttribute.Image": {
+                "type": "object",
+                "properties": {
+                    "image": {
+                        "type": "object",
+                        "properties": {
+                            "origin": {
+                                "type": "string",
+                                "description": "URL оригинального изображения",
+                                "example": "https://best-picture.png"
+                            },
+                            "sm": {
+                                "type": "string",
+                                "description": "URL изображения, формат 57 x 32",
+                                "example": "https://best-picture.png"
+                            },
+                            "md": {
+                                "type": "string",
+                                "description": "URL изображения, формат 70 x 40",
+                                "example": "https://best-picture.png"
+                            },
+                            "lg": {
+                                "type": "string",
+                                "description": "URL изображения, формат 105 x 60",
+                                "example": "https://best-picture.png"
+                            },
+                            "xl": {
+                                "type": "string",
+                                "description": "URL изображения, формат 160 x 90",
+                                "example": "https://best-picture.png"
+                            },
+                            "xxl": {
+                                "type": "string",
+                                "description": "URL изображения, формат 328 x 187",
+                                "example": "https://best-picture.png"
+                            }
+                        }
+                    }
+                }
+            },
             "Materials.SourceAttribute.Id": {
                 "type": "object",
                 "properties": {
@@ -10562,7 +10764,8 @@
                     {"$ref": "#/components/schemas/Materials.MaterialAttribute.ParentId"},
                     {"$ref": "#/components/schemas/Materials.MaterialAttribute.Name"},
                     {"$ref": "#/components/schemas/Materials.MaterialAttribute.IsPaid"},
-                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.Skills"}
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.Skills"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.Image"}
                 ]
             },
             "Materials.Directory.AdminPanelCollectionView": {
@@ -10619,7 +10822,8 @@
                     {"$ref": "#/components/schemas/Materials.MaterialAttribute.CreatedAt"},
                     {"$ref": "#/components/schemas/Materials.MaterialAttribute.UpdatedAt"},
                     {"$ref": "#/components/schemas/Materials.MaterialAttribute.Skills"},
-                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.IsManual"}
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.IsManual"},
+                    {"$ref": "#/components/schemas/Materials.MaterialAttribute.Image"}
                 ]
             },
             "Materials.Material.BriefView": {
