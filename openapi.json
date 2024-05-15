@@ -8406,6 +8406,16 @@
                     }
                 }
             },
+            "Targets.TargetAttribute.TypeId": {
+                "type": "object",
+                "properties": {
+                    "type_id": {
+                        "type": "integer",
+                        "description": "ID типа",
+                        "example": 11
+                    }
+                }
+            },
             "Targets.TargetAttribute.Name": {
                 "type": "object",
                 "properties": {
@@ -8526,6 +8536,7 @@
             "Targets.Target.ToUpdate": {
                 "type": "object",
                 "allOf": [
+                    {"$ref": "#/components/schemas/Targets.TargetAttribute.TypeId"},
                     {"$ref": "#/components/schemas/Targets.TargetAttribute.Name"},
                     {"$ref": "#/components/schemas/Targets.TargetAttribute.Description"},
                     {"$ref": "#/components/schemas/Targets.TargetAttribute.Priority"},
