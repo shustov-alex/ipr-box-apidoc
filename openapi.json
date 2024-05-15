@@ -83,6 +83,10 @@
         {
             "name": "AdminPanel.Companies",
             "description": "18. Панель администратора, список компаний"
+        },
+        {
+            "name": "AdminPanel.TargetTypes",
+            "description": "19. Панель администратора, типы целей"
         }
     ],
     "paths": {
@@ -6247,6 +6251,95 @@
                     }
                 }
             }
+        },
+        "/admin/target-types": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanel.TargetTypes"
+                ],
+                "summary": "19.01. Получить типы целей",
+                "description": "Получить типы целей",
+                "operationId": "adminPanel.TargetTypes.getTypes",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Path.Company.Id"}
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Типы целей",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.TargetTypes.GetTypes.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Запрашиваемый объект не найден",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/target-types/update": {
+            "put": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanel.TargetTypes"
+                ],
+                "summary": "19.02. Обновить типы целей",
+                "description": "Обновить типы целей",
+                "operationId": "adminPanel.TargetTypes.updateTypes",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Path.Company.Id"}
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AdminPanel.TargetTypes.UpdateTypes.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Типы целей",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.TargetTypes.GetTypes.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundOrValidationErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -9266,6 +9359,71 @@
                             }
                         }
                     }
+                ]
+            },
+            "Targets.TargetTypeAttribute.Id": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "ID типа цели",
+                        "example": 56
+                    }
+                }
+            },
+            "Targets.TargetTypeAttribute.Status": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "description": "Статус типа цели",
+                        "example": "active",
+                        "enum": ["active", "archived"]
+                    }
+                }
+            },
+            "Targets.TargetTypeAttribute.CanBeArchived": {
+                "type": "object",
+                "properties": {
+                    "can_be_archived": {
+                        "type": "boolean",
+                        "description": "Флаг, обозначающий возможность архивации типа цели",
+                        "example": true
+                    }
+                }
+            },
+            "Targets.TargetTypeAttribute.LocalizedName": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "object",
+                        "properties": {
+                            "ru": {
+                                "type": "string",
+                                "description": "Название типа цели (ru)",
+                                "example": "Прочее"
+                            },
+                            "en": {
+                                "type": "string",
+                                "description": "Название типа цели (en)",
+                                "example": "Other"
+                            }
+                        }
+                    }
+                }
+            },
+            "Targets.TargetTypeAdminView.ToSave": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Targets.TargetTypeAttribute.Id"},
+                    {"$ref": "#/components/schemas/Targets.TargetTypeAttribute.LocalizedName"}
+                ]
+            },
+            "Targets.TargetTypeAdminView.ToDisplay": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Targets.TargetTypeAdminView.ToSave"},
+                    {"$ref": "#/components/schemas/Targets.TargetTypeAttribute.CanBeArchived"}
                 ]
             },
             "Idp.IdpAttribute.Id": {
@@ -13138,6 +13296,50 @@
                         "type": "integer",
                         "description": "ID источника по умолчанию",
                         "example": 15
+                    }
+                }
+            },
+            "AdminPanel.TargetTypes.GetTypes.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "object",
+                                "properties": {
+                                    "active": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/Targets.TargetTypeAdminView.ToDisplay"
+                                        }
+                                    },
+                                    "archived": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/Targets.TargetTypeAdminView.ToDisplay"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "AdminPanel.TargetTypes.UpdateTypes.Request": {
+                "type": "object",
+                "properties": {
+                    "active": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Targets.TargetTypeAdminView.ToSave"
+                        }
+                    },
+                    "archived": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Targets.TargetTypeAdminView.ToSave"
+                        }
                     }
                 }
             }
