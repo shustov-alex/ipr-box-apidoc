@@ -1541,6 +1541,36 @@
                 }
             }
         },
+        "/targets/types": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Targets"
+                ],
+                "summary": "06.17. Получить список активных типов",
+                "description": "Получить список активных типов",
+                "operationId": "targets.getActiveTypes",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Список типов",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Targets.GetActiveTypes.SuccessResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/idp": {
             "get": {
                 "security": [
@@ -8760,6 +8790,22 @@
                 "allOf": [
                     {"$ref": "#/components/schemas/Targets.TargetAttribute.Percent"}
                 ]
+            },
+            "Targets.GetActiveTypes.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/Targets.TargetTypeDefaultView"
+                                }
+                            }
+                        }
+                    }
+                }
             },
             "Targets.StatusGroup": {
                 "type": "object",
