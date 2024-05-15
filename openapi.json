@@ -8533,6 +8533,14 @@
                     }
                 }
             },
+            "Targets.TargetAttribute.Type": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "$ref": "#/components/schemas/Targets.TargetTypeDefaultView"
+                    }
+                }
+            },
             "Targets.Target.ToUpdate": {
                 "type": "object",
                 "allOf": [
@@ -8631,7 +8639,8 @@
                     {"$ref": "#/components/schemas/Targets.TargetAttribute.Priority"},
                     {"$ref": "#/components/schemas/Targets.TargetAttribute.CreatedAt"},
                     {"$ref": "#/components/schemas/Targets.TargetAttribute.Deadline"},
-                    {"$ref": "#/components/schemas/Targets.TargetAttribute.Percent"}
+                    {"$ref": "#/components/schemas/Targets.TargetAttribute.Percent"},
+                    {"$ref": "#/components/schemas/Targets.TargetAttribute.Type"}
                 ]
             },
             "Targets.Filters.IdpId": {
@@ -9403,6 +9412,16 @@
                     }
                 }
             },
+            "Targets.TargetTypeAttribute.Name": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Название типа цели",
+                        "example": "Прочее"
+                    }
+                }
+            },
             "Targets.TargetTypeAttribute.LocalizedName": {
                 "type": "object",
                 "properties": {
@@ -9422,6 +9441,14 @@
                         }
                     }
                 }
+            },
+            "Targets.TargetTypeDefaultView": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Targets.TargetTypeAttribute.Id"},
+                    {"$ref": "#/components/schemas/Targets.TargetTypeAttribute.Status"},
+                    {"$ref": "#/components/schemas/Targets.TargetTypeAttribute.Name"}
+                ]
             },
             "Targets.TargetTypeAdminView.ToSave": {
                 "type": "object",
