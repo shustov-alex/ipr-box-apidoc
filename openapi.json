@@ -823,6 +823,46 @@
                 }
             }
         },
+        "/targets/grouped": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Targets"
+                ],
+                "summary": "06.00. Получить список сгруппированных целей",
+                "description": "Получить список сгруппированных целей. Максимальное количество элементов - 1000.",
+                "operationId": "targets.getGroupedCollection",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"},
+                    {"$ref": "#/components/parameters/Employees.Query.Employee.Id"}
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Targets.GetGroupedCollection.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Список сгруппированных целей",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Targets.GetGroupedCollection.SuccessResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/targets": {
             "post": {
                 "security": [
@@ -844,7 +884,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Targets.Collection.Request"
+                                "$ref": "#/components/schemas/Targets.GetCollection.Request"
                             }
                         }
                     }
@@ -855,7 +895,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Targets.Collection.SuccessResponse"
+                                    "$ref": "#/components/schemas/Targets.GetCollection.SuccessResponse"
                                 }
                             }
                         }
@@ -8694,7 +8734,7 @@
                     }
                 }
             },
-            "Targets.Collection.Sort": {
+            "Targets.GetCollection.Sort": {
                 "type": "object",
                 "allOf": [
                     {
@@ -8713,11 +8753,57 @@
                     }
                 ]
             },
-            "Targets.Collection.Request": {
+            "Targets.GetGroupedCollection.Request": {
+                "type": "object",
+                "properties": {
+                    "grouped_by": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "Параметр, по которому происходит группировка",
+                        "example": "type",
+                        "enum": ["type", "status"]
+                    },
+                    "sort": {
+                        "$ref": "#/components/schemas/Targets.GetCollection.Sort"
+                    },
+                    "filter": {
+                        "type": "object",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Targets.Filters.IdpId"
+                            }
+                        ],
+                        "required": ["idp_id"]
+                    }
+                },
+                "required": ["filter"]
+            },
+            "Targets.GetGroupedCollection.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "object",
+                                "properties": {
+                                    "Мои цели": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/Targets.Target.CollectionView"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "Targets.GetCollection.Request": {
                 "type": "object",
                 "properties": {
                     "sort": {
-                        "$ref": "#/components/schemas/Targets.Collection.Sort"
+                        "$ref": "#/components/schemas/Targets.GetCollection.Sort"
                     },
                     "filter": {
                         "type": "object",
@@ -8743,7 +8829,7 @@
                     {"$ref": "#/components/schemas/Targets.TargetAttribute.Skills"}
                 ]
             },
-            "Targets.Collection.SuccessResponse": {
+            "Targets.GetCollection.SuccessResponse": {
                 "type": "object",
                 "properties": {
                     "data": {
