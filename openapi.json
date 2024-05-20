@@ -6247,6 +6247,95 @@
                     }
                 }
             }
+        },
+        "/admin/companies/{company_id}/integration": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanel.Companies"
+                ],
+                "summary": "18.19. Получить настройки интеграции",
+                "description": "Получить настройки интеграции",
+                "operationId": "adminPanel.Companies.getIntegrationSettings",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Path.Company.Id"}
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Настройки интеграции",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.Companies.GetIntegrationSettings.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Запрашиваемый объект не найден",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/companies/{company_id}/integration/update": {
+            "put": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanel.Companies"
+                ],
+                "summary": "18.20. Обновить настройки интеграции",
+                "description": "Обновить настройки интеграции",
+                "operationId": "adminPanel.Companies.updateIntegrationSettings",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Path.Company.Id"}
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AdminPanel.Companies.UpdateIntegrationSettings.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Настройки интеграции",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.Companies.GetIntegrationSettings.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundOrValidationErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -6739,6 +6828,272 @@
                         "example": "556ef7"
                     }
                 }
+            },
+            "Companies.IntegrationAttribute.IsEnabled": {
+                "type": "object",
+                "properties": {
+                    "is_enabled": {
+                        "type": "boolean",
+                        "description": "Включена ли интеграция",
+                        "example": true
+                    }
+                }
+            },
+            "Companies.IntegrationAttribute.Period": {
+                "type": "object",
+                "properties": {
+                    "period": {
+                        "type": "string",
+                        "description": "Периодичность интеграции",
+                        "example": "daily",
+                        "enum": ["daily", "once_every_two_days", "once_every_three_days", "weekly", "once_every_two_weeks", "monthly"]
+                    }
+                }
+            },
+            "Companies.IntegrationAttribute.Base.IntegrationApiHost": {
+                "type": "object",
+                "properties": {
+                    "integration_api_host": {
+                        "type": "string",
+                        "description": "Адрес интеграционного API",
+                        "example": "https://integration.test-eq.ru"
+                    }
+                }
+            },
+            "Companies.IntegrationAttribute.Base.IntegrationApiAccessToken": {
+                "type": "object",
+                "properties": {
+                    "integration_api_access_token": {
+                        "type": "string",
+                        "description": "Токен для доступа к интеграционному API",
+                        "example": "FVuo-yKEBRBvsFF1B_BBaLx5Qfrmx86P"
+                    }
+                }
+            },
+            "Companies.IntegrationAttribute.Base.CompanyId": {
+                "type": "object",
+                "properties": {
+                    "company_id": {
+                        "type": "integer",
+                        "description": "ID компании Equeo, с которой должна быть настроена интеграция",
+                        "example": 34
+                    }
+                }
+            },
+            "Companies.IntegrationAttribute.Base.PublicApiUrl": {
+                "type": "object",
+                "properties": {
+                    "public_api_url": {
+                        "type": "string",
+                        "description": "Адрес публичного API Equeo",
+                        "example": "https://api.test-eq.ru/v44"
+                    }
+                }
+            },
+            "Companies.IntegrationAttribute.Base.TechUserLogin": {
+                "type": "object",
+                "properties": {
+                    "tech_user_login": {
+                        "type": "string",
+                        "description": "Логин технического пользователя",
+                        "example": "tech_user_login"
+                    }
+                }
+            },
+            "Companies.IntegrationAttribute.Base.TechUserPassword": {
+                "type": "object",
+                "properties": {
+                    "tech_user_password": {
+                        "type": "string",
+                        "description": "Пароль технического пользователя",
+                        "example": "tech_user_password"
+                    }
+                }
+            },
+            "Companies.IntegrationAttribute.Base.PublicApiClientId": {
+                "type": "object",
+                "properties": {
+                    "public_api_client_id": {
+                        "type": "string",
+                        "description": "Client ID для Basic-авторизации в Public API Equeo",
+                        "example": "client_id"
+                    }
+                }
+            },
+            "Companies.IntegrationAttribute.Base.PublicApiClientSecret": {
+                "type": "object",
+                "properties": {
+                    "public_api_client_secret": {
+                        "type": "string",
+                        "description": "Client secret для Basic-авторизации в Public API Equeo",
+                        "example": "client_secret"
+                    }
+                }
+            },
+            "Companies.IntegrationAttribute.User.DefaultRoleId": {
+                "type": "object",
+                "properties": {
+                    "default_role_id": {
+                        "type": "integer",
+                        "description": "Роль по умолчанию для импортируемых пользователей",
+                        "example": 4
+                    }
+                }
+            },
+            "Companies.IntegrationAttribute.User.ChiefDefaultRoleId": {
+                "type": "object",
+                "properties": {
+                    "chief_default_role_id": {
+                        "type": "integer",
+                        "description": "Роль по умолчанию для пользователей, которые в Equeo отмечены как руководители",
+                        "example": 2
+                    }
+                }
+            },
+            "Companies.IntegrationAttribute.User.RoleIdsThatAreNotAllowedToEdit": {
+                "type": "object",
+                "properties": {
+                    "role_ids_that_are_not_allowed_to_edit": {
+                        "type": "array",
+                        "nullable": true,
+                        "description": "Список ролей пользователя, которые не могут быть обновлены интеграцией",
+                        "items": {
+                            "type": "integer",
+                            "description": "Роль пользователя, которая не может быть обновлена интеграцией",
+                            "example": 1
+                        }
+                    }
+                }
+            },
+            "Companies.IntegrationAttribute.Group.ParentId": {
+                "type": "object",
+                "properties": {
+                    "parent_id": {
+                        "type": "integer",
+                        "description": "ID родительской группы",
+                        "example": 45
+                    }
+                }
+            },
+            "Companies.IntegrationAttribute.Group.MinDepth": {
+                "type": "object",
+                "properties": {
+                    "min_depth": {
+                        "type": "integer",
+                        "nullable": true,
+                        "description": "Минимальный уровень вложенности",
+                        "example": 1
+                    }
+                }
+            },
+            "Companies.IntegrationAttribute.Group.MaxDepth": {
+                "type": "object",
+                "properties": {
+                    "max_depth": {
+                        "type": "integer",
+                        "nullable": true,
+                        "description": "Максимальный уровень вложенности",
+                        "example": 3
+                    }
+                }
+            },
+            "Companies.IntegrationAttribute.Group.NameSubstring": {
+                "type": "object",
+                "properties": {
+                    "name_substring": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "Подстрока, которая должна быть в названии группы",
+                        "example": "Должность"
+                    }
+                }
+            },
+            "Companies.IntegrationAttribute.Group.ChildrenPolicy": {
+                "type": "object",
+                "properties": {
+                    "children_policy": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "Наличие дочерних элементов",
+                        "example": null,
+                        "enum": ["forbidden", "required"]
+                    }
+                }
+            },
+            "Companies.IntegrationAttribute.Material.SourceId": {
+                "type": "object",
+                "properties": {
+                    "source_id": {
+                        "type": "integer",
+                        "description": "ID источника для материалов, импортируемых из Equeo",
+                        "example": 8
+                    }
+                }
+            },
+            "Companies.IntegrationAttribute.Material.EventTypeId": {
+                "type": "object",
+                "properties": {
+                    "event_type_id": {
+                        "type": "integer",
+                        "description": "ID типа для мероприятий, импортируемых из Equeo",
+                        "example": 9
+                    }
+                }
+            },
+            "Companies.IntegrationAttribute.Material.LearningProgramTypeId": {
+                "type": "object",
+                "properties": {
+                    "learning_program_type_id": {
+                        "type": "integer",
+                        "description": "ID типа для программ обучения, импортируемых из Equeo",
+                        "example": 10
+                    }
+                }
+            },
+            "Companies.IntegrationSettings.Base": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Companies.IntegrationAttribute.Base.IntegrationApiHost"},
+                    {"$ref": "#/components/schemas/Companies.IntegrationAttribute.Base.IntegrationApiAccessToken"},
+                    {"$ref": "#/components/schemas/Companies.IntegrationAttribute.Base.CompanyId"},
+                    {"$ref": "#/components/schemas/Companies.IntegrationAttribute.Base.PublicApiUrl"},
+                    {"$ref": "#/components/schemas/Companies.IntegrationAttribute.Base.TechUserLogin"},
+                    {"$ref": "#/components/schemas/Companies.IntegrationAttribute.Base.TechUserPassword"},
+                    {"$ref": "#/components/schemas/Companies.IntegrationAttribute.Base.PublicApiClientId"},
+                    {"$ref": "#/components/schemas/Companies.IntegrationAttribute.Base.PublicApiClientSecret"}
+                ]
+            },
+            "Companies.IntegrationSettings.User": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Companies.IntegrationAttribute.IsEnabled"},
+                    {"$ref": "#/components/schemas/Companies.IntegrationAttribute.Period"},
+                    {"$ref": "#/components/schemas/Companies.IntegrationAttribute.User.DefaultRoleId"},
+                    {"$ref": "#/components/schemas/Companies.IntegrationAttribute.User.ChiefDefaultRoleId"},
+                    {"$ref": "#/components/schemas/Companies.IntegrationAttribute.User.RoleIdsThatAreNotAllowedToEdit"}
+                ]
+            },
+            "Companies.IntegrationSettings.Group": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Companies.IntegrationAttribute.IsEnabled"},
+                    {"$ref": "#/components/schemas/Companies.IntegrationAttribute.Period"},
+                    {"$ref": "#/components/schemas/Companies.IntegrationAttribute.Group.ParentId"},
+                    {"$ref": "#/components/schemas/Companies.IntegrationAttribute.Group.MinDepth"},
+                    {"$ref": "#/components/schemas/Companies.IntegrationAttribute.Group.MaxDepth"},
+                    {"$ref": "#/components/schemas/Companies.IntegrationAttribute.Group.NameSubstring"},
+                    {"$ref": "#/components/schemas/Companies.IntegrationAttribute.Group.ChildrenPolicy"}
+                ]
+            },
+            "Companies.IntegrationSettings.Material": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Companies.IntegrationAttribute.IsEnabled"},
+                    {"$ref": "#/components/schemas/Companies.IntegrationAttribute.Period"},
+                    {"$ref": "#/components/schemas/Companies.IntegrationAttribute.Material.SourceId"},
+                    {"$ref": "#/components/schemas/Companies.IntegrationAttribute.Material.EventTypeId"},
+                    {"$ref": "#/components/schemas/Companies.IntegrationAttribute.Material.LearningProgramTypeId"}
+                ]
             },
             "Companies.NotificationConfigAttribute.Sender": {
                 "type": "object",
@@ -13138,6 +13493,56 @@
                         "type": "integer",
                         "description": "ID источника по умолчанию",
                         "example": 15
+                    }
+                }
+            },
+            "AdminPanel.Companies.GetIntegrationSettings.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "object",
+                                "properties": {
+                                    "base": {
+                                        "$ref": "#/components/schemas/Companies.IntegrationSettings.Base"
+                                    },
+                                    "user": {
+                                        "$ref": "#/components/schemas/Companies.IntegrationSettings.User"
+                                    },
+                                    "position": {
+                                        "$ref": "#/components/schemas/Companies.IntegrationSettings.Group"
+                                    },
+                                    "division": {
+                                        "$ref": "#/components/schemas/Companies.IntegrationSettings.Group"
+                                    },
+                                    "material": {
+                                        "$ref": "#/components/schemas/Companies.IntegrationSettings.Material"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "AdminPanel.Companies.UpdateIntegrationSettings.Request": {
+                "type": "object",
+                "properties": {
+                    "base": {
+                        "$ref": "#/components/schemas/Companies.IntegrationSettings.Base"
+                    },
+                    "user": {
+                        "$ref": "#/components/schemas/Companies.IntegrationSettings.User"
+                    },
+                    "position": {
+                        "$ref": "#/components/schemas/Companies.IntegrationSettings.Group"
+                    },
+                    "division": {
+                        "$ref": "#/components/schemas/Companies.IntegrationSettings.Group"
+                    },
+                    "material": {
+                        "$ref": "#/components/schemas/Companies.IntegrationSettings.Material"
                     }
                 }
             }
