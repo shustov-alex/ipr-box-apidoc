@@ -6839,10 +6839,10 @@
                     }
                 }
             },
-            "Companies.IntegrationAttribute.Period": {
+            "Companies.IntegrationAttribute.Frequency": {
                 "type": "object",
                 "properties": {
-                    "period": {
+                    "frequency": {
                         "type": "string",
                         "description": "Периодичность интеграции",
                         "example": "daily",
@@ -7067,7 +7067,7 @@
                 "type": "object",
                 "allOf": [
                     {"$ref": "#/components/schemas/Companies.IntegrationAttribute.IsEnabled"},
-                    {"$ref": "#/components/schemas/Companies.IntegrationAttribute.Period"},
+                    {"$ref": "#/components/schemas/Companies.IntegrationAttribute.Frequency"},
                     {"$ref": "#/components/schemas/Companies.IntegrationAttribute.User.DefaultRoleId"},
                     {"$ref": "#/components/schemas/Companies.IntegrationAttribute.User.ChiefDefaultRoleId"},
                     {"$ref": "#/components/schemas/Companies.IntegrationAttribute.User.RoleIdsThatAreNotAllowedToEdit"}
@@ -7077,7 +7077,7 @@
                 "type": "object",
                 "allOf": [
                     {"$ref": "#/components/schemas/Companies.IntegrationAttribute.IsEnabled"},
-                    {"$ref": "#/components/schemas/Companies.IntegrationAttribute.Period"},
+                    {"$ref": "#/components/schemas/Companies.IntegrationAttribute.Frequency"},
                     {
                         "type": "object",
                         "properties": {
@@ -7102,7 +7102,7 @@
                 "type": "object",
                 "allOf": [
                     {"$ref": "#/components/schemas/Companies.IntegrationAttribute.IsEnabled"},
-                    {"$ref": "#/components/schemas/Companies.IntegrationAttribute.Period"},
+                    {"$ref": "#/components/schemas/Companies.IntegrationAttribute.Frequency"},
                     {"$ref": "#/components/schemas/Companies.IntegrationAttribute.Material.SourceId"},
                     {"$ref": "#/components/schemas/Companies.IntegrationAttribute.Material.EventTypeId"},
                     {"$ref": "#/components/schemas/Companies.IntegrationAttribute.Material.LearningProgramTypeId"}
