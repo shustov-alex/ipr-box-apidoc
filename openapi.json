@@ -7078,11 +7078,24 @@
                 "allOf": [
                     {"$ref": "#/components/schemas/Companies.IntegrationAttribute.IsEnabled"},
                     {"$ref": "#/components/schemas/Companies.IntegrationAttribute.Period"},
-                    {"$ref": "#/components/schemas/Companies.IntegrationAttribute.Group.ParentId"},
-                    {"$ref": "#/components/schemas/Companies.IntegrationAttribute.Group.MinDepth"},
-                    {"$ref": "#/components/schemas/Companies.IntegrationAttribute.Group.MaxDepth"},
-                    {"$ref": "#/components/schemas/Companies.IntegrationAttribute.Group.NameSubstring"},
-                    {"$ref": "#/components/schemas/Companies.IntegrationAttribute.Group.ChildrenPolicy"}
+                    {
+                        "type": "object",
+                        "properties": {
+                            "scopes": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "allOf": [
+                                        {"$ref": "#/components/schemas/Companies.IntegrationAttribute.Group.ParentId"},
+                                        {"$ref": "#/components/schemas/Companies.IntegrationAttribute.Group.MinDepth"},
+                                        {"$ref": "#/components/schemas/Companies.IntegrationAttribute.Group.MaxDepth"},
+                                        {"$ref": "#/components/schemas/Companies.IntegrationAttribute.Group.NameSubstring"},
+                                        {"$ref": "#/components/schemas/Companies.IntegrationAttribute.Group.ChildrenPolicy"}
+                                    ]
+                                }
+                            }
+                        }
+                    }
                 ]
             },
             "Companies.IntegrationSettings.Material": {
