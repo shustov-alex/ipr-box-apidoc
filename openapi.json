@@ -7,8 +7,8 @@
     },
     "servers": [
         {
-            "url": "http://127.0.0.1",
-            "description": "Local server"
+            "url": "https://api.ipr.e-queo.xyz",
+            "description": "Test server"
         }
     ],
     "tags": [
