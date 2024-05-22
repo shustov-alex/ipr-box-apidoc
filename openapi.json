@@ -83,6 +83,10 @@
         {
             "name": "AdminPanel.Companies",
             "description": "18. Панель администратора, список компаний"
+        },
+        {
+            "name": "AdminPanel.TargetTypes",
+            "description": "19. Панель администратора, типы целей"
         }
     ],
     "paths": {
@@ -819,6 +823,46 @@
                 }
             }
         },
+        "/targets/grouped": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Targets"
+                ],
+                "summary": "06.00. Получить список сгруппированных целей",
+                "description": "Получить список сгруппированных целей. Максимальное количество элементов - 1000.",
+                "operationId": "targets.getGroupedCollection",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"},
+                    {"$ref": "#/components/parameters/Employees.Query.Employee.Id"}
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Targets.GetGroupedCollection.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Список сгруппированных целей",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Targets.GetGroupedCollection.SuccessResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/targets": {
             "post": {
                 "security": [
@@ -840,7 +884,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/Targets.Collection.Request"
+                                "$ref": "#/components/schemas/Targets.GetCollection.Request"
                             }
                         }
                     }
@@ -851,7 +895,7 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Targets.Collection.SuccessResponse"
+                                    "$ref": "#/components/schemas/Targets.GetCollection.SuccessResponse"
                                 }
                             }
                         }
@@ -1530,6 +1574,36 @@
                             "application/json": {
                                 "schema": {
                                     "$ref": "#/components/schemas/Base.ObjectNotFoundOrValidationErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/targets/types": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Targets"
+                ],
+                "summary": "06.17. Получить список активных типов",
+                "description": "Получить список активных типов",
+                "operationId": "targets.getActiveTypes",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Список типов",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Targets.GetActiveTypes.SuccessResponse"
                                 }
                             }
                         }
@@ -6248,6 +6322,95 @@
                 }
             }
         },
+        "/admin/target-types": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanel.TargetTypes"
+                ],
+                "summary": "19.01. Получить типы целей",
+                "description": "Получить типы целей",
+                "operationId": "adminPanel.TargetTypes.getTypes",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Path.Company.Id"}
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Типы целей",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.TargetTypes.GetTypes.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Запрашиваемый объект не найден",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/target-types/update": {
+            "put": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanel.TargetTypes"
+                ],
+                "summary": "19.02. Обновить типы целей",
+                "description": "Обновить типы целей",
+                "operationId": "adminPanel.TargetTypes.updateTypes",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Path.Company.Id"}
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AdminPanel.TargetTypes.UpdateTypes.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Типы целей",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.TargetTypes.GetTypes.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundOrValidationErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/admin/companies/{company_id}/integration": {
             "get": {
                 "security": [
@@ -8681,6 +8844,16 @@
                     }
                 }
             },
+            "Targets.TargetAttribute.TypeId": {
+                "type": "object",
+                "properties": {
+                    "type_id": {
+                        "type": "integer",
+                        "description": "ID типа",
+                        "example": 11
+                    }
+                }
+            },
             "Targets.TargetAttribute.Name": {
                 "type": "object",
                 "properties": {
@@ -8798,9 +8971,18 @@
                     }
                 }
             },
+            "Targets.TargetAttribute.Type": {
+                "type": "object",
+                "properties": {
+                    "type": {
+                        "$ref": "#/components/schemas/Targets.TargetTypeDefaultView"
+                    }
+                }
+            },
             "Targets.Target.ToUpdate": {
                 "type": "object",
                 "allOf": [
+                    {"$ref": "#/components/schemas/Targets.TargetAttribute.TypeId"},
                     {"$ref": "#/components/schemas/Targets.TargetAttribute.Name"},
                     {"$ref": "#/components/schemas/Targets.TargetAttribute.Description"},
                     {"$ref": "#/components/schemas/Targets.TargetAttribute.Priority"},
@@ -8895,7 +9077,8 @@
                     {"$ref": "#/components/schemas/Targets.TargetAttribute.Priority"},
                     {"$ref": "#/components/schemas/Targets.TargetAttribute.CreatedAt"},
                     {"$ref": "#/components/schemas/Targets.TargetAttribute.Deadline"},
-                    {"$ref": "#/components/schemas/Targets.TargetAttribute.Percent"}
+                    {"$ref": "#/components/schemas/Targets.TargetAttribute.Percent"},
+                    {"$ref": "#/components/schemas/Targets.TargetAttribute.Type"}
                 ]
             },
             "Targets.Filters.IdpId": {
@@ -8919,7 +9102,7 @@
                     }
                 }
             },
-            "Targets.Collection.Sort": {
+            "Targets.GetCollection.Sort": {
                 "type": "object",
                 "allOf": [
                     {
@@ -8938,11 +9121,57 @@
                     }
                 ]
             },
-            "Targets.Collection.Request": {
+            "Targets.GetGroupedCollection.Request": {
+                "type": "object",
+                "properties": {
+                    "group_by": {
+                        "type": "string",
+                        "nullable": true,
+                        "description": "Параметр, по которому происходит группировка",
+                        "example": "type",
+                        "enum": ["type", "status"]
+                    },
+                    "sort": {
+                        "$ref": "#/components/schemas/Targets.GetCollection.Sort"
+                    },
+                    "filter": {
+                        "type": "object",
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Targets.Filters.IdpId"
+                            }
+                        ],
+                        "required": ["idp_id"]
+                    }
+                },
+                "required": ["filter"]
+            },
+            "Targets.GetGroupedCollection.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "object",
+                                "properties": {
+                                    "Мои цели": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/Targets.Target.CollectionView"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "Targets.GetCollection.Request": {
                 "type": "object",
                 "properties": {
                     "sort": {
-                        "$ref": "#/components/schemas/Targets.Collection.Sort"
+                        "$ref": "#/components/schemas/Targets.GetCollection.Sort"
                     },
                     "filter": {
                         "type": "object",
@@ -8968,7 +9197,7 @@
                     {"$ref": "#/components/schemas/Targets.TargetAttribute.Skills"}
                 ]
             },
-            "Targets.Collection.SuccessResponse": {
+            "Targets.GetCollection.SuccessResponse": {
                 "type": "object",
                 "properties": {
                     "data": {
@@ -9015,6 +9244,22 @@
                 "allOf": [
                     {"$ref": "#/components/schemas/Targets.TargetAttribute.Percent"}
                 ]
+            },
+            "Targets.GetActiveTypes.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "array",
+                                "items": {
+                                    "$ref": "#/components/schemas/Targets.TargetTypeDefaultView"
+                                }
+                            }
+                        }
+                    }
+                }
             },
             "Targets.StatusGroup": {
                 "type": "object",
@@ -9634,6 +9879,89 @@
                             }
                         }
                     }
+                ]
+            },
+            "Targets.TargetTypeAttribute.Id": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "ID типа цели",
+                        "example": 56
+                    }
+                }
+            },
+            "Targets.TargetTypeAttribute.Status": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "description": "Статус типа цели",
+                        "example": "active",
+                        "enum": ["active", "archived"]
+                    }
+                }
+            },
+            "Targets.TargetTypeAttribute.CanBeArchived": {
+                "type": "object",
+                "properties": {
+                    "can_be_archived": {
+                        "type": "boolean",
+                        "description": "Флаг, обозначающий возможность архивации типа цели",
+                        "example": true
+                    }
+                }
+            },
+            "Targets.TargetTypeAttribute.Name": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "Название типа цели",
+                        "example": "Прочее"
+                    }
+                }
+            },
+            "Targets.TargetTypeAttribute.LocalizedName": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "object",
+                        "properties": {
+                            "ru": {
+                                "type": "string",
+                                "description": "Название типа цели (ru)",
+                                "example": "Прочее"
+                            },
+                            "en": {
+                                "type": "string",
+                                "description": "Название типа цели (en)",
+                                "example": "Other"
+                            }
+                        }
+                    }
+                }
+            },
+            "Targets.TargetTypeDefaultView": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Targets.TargetTypeAttribute.Id"},
+                    {"$ref": "#/components/schemas/Targets.TargetTypeAttribute.Status"},
+                    {"$ref": "#/components/schemas/Targets.TargetTypeAttribute.Name"}
+                ]
+            },
+            "Targets.TargetTypeAdminView.ToSave": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Targets.TargetTypeAttribute.Id"},
+                    {"$ref": "#/components/schemas/Targets.TargetTypeAttribute.LocalizedName"}
+                ]
+            },
+            "Targets.TargetTypeAdminView.ToDisplay": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Targets.TargetTypeAdminView.ToSave"},
+                    {"$ref": "#/components/schemas/Targets.TargetTypeAttribute.CanBeArchived"}
                 ]
             },
             "Idp.IdpAttribute.Id": {
@@ -13556,6 +13884,50 @@
                     },
                     "material": {
                         "$ref": "#/components/schemas/Companies.IntegrationSettings.Material"
+                    }
+                }
+            },
+            "AdminPanel.TargetTypes.GetTypes.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "object",
+                                "properties": {
+                                    "active": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/Targets.TargetTypeAdminView.ToDisplay"
+                                        }
+                                    },
+                                    "archived": {
+                                        "type": "array",
+                                        "items": {
+                                            "$ref": "#/components/schemas/Targets.TargetTypeAdminView.ToDisplay"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "AdminPanel.TargetTypes.UpdateTypes.Request": {
+                "type": "object",
+                "properties": {
+                    "active": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Targets.TargetTypeAdminView.ToSave"
+                        }
+                    },
+                    "archived": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Targets.TargetTypeAdminView.ToSave"
+                        }
                     }
                 }
             }
