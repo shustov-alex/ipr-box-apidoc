@@ -6746,6 +6746,35 @@
                     }
                 }
             },
+            "Companies.FeatureFlag.IdpApproval": {
+                "type": "object",
+                "properties": {
+                    "idp_approval": {
+                        "type": "boolean",
+                        "description": "Функция 'Процесс согласования ИПР'",
+                        "example": true
+                    }
+                }
+            },
+            "Companies.FeatureFlag.TargetPriority": {
+                "type": "object",
+                "properties": {
+                    "target_priority": {
+                        "type": "boolean",
+                        "description": "Функция 'Приоритизация целей'",
+                        "example": true
+                    }
+                }
+            },
+            "Companies.FeatureFlags": {
+                "type": "object",
+                "allOf": [
+                    {"$ref": "#/components/schemas/Companies.FeatureFlag.RememberMe"},
+                    {"$ref": "#/components/schemas/Companies.FeatureFlag.ResetPassword"},
+                    {"$ref": "#/components/schemas/Companies.FeatureFlag.IdpApproval"},
+                    {"$ref": "#/components/schemas/Companies.FeatureFlag.TargetPriority"}
+                ]
+            },
             "Companies.BrandingAttributes.Images.LogoId": {
                 "type": "object",
                 "properties": {
@@ -7195,11 +7224,7 @@
                                         }
                                     },
                                     "feature_flags": {
-                                        "type": "object",
-                                        "allOf": [
-                                            {"$ref": "#/components/schemas/Companies.FeatureFlag.RememberMe"},
-                                            {"$ref": "#/components/schemas/Companies.FeatureFlag.ResetPassword"}
-                                        ]
+                                        "$ref": "#/components/schemas/Companies.FeatureFlags"
                                     },
                                     "intercom": {
                                         "type": "object",
@@ -13296,22 +13321,14 @@
                         "type": "object",
                         "properties": {
                             "success": {
-                                "type": "object",
-                                "allOf": [
-                                    {"$ref": "#/components/schemas/Companies.FeatureFlag.RememberMe"},
-                                    {"$ref": "#/components/schemas/Companies.FeatureFlag.ResetPassword"}
-                                ]
+                                "$ref": "#/components/schemas/Companies.FeatureFlags"
                             }
                         }
                     }
                 }
             },
             "AdminPanel.Companies.UpdateFeatureFlags.Request": {
-                "type": "object",
-                "allOf": [
-                    {"$ref": "#/components/schemas/Companies.FeatureFlag.RememberMe"},
-                    {"$ref": "#/components/schemas/Companies.FeatureFlag.ResetPassword"}
-                ]
+                "$ref": "#/components/schemas/Companies.FeatureFlags"
             },
             "AdminPanel.Companies.GetBranding.SuccessResponse": {
                 "type": "object",
