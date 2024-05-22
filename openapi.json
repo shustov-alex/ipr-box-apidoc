@@ -8756,7 +8756,7 @@
             "Targets.GetGroupedCollection.Request": {
                 "type": "object",
                 "properties": {
-                    "grouped_by": {
+                    "group_by": {
                         "type": "string",
                         "nullable": true,
                         "description": "Параметр, по которому происходит группировка",
