@@ -9088,6 +9088,20 @@
                 ],
                 "required": ["idp_id"]
             },
+            "Targets.Filters.Statuses": {
+                "type": "object",
+                "properties": {
+                    "statuses": {
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "description": "status",
+                            "example": "in_progress",
+                            "enum": ["not_started", "in_progress", "done", "cancelled"]
+                        }
+                    }
+                }
+            },
             "Targets.Filters.StatusGroup": {
                 "type": "object",
                 "properties": {
@@ -9137,9 +9151,8 @@
                     "filter": {
                         "type": "object",
                         "allOf": [
-                            {
-                                "$ref": "#/components/schemas/Targets.Filters.IdpId"
-                            }
+                            {"$ref": "#/components/schemas/Targets.Filters.IdpId"},
+                            {"$ref": "#/components/schemas/Targets.Filters.Statuses"}
                         ],
                         "required": ["idp_id"]
                     }
