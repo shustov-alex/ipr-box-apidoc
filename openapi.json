@@ -9169,9 +9169,29 @@
                                 "type": "object",
                                 "properties": {
                                     "Мои цели": {
-                                        "type": "array",
-                                        "items": {
-                                            "$ref": "#/components/schemas/Targets.Target.CollectionView"
+                                        "type": "object",
+                                        "properties": {
+                                            "collection": {
+                                                "type": "array",
+                                                "items": {
+                                                    "$ref": "#/components/schemas/Targets.Target.CollectionView"
+                                                }
+                                            },
+                                            "actual_count": {
+                                                "type": "integer",
+                                                "description": "Текущее количество целей в группе",
+                                                "example": 2
+                                            },
+                                            "actual_count_of_not_cancelled": {
+                                                "type": "integer",
+                                                "description": "Текущее количество целей, которые находятся в статусе отличном от 'отменено'",
+                                                "example": 2
+                                            },
+                                            "total_count_of_not_cancelled": {
+                                                "type": "integer",
+                                                "description": "Общее количество целей, которые находятся в статусе отличном от 'отменено'",
+                                                "example": 2
+                                            }
                                         }
                                     }
                                 }
