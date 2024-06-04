@@ -90,7 +90,7 @@
         }
     ],
     "paths": {
-        "/configuration/{company_sub_domain}": {
+        "/configuration": {
             "get": {
                 "security": [],
                 "tags": [
@@ -99,9 +99,6 @@
                 "summary": "01.01. Получить конфигурацию компании",
                 "description": "Получить конфигурацию компании",
                 "operationId": "companies.getConfiguration",
-                "parameters": [
-                    {"$ref": "#/components/parameters/Companies.Path.Company.SubDomain"}
-                ],
                 "responses": {
                     "200": {
                         "description": "Объект конфигурации",
@@ -7341,13 +7338,6 @@
                             "success": {
                                 "type": "object",
                                 "properties": {
-                                    "company": {
-                                        "type": "object",
-                                        "allOf": [
-                                            {"$ref": "#/components/schemas/Companies.CompanyAttribute.Id"},
-                                            {"$ref": "#/components/schemas/Companies.CompanyAttribute.Name"}
-                                        ]
-                                    },
                                     "language_ids": {
                                         "type": "array",
                                         "description": "ID языка",
@@ -7362,13 +7352,6 @@
                                         "allOf": [
                                             {"$ref": "#/components/schemas/Companies.FeatureFlag.RememberMe"},
                                             {"$ref": "#/components/schemas/Companies.FeatureFlag.ResetPassword"}
-                                        ]
-                                    },
-                                    "intercom": {
-                                        "type": "object",
-                                        "allOf": [
-                                            {"$ref": "#/components/schemas/Companies.IntercomSettingsAttribute.CompanyId"},
-                                            {"$ref": "#/components/schemas/Companies.IntercomSettingsAttribute.CompanyName"}
                                         ]
                                     }
                                 }
