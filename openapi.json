@@ -8098,7 +8098,6 @@
                 "type": "object",
                 "allOf": [
                     {"$ref": "#/components/schemas/Users.UserAttribute.Id"},
-                    {"$ref": "#/components/schemas/Users.UserAttribute.CompanyId"},
                     {"$ref": "#/components/schemas/Users.UserAttribute.Email"},
                     {"$ref": "#/components/schemas/Users.UserAttribute.FirstName"},
                     {"$ref": "#/components/schemas/Users.UserAttribute.LastName"},
