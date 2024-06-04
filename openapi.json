@@ -7707,14 +7707,9 @@
                         "type": "string",
                         "description": "Пароль",
                         "example": "your_password"
-                    },
-                    "company_id": {
-                        "type": "integer",
-                        "description": "ID компании",
-                        "example": 1
                     }
                 },
-                "required": ["login", "password", "company_id"]
+                "required": ["login", "password"]
             },
             "Auth.Login.SuccessResponse": {
                 "type": "object",
@@ -7745,12 +7740,9 @@
                                         "type": "string",
                                         "description": "Refresh token. Используется для обновления пары access token / refresh token.",
                                         "example": "G1O8jaQj4KyGOc3-fbrIF30j5eUU_kqs9O2qDXk1"
-                                    },
-                                    "user_profile": {
-                                        "$ref": "#/components/schemas/Users.Profile"
                                     }
                                 },
-                                "required": ["access_token", "token_type", "expires_in", "refresh_token", "user_profile"]
+                                "required": ["access_token", "token_type", "expires_in", "refresh_token"]
                             }
                         }
                     }
@@ -7774,14 +7766,9 @@
                         "type": "string",
                         "description": "Логин",
                         "example": "your_login"
-                    },
-                    "company_id": {
-                        "type": "integer",
-                        "description": "ID компании",
-                        "example": 1
                     }
                 },
-                "required": ["login", "company_id"]
+                "required": ["login"]
             },
             "Auth.ResetPassword.ForgotPassword.SuccessResponse": {
                 "type": "object",
@@ -7814,18 +7801,13 @@
             "Auth.ResetPassword.CheckToken.Request": {
                 "type": "object",
                 "properties": {
-                    "company_id": {
-                        "type": "integer",
-                        "description": "ID компании",
-                        "example": 1
-                    },
                     "token": {
                         "type": "string",
                         "description": "Токен, полученный из URL",
                         "example": "NDQStklU3VNpnlkp1i22kVVPe4QZxk0nkJi7llE0"
                     }
                 },
-                "required": ["company_id", "token"]
+                "required": ["token"]
             },
             "Auth.PasswordRequirement.AttributeMatch": {
                 "type": "object",
@@ -7902,11 +7884,6 @@
             "Auth.ResetPassword.SaveNewPassword.Request": {
                 "type": "object",
                 "properties": {
-                    "company_id": {
-                        "type": "integer",
-                        "description": "ID компании",
-                        "example": 1
-                    },
                     "token": {
                         "type": "string",
                         "description": "Токен, полученный из URL",
@@ -7918,7 +7895,7 @@
                         "example": "your_new_password"
                     }
                 },
-                "required": ["company_id", "token", "password"]
+                "required": ["token", "password"]
             },
             "Auth.ResetPassword.PasswordRequirement.Error": {
                 "type": "object",
@@ -7976,14 +7953,9 @@
                         "type": "string",
                         "description": "JWT, выданный 'Академией Equeo'",
                         "example": "eyJhbGciOiJIUzI1NiIsInR5cGUiOiJKV1QifQ.eyJpc3MiOiJlcXVlb19hdXRoX3NlcnZlciIsInN1YiI6IjJuZF91c2VyIiwiY29tcGFueV9pZCI6MSwiZXhwIjoxNjkyODkzMDQ3LCJpYXQiOjE2OTI4MDY2NDd9.3uuI7Hjb_5n1JFz36Uialz8PIc7hEMLTRh-83X3U7wA"
-                    },
-                    "company_id": {
-                        "type": "integer",
-                        "description": "ID компании",
-                        "example": 1
                     }
                 },
-                "required": ["token", "company_id"]
+                "required": ["token"]
             },
             "Feedback.NewTicket.Request": {
                 "type": "object",
