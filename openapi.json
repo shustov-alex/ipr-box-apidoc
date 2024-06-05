@@ -6274,6 +6274,17 @@
                                             {"$ref": "#/components/schemas/Companies.FeatureFlag.RememberMe"},
                                             {"$ref": "#/components/schemas/Companies.FeatureFlag.ResetPassword"}
                                         ]
+                                    },
+                                    "target": {
+                                        "type": "object",
+                                        "properties": {
+                                            "alias": {
+                                                "type": "string",
+                                                "description": "Псевдоним цели",
+                                                "example": "goal",
+                                                "enum": ["goal", "task", "action"]
+                                            }
+                                        }
                                     }
                                 }
                             }
