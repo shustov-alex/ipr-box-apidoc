@@ -5837,6 +5837,16 @@
                     }
                 }
             },
+            "Companies.FeatureFlag.TargetPriority": {
+                "type": "object",
+                "properties": {
+                    "target_priority": {
+                        "type": "boolean",
+                        "description": "Функция 'Отображение приоритета цели'",
+                        "example": true
+                    }
+                }
+            },
             "Companies.BrandingAttributes.Images.LogoId": {
                 "type": "object",
                 "properties": {
@@ -6283,7 +6293,8 @@
                                         "allOf": [
                                             {"$ref": "#/components/schemas/Companies.FeatureFlag.RememberMe"},
                                             {"$ref": "#/components/schemas/Companies.FeatureFlag.ResetPassword"},
-                                            {"$ref": "#/components/schemas/Companies.FeatureFlag.IdpApproval"}
+                                            {"$ref": "#/components/schemas/Companies.FeatureFlag.IdpApproval"},
+                                            {"$ref": "#/components/schemas/Companies.FeatureFlag.TargetPriority"}
                                         ]
                                     },
                                     "target": {
