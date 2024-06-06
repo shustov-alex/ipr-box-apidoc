@@ -6285,6 +6285,17 @@
                                             {"$ref": "#/components/schemas/Companies.FeatureFlag.ResetPassword"},
                                             {"$ref": "#/components/schemas/Companies.FeatureFlag.IdpApproval"}
                                         ]
+                                    },
+                                    "target": {
+                                        "type": "object",
+                                        "properties": {
+                                            "alias": {
+                                                "type": "string",
+                                                "description": "Псевдоним цели",
+                                                "example": "goal",
+                                                "enum": ["goal", "task", "action"]
+                                            }
+                                        }
                                     }
                                 }
                             }
