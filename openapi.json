@@ -5847,6 +5847,16 @@
                     }
                 }
             },
+            "Companies.FeatureFlag.Skills": {
+                "type": "object",
+                "properties": {
+                    "skills": {
+                        "type": "boolean",
+                        "description": "Функция 'Навыки'",
+                        "example": true
+                    }
+                }
+            },
             "Companies.BrandingAttributes.Images.LogoId": {
                 "type": "object",
                 "properties": {
@@ -6294,7 +6304,8 @@
                                             {"$ref": "#/components/schemas/Companies.FeatureFlag.RememberMe"},
                                             {"$ref": "#/components/schemas/Companies.FeatureFlag.ResetPassword"},
                                             {"$ref": "#/components/schemas/Companies.FeatureFlag.IdpApproval"},
-                                            {"$ref": "#/components/schemas/Companies.FeatureFlag.TargetPriority"}
+                                            {"$ref": "#/components/schemas/Companies.FeatureFlag.TargetPriority"},
+                                            {"$ref": "#/components/schemas/Companies.FeatureFlag.Skills"}
                                         ]
                                     },
                                     "target": {
