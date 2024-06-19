@@ -7271,10 +7271,10 @@
                     {"$ref": "#/components/schemas/Companies.IntegrationAttribute.Material.LearningProgramTypeId"}
                 ]
             },
-            "Companies.NotificationConfigAttribute.Sender": {
+            "Companies.NotificationConfigAttribute.SenderEmail": {
                 "type": "object",
                 "properties": {
-                    "sender": {
+                    "sender_email": {
                         "type": "string",
                         "description": "Отправитель",
                         "example": "noreply@e-queo.com"
@@ -7288,6 +7288,16 @@
                         "type": "string",
                         "description": "Email техподдержки",
                         "example": "support@e-queo.com"
+                    }
+                }
+            },
+            "Companies.NotificationConfigAttribute.SupportPhone": {
+                "type": "object",
+                "properties": {
+                    "support_phone": {
+                        "type": "string",
+                        "description": "Телефон техподдержки",
+                        "example": "8 800 234-84-30"
                     }
                 }
             },
@@ -13706,8 +13716,9 @@
                             "success": {
                                 "type": "object",
                                 "allOf": [
-                                    {"$ref": "#/components/schemas/Companies.NotificationConfigAttribute.Sender"},
+                                    {"$ref": "#/components/schemas/Companies.NotificationConfigAttribute.SenderEmail"},
                                     {"$ref": "#/components/schemas/Companies.NotificationConfigAttribute.SupportEmail"},
+                                    {"$ref": "#/components/schemas/Companies.NotificationConfigAttribute.SupportPhone"},
                                     {"$ref": "#/components/schemas/Companies.NotificationConfig"}
                                 ]
                             }
@@ -13718,8 +13729,9 @@
             "AdminPanel.Companies.UpdateNotificationsConfig.Request": {
                 "type": "object",
                 "allOf": [
-                    {"$ref": "#/components/schemas/Companies.NotificationConfigAttribute.Sender"},
+                    {"$ref": "#/components/schemas/Companies.NotificationConfigAttribute.SenderEmail"},
                     {"$ref": "#/components/schemas/Companies.NotificationConfigAttribute.SupportEmail"},
+                    {"$ref": "#/components/schemas/Companies.NotificationConfigAttribute.SupportPhone"},
                     {"$ref": "#/components/schemas/Companies.NotificationConfig"}
                 ]
             },
