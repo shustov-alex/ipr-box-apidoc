@@ -5827,6 +5827,16 @@
                     }
                 }
             },
+            "Companies.FeatureFlag.Intercom": {
+                "type": "object",
+                "properties": {
+                    "intercom": {
+                        "type": "boolean",
+                        "description": "Функция 'Intercom'",
+                        "example": true
+                    }
+                }
+            },
             "Companies.FeatureFlag.IdpApproval": {
                 "type": "object",
                 "properties": {
@@ -6303,6 +6313,7 @@
                                         "allOf": [
                                             {"$ref": "#/components/schemas/Companies.FeatureFlag.RememberMe"},
                                             {"$ref": "#/components/schemas/Companies.FeatureFlag.ResetPassword"},
+                                            {"$ref": "#/components/schemas/Companies.FeatureFlag.Intercom"},
                                             {"$ref": "#/components/schemas/Companies.FeatureFlag.IdpApproval"},
                                             {"$ref": "#/components/schemas/Companies.FeatureFlag.TargetPriority"},
                                             {"$ref": "#/components/schemas/Companies.FeatureFlag.Skills"}
