@@ -5335,6 +5335,80 @@
                 }
             }
         },
+        "/admin/target-templates/import": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanel.TargetTemplates"
+                ],
+                "summary": "17.07. Импортировать шаблоны целей",
+                "description": "Импортировать шаблоны целей из xlsx-файла",
+                "operationId": "adminPanel.TargetTemplates.importTemplates",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AdminPanel.TargetTemplates.ImportTemplates.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Объект асинхронной задачи, в рамках которой будет проходить импорт",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.Materials.ImportMaterials.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки валидации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ValidationErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/target-templates/import/template": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanel.TargetTemplates"
+                ],
+                "summary": "17.08. Скачать шаблон для импорта",
+                "description": "Скачать шаблон для импорта",
+                "operationId": "adminPanel.TargetTemplates.getFileTemplate",
+                "responses": {
+                    "200": {
+                        "description": "xlsx-файл",
+                        "content": {
+                            "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": {
+                                "schema": {
+                                    "type": "string",
+                                    "format": "binary"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/admin/target-types": {
             "get": {
                 "security": [
@@ -12298,6 +12372,17 @@
                         }
                     }
                 }
+            },
+            "AdminPanel.TargetTemplates.ImportTemplates.Request": {
+                "type": "object",
+                "properties": {
+                    "file": {
+                        "description": "Импортируемый файл",
+                        "type": "string",
+                        "format": "binary"
+                    }
+                },
+                "required": ["file"]
             },
             "AdminPanel.Companies.Collection.Sort": {
                 "type": "object",
