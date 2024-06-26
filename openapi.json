@@ -7843,16 +7843,6 @@
                     }
                 }
             },
-            "Targets.TargetAttribute.TypeId": {
-                "type": "object",
-                "properties": {
-                    "type_id": {
-                        "type": "integer",
-                        "description": "ID типа",
-                        "example": 11
-                    }
-                }
-            },
             "Targets.TargetAttribute.Name": {
                 "type": "object",
                 "properties": {
@@ -7970,18 +7960,28 @@
                     }
                 }
             },
-            "Targets.TargetAttribute.Type": {
+            "Targets.Type.AttributeViewId": {
+                "type": "object",
+                "properties": {
+                    "type_id": {
+                        "type": "integer",
+                        "description": "ID типа",
+                        "example": 11
+                    }
+                }
+            },
+            "Targets.Type.AttributeViewObject": {
                 "type": "object",
                 "properties": {
                     "type": {
-                        "$ref": "#/components/schemas/Targets.TargetTypeDefaultView"
+                        "$ref": "#/components/schemas/Targets.Type.DefaultView"
                     }
                 }
             },
             "Targets.Target.ToUpdate": {
                 "type": "object",
                 "allOf": [
-                    {"$ref": "#/components/schemas/Targets.TargetAttribute.TypeId"},
+                    {"$ref": "#/components/schemas/Targets.Type.AttributeViewId"},
                     {"$ref": "#/components/schemas/Targets.TargetAttribute.Name"},
                     {"$ref": "#/components/schemas/Targets.TargetAttribute.Description"},
                     {"$ref": "#/components/schemas/Targets.TargetAttribute.Priority"},
@@ -8077,7 +8077,7 @@
                     {"$ref": "#/components/schemas/Targets.TargetAttribute.CreatedAt"},
                     {"$ref": "#/components/schemas/Targets.TargetAttribute.Deadline"},
                     {"$ref": "#/components/schemas/Targets.TargetAttribute.Percent"},
-                    {"$ref": "#/components/schemas/Targets.TargetAttribute.Type"}
+                    {"$ref": "#/components/schemas/Targets.Type.AttributeViewObject"}
                 ]
             },
             "Targets.Filters.IdpId": {
@@ -8253,7 +8253,7 @@
                             "success": {
                                 "type": "array",
                                 "items": {
-                                    "$ref": "#/components/schemas/Targets.TargetTypeDefaultView"
+                                    "$ref": "#/components/schemas/Targets.Type.DefaultView"
                                 }
                             }
                         }
@@ -8880,7 +8880,7 @@
                     }
                 ]
             },
-            "Targets.TargetTypeAttribute.Id": {
+            "Targets.TypeAttribute.Id": {
                 "type": "object",
                 "properties": {
                     "id": {
@@ -8890,7 +8890,7 @@
                     }
                 }
             },
-            "Targets.TargetTypeAttribute.Status": {
+            "Targets.TypeAttribute.Status": {
                 "type": "object",
                 "properties": {
                     "status": {
@@ -8901,7 +8901,7 @@
                     }
                 }
             },
-            "Targets.TargetTypeAttribute.CanBeArchived": {
+            "Targets.TypeAttribute.CanBeArchived": {
                 "type": "object",
                 "properties": {
                     "can_be_archived": {
@@ -8911,7 +8911,7 @@
                     }
                 }
             },
-            "Targets.TargetTypeAttribute.Name": {
+            "Targets.TypeAttribute.Name": {
                 "type": "object",
                 "properties": {
                     "name": {
@@ -8921,7 +8921,7 @@
                     }
                 }
             },
-            "Targets.TargetTypeAttribute.LocalizedName": {
+            "Targets.TypeAttribute.LocalizedName": {
                 "type": "object",
                 "properties": {
                     "name": {
@@ -8941,26 +8941,26 @@
                     }
                 }
             },
-            "Targets.TargetTypeDefaultView": {
+            "Targets.Type.DefaultView": {
                 "type": "object",
                 "allOf": [
-                    {"$ref": "#/components/schemas/Targets.TargetTypeAttribute.Id"},
-                    {"$ref": "#/components/schemas/Targets.TargetTypeAttribute.Status"},
-                    {"$ref": "#/components/schemas/Targets.TargetTypeAttribute.Name"}
+                    {"$ref": "#/components/schemas/Targets.TypeAttribute.Id"},
+                    {"$ref": "#/components/schemas/Targets.TypeAttribute.Status"},
+                    {"$ref": "#/components/schemas/Targets.TypeAttribute.Name"}
                 ]
             },
             "Targets.TargetTypeAdminView.ToSave": {
                 "type": "object",
                 "allOf": [
-                    {"$ref": "#/components/schemas/Targets.TargetTypeAttribute.Id"},
-                    {"$ref": "#/components/schemas/Targets.TargetTypeAttribute.LocalizedName"}
+                    {"$ref": "#/components/schemas/Targets.TypeAttribute.Id"},
+                    {"$ref": "#/components/schemas/Targets.TypeAttribute.LocalizedName"}
                 ]
             },
             "Targets.TargetTypeAdminView.ToDisplay": {
                 "type": "object",
                 "allOf": [
                     {"$ref": "#/components/schemas/Targets.TargetTypeAdminView.ToSave"},
-                    {"$ref": "#/components/schemas/Targets.TargetTypeAttribute.CanBeArchived"}
+                    {"$ref": "#/components/schemas/Targets.TypeAttribute.CanBeArchived"}
                 ]
             },
             "Idp.IdpAttribute.Id": {
@@ -12322,6 +12322,7 @@
                     {"$ref": "#/components/schemas/TargetTemplates.TemplateAttribute.Name"},
                     {"$ref": "#/components/schemas/TargetTemplates.TemplateAttribute.Description"},
                     {"$ref": "#/components/schemas/TargetTemplates.TemplateAttribute.Priority"},
+                    {"$ref": "#/components/schemas/Targets.Type.AttributeViewId"},
                     {"$ref": "#/components/schemas/TargetTemplates.TemplateAttribute.Scope.Ids"},
                     {"$ref": "#/components/schemas/TargetTemplates.TemplateAttribute.ScopeExtra.Ids"},
                     {"$ref": "#/components/schemas/TargetTemplates.TemplateAttribute.ApplyToCurrentUsers"},
@@ -12359,6 +12360,7 @@
                                     {"$ref": "#/components/schemas/TargetTemplates.TemplateAttribute.Name"},
                                     {"$ref": "#/components/schemas/TargetTemplates.TemplateAttribute.Description"},
                                     {"$ref": "#/components/schemas/TargetTemplates.TemplateAttribute.Priority"},
+                                    {"$ref": "#/components/schemas/Targets.Type.AttributeViewObject"},
                                     {"$ref": "#/components/schemas/TargetTemplates.TemplateAttribute.Scope.Objects"},
                                     {"$ref": "#/components/schemas/TargetTemplates.TemplateAttribute.ScopeExtra.Objects"},
                                     {"$ref": "#/components/schemas/TargetTemplates.TemplateAttribute.ApplyToCurrentUsers"},
