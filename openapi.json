@@ -81,12 +81,16 @@
             "description": "17. Панель администратора, шаблоны целей"
         },
         {
+            "name": "AdminPanel.Companies",
+            "description": "18. Панель администратора, список компаний"
+        },
+        {
             "name": "AdminPanel.TargetTypes",
             "description": "19. Панель администратора, типы целей"
         }
     ],
     "paths": {
-        "/configuration": {
+        "/configuration/{company_sub_domain}": {
             "get": {
                 "security": [],
                 "tags": [
@@ -95,6 +99,9 @@
                 "summary": "01.01. Получить конфигурацию компании",
                 "description": "Получить конфигурацию компании",
                 "operationId": "companies.getConfiguration",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Path.Company.SubDomain"}
+                ],
                 "responses": {
                     "200": {
                         "description": "Объект конфигурации",
@@ -5409,6 +5416,895 @@
                 }
             }
         },
+        "/admin/companies": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanel.Companies"
+                ],
+                "summary": "18.01. Получить список компаний",
+                "description": "Получить список компаний",
+                "operationId": "adminPanel.Companies.getCompanies",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AdminPanel.Companies.GetCollection.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Список компаний",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.Companies.GetCollection.SuccessResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/companies/update-status": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanel.Companies"
+                ],
+                "summary": "18.02. Массовое изменение статуса компаний",
+                "description": "Массовое изменение статуса компаний",
+                "operationId": "adminPanel.Companies.massUpdateStatus",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AdminPanel.Companies.MassUpdateStatus.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Статус компаний успешно изменён",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.EmptySuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки валидации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ValidationErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/companies/create": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanel.Companies"
+                ],
+                "summary": "18.03. Создать компанию",
+                "description": "Создать компанию",
+                "operationId": "adminPanel.Companies.createCompany",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AdminPanel.Companies.CreateCompany.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Основные настройки компании",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.Companies.GetBaseSettings.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки валидации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ValidationErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/companies/{company_id}/change-history": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanel.Companies"
+                ],
+                "summary": "18.04. Получить краткую историю изменений",
+                "description": "Получить краткую историю изменений",
+                "operationId": "adminPanel.Companies.getChangeHistory",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Path.Company.Id"}
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AdminPanel.Companies.GetChangeHistory.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Основные настройки компании",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.Companies.GetChangeHistory.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Запрашиваемый объект не найден",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/companies/{company_id}/base-settings": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanel.Companies"
+                ],
+                "summary": "18.05. Получить основные настройки компании",
+                "description": "Получить основные настройки компании",
+                "operationId": "adminPanel.Companies.getBaseSettings",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Path.Company.Id"}
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Основные настройки компании",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.Companies.GetBaseSettings.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Запрашиваемый объект не найден",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/companies/{company_id}/base-settings/update": {
+            "put": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanel.Companies"
+                ],
+                "summary": "18.06. Обновить основные настройки компании",
+                "description": "Обновить основные настройки компании",
+                "operationId": "adminPanel.Companies.updateBaseSettings",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Path.Company.Id"}
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AdminPanel.Companies.UpdateBaseSettings.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Основные настройки компании",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.Companies.GetBaseSettings.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundOrValidationErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/companies/{company_id}/intercom": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanel.Companies"
+                ],
+                "summary": "18.07. Получить настройки intercom",
+                "description": "Получить настройки intercom",
+                "operationId": "adminPanel.Companies.getIntercomSettings",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Path.Company.Id"}
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Настройки intercom",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.Companies.GetIntercomSettings.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Запрашиваемый объект не найден",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/companies/{company_id}/intercom/update": {
+            "put": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanel.Companies"
+                ],
+                "summary": "18.08. Обновить настройки intercom",
+                "description": "Обновить настройки intercom",
+                "operationId": "adminPanel.Companies.updateIntercomSettings",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Path.Company.Id"}
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AdminPanel.Companies.UpdateIntercomSettings.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Настройки intercom",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.Companies.GetIntercomSettings.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundOrValidationErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/companies/{company_id}/feature-flags": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanel.Companies"
+                ],
+                "summary": "18.09. Получить feature-флаги",
+                "description": "Получить feature-флаги",
+                "operationId": "adminPanel.Companies.getFeatureFlags",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Path.Company.Id"}
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Feature-флаги",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.Companies.GetFeatureFlags.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Запрашиваемый объект не найден",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/companies/{company_id}/feature-flags/update": {
+            "put": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanel.Companies"
+                ],
+                "summary": "18.10. Обновить feature-флаги",
+                "description": "Обновить feature-флаги",
+                "operationId": "adminPanel.Companies.updateFeatureFlags",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Path.Company.Id"}
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AdminPanel.Companies.UpdateFeatureFlags.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Feature-флаги",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.Companies.GetFeatureFlags.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundOrValidationErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/companies/{company_id}/branding": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanel.Companies"
+                ],
+                "summary": "18.11. Получить настройки брендирования",
+                "description": "Получить настройки брендирования",
+                "operationId": "adminPanel.Companies.getBranding",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Path.Company.Id"}
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Настройки брендирования",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.Companies.GetBranding.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Запрашиваемый объект не найден",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/companies/{company_id}/branding/update": {
+            "put": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanel.Companies"
+                ],
+                "summary": "18.12. Обновить настройки брендирования",
+                "description": "Обновить настройки брендирования",
+                "operationId": "adminPanel.Companies.updateBranding",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Path.Company.Id"}
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AdminPanel.Companies.UpdateBranding.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Настройки брендирования",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.Companies.GetBranding.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundOrValidationErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/companies/{company_id}/notifications": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanel.Companies"
+                ],
+                "summary": "18.13. Получить настройки уведомлений",
+                "description": "Получить настройки уведомлений",
+                "operationId": "adminPanel.Companies.getNotificationsConfig",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Path.Company.Id"}
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Настройки уведомлений",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.Companies.GetNotificationsConfig.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Запрашиваемый объект не найден",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/companies/{company_id}/notifications/update": {
+            "put": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanel.Companies"
+                ],
+                "summary": "18.14. Обновить настройки уведомлений",
+                "description": "Обновить настройки уведомлений",
+                "operationId": "adminPanel.Companies.updateNotificationsConfig",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Path.Company.Id"}
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AdminPanel.Companies.UpdateNotificationsConfig.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Настройки уведомлений",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.Companies.GetNotificationsConfig.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundOrValidationErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/companies/{company_id}/roles": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanel.Companies"
+                ],
+                "summary": "18.15. Получить настройки ролей",
+                "description": "Получить настройки ролей",
+                "operationId": "adminPanel.Companies.getRoles",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Path.Company.Id"}
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Настройки ролей",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.Companies.GetRoles.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Запрашиваемый объект не найден",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/companies/{company_id}/roles/update": {
+            "put": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanel.Companies"
+                ],
+                "summary": "18.16. Обновить настройки ролей",
+                "description": "Обновить настройки ролей",
+                "operationId": "adminPanel.Companies.updateRoles",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Path.Company.Id"}
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AdminPanel.Companies.UpdateRoles.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Настройки ролей",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.Companies.GetRoles.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundOrValidationErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/companies/{company_id}/materials": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanel.Companies"
+                ],
+                "summary": "18.17. Получить настройки материалов",
+                "description": "Получить настройки материалов",
+                "operationId": "adminPanel.Companies.getMaterialSettings",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Path.Company.Id"}
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Настройки материалов",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.Companies.GetMaterialSettings.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Запрашиваемый объект не найден",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/companies/{company_id}/materials/update": {
+            "put": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanel.Companies"
+                ],
+                "summary": "18.18. Обновить настройки материалов",
+                "description": "Обновить настройки материалов",
+                "operationId": "adminPanel.Companies.updateMaterialSettings",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Path.Company.Id"}
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AdminPanel.Companies.UpdateMaterialSettings.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Настройки материалов",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.Companies.GetMaterialSettings.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundOrValidationErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/companies/{company_id}/integration": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanel.Companies"
+                ],
+                "summary": "18.19. Получить настройки интеграции",
+                "description": "Получить настройки интеграции",
+                "operationId": "adminPanel.Companies.getIntegrationSettings",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Path.Company.Id"}
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Настройки интеграции",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.Companies.GetIntegrationSettings.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Запрашиваемый объект не найден",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/companies/{company_id}/integration/update": {
+            "put": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanel.Companies"
+                ],
+                "summary": "18.20. Обновить настройки интеграции",
+                "description": "Обновить настройки интеграции",
+                "operationId": "adminPanel.Companies.updateIntegrationSettings",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Path.Company.Id"}
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AdminPanel.Companies.UpdateIntegrationSettings.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Настройки интеграции",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.Companies.GetIntegrationSettings.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundOrValidationErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/admin/target-types": {
             "get": {
                 "security": [
@@ -6383,6 +7279,13 @@
                             "success": {
                                 "type": "object",
                                 "properties": {
+                                    "company": {
+                                        "type": "object",
+                                        "allOf": [
+                                            {"$ref": "#/components/schemas/Companies.CompanyAttribute.Id"},
+                                            {"$ref": "#/components/schemas/Companies.CompanyAttribute.Name"}
+                                        ]
+                                    },
                                     "language_ids": {
                                         "type": "array",
                                         "description": "ID языка",
@@ -6413,6 +7316,13 @@
                                                 "enum": ["goal", "task", "action"]
                                             }
                                         }
+                                    },
+                                    "intercom": {
+                                        "type": "object",
+                                        "allOf": [
+                                            {"$ref": "#/components/schemas/Companies.IntercomSettingsAttribute.CompanyId"},
+                                            {"$ref": "#/components/schemas/Companies.IntercomSettingsAttribute.CompanyName"}
+                                        ]
                                     }
                                 }
                             }
@@ -6767,9 +7677,14 @@
                         "type": "string",
                         "description": "Пароль",
                         "example": "your_password"
+                    },
+                    "company_id": {
+                        "type": "integer",
+                        "description": "ID компании",
+                        "example": 1
                     }
                 },
-                "required": ["login", "password"]
+                "required": ["login", "password", "company_id"]
             },
             "Auth.Login.SuccessResponse": {
                 "type": "object",
@@ -6800,9 +7715,12 @@
                                         "type": "string",
                                         "description": "Refresh token. Используется для обновления пары access token / refresh token.",
                                         "example": "G1O8jaQj4KyGOc3-fbrIF30j5eUU_kqs9O2qDXk1"
+                                    },
+                                    "user_profile": {
+                                        "$ref": "#/components/schemas/Users.Profile"
                                     }
                                 },
-                                "required": ["access_token", "token_type", "expires_in", "refresh_token"]
+                                "required": ["access_token", "token_type", "expires_in", "refresh_token", "user_profile"]
                             }
                         }
                     }
@@ -6826,9 +7744,14 @@
                         "type": "string",
                         "description": "Логин",
                         "example": "your_login"
+                    },
+                    "company_id": {
+                        "type": "integer",
+                        "description": "ID компании",
+                        "example": 1
                     }
                 },
-                "required": ["login"]
+                "required": ["login", "company_id"]
             },
             "Auth.ResetPassword.ForgotPassword.SuccessResponse": {
                 "type": "object",
@@ -6861,13 +7784,18 @@
             "Auth.ResetPassword.CheckToken.Request": {
                 "type": "object",
                 "properties": {
+                    "company_id": {
+                        "type": "integer",
+                        "description": "ID компании",
+                        "example": 1
+                    },
                     "token": {
                         "type": "string",
                         "description": "Токен, полученный из URL",
                         "example": "NDQStklU3VNpnlkp1i22kVVPe4QZxk0nkJi7llE0"
                     }
                 },
-                "required": ["token"]
+                "required": ["company_id", "token"]
             },
             "Auth.PasswordRequirement.AttributeMatch": {
                 "type": "object",
@@ -6944,6 +7872,11 @@
             "Auth.ResetPassword.SaveNewPassword.Request": {
                 "type": "object",
                 "properties": {
+                    "company_id": {
+                        "type": "integer",
+                        "description": "ID компании",
+                        "example": 1
+                    },
                     "token": {
                         "type": "string",
                         "description": "Токен, полученный из URL",
@@ -6955,7 +7888,7 @@
                         "example": "your_new_password"
                     }
                 },
-                "required": ["token", "password"]
+                "required": ["company_id", "token", "password"]
             },
             "Auth.ResetPassword.PasswordRequirement.Error": {
                 "type": "object",
@@ -7013,9 +7946,14 @@
                         "type": "string",
                         "description": "JWT, выданный 'Академией Equeo'",
                         "example": "eyJhbGciOiJIUzI1NiIsInR5cGUiOiJKV1QifQ.eyJpc3MiOiJlcXVlb19hdXRoX3NlcnZlciIsInN1YiI6IjJuZF91c2VyIiwiY29tcGFueV9pZCI6MSwiZXhwIjoxNjkyODkzMDQ3LCJpYXQiOjE2OTI4MDY2NDd9.3uuI7Hjb_5n1JFz36Uialz8PIc7hEMLTRh-83X3U7wA"
+                    },
+                    "company_id": {
+                        "type": "integer",
+                        "description": "ID компании",
+                        "example": 1
                     }
                 },
-                "required": ["token"]
+                "required": ["token", "company_id"]
             },
             "Feedback.NewTicket.Request": {
                 "type": "object",
@@ -7029,9 +7967,14 @@
                         "type": "string",
                         "description": "Текст запроса",
                         "example": "Ничего не работает. Ничего не понятно."
+                    },
+                    "company_id": {
+                        "type": "integer",
+                        "description": "ID компании",
+                        "example": 1
                     }
                 },
-                "required": ["email", "text"]
+                "required": ["email", "text", "company_id"]
             },
             "Users.UserAttribute.Id": {
                 "type": "object",
@@ -7158,6 +8101,7 @@
                 "type": "object",
                 "allOf": [
                     {"$ref": "#/components/schemas/Users.UserAttribute.Id"},
+                    {"$ref": "#/components/schemas/Users.UserAttribute.CompanyId"},
                     {"$ref": "#/components/schemas/Users.UserAttribute.Email"},
                     {"$ref": "#/components/schemas/Users.UserAttribute.FirstName"},
                     {"$ref": "#/components/schemas/Users.UserAttribute.LastName"},
