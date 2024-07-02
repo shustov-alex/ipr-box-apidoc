@@ -5535,6 +5535,9 @@
                 "summary": "17.07. Импортировать шаблоны целей",
                 "description": "Импортировать шаблоны целей из xlsx-файла",
                 "operationId": "adminPanel.TargetTemplates.importTemplates",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
+                ],
                 "requestBody": {
                     "content": {
                         "multipart/form-data": {
@@ -5581,6 +5584,9 @@
                 "summary": "17.08. Скачать шаблон для импорта",
                 "description": "Скачать шаблон для импорта",
                 "operationId": "adminPanel.TargetTemplates.getFileTemplate",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
+                ],
                 "responses": {
                     "200": {
                         "description": "xlsx-файл",
@@ -6499,7 +6505,7 @@
                 "description": "Получить типы целей",
                 "operationId": "adminPanel.TargetTypes.getTypes",
                 "parameters": [
-                    {"$ref": "#/components/parameters/Companies.Path.Company.Id"}
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
                 ],
                 "responses": {
                     "200": {
@@ -6539,7 +6545,7 @@
                 "description": "Обновить типы целей",
                 "operationId": "adminPanel.TargetTypes.updateTypes",
                 "parameters": [
-                    {"$ref": "#/components/parameters/Companies.Path.Company.Id"}
+                    {"$ref": "#/components/parameters/Companies.Query.Company.Id"}
                 ],
                 "requestBody": {
                     "content": {
