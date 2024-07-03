@@ -5731,7 +5731,7 @@
             }
         },
         "/admin/companies/{company_id}/change-history": {
-            "post": {
+            "get": {
                 "security": [
                     {
                         "bearerAuth": []
@@ -5746,18 +5746,9 @@
                 "parameters": [
                     {"$ref": "#/components/parameters/Companies.Path.Company.Id"}
                 ],
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/AdminPanel.Companies.GetChangeHistory.Request"
-                            }
-                        }
-                    }
-                },
                 "responses": {
                     "200": {
-                        "description": "Основные настройки компании",
+                        "description": "Краткая история изменений",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -13693,14 +13684,6 @@
                     {"$ref": "#/components/schemas/Companies.CompanyAttribute.UserLimit"}
                 ]
             },
-            "AdminPanel.Companies.GetChangeHistory.Request": {
-                "type": "object",
-                "properties": {
-                    "pagination": {
-                        "$ref": "#/components/schemas/Base.CursorPaginationBackward"
-                    }
-                }
-            },
             "AdminPanel.Companies.GetChangeHistory.SuccessResponse": {
                 "type": "object",
                 "properties": {
@@ -13712,18 +13695,14 @@
                                 "items": {
                                     "type": "object",
                                     "properties": {
-                                        "id": {
-                                            "type": "integer",
-                                            "description": "ID записи в истории",
-                                            "example": 345
-                                        },
                                         "action": {
                                             "type": "string",
                                             "description": "Действие",
                                             "example": "updated",
                                             "enum": [
                                                 "created",
-                                                "updated"
+                                                "updated",
+                                                "activated"
                                             ]
                                         },
                                         "admin_login": {
@@ -13738,14 +13717,6 @@
                                         }
                                     }
                                 }
-                            }
-                        }
-                    },
-                    "meta": {
-                        "type": "object",
-                        "properties": {
-                            "pagination": {
-                                "$ref": "#/components/schemas/Base.CursorPaginationMeta"
                             }
                         }
                     }
