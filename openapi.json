@@ -6491,6 +6491,95 @@
                 }
             }
         },
+        "/admin/companies/{company_id}/additional-settings": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanel.Companies"
+                ],
+                "summary": "18.21. Получить дополнительные настройки",
+                "description": "Получить дополнительные настройки",
+                "operationId": "adminPanel.Companies.getAdditionalSettings",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Path.Company.Id"}
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Дополнительные настройки",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.Companies.GetAdditionalSettings.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Запрашиваемый объект не найден",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/companies/{company_id}/additional-settings/update": {
+            "put": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanel.Companies"
+                ],
+                "summary": "18.22. Обновить дополнительные настройки",
+                "description": "Обновить дополнительные настройки",
+                "operationId": "adminPanel.Companies.updateAdditionalSettings",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Path.Company.Id"}
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AdminPanel.Companies.UpdateAdditionalSettings.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Дополнительные настройки",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.Companies.GetAdditionalSettings.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundOrValidationErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/admin/target-types": {
             "get": {
                 "security": [
@@ -14044,6 +14133,92 @@
                     },
                     "material": {
                         "$ref": "#/components/schemas/Companies.IntegrationSettings.Material"
+                    }
+                }
+            },
+            "AdminPanel.Companies.GetAdditionalSettings.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "object",
+                                "properties": {
+                                    "feature_flags": {
+                                        "type": "object",
+                                        "allOf": [
+                                            {"$ref": "#/components/schemas/Companies.FeatureFlag.TargetPriority"}
+                                        ]
+                                    },
+                                    "target": {
+                                        "type": "object",
+                                        "properties": {
+                                            "limit": {
+                                                "type": "integer",
+                                                "nullable": true,
+                                                "description": "Лимит количества создаваемых целей",
+                                                "example": 50
+                                            },
+                                            "current_alias": {
+                                                "type": "string",
+                                                "description": "Псевдоним цели",
+                                                "example": "goal",
+                                                "enum": ["goal", "task", "action"]
+                                            },
+                                            "aliases": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "string",
+                                                            "description": "Псевдоним цели, id",
+                                                            "example": "goal",
+                                                            "enum": ["goal", "task", "action"]
+                                                        },
+                                                        "name": {
+                                                            "type": "string",
+                                                            "description": "Псевдоним цели, название",
+                                                            "example": "Цель",
+                                                            "enum": ["Цель", "Задача", "Действие"]
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "AdminPanel.Companies.UpdateAdditionalSettings.Request": {
+                "type": "object",
+                "properties": {
+                    "feature_flags": {
+                        "type": "object",
+                        "allOf": [
+                            {"$ref": "#/components/schemas/Companies.FeatureFlag.TargetPriority"}
+                        ]
+                    },
+                    "target": {
+                        "type": "object",
+                        "properties": {
+                            "limit": {
+                                "type": "integer",
+                                "nullable": true,
+                                "description": "Лимит количества создаваемых целей",
+                                "example": 50
+                            },
+                            "current_alias": {
+                                "type": "string",
+                                "description": "Псевдоним цели",
+                                "example": "goal",
+                                "enum": ["goal", "task", "action"]
+                            }
+                        }
                     }
                 }
             },
