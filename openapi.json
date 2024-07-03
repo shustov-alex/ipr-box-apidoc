@@ -14144,51 +14144,26 @@
                         "properties": {
                             "success": {
                                 "type": "object",
-                                "properties": {
-                                    "feature_flags": {
-                                        "type": "object",
-                                        "allOf": [
-                                            {"$ref": "#/components/schemas/Companies.FeatureFlag.TargetPriority"}
-                                        ]
-                                    },
-                                    "target": {
+                                "allOf": [
+                                    {"$ref": "#/components/schemas/Companies.FeatureFlag.TargetPriority"},
+                                    {
                                         "type": "object",
                                         "properties": {
-                                            "limit": {
+                                            "target_limit": {
                                                 "type": "integer",
                                                 "nullable": true,
                                                 "description": "Лимит количества создаваемых целей",
                                                 "example": 50
                                             },
-                                            "current_alias": {
+                                            "target_alias": {
                                                 "type": "string",
                                                 "description": "Псевдоним цели",
                                                 "example": "goal",
                                                 "enum": ["goal", "task", "action"]
-                                            },
-                                            "aliases": {
-                                                "type": "array",
-                                                "items": {
-                                                    "type": "object",
-                                                    "properties": {
-                                                        "id": {
-                                                            "type": "string",
-                                                            "description": "Псевдоним цели, id",
-                                                            "example": "goal",
-                                                            "enum": ["goal", "task", "action"]
-                                                        },
-                                                        "name": {
-                                                            "type": "string",
-                                                            "description": "Псевдоним цели, название",
-                                                            "example": "Цель",
-                                                            "enum": ["Цель", "Задача", "Действие"]
-                                                        }
-                                                    }
-                                                }
                                             }
                                         }
                                     }
-                                }
+                                ]
                             }
                         }
                     }
@@ -14196,23 +14171,18 @@
             },
             "AdminPanel.Companies.UpdateAdditionalSettings.Request": {
                 "type": "object",
-                "properties": {
-                    "feature_flags": {
-                        "type": "object",
-                        "allOf": [
-                            {"$ref": "#/components/schemas/Companies.FeatureFlag.TargetPriority"}
-                        ]
-                    },
-                    "target": {
+                "allOf": [
+                    {"$ref": "#/components/schemas/Companies.FeatureFlag.TargetPriority"},
+                    {
                         "type": "object",
                         "properties": {
-                            "limit": {
+                            "target_limit": {
                                 "type": "integer",
                                 "nullable": true,
                                 "description": "Лимит количества создаваемых целей",
                                 "example": 50
                             },
-                            "current_alias": {
+                            "target_alias": {
                                 "type": "string",
                                 "description": "Псевдоним цели",
                                 "example": "goal",
@@ -14220,7 +14190,7 @@
                             }
                         }
                     }
-                }
+                ]
             },
             "AdminPanel.TargetTypes.GetTypes.SuccessResponse": {
                 "type": "object",
