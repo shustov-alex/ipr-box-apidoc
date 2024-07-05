@@ -90,8 +90,8 @@
         }
     ],
     "paths": {
-        "/configuration/{company_sub_domain}": {
-            "get": {
+        "/configuration": {
+            "post": {
                 "security": [],
                 "tags": [
                     "Base"
@@ -99,16 +99,22 @@
                 "summary": "01.01. Получить конфигурацию компании",
                 "description": "Получить конфигурацию компании",
                 "operationId": "companies.getConfiguration",
-                "parameters": [
-                    {"$ref": "#/components/parameters/Companies.Path.Company.SubDomain"}
-                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Companies.Configuration.Request"
+                            }
+                        }
+                    }
+                },
                 "responses": {
                     "200": {
                         "description": "Объект конфигурации",
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/Companies.Configuration.Response"
+                                    "$ref": "#/components/schemas/Companies.Configuration.SuccessResponse"
                                 }
                             }
                         }
@@ -7453,7 +7459,22 @@
                     }
                 }
             },
-            "Companies.Configuration.Response": {
+            "Companies.Configuration.Request": {
+                "type": "object",
+                "properties": {
+                    "company_id": {
+                        "type": "integer",
+                        "description": "ID компании",
+                        "example": 123
+                    },
+                    "company_sub_domain": {
+                        "type": "string",
+                        "description": "Поддомен компании",
+                        "example": "my-subdomain"
+                    }
+                }
+            },
+            "Companies.Configuration.SuccessResponse": {
                 "type": "object",
                 "properties": {
                     "data": {
@@ -7466,6 +7487,8 @@
                                         "type": "object",
                                         "allOf": [
                                             {"$ref": "#/components/schemas/Companies.CompanyAttribute.Id"},
+                                            {"$ref": "#/components/schemas/Companies.CompanyAttribute.Status"},
+                                            {"$ref": "#/components/schemas/Companies.CompanyAttribute.SubDomain"},
                                             {"$ref": "#/components/schemas/Companies.CompanyAttribute.Name"}
                                         ]
                                     },
