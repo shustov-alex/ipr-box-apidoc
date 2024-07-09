@@ -13924,6 +13924,7 @@
                                         },
                                         "admin_email": {
                                             "type": "string",
+                                            "nullable": true,
                                             "description": "Email администратора",
                                             "example": "admin@test.com"
                                         },
