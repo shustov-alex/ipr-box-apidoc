@@ -6399,7 +6399,7 @@
                 }
             }
         },
-        "/admin/companies/{company_id}/integration": {
+        "/admin/companies/{company_id}/integration-settings": {
             "get": {
                 "security": [
                     {
@@ -6439,7 +6439,7 @@
                 }
             }
         },
-        "/admin/companies/{company_id}/integration/update": {
+        "/admin/companies/{company_id}/integration-settings/update": {
             "put": {
                 "security": [
                     {
@@ -6488,6 +6488,111 @@
                 }
             }
         },
+        "/admin/companies/{company_id}/integration/{type}/sync": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanel.Companies"
+                ],
+                "summary": "18.21. Запустить синхронизацию",
+                "description": "Запустить синхронизацию",
+                "operationId": "adminPanel.Companies.syncEntities",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Path.Company.Id"}
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Синхронизация запущена успешно",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.EmptySuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundOrValidationErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/admin/companies/{company_id}/integration/{type}/sync-dates": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "AdminPanel.Companies"
+                ],
+                "summary": "18.22. Получить даты синхронизации",
+                "description": "Получить даты синхронизации",
+                "operationId": "adminPanel.Companies.getDatesOfEntitiesSync",
+                "parameters": [
+                    {"$ref": "#/components/parameters/Companies.Path.Company.Id"}
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Даты синхронизации",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "success": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "last": {
+                                                            "type": "string",
+                                                            "nullable": true,
+                                                            "description": "Дата последней синхронизации",
+                                                            "example": "2023-09-01 12:10:20 +03:00"
+                                                        },
+                                                        "scheduled": {
+                                                            "type": "string",
+                                                            "nullable": true,
+                                                            "description": "Дата запланированной синхронизации",
+                                                            "example": "2023-09-01 12:10:20 +03:00"
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "required": ["success"]
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ObjectNotFoundOrValidationErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/admin/companies/{company_id}/additional-settings": {
             "get": {
                 "security": [
@@ -6498,7 +6603,7 @@
                 "tags": [
                     "AdminPanel.Companies"
                 ],
-                "summary": "18.21. Получить дополнительные настройки",
+                "summary": "18.23. Получить дополнительные настройки",
                 "description": "Получить дополнительные настройки",
                 "operationId": "adminPanel.Companies.getAdditionalSettings",
                 "parameters": [
@@ -6538,7 +6643,7 @@
                 "tags": [
                     "AdminPanel.Companies"
                 ],
-                "summary": "18.22. Обновить дополнительные настройки",
+                "summary": "18.24. Обновить дополнительные настройки",
                 "description": "Обновить дополнительные настройки",
                 "operationId": "adminPanel.Companies.updateAdditionalSettings",
                 "parameters": [
