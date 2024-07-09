@@ -13922,10 +13922,10 @@
                                                 "activated"
                                             ]
                                         },
-                                        "admin_login": {
+                                        "admin_email": {
                                             "type": "string",
-                                            "description": "Логин администратора",
-                                            "example": "admin_login"
+                                            "description": "Email администратора",
+                                            "example": "admin@test.com"
                                         },
                                         "datetime": {
                                             "type": "string",
