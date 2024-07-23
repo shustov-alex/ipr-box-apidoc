@@ -6693,7 +6693,7 @@
                 }
             }
         },
-        "/admin/users/roles": {
+        "/users/sources": {
             "get": {
                 "security": [
                     {
@@ -6701,43 +6701,11 @@
                     }
                 ],
                 "tags": [
-                    "AdminPanel.Users"
+                    "Users"
                 ],
-                "summary": "15.01. Список всех ролей в системе",
-                "description": "Список всех ролей в системе",
-                "operationId": "adminPanel.Users.getRoles",
-                "parameters": [
-                    {
-                        "$ref": "#/components/parameters/Companies.Query.Company.Id"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Список ролей",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/AdminPanel.Roles.GetCollection.SuccessResponse"
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/admin/users/sources": {
-            "get": {
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ],
-                "tags": [
-                    "AdminPanel.Users"
-                ],
-                "summary": "15.02. Список возможных источников пользователей",
-                "description": "Список возможных источников пользователей",
-                "operationId": "adminPanel.Users.getSources",
+                "summary": "04.03. Список источников пользователей",
+                "description": "Список источников пользователей",
+                "operationId": "users.getSources",
                 "parameters": [
                     {
                         "$ref": "#/components/parameters/Companies.Query.Company.Id"
@@ -6749,7 +6717,71 @@
                         "content": {
                             "application/json": {
                                 "schema": {
-                                    "$ref": "#/components/schemas/AdminPanel.UserSources.GetCollection.SuccessResponse"
+                                    "$ref": "#/components/schemas/Users.GetSources.SuccessResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/users/active-roles": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "summary": "04.04. Список активных ролей",
+                "description": "Список активных ролей",
+                "operationId": "users.getActiveRoles",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/Companies.Query.Company.Id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Список ролей",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Users.GetActiveRoles.SuccessResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/users/roles-used": {
+            "get": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Users"
+                ],
+                "summary": "04.05. Список используемых ролей",
+                "description": "Список используемых ролей. Включает все активные роли и используемые архивные роли.",
+                "operationId": "users.getRolesUsed",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/Companies.Query.Company.Id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Список ролей",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Users.GetRolesUsed.SuccessResponse"
                                 }
                             }
                         }
@@ -7496,30 +7528,6 @@
                         "$ref": "#/components/schemas/Roles.RoleAttribute.CountOfUsers"
                     }
                 ]
-            },
-            "AdminPanel.Roles.GetCollection.SuccessResponse": {
-                "type": "object",
-                "properties": {
-                    "data": {
-                        "type": "object",
-                        "properties": {
-                            "success": {
-                                "type": "array",
-                                "items": {
-                                    "type": "object",
-                                    "allOf": [
-                                        {
-                                            "$ref": "#/components/schemas/Roles.RoleAttribute.Id"
-                                        },
-                                        {
-                                            "$ref": "#/components/schemas/Roles.RoleAttribute.Name"
-                                        }
-                                    ]
-                                }
-                            }
-                        }
-                    }
-                }
             },
             "Auth.Login.Request": {
                 "type": "object",
@@ -15001,6 +15009,79 @@
                     }
                 }
             },
+            "Users.GetSources.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string",
+                                    "description": "Источник данных о пользователе",
+                                    "enum": [
+                                        "equeo",
+                                        "idp",
+                                        "other"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "Users.GetActiveRoles.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/components/schemas/Roles.RoleAttribute.Id"
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/Roles.RoleAttribute.Name"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "Users.GetRolesUsed.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "type": "array",
+                                "items": {
+                                    "type": "object",
+                                    "allOf": [
+                                        {
+                                            "$ref": "#/components/schemas/Roles.RoleAttribute.Id"
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/Roles.RoleAttribute.Name"
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/Roles.RoleAttribute.Status"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            },
             "Employees.EmployeeAttribute.Id": {
                 "type": "object",
                 "properties": {
@@ -15488,28 +15569,6 @@
                         "properties": {
                             "pagination": {
                                 "$ref": "#/components/schemas/Base.CursorPaginationMeta"
-                            }
-                        }
-                    }
-                }
-            },
-            "AdminPanel.UserSources.GetCollection.SuccessResponse": {
-                "type": "object",
-                "properties": {
-                    "data": {
-                        "type": "object",
-                        "properties": {
-                            "success": {
-                                "type": "array",
-                                "items": {
-                                    "type": "string",
-                                    "description": "Источник данных о пользователе",
-                                    "enum": [
-                                        "equeo",
-                                        "idp",
-                                        "other"
-                                    ]
-                                }
                             }
                         }
                     }
