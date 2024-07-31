@@ -1781,6 +1781,52 @@
                 }
             }
         },
+        "/files/upload": {
+            "post": {
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "tags": [
+                    "Files"
+                ],
+                "summary": "12.02. Загрузить файл",
+                "description": "Загрузить файл",
+                "operationId": "files.uploadOne",
+                "requestBody": {
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "$ref": "#/components/schemas/AdminPanel.Files.UploadOne.Request"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Файл загружен успешно",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/AdminPanel.Files.UploadOne.SuccessResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Ошибки",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Base.ErrorCollectionResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/idp": {
             "get": {
                 "security": [
@@ -6706,11 +6752,6 @@
                 "summary": "04.03. Список источников пользователей",
                 "description": "Список источников пользователей",
                 "operationId": "users.getSources",
-                "parameters": [
-                    {
-                        "$ref": "#/components/parameters/Companies.Query.Company.Id"
-                    }
-                ],
                 "responses": {
                     "200": {
                         "description": "Список источников",
@@ -8504,7 +8545,7 @@
                     }
                 }
             },
-            "Companies.BrandingAttributes.Images.LogoId": {
+            "Companies.BrandingAttributes.ImageSettings.LogoId": {
                 "type": "object",
                 "properties": {
                     "logo_id": {
@@ -8515,7 +8556,15 @@
                     }
                 }
             },
-            "Companies.BrandingAttributes.Images.AuthId": {
+            "Companies.BrandingAttributes.ImageSettings.Logo": {
+                "type": "object",
+                "properties": {
+                    "logo": {
+                        "$ref": "#/components/schemas/AdminPanel.Files.DefaultImage"
+                    }
+                }
+            },
+            "Companies.BrandingAttributes.ImageSettings.AuthId": {
                 "type": "object",
                 "properties": {
                     "auth_id": {
@@ -8526,14 +8575,27 @@
                     }
                 }
             },
-            "Companies.BrandingAttributes.Images.BackgroundId": {
+            "Companies.BrandingAttributes.ImageSettings.Auth": {
                 "type": "object",
                 "properties": {
-                    "background_id": {
-                        "type": "integer",
-                        "description": "ID фонового изображения",
-                        "nullable": true,
-                        "example": 30
+                    "auth": {
+                        "$ref": "#/components/schemas/AdminPanel.Files.DefaultImage"
+                    }
+                }
+            },
+            "Companies.BrandingAttributes.Images.Logo": {
+                "type": "object",
+                "properties": {
+                    "logo": {
+                        "$ref": "#/components/schemas/Files.DefaultImage"
+                    }
+                }
+            },
+            "Companies.BrandingAttributes.Images.Auth": {
+                "type": "object",
+                "properties": {
+                    "auth": {
+                        "$ref": "#/components/schemas/Files.DefaultImage"
                     }
                 }
             },
@@ -9106,6 +9168,42 @@
                                                 "$ref": "#/components/schemas/Companies.IntercomSettingsAttribute.CompanyName"
                                             }
                                         ]
+                                    },
+                                    "branding": {
+                                        "type": "object",
+                                        "properties": {
+                                            "images": {
+                                                "type": "object",
+                                                "allOf": [
+                                                    {
+                                                        "$ref": "#/components/schemas/Companies.BrandingAttributes.Images.Logo"
+                                                    },
+                                                    {
+                                                        "$ref": "#/components/schemas/Companies.BrandingAttributes.Images.Auth"
+                                                    }
+                                                ]
+                                            },
+                                            "colors": {
+                                                "type": "object",
+                                                "allOf": [
+                                                    {
+                                                        "$ref": "#/components/schemas/Companies.BrandingAttributes.Colors.Base"
+                                                    },
+                                                    {
+                                                        "$ref": "#/components/schemas/Companies.BrandingAttributes.Colors.Notification"
+                                                    },
+                                                    {
+                                                        "$ref": "#/components/schemas/Companies.BrandingAttributes.Colors.Error"
+                                                    },
+                                                    {
+                                                        "$ref": "#/components/schemas/Companies.BrandingAttributes.Colors.Correct"
+                                                    },
+                                                    {
+                                                        "$ref": "#/components/schemas/Companies.BrandingAttributes.Colors.Link"
+                                                    }
+                                                ]
+                                            }
+                                        }
                                     }
                                 }
                             }
@@ -9446,13 +9544,10 @@
                                         "type": "object",
                                         "allOf": [
                                             {
-                                                "$ref": "#/components/schemas/Companies.BrandingAttributes.Images.LogoId"
+                                                "$ref": "#/components/schemas/Companies.BrandingAttributes.ImageSettings.Logo"
                                             },
                                             {
-                                                "$ref": "#/components/schemas/Companies.BrandingAttributes.Images.AuthId"
-                                            },
-                                            {
-                                                "$ref": "#/components/schemas/Companies.BrandingAttributes.Images.BackgroundId"
+                                                "$ref": "#/components/schemas/Companies.BrandingAttributes.ImageSettings.Auth"
                                             }
                                         ]
                                     },
@@ -9489,13 +9584,10 @@
                         "type": "object",
                         "allOf": [
                             {
-                                "$ref": "#/components/schemas/Companies.BrandingAttributes.Images.LogoId"
+                                "$ref": "#/components/schemas/Companies.BrandingAttributes.ImageSettings.LogoId"
                             },
                             {
-                                "$ref": "#/components/schemas/Companies.BrandingAttributes.Images.AuthId"
-                            },
-                            {
-                                "$ref": "#/components/schemas/Companies.BrandingAttributes.Images.BackgroundId"
+                                "$ref": "#/components/schemas/Companies.BrandingAttributes.ImageSettings.AuthId"
                             }
                         ]
                     },
@@ -9937,6 +10029,239 @@
                     "text",
                     "company_id"
                 ]
+            },
+            "Files.FileAttribute.Id": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "description": "ID файла",
+                        "example": 34
+                    }
+                }
+            },
+            "Files.FileAttribute.Url": {
+                "type": "object",
+                "properties": {
+                    "url": {
+                        "$ref": "#/components/schemas/Files.FileAttribute.Url.Origin"
+                    }
+                }
+            },
+            "Files.FileAttribute.Url.Origin": {
+                "type": "object",
+                "properties": {
+                    "origin": {
+                        "type": "string",
+                        "description": "Публичная ссылка на файл",
+                        "example": "https://ipr.ru/content/6f0cb3641a3a11ee974102420a00021c.jpeg"
+                    }
+                }
+            },
+            "Files.FileAttribute.Requirements.Extensions": {
+                "type": "object",
+                "properties": {
+                    "extensions": {
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "description": "Расширение файла",
+                            "example": "png",
+                            "enum": [
+                                "png",
+                                "jpg",
+                                "jpeg"
+                            ]
+                        }
+                    }
+                }
+            },
+            "Files.FileAttribute.Requirements.MaxSize": {
+                "type": "object",
+                "properties": {
+                    "max_size": {
+                        "type": "integer",
+                        "description": "Максимальный размер файла (в байтах)",
+                        "example": 5242880
+                    }
+                }
+            },
+            "Files.FileAttribute.Requirements.MinSize": {
+                "type": "object",
+                "properties": {
+                    "min_size": {
+                        "type": "integer",
+                        "nullable": true,
+                        "description": "Минимальный размер файла (в байтах)",
+                        "example": null
+                    }
+                }
+            },
+            "Files.ImageAttribute.Requirements.MaxHeight": {
+                "type": "object",
+                "properties": {
+                    "max_height": {
+                        "type": "integer",
+                        "description": "Максимальная высота изображения",
+                        "example": 1280
+                    }
+                }
+            },
+            "Files.ImageAttribute.Requirements.MinHeight": {
+                "type": "object",
+                "properties": {
+                    "min_height": {
+                        "type": "integer",
+                        "nullable": true,
+                        "description": "Минимальная высота изображения",
+                        "example": 1280
+                    }
+                }
+            },
+            "Files.ImageAttribute.Requirements.MaxWidth": {
+                "type": "object",
+                "properties": {
+                    "max_width": {
+                        "type": "integer",
+                        "description": "Максимальная ширина изображения",
+                        "example": 720
+                    }
+                }
+            },
+            "Files.ImageAttribute.Requirements.MinWidth": {
+                "type": "object",
+                "properties": {
+                    "min_width": {
+                        "type": "integer",
+                        "nullable": true,
+                        "description": "Минимальная ширина изображения",
+                        "example": 720
+                    }
+                }
+            },
+            "Files.DefaultImage": {
+                "$ref": "#/components/schemas/Files.FileAttribute.Url.Origin"
+            },
+            "AdminPanel.Files.DefaultFile": {
+                "type": "object",
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/Files.FileAttribute.Id"
+                    },
+                    {
+                        "$ref": "#/components/schemas/Files.FileAttribute.Url"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "requirements": {
+                                "type": "object",
+                                "allOf": [
+                                    {
+                                        "$ref": "#/components/schemas/Files.FileAttribute.Requirements.Extensions"
+                                    },
+                                    {
+                                        "$ref": "#/components/schemas/Files.FileAttribute.Requirements.MaxSize"
+                                    },
+                                    {
+                                        "$ref": "#/components/schemas/Files.FileAttribute.Requirements.MinSize"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ]
+            },
+            "AdminPanel.Files.DefaultImage": {
+                "type": "object",
+                "allOf": [
+                    {
+                        "$ref": "#/components/schemas/Files.FileAttribute.Id"
+                    },
+                    {
+                        "$ref": "#/components/schemas/Files.FileAttribute.Url"
+                    },
+                    {
+                        "type": "object",
+                        "properties": {
+                            "requirements": {
+                                "type": "object",
+                                "allOf": [
+                                    {
+                                        "$ref": "#/components/schemas/Files.FileAttribute.Requirements.Extensions"
+                                    },
+                                    {
+                                        "$ref": "#/components/schemas/Files.FileAttribute.Requirements.MaxSize"
+                                    },
+                                    {
+                                        "$ref": "#/components/schemas/Files.FileAttribute.Requirements.MinSize"
+                                    },
+                                    {
+                                        "$ref": "#/components/schemas/Files.ImageAttribute.Requirements.MaxHeight"
+                                    },
+                                    {
+                                        "$ref": "#/components/schemas/Files.ImageAttribute.Requirements.MinHeight"
+                                    },
+                                    {
+                                        "$ref": "#/components/schemas/Files.ImageAttribute.Requirements.MaxWidth"
+                                    },
+                                    {
+                                        "$ref": "#/components/schemas/Files.ImageAttribute.Requirements.MinWidth"
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ]
+            },
+            "AdminPanel.Files.DefaultFileOrImage": {
+                "type": "object",
+                "oneOf": [
+                    {
+                        "$ref": "#/components/schemas/AdminPanel.Files.DefaultImage"
+                    },
+                    {
+                        "$ref": "#/components/schemas/AdminPanel.Files.DefaultFile"
+                    }
+                ]
+            },
+            "AdminPanel.Files.UploadOne.Request": {
+                "type": "object",
+                "properties": {
+                    "company_id": {
+                        "type": "integer",
+                        "description": "ID компании",
+                        "example": 1
+                    },
+                    "entity_type": {
+                        "type": "string",
+                        "description": "Тип сущности",
+                        "example": "company_branding"
+                    },
+                    "attribute": {
+                        "type": "string",
+                        "description": "Атрибут",
+                        "example": "logo"
+                    },
+                    "file": {
+                        "description": "Загружаемый файл",
+                        "type": "string",
+                        "format": "binary"
+                    }
+                }
+            },
+            "AdminPanel.Files.UploadOne.SuccessResponse": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "type": "object",
+                        "properties": {
+                            "success": {
+                                "$ref": "#/components/schemas/AdminPanel.Files.DefaultFileOrImage"
+                            }
+                        }
+                    }
+                }
             },
             "Idp.IdpAttribute.Id": {
                 "type": "object",
